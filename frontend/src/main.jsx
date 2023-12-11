@@ -3,12 +3,42 @@ import ReactDOM from "react-dom/client";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import App from "./App";
+import Home from "./pages/Home";
+import HomePro from "./pages/HomePro";
+import Loc from "./pages/Loc";
+import SearchList from "./pages/SearchList";
+import ProLogin from "./pages/ProLogin";
+import ProRegister from "./pages/ProRegister";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Home />,
+    children: [
+      {
+        path: "/loc",
+        element: <Loc />,
+      },
+      {
+        path: "/searchlist",
+        element: <SearchList />,
+        children: [],
+      },
+    ],
+  },
+  {
+    path: "/pro",
+    element: <HomePro />,
+    children: [
+      {
+        path: "/connect",
+        element: <ProLogin />,
+      },
+      {
+        path: "/register",
+        element: <ProRegister />,
+      },
+    ],
   },
 ]);
 
