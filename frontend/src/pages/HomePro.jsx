@@ -1,5 +1,9 @@
 function HomePro() {
-  return <div>yo</div>;
+  return (
+    <div>
+      <p>test</p>
+    </div>
+  );
 }
 
 export default HomePro;
