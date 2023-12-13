@@ -4,19 +4,18 @@ import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-// import Home from "./pages/Home";
+import Home from "./pages/Home";
 import HomePro from "./pages/HomePro";
 import Loc from "./pages/Loc";
 import SearchList from "./pages/SearchList";
 import ProLogin from "./pages/ProLogin";
 import ProRegister from "./pages/ProRegister";
-import App from "./App";
 import "./assets/scss/mdb.pro.scss";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Home />,
     children: [
       {
         path: "/loc",
