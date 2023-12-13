@@ -11,34 +11,51 @@ import ProLogin from "./pages/ProLogin";
 import ProRegister from "./pages/ProRegister";
 import "./assets/scss/mdb.pro.scss";
 import Home from "./pages/Home";
+import UserContextProvider from "./context/UserContext";
+import ProContextProvider from "./context/ProContext";
+import App from "./App";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <UserContextProvider>
+        <App />
+      </UserContextProvider>
+    ),
     children: [
       {
-        path: "/loc",
-        element: <Loc />,
+        path: "/",
+        element: <Home />,
+        children: [
+          {
+            path: "/loc",
+            element: <Loc />,
+          },
+          {
+            path: "/searchlist",
+            element: <SearchList />,
+            children: [],
+          },
+        ],
       },
       {
-        path: "/searchlist",
-        element: <SearchList />,
-        children: [],
-      },
-    ],
-  },
-  {
-    path: "/pro",
-    element: <HomePro />,
-    children: [
-      {
-        path: "/pro/connect",
-        element: <ProLogin />,
-      },
-      {
-        path: "/pro/register",
-        element: <ProRegister />,
+        path: "/pro",
+        element: (
+          <ProContextProvider>
+            <HomePro />
+          </ProContextProvider>
+        ),
+        children: [
+          {
+            path: "/pro/connect",
+            element: <ProLogin />,
+          },
+          {
+            path: "/pro/register",
+            element: <ProRegister />,
+          },
+        ],
       },
     ],
   },
