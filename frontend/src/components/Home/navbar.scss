@@ -1,0 +1,56 @@
+.homeNav {
+  background-color: #f2f2f2;
+  width: 80%;
+  height: 10vh;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 5px;
+
+  img {
+    width: 70px;
+  }
+
+  button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .homeTxtBtn {
+    text-decoration: underline;
+    transition: 0.3s ease-in-out;
+    font-weight: bold;
+    font-size: 10px;
+  }
+
+  .connectBtn {
+    width: 150px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border: 1px solid transparent;
+    border-radius: 40px;
+    background-color: white;
+    margin: 0 auto;
+    box-shadow: -3px 3px 3px rgba(75, 93, 104, 0.1);
+    transition: 0.3s ease-in-out;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .homeNav {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+
+    .connectBtn {
+      margin: 0;
+    }
+  }
+}
