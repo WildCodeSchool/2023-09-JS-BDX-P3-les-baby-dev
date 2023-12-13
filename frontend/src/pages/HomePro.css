@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  max-width: 1280px;
+}
+
+.text {
+  font-family: "Adamina", serif;
+  font-size: 4vw;
+  text-align: center;
+  justify-content: center;
+}
+.info-text {
+  font-family: "Adamina", serif;
+  font-size: 2vw;
+}
+.grid {
+  display: flex;
+  justify-content: center;
+}
+
+.visuel-simple {
+  width: 60%;
+}
+.visuel {
+  width: 30%;
+  position: relative;
+}
+.text-overlay {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Adamina", serif;
+  font-size: 12px;
+}
