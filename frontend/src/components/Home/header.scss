@@ -1,0 +1,58 @@
+.header {
+  width: 85%;
+  height: 40vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+
+  // .h1 {
+  //   width: 70%;
+  //   font-size: 15px;
+  //   line-height: 1px;
+  // }
+
+  h1 {
+    line-height: 27px;
+  }
+
+  button {
+    width: 200px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 5px;
+    border-radius: 50px;
+    background-color: #9805c5c7;
+    color: #f2f2f2;
+    border: none;
+
+    span {
+      font-size: 20px;
+    }
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .header {
+    align-items: start;
+    h1 {
+      line-height: 35px;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .header {
+    height: 60vh;
+    gap: 60px;
+
+    button {
+      width: 230px;
+    }
+  }
+}
