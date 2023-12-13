@@ -1,17 +1,17 @@
 .homeNav {
   background-color: #f2f2f2;
-  width: 80%;
+  width: 100%;
   height: 10vh;
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 5px;
 
   img {
-    width: 70px;
+    width: 80px;
   }
 
   button {
@@ -24,22 +24,33 @@
     text-decoration: underline;
     transition: 0.3s ease-in-out;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .connectBtn {
-    width: 120px;
-    font-size: 12px;
+    width: 140px;
     display: flex;
     align-items: center;
     justify-content: space-around;
     border: 1px solid transparent;
     border-radius: 40px;
     background-color: white;
+    color: #9805c5c7;
     margin: 0 auto;
     box-shadow: -3px 3px 3px rgba(75, 93, 104, 0.1);
     transition: 0.3s ease-in-out;
-    font-size: 10px;
+    line-height: 15px;
+
+    div {
+      font-size: 13px;
+
+      span {
+        font-size: 10px;
+      }
+    }
+    .arrow {
+      font-size: 15px;
+    }
   }
 }
 
@@ -58,10 +69,19 @@
     }
 
     .connectBtn {
+      height: 50px;
       width: 150px;
       margin: 0;
       padding: 0;
       font-size: 12px;
+
+      div {
+        font-size: 18px;
+
+        span {
+          font-size: 14px;
+        }
+      }
 
       .arrow {
         font-size: 20px;
@@ -87,7 +107,7 @@
     .connectBtn {
       width: 200px;
       margin: 0;
-      font-size: 15px;
+      font-size: 20px;
 
       .arrow {
         font-size: 25px;

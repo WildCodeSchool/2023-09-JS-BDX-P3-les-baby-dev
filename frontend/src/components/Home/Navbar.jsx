@@ -13,7 +13,7 @@ function Navbar() {
         <div>
           Se connecter
           <br />
-          Trouver une crèche
+          <span>Trouver une crèche</span>
         </div>
         <span className="arrow">➜</span>
       </button>

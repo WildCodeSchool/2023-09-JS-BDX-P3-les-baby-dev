@@ -1,3 +1,4 @@
+import Header from "../components/Home/Header";
 import Navbar from "../components/Home/Navbar";
 import "./Home.css";
 
@@ -5,6 +6,7 @@ function Home() {
   return (
     <>
       <Navbar />
+      <Header />
       <div className="container">
         <h1 className="text">
           Simplifiez vous la vie avec Babyplace grâce à notre logiciel de
