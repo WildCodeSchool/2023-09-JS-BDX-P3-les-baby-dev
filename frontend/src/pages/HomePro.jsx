@@ -1,8 +1,10 @@
+import Navbar from "../components/Home/Navbar";
 import "./HomePro.css";
 
 function HomePro() {
   return (
     <div className="container">
+      <Navbar />
       <img
         className="visuel-simple"
         src="./src/assets/proSimple.svg"
