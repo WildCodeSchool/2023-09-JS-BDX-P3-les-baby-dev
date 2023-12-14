@@ -1,3 +1,4 @@
+import Footer from "../components/Home/Footer";
 import Header from "../components/Home/Header";
 import Navbar from "../components/Home/Navbar";
 import "./Home.css";
@@ -37,6 +38,7 @@ function Home() {
           className="zeroPapier"
         />
       </div>
+      <Footer />
     </div>
   );
 }
