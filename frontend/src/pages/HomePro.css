@@ -34,6 +34,7 @@
 
 .visuel-simple {
   width: 60%;
+  margin: 3vh;
 }
 .visuel {
   width: 30%;
@@ -50,4 +51,8 @@
   justify-content: center;
   font-family: "Adamina", serif;
   font-size: 12px;
+}
+
+.contents {
+  display: contents;
 }

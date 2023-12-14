@@ -4,10 +4,10 @@ import "./Home.css";
 
 function Home() {
   return (
-    <>
+    <div className="container">
       <Navbar />
       <Header />
-      <div className="container">
+      <div>
         <h1 className="text">
           Simplifiez vous la vie avec Babyplace grâce à notre logiciel de
           reservation en ligne
@@ -37,7 +37,7 @@ function Home() {
           className="zeroPapier"
         />
       </div>
-    </>
+    </div>
   );
 }
 
