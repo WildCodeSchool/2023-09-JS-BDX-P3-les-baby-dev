@@ -38,7 +38,7 @@ function HomePro() {
             src="./src/assets/ProAgenda.svg"
             alt="Visuel Agenda"
           />
-          <p className="text-overlay">
+          <p className="text-svg one">
             Consultez en temps reel votre agenda et modifiez le en quelques
             cliques afin d’optimiser votre temps et votre rentabilite.
             Accessible de puis votre Smarktphone, tabelle ou Telephone
@@ -50,7 +50,7 @@ function HomePro() {
             src="./src/assets/proAlerte.svg"
             alt="Visuel Alerte"
           />
-          <p className="text-overlay">
+          <p className="text-svg two">
             Choisissez le mode de notifications afin d’etre informe au plus vote
             des annulations et des demandes de reservation.
           </p>
@@ -63,7 +63,7 @@ function HomePro() {
             src="./src/assets/ProCom.svg"
             alt="Visuel Agenda"
           />
-          <p className="text-overlay">
+          <p className="text-svg three">
             Optimisez votre page profil pour vous rendre plus visible et vous
             permettre de vous decouvrir par les parents de votre quartier.
           </p>
@@ -74,7 +74,7 @@ function HomePro() {
             src="./src/assets/proMarketing.svg"
             alt="Visuel Alerte"
           />
-          <p className="text-overlay">
+          <p className="text-svg four">
             Les parents doivent avoir prerempliss leur liste de documents pour
             pouvoir faire des reservations. Les parents peuvent vous soumettre
             les contrats deja valide par les equipes legales de Babyplabce

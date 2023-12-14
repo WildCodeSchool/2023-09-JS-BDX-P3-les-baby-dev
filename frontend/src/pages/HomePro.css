@@ -62,7 +62,30 @@
   top: -5vw;
   font-size: 2vw;
 }
-
+.text-svg {
+  position: absolute;
+  top: 3px;
+  left: 15%;
+  margin-left: 20%;
+  width: 13%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Adamina", serif;
+  font-size: 1.1vw;
+}
+.one {
+  left: 15%;
+  top: -8.5%;
+}
+.two {
+  left: 43%;
+  top: -8.5%;
+}
+.four {
+  left: 44%;
+}
 .contents {
   display: contents;
   position: relative;
@@ -75,5 +98,57 @@
   .titre-overlay {
     top: -7vw;
     font-size: 2vw;
+  }
+  .one {
+    left: 15%;
+    top: 7%;
+  }
+  .two {
+    left: 43%;
+    top: 8%;
+  }
+  .three {
+    left: 15%;
+    top: 21%;
+  }
+  .four {
+    left: 44%;
+    top: 21%;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .one {
+    left: 15%;
+    top: 57%;
+  }
+  .two {
+    left: 45%;
+    top: 58%;
+  }
+  .three {
+    left: 15%;
+    top: 90%;
+  }
+  .four {
+    left: 44%;
+    top: 91%;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .one {
+    left: 16%;
+    top: 46%;
+  }
+  .two {
+    left: 42%;
+    top: 46%;
+  }
+  .three {
+    left: 15%;
+    top: 73%;
+  }
+  .four {
+    left: 42%;
+    top: 73vh;
   }
 }
