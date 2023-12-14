@@ -1,3 +1,4 @@
+import Footer from "../components/Home/Footer";
 import Navbar from "../components/Home/Navbar";
 import "./HomePro.css";
 
@@ -5,11 +6,24 @@ function HomePro() {
   return (
     <div className="container">
       <Navbar />
-      <img
-        className="visuel-simple"
-        src="./src/assets/proSimple.svg"
-        alt="Visuel Simple"
-      />
+      <div className="div-visuel">
+        <img
+          className="visuel-simple"
+          src="./src/assets/proSimple.svg"
+          alt="Visuel Simple"
+        />
+        <h4 className="text-overlay titre-overlay">
+          Simplifiez vous la vie en choisissant un systeme de reservation
+          moderne et efficace
+        </h4>
+        <p className="text-overlay">
+          Gerez vos reservations directement depuis votre agenda que vous pouvez
+          consulter sur votre telephone, ordinateur ou tablette Soyez prevenu en
+          temps reel des annulations vous permettant ainsi de remplacer les
+          places vacantes. Remplacez facilement les absences grace aux “waiting
+          list” des parents.
+        </p>
+      </div>
       <h1 className="text">
         Equipez vous du logiciel de gestion de place d’accueil de jeunes enfants
         le plus complet
@@ -24,7 +38,11 @@ function HomePro() {
             src="./src/assets/ProAgenda.svg"
             alt="Visuel Agenda"
           />
-          <p>Text exemple</p>
+          <p className="text-overlay">
+            Consultez en temps reel votre agenda et modifiez le en quelques
+            cliques afin d’optimiser votre temps et votre rentabilite.
+            Accessible de puis votre Smarktphone, tabelle ou Telephone
+          </p>
         </div>
         <div className="contents">
           <img
@@ -32,6 +50,10 @@ function HomePro() {
             src="./src/assets/proAlerte.svg"
             alt="Visuel Alerte"
           />
+          <p className="text-overlay">
+            Choisissez le mode de notifications afin d’etre informe au plus vote
+            des annulations et des demandes de reservation.
+          </p>
         </div>
       </div>
       <div className="grid">
@@ -41,6 +63,10 @@ function HomePro() {
             src="./src/assets/ProCom.svg"
             alt="Visuel Agenda"
           />
+          <p className="text-overlay">
+            Optimisez votre page profil pour vous rendre plus visible et vous
+            permettre de vous decouvrir par les parents de votre quartier.
+          </p>
         </div>
         <div className="contents">
           <img
@@ -48,8 +74,14 @@ function HomePro() {
             src="./src/assets/proMarketing.svg"
             alt="Visuel Alerte"
           />
+          <p className="text-overlay">
+            Les parents doivent avoir prerempliss leur liste de documents pour
+            pouvoir faire des reservations. Les parents peuvent vous soumettre
+            les contrats deja valide par les equipes legales de Babyplabce
+          </p>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -16,6 +16,11 @@
   flex-direction: column;
   max-width: 1280px;
 }
+.div-visuel {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
 
 .text {
   font-family: "Adamina", serif;
@@ -42,17 +47,33 @@
 }
 .text-overlay {
   position: absolute;
-  top: 30px;
+  top: 23px;
   left: 0;
-  width: 100%;
+  margin-left: 47%;
+  width: 32%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: "Adamina", serif;
-  font-size: 12px;
+  font-size: 1vw;
+}
+.titre-overlay {
+  top: -5vw;
+  font-size: 2vw;
 }
 
 .contents {
   display: contents;
+  position: relative;
+}
+
+@media screen and (min-width: 750px) {
+  .text-overlay {
+    top: 40px;
+  }
+  .titre-overlay {
+    top: -7vw;
+    font-size: 2vw;
+  }
 }
