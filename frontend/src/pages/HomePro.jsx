@@ -18,28 +18,37 @@ function HomePro() {
         Cliquez sur l'une de nos solutions pour en savoir plus
       </h4>
       <div className="grid">
-        <img
-          className="visuel"
-          src="./src/assets/ProAgenda.svg"
-          alt="Visuel Agenda"
-        />
-        <img
-          className="visuel"
-          src="./src/assets/proAlerte.svg"
-          alt="Visuel Alerte"
-        />
+        <div className="contents">
+          <img
+            className="visuel"
+            src="./src/assets/ProAgenda.svg"
+            alt="Visuel Agenda"
+          />
+          <p>Text exemple</p>
+        </div>
+        <div className="contents">
+          <img
+            className="visuel"
+            src="./src/assets/proAlerte.svg"
+            alt="Visuel Alerte"
+          />
+        </div>
       </div>
       <div className="grid">
-        <img
-          className="visuel"
-          src="./src/assets/ProCom.svg"
-          alt="Visuel Agenda"
-        />
-        <img
-          className="visuel"
-          src="./src/assets/proMarketing.svg"
-          alt="Visuel Alerte"
-        />
+        <div className="contents">
+          <img
+            className="visuel"
+            src="./src/assets/ProCom.svg"
+            alt="Visuel Agenda"
+          />
+        </div>
+        <div className="contents">
+          <img
+            className="visuel"
+            src="./src/assets/proMarketing.svg"
+            alt="Visuel Alerte"
+          />
+        </div>
       </div>
     </div>
   );
