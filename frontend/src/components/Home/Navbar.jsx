@@ -3,8 +3,8 @@ import "./navbar.scss";
 function Navbar() {
   return (
     <nav className="homeNav">
-      <div className="homeLogo">
-        <img src="./src/assets/logoPasPro.svg" alt="Babyplace" />{" "}
+      <div>
+        <img src="./src/assets/logoPasPro.svg" alt="Babyplace" />
       </div>
       <button type="button" className="homeTxtBtn">
         Vous êtes professionnel de la petite enfance ?

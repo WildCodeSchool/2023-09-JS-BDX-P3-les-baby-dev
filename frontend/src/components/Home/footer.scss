@@ -1,0 +1,70 @@
+.line {
+  border-bottom: 1px solid #9805c5c7;
+  margin: 50px 10px;
+}
+
+.footerTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+
+  h3 {
+    font-size: 15px;
+  }
+  .helpBtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+      width: 130px;
+      height: 50px;
+      border: 1px solid transparent;
+      border-radius: 40px;
+      background-color: white;
+      color: #9805c5c7;
+      margin: 0 auto;
+      box-shadow: -3px 3px 3px rgba(75, 93, 104, 0.1);
+      transition: 0.3s ease-in-out;
+      font-size: 15px;
+    }
+
+    button:hover {
+      border: 1px solid #9805c5c7;
+    }
+  }
+}
+
+.footerTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-direction: row;
+  margin-bottom: 10px;
+
+  button {
+    border: transparent;
+    img {
+      display: none;
+    }
+  }
+}
+
+.infoContainer {
+  display: flex;
+  height: 30vh;
+
+  .listAbout {
+    ul {
+      list-style-type: none;
+    }
+  }
+
+  .listHelp {
+    ul {
+      list-style-type: none;
+    }
+  }
+}

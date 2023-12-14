@@ -7,7 +7,7 @@ function Header() {
         Réservez une place auprès de professionnels de la petite enfance
         gratuitement en quelques clics
       </h1>
-      <div className="headerBtn">
+      <div>
         <button type="button">
           {" "}
           Rechercher <span>➜</span>
