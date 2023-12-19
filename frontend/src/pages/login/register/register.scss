@@ -1,4 +1,4 @@
-.login_container {
+.register_container {
   width: 100%;
   display: flex;
   height: 700px;
@@ -16,6 +16,7 @@
       margin-left: 50px;
     }
   }
+
   .right_part {
     width: 60%;
 
@@ -28,7 +29,7 @@
     }
 
     h3 {
-      margin-left: 100px;
+      margin-left: 130px;
       margin-top: 100px;
     }
 
@@ -43,10 +44,9 @@
         input {
           width: 400px;
           height: 40px;
-
-          ::placeholder {
-            color: red;
-          }
+        }
+        .input2 {
+          margin-bottom: 20px;
         }
       }
     }

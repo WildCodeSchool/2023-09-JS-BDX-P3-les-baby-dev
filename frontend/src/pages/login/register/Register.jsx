@@ -1,6 +1,9 @@
-import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
+// import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
+import { Link } from "react-router-dom";
 import { useState } from "react";
+import { MDBSwitch } from "mdb-react-ui-kit";
 import { useUser } from "../../../context/UserContext";
+import "./register.scss";
 
 function Register() {
   const [formValue, setFormValue] = useState({
@@ -15,27 +18,51 @@ function Register() {
   };
 
   return (
-    <div className="container">
-      <MDBInput
-        value={formValue.email}
-        name="email"
-        onChange={onChange}
-        id="validationCustom01"
-        required
-        label="Email"
-        type="email"
-      />
-      <MDBInput
-        value={formValue.password}
-        name="password"
-        onChange={onChange}
-        id="validationCustom02"
-        required
-        label="Password"
-        type="password"
-      />
+    <div className="register_container">
+      <div className="left_part">
+        <h2>BabyPlace</h2>
+      </div>
+      <div className="right_part">
+        <div className="already_register">
+          <Link to="/login">
+            <h4>Déjà inscrit?</h4>
+          </Link>
+        </div>
+        <h3> Je m'inscris sur Baby Place</h3>
+        <ul>
+          <li>
+            <input
+              value={formValue.email}
+              name="email"
+              onChange={onChange}
+              required
+              label="Email"
+              type="email"
+            />
+          </li>
 
-      <MDBBtn onClick={() => register(formValue)}>Connexion</MDBBtn>
+          <li>
+            <input
+              className="input2"
+              value={formValue.password}
+              name="password"
+              onChange={onChange}
+              required
+              label="Password"
+              type="password"
+            />
+          </li>
+          <MDBSwitch
+            id="flexSwitchCheckDefault"
+            label="Je suis professionnel"
+          />
+        </ul>
+        <Link to="/">
+          <button type="button" onClick={() => register(formValue)}>
+            Inscription
+          </button>
+        </Link>
+      </div>
     </div>
   );
 }
