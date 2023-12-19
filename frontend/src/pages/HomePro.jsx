@@ -1,6 +1,6 @@
 import Footer from "../components/Home/Footer";
 import Navbar from "../components/Home/Navbar";
-import "./HomePro.css";
+import "./HomePro.scss";
 
 function HomePro() {
   return (
