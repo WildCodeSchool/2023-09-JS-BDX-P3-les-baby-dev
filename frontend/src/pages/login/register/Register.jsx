@@ -1,4 +1,3 @@
-// import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { MDBSwitch } from "mdb-react-ui-kit";
@@ -11,10 +10,16 @@ function Register() {
     password: "1234",
   });
 
+  const [isProfessional, setIsProfessional] = useState(false);
+
   const { register } = useUser();
 
   const onChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
+  };
+
+  const onSwitchChange = () => {
+    setIsProfessional(!isProfessional);
   };
 
   return (
@@ -55,9 +60,10 @@ function Register() {
           <MDBSwitch
             id="flexSwitchCheckDefault"
             label="Je suis professionnel"
+            onChange={onSwitchChange}
           />
         </ul>
-        <Link to="/">
+        <Link to={isProfessional ? "/pro" : "/"}>
           <button type="button" onClick={() => register(formValue)}>
             Inscription
           </button>
