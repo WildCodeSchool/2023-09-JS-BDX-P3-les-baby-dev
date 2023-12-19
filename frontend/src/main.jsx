@@ -4,16 +4,27 @@ import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import HomePro from "./pages/HomePro";
-import Loc from "./pages/Loc";
-import SearchList from "./pages/SearchList";
+import HomePro from "./pages/pages.pro/HomePro";
+import SearchList from "./pages/pages.parents/SearchList";
 import "./assets/scss/mdb.pro.scss";
-import Home from "./pages/Home";
+import Home from "./pages/pages.parents/Home";
 import UserContextProvider from "./context/UserContext";
 import ProContextProvider from "./context/ProContext";
 import App from "./App";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Login from "./pages/login/register/Login";
+import Register from "./pages/login/register/Register";
+import Filter from "./pages/pages.parents/search-nursery/Filter";
+import FilterDate from "./pages/pages.parents/search-nursery/FilterDate";
+import FilterService from "./pages/pages.parents/search-nursery/FilterService";
+import NurseryCard from "./pages/pages.parents/NurseryCard";
+import Reservation from "./pages/pages.parents/profil/Reservation";
+import ConditonResa from "./pages/pages.parents/reservation/ConditionResa";
+import Profil from "./pages/pages.parents/Profil";
+import ProfilResa from "./pages/pages.parents/profil/ProfilResa";
+import InscriptionParent from "./pages/pages.parents/profil/InscriptionParent";
+import IncriptionChildren from "./pages/pages.parents/profil/InscriptionChildren";
+import DocInscription from "./pages/pages.parents/profil/DocInscription";
+import ConfirmationResa from "./pages/pages.parents/reservation/ConfirmationResa";
 
 const router = createBrowserRouter([
   {
@@ -27,18 +38,64 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/searchlist",
+        element: <SearchList />,
         children: [
           {
-            path: "/loc",
-            element: <Loc />,
+            path: "/searchlist/filter",
+            element: <Filter />,
+            children: [
+              { path: "/searchlist/filter/dates", element: <FilterDate /> },
+              {
+                path: "/searchlist/filter/services",
+                element: <FilterService />,
+              },
+            ],
           },
           {
-            path: "/searchlist",
-            element: <SearchList />,
-            children: [],
+            path: "/searchlist/nursery",
+            element: <NurseryCard />,
+            children: [
+              {
+                path: "/searchlist/nurserycard/reservation",
+                element: <Reservation />,
+              },
+              {
+                path: "/searchlist/nurserycard/conditions",
+                element: <ConditonResa />,
+              },
+              {
+                path: "/searchlist/nurserycard/confirmation",
+                element: <ConfirmationResa />,
+              },
+            ],
           },
         ],
       },
+      {
+        path: "/profil",
+        element: <Profil />,
+        children: [
+          { path: "/profil/myresa", element: <ProfilResa /> },
+          {
+            path: "/profil/inscription",
+            element: <InscriptionParent />,
+            children: [
+              {
+                path: "/profil/inscription/children",
+                element: <IncriptionChildren />,
+              },
+              {
+                path: "/profil/inscription/documents",
+                element: <DocInscription />,
+              },
+            ],
+          },
+        ],
+      },
+
       {
         path: "/login",
         element: <Login />,

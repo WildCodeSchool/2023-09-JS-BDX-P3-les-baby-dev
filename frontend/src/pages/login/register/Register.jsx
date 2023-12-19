@@ -1,6 +1,6 @@
 import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
 import { useState } from "react";
-import { useUser } from "../context/UserContext";
+import { useUser } from "../../../context/UserContext";
 
 function Register() {
   const [formValue, setFormValue] = useState({
