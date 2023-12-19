@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./navbar.scss";
 
 function Navbar() {
@@ -11,9 +12,13 @@ function Navbar() {
       </button>
       <button type="button" className="connectBtn">
         <div>
-          Se connecter
-          <br />
-          <span>Trouver une crèche</span>
+          <Link to="/login">
+            <div>
+              Se connecter
+              <br />
+              <span>Trouver une crèche</span>
+            </div>
+          </Link>
         </div>
         <span className="arrow">➜</span>
       </button>
