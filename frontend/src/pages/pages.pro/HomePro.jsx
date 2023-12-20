@@ -1,5 +1,5 @@
-import Footer from "../../components/Home/Footer";
-import Navbar from "../../components/Home/Navbar";
+import Footer from "../../components/home.components/Footer";
+import Navbar from "../../components/home.components/Navbar";
 import "./HomePro.scss";
 
 function HomePro() {
