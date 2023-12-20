@@ -23,7 +23,7 @@ import Profil from "./pages/pages.parents/Profil";
 import ProfilResa from "./pages/pages.parents/profil/ProfilResa";
 import InscriptionParent from "./pages/pages.parents/profil/InscriptionParent";
 import IncriptionChildren from "./pages/pages.parents/profil/InscriptionChildren";
-import DocInscription from "./pages/pages.parents/profil/DocInscription";
+import DocInscription from "./pages/pages.parents/profil/InscriptionDoc";
 import ConfirmationResa from "./pages/pages.parents/reservation/ConfirmationResa";
 import StructureRegister from "./pages/pages.pro/StructureRegister";
 
@@ -77,16 +77,18 @@ const router = createBrowserRouter([
       },
       {
         path: "/profil",
-        element: <Profil />,
+        element: <InscriptionParent />,
+        // element: <IncriptionChildren />,
         children: [
           { path: "/profil/myresa", element: <ProfilResa /> },
           {
             path: "/profil/inscription",
-            element: <InscriptionParent />,
+            element: <Profil />,
             children: [
               {
                 path: "/profil/inscription/children",
                 element: <IncriptionChildren />,
+                // element: <InscriptionParent />,
               },
               {
                 path: "/profil/inscription/documents",
