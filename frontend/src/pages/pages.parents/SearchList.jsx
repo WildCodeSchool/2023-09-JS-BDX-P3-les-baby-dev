@@ -1,3 +1,4 @@
+import "./SearchList.scss";
 import {
   MDBCard,
   MDBCardImage,
@@ -8,8 +9,14 @@ import {
   MDBListGroup,
   MDBListGroupItem,
 } from "mdb-react-ui-kit";
+import { useNavigate } from "react-router-dom";
 
 function SearchList() {
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate("/searchlist/nursery");
+  };
   const crechesData = [
     {
       id: 1,
@@ -90,23 +97,26 @@ function SearchList() {
               <MDBListGroupItem>{creche.openingHours}</MDBListGroupItem>
               <MDBListGroupItem>{creche.contact.phone}</MDBListGroupItem>
               <MDBListGroupItem>{creche.contact.email}</MDBListGroupItem>
-              <div>
+              <div className="days-container">
                 {Object.entries(creche.availability).map(
                   ([day, isAvailable], index) => (
                     <div
+                      className="days-availability"
                       key={`index-${index + 1}`}
                       style={{
-                        backgroundColor: isAvailable ? "green" : "lightgrey",
+                        backgroundColor: isAvailable
+                          ? "green"
+                          : "rgb(105, 105, 105)",
                       }}
                     >
-                      {day}: {isAvailable ? "Available" : "Not Available"}
+                      {day}: {isAvailable ? "Disponible" : "Complet"}
                     </div>
                   )
                 )}
               </div>
             </MDBListGroup>
             <MDBCardBody>
-              <MDBCardLink href="#">Card link</MDBCardLink>
+              <MDBCardLink onClick={handleNavigate}>Nursery</MDBCardLink>
               <MDBCardLink href="#">Card link</MDBCardLink>
             </MDBCardBody>
           </MDBCard>
