@@ -17,16 +17,16 @@ function Login() {
 
   return (
     <div className="login_container">
-      <div>
-        <h2>titre</h2>
+      <div className="left_part">
+        <h2>BabyPlace</h2>
       </div>
       <div className="right_part">
-        <div className="already_register">
+        <div className="notAlready_register">
           <Link to="/register">
-            <h4>deja un compte?</h4>
+            <h4>Vous n'avez pas encore de compte?</h4>
           </Link>
         </div>
-        <h3> Je m'inscris sur Baby Place</h3>
+        <h3> Je me connecte à BabyPlace</h3>
         <ul>
           <li>
             <input
