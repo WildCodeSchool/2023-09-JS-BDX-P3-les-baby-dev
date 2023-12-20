@@ -49,37 +49,64 @@ function NurseryCard() {
                 <li>{creche.contact.email}</li>
               </ul>
             </div>
-            <div className="disponibility_nursery">
-              <h4>Disponibilités</h4>
+            <div className="critere_nursery">
+              <div className="disponibility_nursery">
+                <h5>Disponibilités</h5>
+                <div className="days-container">
+                  {Object.entries(creche.availability).map(
+                    ([day, isAvailable], index) => (
+                      <div
+                        className="days-availability"
+                        key={`index-${index + 1}`}
+                        style={{
+                          backgroundColor: isAvailable
+                            ? "green"
+                            : "rgb(105, 105, 105)",
+                        }}
+                      >
+                        {day}
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+              <div className="experience_nursery">
+                <h5>Expériences</h5>
+                <ul>
+                  <li>Formation premiers secours</li>
+                  <li>Formation Nesting</li>
+                  <li>Pedagogie Montessori</li>
+                </ul>
+              </div>
+              <div className="accueil_nursery">
+                <h5>Accueil</h5>
+                <ul>
+                  <li>Sorties Extérieur</li>
+                  <li>Repas Maison</li>
+                  <li>Foyer non-fumeur</li>
+                </ul>
+              </div>
+              <div className="activity_nursery">
+                <h5>Activités</h5>
+                <ul>
+                  <li>Promenade</li>
+                  <li>Activité d'éveil</li>
+                  <li>Atelier musique</li>
+                </ul>
+              </div>
             </div>
-            <div className="experience_nursery">
-              <h4>Expériences</h4>
-              <ul>
-                <li>Formation premiers secours</li>
-                <li>Formation Nesting</li>
-                <li>Pedagogie Montessori</li>
-              </ul>
+            <div className="button_reservation">
+              <button type="button">Reserver</button>
             </div>
-            <div className="accueil_nursery">
-              <h4>Accueil</h4>
-              <ul>
-                <li>Sorties Extérieur</li>
-                <li>Repas Maison</li>
-                <li>Foyer non-fumeur</li>
-              </ul>
-            </div>
-            <div className="activity_nursery">
-              <h4>Activités</h4>
-              <ul>
-                <li>Promenade</li>
-                <li>Activité d'éveil</li>
-                <li>Atelier musique</li>
-              </ul>
-            </div>
-            <button type="button">Reserver</button>
           </div>
         </div>
       ))}
+      <div className="tarif_perso">
+        <p>
+          * En complétant mon profil, je peux obtenir une tarification
+          personnalisée en fonction de mes revenus{" "}
+        </p>
+      </div>
     </div>
   );
 }
