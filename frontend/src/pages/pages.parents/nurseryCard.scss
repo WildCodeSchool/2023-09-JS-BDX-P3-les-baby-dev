@@ -7,6 +7,7 @@
     color: white;
     padding-top: 30px;
     padding-left: 40px;
+    font-weight: bold;
   }
 
   h2 {
@@ -89,6 +90,8 @@
         height: 60px;
         font-size: 1.4em;
         border-radius: 5px;
+        font-weight: bold;
+        border: 1px solid #f8a56f;
       }
     }
   }
@@ -103,5 +106,14 @@
     margin-top: 10px;
     margin-left: 15px;
     font-size: 1.6em;
+  }
+
+  .popup_reglement {
+    h4 {
+      color: #6200ee;
+    }
+    p {
+      padding: 0 20px;
+    }
   }
 }
