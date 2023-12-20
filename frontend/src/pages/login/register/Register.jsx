@@ -63,7 +63,7 @@ function Register() {
             onChange={onSwitchChange}
           />
         </ul>
-        <Link to={isProfessional ? "/pro" : "/"}>
+        <Link to={isProfessional ? "/pro" : "/searchlist"}>
           <button type="button" onClick={() => register(formValue)}>
             Inscription
           </button>
