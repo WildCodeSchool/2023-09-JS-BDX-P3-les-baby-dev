@@ -9,13 +9,13 @@ import {
   MDBListGroup,
   MDBListGroupItem,
 } from "mdb-react-ui-kit";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SearchList() {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate("/searchlist/nursery");
+    navigate("/searchlist/nursery/:id");
   };
   const crechesData = [
     {
@@ -117,7 +117,9 @@ function SearchList() {
             </MDBListGroup>
             <MDBCardBody>
               <MDBCardLink onClick={handleNavigate}>Nursery</MDBCardLink>
-              <MDBCardLink href="#">Card link</MDBCardLink>
+              <MDBCardLink>
+                <Link to="/searchlist/nursery">Réserver</Link>
+              </MDBCardLink>
             </MDBCardBody>
           </MDBCard>
         </div>
