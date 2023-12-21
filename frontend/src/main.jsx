@@ -60,10 +60,6 @@ const router = createBrowserRouter([
             element: <NurseryCard />,
             children: [
               {
-                path: "/searchlist/nursery/conditions",
-                element: <ConditonResa />,
-              },
-              {
                 path: "/searchlist/nursery/confirmation",
                 element: <ConfirmationResa />,
               },
@@ -72,6 +68,10 @@ const router = createBrowserRouter([
           {
             path: "/searchlist/reservation",
             element: <Reservation />,
+          },
+          {
+            path: "/searchlist/conditions",
+            element: <ConditonResa />,
           },
         ],
       },

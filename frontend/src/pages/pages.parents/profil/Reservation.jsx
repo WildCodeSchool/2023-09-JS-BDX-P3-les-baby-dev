@@ -1,6 +1,7 @@
 import React from "react";
 import { MDBTimepicker, MDBDatepicker } from "mdb-react-ui-kit";
 import "./reservation.scss";
+import { Link } from "react-router-dom";
 
 function Reservation() {
   const crechesData = [
@@ -56,9 +57,11 @@ function Reservation() {
               </ul>
             </div>
             <div className="bottom_resa">
-              <button type="button" className="btn_next">
-                Suivant
-              </button>
+              <Link to="/searchlist/conditions">
+                <button type="button" className="btn_next">
+                  Suivant
+                </button>
+              </Link>
             </div>
           </div>
         </div>
