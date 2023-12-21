@@ -80,7 +80,7 @@ function SearchList() {
     },
   ];
   return (
-    <div className="card-container">
+    <div className="card-container container">
       {crechesData.map((creche) => (
         <div key={creche.id}>
           <MDBCard>
