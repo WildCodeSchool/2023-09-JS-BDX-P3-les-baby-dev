@@ -3,48 +3,55 @@ import { MDBStepper, MDBStepperStep } from "mdb-react-ui-kit";
 import "./structureRegister.scss";
 import FirstStep from "../../components/stepper.components/FirstStep";
 import SecondStep from "../../components/stepper.components/SecondStep";
+import ThirdStep from "../../components/stepper.components/ThirdStep";
+import FourthStep from "../../components/stepper.components/FourthStep";
+import FifthStep from "../../components/stepper.components/FifthStep";
+import SixthStep from "../../components/stepper.components/SixthStep";
+import EighthStep from "../../components/stepper.components/EighthStep";
+import NinthStep from "../../components/stepper.components/NinthStep";
+import SeventhStep from "../../components/stepper.components/SeventhStep";
 
 function StructureRegister() {
   return (
-    <MDBStepper type="vertical">
-      <MDBStepperStep headIcon={1} headText="Stucture d'accueil" itemId={1}>
-        <FirstStep />
-      </MDBStepperStep>
-      <MDBStepperStep headIcon={2} headText="Localisation" itemId={2}>
-        <SecondStep />
-      </MDBStepperStep>
-      <MDBStepperStep headIcon={3} headText="Présentation" itemId={3}>
-        <div>yo</div>
-      </MDBStepperStep>
-      <MDBStepperStep headIcon={4} headText="Votre équipe" itemId={4}>
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-        dolore eu fugiat nulla pariatur
-      </MDBStepperStep>
-      <MDBStepperStep headIcon={5} headText="Services et Activitées" itemId={5}>
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-        dolore eu fugiat nulla pariatur
-      </MDBStepperStep>
-      <MDBStepperStep headIcon={6} headText="Réglement intérieur" itemId={6}>
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-        dolore eu fugiat nulla pariatur
-      </MDBStepperStep>
-      <MDBStepperStep headIcon={7} headText="Vos disponibilitées" itemId={7}>
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-        dolore eu fugiat nulla pariatur
-      </MDBStepperStep>
-      <MDBStepperStep headIcon={8} headText="Nombre de places" itemId={8}>
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-        dolore eu fugiat nulla pariatur
-      </MDBStepperStep>
-      <MDBStepperStep headIcon={9} headText="Récapitulatif" itemId={9}>
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-        dolore eu fugiat nulla pariatur
-      </MDBStepperStep>
-      <MDBStepperStep headIcon={10} headText="Bienvenue" itemId={10}>
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-        dolore eu fugiat nulla pariatur
-      </MDBStepperStep>
-    </MDBStepper>
+    <>
+      <div className="nav">
+        <div>Babyplace</div>
+        <div>Inscription</div>
+      </div>
+      <MDBStepper type="vertical">
+        <MDBStepperStep headIcon={1} headText="Stucture d'accueil" itemId={1}>
+          <FirstStep />
+        </MDBStepperStep>
+        <MDBStepperStep headIcon={2} headText="Présentation" itemId={2}>
+          <SecondStep />
+        </MDBStepperStep>
+        <MDBStepperStep headIcon={3} headText="Votre équipe" itemId={3}>
+          <ThirdStep />
+        </MDBStepperStep>
+        <MDBStepperStep
+          headIcon={4}
+          headText="Services et Activitées"
+          itemId={4}
+        >
+          <FourthStep />
+        </MDBStepperStep>
+        <MDBStepperStep headIcon={5} headText="Vos disponibilitées" itemId={5}>
+          <FifthStep />
+        </MDBStepperStep>
+        <MDBStepperStep headIcon={6} headText="Nombre de places" itemId={6}>
+          <SixthStep />
+        </MDBStepperStep>
+        <MDBStepperStep headIcon={7} headText="Règlement intérieur" itemId={7}>
+          <SeventhStep />
+        </MDBStepperStep>
+        <MDBStepperStep headIcon={8} headText="Récapitulatif" itemId={8}>
+          <EighthStep />
+        </MDBStepperStep>
+        <MDBStepperStep headIcon={9} headText="Bienvenue" itemId={9}>
+          <NinthStep />
+        </MDBStepperStep>
+      </MDBStepper>
+    </>
   );
 }
 

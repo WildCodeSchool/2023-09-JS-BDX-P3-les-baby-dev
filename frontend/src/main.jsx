@@ -27,6 +27,7 @@ import DocInscription from "./pages/pages.parents/profil/InscriptionDoc";
 import ConfirmationResa from "./pages/pages.parents/reservation/ConfirmationResa";
 import StructureRegister from "./pages/pages.pro/StructureRegister";
 import ReservationFinal from "./pages/pages.parents/reservation/ReservationFinal";
+import StructureContextProvider from "./context/StrucutreContext";
 
 const router = createBrowserRouter([
   {
@@ -121,7 +122,14 @@ const router = createBrowserRouter([
         ),
         children: [],
       },
-      { path: "/structure", element: <StructureRegister /> },
+      {
+        path: "/structure",
+        element: (
+          <StructureContextProvider>
+            <StructureRegister />
+          </StructureContextProvider>
+        ),
+      },
     ],
   },
 ]);

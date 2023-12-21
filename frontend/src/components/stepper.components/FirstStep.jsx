@@ -1,44 +1,93 @@
-import React from "react";
+// import "./firstStep.scss";
+import {
+  MDBBtn,
+  MDBInput,
+  MDBInputGroup,
+  MDBValidation,
+  MDBValidationItem,
+} from "mdb-react-ui-kit";
+import { useStructure } from "../../context/StrucutreContext";
 
 function FirstStep() {
+  const { setData, data, handleSubmit } = useStructure();
+
+  const onChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
   return (
-    <div>
-      <div className="">
-        <div className="step1">
-          <h3>Complétez et vérifiez vos informations</h3>
-          <input
+    <div className="step1">
+      <h4>Complétez et vérifiez vos informations</h4>
+      <MDBValidation className="row g-3" isValidated>
+        <MDBValidationItem className="col-md-4">
+          <MDBInput
+            value={data.fname}
+            name="fname"
+            onChange={onChange}
+            id="validationCustom01"
             required
-            type="text"
-            name="nomStructure"
-            placeholder="Nom de votre établissement"
+            label="First name"
           />
-          <label htmlFor="nomStrucure" className="labelChecked">
-            Nom
-          </label>
-          <p>Ce nom sera celui qui s'affichera en titre de votre annonce</p>
-        </div>
-        <div className="inputsContainer">
-          <input
+        </MDBValidationItem>
+        <MDBValidationItem className="col-md-4">
+          <MDBInput
+            value={data.lname}
+            name="lname"
+            onChange={onChange}
+            id="validationCustom02"
             required
-            type="text"
-            name="adresseStructure"
-            placeholder="N°, rue, CP, ville"
+            label="Last name"
           />
-          <label htmlFor="adresseStrucure" className="labelChecked">
-            Adresse
-          </label>
-          <p>
-            Les parents n'obtiendront l'adresse exacte qu'après avoir effectué
-            la réservation
-          </p>
+        </MDBValidationItem>
+        <MDBValidationItem
+          feedback="Please choose a username."
+          invalid
+          className="col-md-4"
+        >
+          <MDBInputGroup textBefore="@">
+            <input
+              type="text"
+              className="form-control"
+              id="validationCustomUsername"
+              placeholder="Username"
+              required
+            />
+          </MDBInputGroup>
+        </MDBValidationItem>
+        <MDBValidationItem
+          className="col-md-6"
+          feedback="Please provide a valid city."
+          invalid
+        >
+          <MDBInput
+            value={data.city}
+            name="city"
+            onChange={onChange}
+            id="validationCustom03"
+            required
+            label="City"
+          />
+        </MDBValidationItem>
+        <MDBValidationItem
+          className="col-md-6"
+          feedback="Please provide a valid zip."
+          invalid
+        >
+          <MDBInput
+            value={data.zip}
+            name="zip"
+            onChange={onChange}
+            id="validationCustom05"
+            required
+            label="Zip"
+          />
+        </MDBValidationItem>
+        <div className="col-12">
+          <MDBBtn type="submit" onClick={handleSubmit}>
+            Submit form
+          </MDBBtn>
         </div>
-        <div className="inputsContainer">
-          <input required type="tel" placeholder="0123456789" />
-          <label htmlFor="phone" className="labelChecked">
-            Numéro de téléphone
-          </label>
-        </div>
-      </div>
+      </MDBValidation>
     </div>
   );
 }
