@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 function ThirdStep() {
+  const [employee, setEmployee] = useState([]);
+
+  const HandleAdd = () => {
+    const abc = [...employee, []];
+    setEmployee(abc);
+  };
+
+  const handleChange = (onChangeValue, i) => {
+    const inputData = [...employee];
+    inputData[i] = onChangeValue.target.value;
+    setEmployee(inputData);
+  };
+
+  const handleDelete = (i) => {
+    const deleteEmployee = [...employee];
+    deleteEmployee.splice(i, 1);
+    setEmployee(deleteEmployee);
+  };
   return (
     <div className="step3">
       <h4>Égayez votre annonce avec des photos</h4>
@@ -55,38 +73,72 @@ function ThirdStep() {
               Fonction
             </label>
           </div>
+          <button type="button" onClick={() => HandleAdd()}>
+            +
+          </button>
         </div>
-        <div className="photoAndDescContainer">
-          <div className="imgContainer">
-            <img
-              src="./src/assets/profil-picture.svg "
-              alt="prévisualisation"
-            />
+        {employee.map((index, i) => (
+          <div key={index} className="photoContainer">
+            <div className="imgContainer">
+              <img
+                src="./src/assets/profil-picture.svg"
+                alt="prévisualisation"
+              />
+            </div>
+            <div className="inputContainer">
+              <br />
+              <input
+                type="file"
+                id="photo1"
+                name="file"
+                accept="image/png, image/jpg, image/jpeg"
+              />
+              <label htmlFor="nomProfil" className="labelChecked">
+                Nom
+              </label>
+              <input
+                required
+                type="text"
+                name="nomStructure"
+                placeholder="Nom"
+                onChange={(e) => handleChange(e, i)}
+              />
+              <input
+                required
+                type="text"
+                name="nomStructure"
+                placeholder="Prenom"
+                onChange={(e) => handleChange(e, i)}
+              />
+              <label htmlFor="nomProfil" className="labelChecked">
+                Prenom
+              </label>
+              <input
+                required
+                type="text"
+                name="nomStructure"
+                placeholder="Mail"
+                onChange={(e) => handleChange(e, i)}
+              />
+              <label htmlFor="nomProfil" className="labelChecked">
+                Mail
+              </label>
+              <input
+                required
+                type="text"
+                name="nomStructure"
+                placeholder="Fonction"
+                onChange={(e) => handleChange(e, i)}
+              />
+              <label htmlFor="nomProfil" className="labelChecked">
+                Fonction
+              </label>
+            </div>
+            <button type="button" onClick={() => handleDelete(i)}>
+              x
+            </button>
           </div>
-          <div className="inputContainer">
-            <br />
-            <input
-              type="file"
-              id="photo2"
-              name="file"
-              accept="image/png, image/jpg, image/jpeg"
-            />
-          </div>
-        </div>
-        <div className="photoAndDescContainer">
-          <div className="imgContainer">
-            <img src="./src/assets/profil-picture.svg" alt="prévisualisation" />
-          </div>
-          <div className="inputContainer">
-            <br />
-            <input
-              type="file"
-              id="photo3"
-              name="file"
-              accept="image/png, image/jpg, image/jpeg"
-            />
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
