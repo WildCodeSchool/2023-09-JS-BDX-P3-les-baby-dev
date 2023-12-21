@@ -43,7 +43,9 @@ function ConditonResa() {
         </ul>
       </div>
       <div className="btn_accepted">
-        <button type="button">J’ai lu et j’accepte la consigne</button>
+        <Link to="/searchlist/reservation2">
+          <button type="button">J’ai lu et j’accepte la consigne</button>
+        </Link>
       </div>
     </div>
   );

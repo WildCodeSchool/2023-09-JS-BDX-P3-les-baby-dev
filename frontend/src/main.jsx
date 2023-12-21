@@ -26,6 +26,7 @@ import IncriptionChildren from "./pages/pages.parents/profil/InscriptionChildren
 import DocInscription from "./pages/pages.parents/profil/InscriptionDoc";
 import ConfirmationResa from "./pages/pages.parents/reservation/ConfirmationResa";
 import StructureRegister from "./pages/pages.pro/StructureRegister";
+import ReservationFinal from "./pages/pages.parents/reservation/ReservationFinal";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
           {
             path: "/searchlist/conditions",
             element: <ConditonResa />,
+          },
+          {
+            path: "/searchlist/reservation2",
+            element: <ReservationFinal />,
           },
         ],
       },
