@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "./nurseryCard.scss";
+import {
+  MDBBtn,
+  MDBModal,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalBody,
+  MDBModalFooter,
+} from "mdb-react-ui-kit";
+import { Link } from "react-router-dom";
 
 function NurseryCard() {
+  const [scrollableModal, setScrollableModal] = useState(false);
+
   const crechesData = [
     {
       id: 1,
@@ -96,7 +107,72 @@ function NurseryCard() {
               </div>
             </div>
             <div className="button_reservation">
-              <button type="button">Reserver</button>
+              <button
+                type="button"
+                onClick={() => setScrollableModal(!scrollableModal)}
+              >
+                Reserver
+              </button>
+            </div>
+            <div className="popup_reglement">
+              <MDBModal
+                open={scrollableModal}
+                setOpen={setScrollableModal}
+                tabIndex="-1"
+              >
+                <MDBModalDialog scrollable>
+                  <MDBModalContent>
+                    <MDBModalBody>
+                      <h4>Aggréments</h4>
+                      <ol>
+                        <li>Enfants handicapés</li>
+                        <li>Enfants de moins de 18 mois</li>
+                        <li>Horaire atypique</li>
+                        <li>Accueil de nuit</li>
+                      </ol>
+                      <h4>Réglement intérieur</h4>
+                      <p>La période d’adaptation est obligatoire</p>
+                      <p>
+                        Les parents sont priés de respecter l’environnement, le
+                        voisinage, la vie privée et la famille de l’assistante
+                        maternelle
+                      </p>
+                      <p>
+                        Taper ou sonner à la porte, ne pas rentrer sans y être
+                        invité et attendre qu’on vienne vous ouvrir.
+                      </p>
+                      <p>
+                        Les parents doivent me transmettent toutes les
+                        informations nécessaires, ainsi que les incidents
+                        éventuels survenus au domicile
+                      </p>
+                      <p>
+                        L’enfant arrivera en état de propreté, habillé et ayant
+                        pris son premier repas
+                      </p>
+                      <p>
+                        Les bijoux seront enlevés et rendus aux parents pour des
+                        raisons de sécurité (étouffement, ingestion…).
+                      </p>
+                      <p>
+                        L’assistante maternelle est habilitée à administrer les
+                        médicaments uniquement sur ordonnance ou protocole.
+                      </p>
+                    </MDBModalBody>
+                    <MDBModalFooter>
+                      <MDBBtn
+                        color="secondary"
+                        onClick={() => setScrollableModal(!setScrollableModal)}
+                      >
+                        Close
+                      </MDBBtn>
+                      <Link to="/searchlist/reservation">
+                        <MDBBtn>J'ai compris</MDBBtn>
+                      </Link>
+                    </MDBModalFooter>
+                  </MDBModalContent>
+                </MDBModalDialog>
+              </MDBModal>
             </div>
           </div>
         </div>
