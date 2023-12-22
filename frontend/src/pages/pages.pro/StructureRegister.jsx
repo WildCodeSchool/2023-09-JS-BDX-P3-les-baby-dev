@@ -1,8 +1,6 @@
 import React from "react";
 import { MDBStepper, MDBStepperStep } from "mdb-react-ui-kit";
 import "./structureRegister.scss";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { MDBFileUpload } from "mdb-react-file-upload";
 import FirstStep from "../../components/stepper.components/FirstStep";
 import SecondStep from "../../components/stepper.components/SecondStep";
 import ThirdStep from "../../components/stepper.components/ThirdStep";
@@ -58,11 +56,6 @@ function StructureRegister() {
         </MDBStepperStep>
         <MDBStepperStep headIcon={9} headText="Bienvenue" itemId={9}>
           <NinthStep />
-        </MDBStepperStep>
-        <MDBStepperStep headIcon={10} headText="Bienvenue" itemId={10}>
-          <div className="fileUpload">
-            <MDBFileUpload defaultFile="../src/assets/profil-picture.svg" />
-          </div>
         </MDBStepperStep>
       </MDBStepper>
     </>
