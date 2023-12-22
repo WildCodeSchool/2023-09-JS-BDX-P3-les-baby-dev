@@ -1,5 +1,6 @@
 import React from "react";
 import "./confirmationResa.scss";
+import { Link } from "react-router-dom";
 
 function ConfirmationResa() {
   return (
@@ -22,6 +23,9 @@ function ConfirmationResa() {
       </p>
       <h2>Statut de votre réservation:</h2>
       <h3>Confirmé</h3>
+      <Link to="/searchlist">
+        <button type="button">Suivant</button>
+      </Link>
     </div>
   );
 }
