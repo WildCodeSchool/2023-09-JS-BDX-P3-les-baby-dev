@@ -50,7 +50,7 @@ function ReservationFinal() {
         </ul>
       </div>
       <div className="btn_confirmation">
-        <Link to="/searchlist/reservation2">
+        <Link to="/searchlist/confirmation">
           <button type="button">Je confirme ma réservation</button>
         </Link>
       </div>
