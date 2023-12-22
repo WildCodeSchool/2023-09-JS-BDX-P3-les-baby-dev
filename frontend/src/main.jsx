@@ -81,14 +81,18 @@ const router = createBrowserRouter([
       },
       {
         path: "/profil",
-        element: <InscriptionParent />,
         // element: <IncriptionChildren />,
         children: [
+          { path: "/profil", element: <Profil /> },
           { path: "/profil/myresa", element: <ProfilResa /> },
           {
             path: "/profil/inscription",
-            element: <Profil />,
             children: [
+              {
+                path: "/profil/inscription",
+                element: <InscriptionParent />,
+                // element: <InscriptionParent />,
+              },
               {
                 path: "/profil/inscription/children",
                 element: <IncriptionChildren />,
