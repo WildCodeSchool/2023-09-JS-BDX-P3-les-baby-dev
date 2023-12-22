@@ -12,6 +12,7 @@ import SixthStep from "../../components/stepper.components/SixthStep";
 import EighthStep from "../../components/stepper.components/EighthStep";
 import NinthStep from "../../components/stepper.components/NinthStep";
 import SeventhStep from "../../components/stepper.components/SeventhStep";
+import "mdb-react-file-upload/dist/scss/file-upload.scss";
 
 function StructureRegister() {
   return (
@@ -59,7 +60,9 @@ function StructureRegister() {
           <NinthStep />
         </MDBStepperStep>
         <MDBStepperStep headIcon={10} headText="Bienvenue" itemId={10}>
-          <MDBFileUpload />
+          <div className="fileUpload">
+            <MDBFileUpload defaultFile="../src/assets/profil-picture.svg" />
+          </div>
         </MDBStepperStep>
       </MDBStepper>
     </>

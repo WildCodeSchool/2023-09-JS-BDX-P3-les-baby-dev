@@ -25,7 +25,7 @@ function HomePro() {
         </p>
       </div>
       <h1 className="text">
-        Equipez vous du logiciel de gestion de place d’accueil de jeunes enfants
+        Equipez vous du logiciel de gestion de place d'accueil de jeunes enfants
         le plus complet
       </h1>
       <h4 className="info-text">
@@ -40,7 +40,7 @@ function HomePro() {
           />
           <p className="text-svg one">
             Consultez en temps reel votre agenda et modifiez le en quelques
-            cliques afin d’optimiser votre temps et votre rentabilite.
+            cliques afin d'optimiser votre temps et votre rentabilite.
             Accessible de puis votre Smarktphone, tabelle ou Telephone
           </p>
         </div>
@@ -51,7 +51,7 @@ function HomePro() {
             alt="Visuel Alerte"
           />
           <p className="text-svg two">
-            Choisissez le mode de notifications afin d’etre informe au plus vote
+            Choisissez le mode de notifications afin d'etre informe au plus vote
             des annulations et des demandes de reservation.
           </p>
         </div>
