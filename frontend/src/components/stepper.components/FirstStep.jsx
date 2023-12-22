@@ -49,7 +49,7 @@ function FirstStep() {
               type="text"
               className="form-control"
               id="validationCustomUsername"
-              placeholder="Username"
+              placeholder="Email"
               required
             />
           </MDBInputGroup>

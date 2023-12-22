@@ -1,3 +1,5 @@
+import { MDBFileUpload } from "mdb-react-file-upload";
+import { MDBBtn } from "mdb-react-ui-kit";
 import React, { useState } from "react";
 
 function ThirdStep() {
@@ -30,8 +32,8 @@ function ThirdStep() {
       </p>
       <div className="pageContent">
         <div className="photoContainer">
-          <div className="imgContainer">
-            <img src="./src/assets/profil-picture.svg" alt="prévisualisation" />
+          <div className="fileUpload">
+            <MDBFileUpload defaultFile="../src/assets/profil-picture.svg" />
           </div>
           <div className="inputContainer">
             <br />
@@ -73,16 +75,17 @@ function ThirdStep() {
               Fonction
             </label>
           </div>
-          <button type="button" onClick={() => HandleAdd()}>
+
+          <MDBBtn type="submit" onClick={() => HandleAdd()}>
             +
-          </button>
+          </MDBBtn>
         </div>
         {employee.map((index, i) => (
           <div key={index} className="photoContainer">
-            <div className="imgContainer">
-              <img
-                src="./src/assets/profil-picture.svg"
-                alt="prévisualisation"
+            <div className="fileUpload">
+              <MDBFileUpload
+                defaultFile="../src/assets/profil-picture.svg"
+                disabledRemoveBtn
               />
             </div>
             <div className="inputContainer">
@@ -134,9 +137,9 @@ function ThirdStep() {
                 Fonction
               </label>
             </div>
-            <button type="button" onClick={() => handleDelete(i)}>
+            <MDBBtn type="submit" onClick={() => handleDelete(i)}>
               x
-            </button>
+            </MDBBtn>
           </div>
         ))}
       </div>
