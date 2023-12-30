@@ -1,4 +1,4 @@
-import Footer from "../../components/home.components/Footer";
+import FooterMdb from "../../components/home.components/FooterMdb";
 import Header from "../../components/home.components/Header";
 import Navbar from "../../components/home.components/Navbar";
 
@@ -6,7 +6,7 @@ import "./Home.css";
 
 function Home() {
   return (
-    <div className="container">
+    <div className="containerHome">
       <Navbar />
       <Header />
       <div>
@@ -39,7 +39,7 @@ function Home() {
           className="zeroPapier"
         />
       </div>
-      <Footer />
+      <FooterMdb />
     </div>
   );
 }

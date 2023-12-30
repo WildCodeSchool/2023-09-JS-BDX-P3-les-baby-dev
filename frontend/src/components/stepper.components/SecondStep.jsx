@@ -1,6 +1,9 @@
 import { MDBFileUpload } from "mdb-react-file-upload";
+import { useStructure } from "../../context/StrucutreContext";
 
 function SecondStep() {
+  const { onChangeFiles } = useStructure();
+  const { data, onChange } = useStructure();
   return (
     <div>
       <div className="step2">
@@ -9,7 +12,9 @@ function SecondStep() {
           <div className="fileUpload">
             <MDBFileUpload
               defaultFile="../src/assets/profil-picture.svg"
-              disabledRemoveBtn
+              // disabledRemoveBtn
+              name="profilPic"
+              getInputFiles={onChangeFiles}
             />
           </div>
           <div className="inputContainer">
@@ -26,7 +31,13 @@ function SecondStep() {
             l'enfant, activités, sorties, pédagogie... Décrivez les espaces de
             jeu, le lieu de sommeil, les équipements dont vous disposez...
           </p>
-          <textarea id="description" name="description" maxLength="500" />
+          <textarea
+            id="description"
+            name="description"
+            maxLength="500"
+            value={data.description}
+            onChange={onChange}
+          />
           <legend>Maximum 500 caractères.</legend>
         </div>
       </div>

@@ -4,7 +4,7 @@ import "./HomePro.scss";
 
 function HomePro() {
   return (
-    <div className="container">
+    <div className="containerPro">
       <Navbar />
       <div className="div-visuel">
         <img

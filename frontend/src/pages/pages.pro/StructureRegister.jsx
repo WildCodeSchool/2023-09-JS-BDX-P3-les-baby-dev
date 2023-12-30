@@ -11,16 +11,23 @@ import EighthStep from "../../components/stepper.components/EighthStep";
 import NinthStep from "../../components/stepper.components/NinthStep";
 import SeventhStep from "../../components/stepper.components/SeventhStep";
 import "mdb-react-file-upload/dist/scss/file-upload.scss";
+import { useStructure } from "../../context/StrucutreContext";
 
 function StructureRegister() {
+  const { handleSubmit } = useStructure();
   return (
     <>
       <div className="nav">
         <div>Babyplace</div>
         <div>Inscription</div>
       </div>
-      <MDBStepper type="vertical">
-        <MDBStepperStep headIcon={1} headText="Stucture d'accueil" itemId={1}>
+      <MDBStepper type="vertical" externalNext={handleSubmit}>
+        <MDBStepperStep
+          contentClassName="stepContent"
+          headIcon={1}
+          headText="Stucture d'accueil"
+          itemId={1}
+        >
           <FirstStep />
         </MDBStepperStep>
         <MDBStepperStep headIcon={2} headText="Présentation" itemId={2}>
