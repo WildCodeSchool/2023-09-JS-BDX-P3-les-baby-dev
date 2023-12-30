@@ -1,25 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Adamina&display=swap");
+
 .line {
   border-bottom: 1px solid #9805c5c7;
-  margin: 50px 10px;
+  margin: 30px 10px;
 }
 
+.footerTitle {
+  text-align: center;
+  padding: 10px;
+  font-size: 16px;
+  font-family: "Adamina", serif;
+}
 .footerTop {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  width: 100%;
   margin-bottom: 10px;
 
-  h3 {
-    font-size: 15px;
-  }
   .helpBtn {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
+    .purple {
+      background-color: #f063a7;
+      color: #fff;
+
+      &:hover {
+        border: 1px solid #f063a7;
+        background-color: #fff;
+        color: #f063a7;
+      }
+    }
+
+    .arrowBtn {
+      span {
+        transition: 0.3s ease-in-out;
+        display: inline-block;
+        position: relative;
+        top: 0.5px;
+      }
+
+      &:hover {
+        border: 1px solid #9805c5c7;
+        span {
+          transform: translateX(3px) scale(1);
+        }
+      }
+    }
+
     button {
       width: 130px;
-      height: 50px;
+      height: 45px;
       border: 1px solid transparent;
       border-radius: 40px;
       background-color: white;
@@ -27,44 +57,150 @@
       margin: 0 auto;
       box-shadow: -3px 3px 3px rgba(75, 93, 104, 0.1);
       transition: 0.3s ease-in-out;
-      font-size: 15px;
-    }
-
-    button:hover {
-      border: 1px solid #9805c5c7;
+      font-size: 14px;
     }
   }
 }
 
-.footerTitle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-direction: row;
-  margin-bottom: 10px;
+.info {
+  display: none;
+}
 
+.infoContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 70px 50px;
+  height: 20vh;
+  margin: 20px 20px;
+  justify-content: center;
+  align-items: center;
+
+  h5 {
+    text-align: center;
+    margin: 0;
+    font-size: 16px;
+    font-family: "Adamina", serif;
+  }
+
+  .listAbout {
+    padding: 2px;
+    text-align: center;
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      li {
+        font-size: 14px;
+        font-family: "Adamina", serif;
+        padding: 2px 0px;
+      }
+    }
+  }
   button {
     border: transparent;
     img {
       display: none;
     }
   }
-}
 
-.infoContainer {
-  display: flex;
-  height: 30vh;
-
-  .listAbout {
+  .listHelp {
+    padding: 2px;
+    text-align: center;
     ul {
       list-style-type: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        font-size: 14px;
+        font-family: "Adamina", serif;
+        padding: 2px 0px;
+      }
+    }
+  }
+  .socialMedia {
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .footerTop {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 40px;
+
+    .helpBtn {
+      gap: 20px;
+      .arrowBtn {
+        span {
+          font-size: 20px;
+          top: 3px;
+        }
+      }
+      button {
+        width: 200px;
+      }
     }
   }
 
-  .listHelp {
-    ul {
-      list-style-type: none;
+  .footerBtm {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    // gap: 100px;
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      // justify-content: center;
+      align-items: center;
+      // gap: 10px;
+      padding-top: 5px;
+      padding: 20px;
+      width: 200px;
+
+      button {
+        border: none;
+
+        img {
+          width: 250px;
+        }
+      }
+    }
+
+    .infoContainer {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 70px 50px;
+      // gap: 15px;
+    }
+  }
+}
+@media screen and (min-width: 1000px) {
+  .footerTop {
+    justify-content: space-around;
+    .helpBtn {
+      gap: 40px;
+    }
+  }
+  .footerBtm {
+    gap: 100px;
+    .info {
+      width: 400px;
+      // padding: 0;
+      padding-top: 40px;
+    }
+    .infoContainer {
+      gap: 15px;
+      .socialMedia {
+        gap: 10px;
+      }
     }
   }
 }

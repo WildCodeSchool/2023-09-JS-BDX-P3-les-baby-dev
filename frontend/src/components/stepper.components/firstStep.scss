@@ -4,23 +4,34 @@
   box-sizing: border-box;
 }
 
-.step1 {
-  .nameInput {
-    display: flex;
-    flex-direction: column;
-    input {
-      width: 80%;
-      height: 40px;
-      border-radius: 10px;
-      padding: 15px;
-    }
+.fifty {
+  display: flex;
+  flex-direction: row;
 
-    label {
-      // position: absolute;
-      // z-index: 3;
-      transform: translateY(6px) translateX(10px);
-      font-weight: 600;
-      color: #9696a0;
+  .step1 {
+    width: 50%;
+    .nameInput {
+      display: flex;
+      flex-direction: column;
+      input {
+        width: 80%;
+        height: 40px;
+        border-radius: 10px;
+        padding: 15px;
+      }
+
+      label {
+        // position: absolute;
+        // z-index: 3;
+        transform: translateY(6px) translateX(10px);
+        font-weight: 600;
+        color: #9696a0;
+      }
     }
+  }
+
+  .greyBg {
+    width: 50%;
+    background-color: #f9f9f9;
   }
 }

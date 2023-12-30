@@ -5,34 +5,40 @@ function Footer() {
   return (
     <>
       <div className="line" />
-      <footer className="container  ">
+      <footer className="footerContainer">
         <div className="footerTop">
-          <h3>Vous êtes professionnel de la petite enfance ? </h3>
+          <h4 className="footerTitle">
+            Vous êtes professionnel de la petite enfance ?
+          </h4>
           <div className="helpBtn">
-            <button type="button">En savoir plus</button>
-            <button type="button">
+            <button type="button" className="purple">
+              En savoir plus
+            </button>
+            <button type="button" className="arrowBtn">
               Demander une démo <span>➜</span>
             </button>
           </div>
         </div>
         <div className="footerBtm">
-          <div className="footerTitle">
-            <button type="button" className="imgButton">
-              <img src="./src/assets/logoPasPro.svg" alt="Babyplace" />
-            </button>
+          <div className="info">
+            <div>
+              {/* <button type="button" className="imgButton">
+                <img src="./src/assets/logoPasPro.svg" alt="Babyplace" />
+              </button> */}
+            </div>
+            <div>
+              <p className="adress">
+                Warehouse Society, 234 Bahagia Ave Street PRBW 29281
+              </p>
+              <p className="mail">
+                info@davewarehouse.fr <br /> 02.40.01.02.03
+              </p>
+            </div>
+          </div>
+          <div className="infoContainer">
             <h5>À propos</h5>
             <h5>Aide</h5>
             <h5>Réseaux sociaux</h5>
-          </div>
-          <div className="infoContainer">
-            <div className="info">
-              <p className="adress">
-                Warehouse Society, 234 <br /> Bahagia Ave Street PRBW 29281
-              </p>
-              <p className="mail">
-                info@davewarehouse.projet <br /> 02.40.01.02.03
-              </p>
-            </div>
             <div className="listAbout">
               <ul>
                 <li>Notre équipe</li>
@@ -62,15 +68,6 @@ function Footer() {
                 style={{ color: "#55acee" }}
               >
                 <MDBIcon fab icon="twitter" size="lg" />
-              </MDBBtn>
-
-              <MDBBtn
-                tag="a"
-                color="none"
-                className="m-1"
-                style={{ color: "#dd4b39" }}
-              >
-                <MDBIcon fab icon="google" size="lg" />
               </MDBBtn>
 
               <MDBBtn
