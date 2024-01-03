@@ -10,6 +10,7 @@ import {
   MDBListGroupItem,
 } from "mdb-react-ui-kit";
 import { Link, useNavigate } from "react-router-dom";
+import NavProfil from "../../components/profile.components/NavProfil";
 
 function SearchList() {
   const navigate = useNavigate();
@@ -124,6 +125,7 @@ function SearchList() {
           </MDBCard>
         </div>
       ))}
+      <NavProfil />
     </div>
   );
 }

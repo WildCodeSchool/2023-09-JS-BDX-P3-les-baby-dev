@@ -47,9 +47,8 @@ const router = createBrowserRouter([
         children: [
           { path: "/searchlist", element: <SearchList /> },
           {
-            path: "/searchlist/filter",
-            element: <Filter />,
             children: [
+              { path: "/searchlist/filter", element: <Filter /> },
               { path: "/searchlist/filter/dates", element: <FilterDate /> },
               {
                 path: "/searchlist/filter/services",
