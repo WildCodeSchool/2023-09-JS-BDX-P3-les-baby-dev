@@ -1,6 +1,13 @@
 * {
   font-family: "nunito", sans-serif;
 }
+.flex-inscription {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
 .div-form-parent {
   display: flex;
   flex-direction: column;
