@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Adamina&display=swap");
+
+.nav {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid grey;
+
+  .structureTitle {
+    font-family: "Adamina", serif;
+    font-weight: 600;
+  }
+
+  h5 {
+    font-family: "Adamina", serif;
+    color: #787885;
+  }
+
+  button {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: #fff;
+    color: #9c69e2;
+    font-family: "Adamina", serif;
+    font-size: 20px;
+  }
+}
