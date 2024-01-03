@@ -32,7 +32,7 @@ function FilterService() {
   return (
     <div className="filterService_container">
       <div className="returnBar">
-        <Link to="/searchlist/reservation">
+        <Link to="/searchlist/filter">
           <img
             className="arrowBack"
             src="../../src/assets/arrow_back.svg"
