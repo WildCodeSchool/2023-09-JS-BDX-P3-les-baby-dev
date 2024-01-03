@@ -1,8 +1,34 @@
-import React from "react";
+import React /* { useState } */ from "react";
 import { Link } from "react-router-dom";
 import "./filterService.scss";
 
 function FilterService() {
+  /* const [checkboxState, setCheckboxState] = useState({
+    psci: false,
+    nesting: false,
+    montessori: false,
+    handicap: false,
+    jardin: false,
+    sorties: false,
+    promenades: false,
+    eveil: false,
+    musique: false,
+    art: false,
+    bilingue: false,
+    bibli: false,
+  });
+
+  /* const handleCheckboxChange = (checkboxName) => {
+    setCheckboxState((prevCheckboxState) => ({
+      ...prevCheckboxState,
+      [checkboxName]: !prevCheckboxState[checkboxName],
+    }));
+  }; */
+
+  const handleAppliquerClick = () => {
+    // console.log("Filtres à appliquer :", checkboxState);
+  };
+
   return (
     <div className="filterService_container">
       <div className="returnBar">
@@ -17,7 +43,13 @@ function FilterService() {
       </div>
       <h2>Expériences et Formations</h2>
       <div className="checkboxContainer">
-        <input type="checkbox" id="psci" name="psci" />
+        <input
+          type="checkbox"
+          id="psci"
+          name="psci"
+          //        checked={value}
+          //      onChange={() => handleCheckboxChange(key)}
+        />
         <label htmlFor="psci">Formation premiers secours (PSCI)</label>
       </div>
       <div className="checkboxContainer">
@@ -36,7 +68,13 @@ function FilterService() {
       </div>
       <h2>Sorties</h2>
       <div className="checkboxContainer">
-        <input type="checkbox" id="jardin" name="jardin" />
+        <input
+          type="checkbox"
+          id="jardin"
+          name="jardin"
+          //          checked={checkboxState.jardin || false}
+          //         onChange={setCheckboxState}
+        />
         <label htmlFor="jardin">Espace extérieur / jardin</label>
       </div>
       <div className="checkboxContainer">
@@ -69,7 +107,9 @@ function FilterService() {
         <label htmlFor="bibli">Bibliothèque / Ludothèque / RAM</label>
       </div>
       <div className="btn_appliquer">
-        <button type="button">Appliquer</button>
+        <button type="button" onClick={handleAppliquerClick}>
+          Appliquer
+        </button>
       </div>
     </div>
   );
