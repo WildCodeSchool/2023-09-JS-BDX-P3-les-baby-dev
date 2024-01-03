@@ -44,6 +44,8 @@ function FirstStep() {
             <MDBInputGroup textBefore="@">
               <input
                 type="text"
+                value={data.email}
+                onChange={onChange}
                 className="form-control"
                 id="validationCustomUsername"
                 placeholder="Email"
@@ -52,7 +54,7 @@ function FirstStep() {
             </MDBInputGroup>
           </MDBValidationItem>
           <MDBValidationItem
-            className="col-md-6"
+            className="col-md-3"
             feedback="Please provide a valid city."
             invalid
           >
@@ -66,7 +68,7 @@ function FirstStep() {
             />
           </MDBValidationItem>
           <MDBValidationItem
-            className="col-md-6"
+            className="col-md-2"
             feedback="Please provide a valid zip."
             invalid
           >
