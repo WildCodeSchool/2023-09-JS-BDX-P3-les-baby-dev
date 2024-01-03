@@ -90,15 +90,13 @@ const router = createBrowserRouter([
               {
                 path: "/profil/inscription",
                 element: <InscriptionParent />,
-                // element: <InscriptionParent />,
               },
               {
                 path: "/profil/inscription/children",
                 element: <IncriptionChildren />,
-                // element: <InscriptionParent />,
               },
               {
-                path: "/profil/inscription/documents",
+                path: "/profil/inscription/inscription",
                 element: <DocInscription />,
               },
             ],
