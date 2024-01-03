@@ -52,11 +52,7 @@ function DocInscription() {
             placeholder="Adresse postale"
           />
         </div>
-        <Link
-          to="/profil/inscription/children"
-          type="button"
-          className="button-children"
-        >
+        <Link to="/profil" type="button" className="button-children">
           {" "}
           Valider mon dossier{" "}
         </Link>
