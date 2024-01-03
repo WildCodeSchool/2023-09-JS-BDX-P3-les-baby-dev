@@ -9,47 +9,58 @@ function DocInscription() {
         <HeaderProfile />
         <h1>Dossier Inscription</h1>
         <div className="div-form-parent">
+          <label htmlFor="photo1">
+            Justificatif de revenu (moins de 3 mois)
+          </label>
+          <input
+            type="file"
+            id="photo1"
+            name="file"
+            accept="image/png, image/jpg, image/jpeg"
+          />
+          <label htmlFor="photo1">Déclaration de revenu (année en cours)</label>
+          <input
+            type="file"
+            id="photo1"
+            name="file"
+            accept="image/png, image/jpg, image/jpeg"
+          />
+          <label htmlFor="photo1">Justificatif de domicile</label>
+          <input
+            type="file"
+            id="photo1"
+            name="file"
+            accept="image/png, image/jpg, image/jpeg"
+          />
+          <label htmlFor="photo1">
+            Justificatif de situation professionnelles
+          </label>
+          <input
+            type="file"
+            id="photo1"
+            name="file"
+            accept="image/png, image/jpg, image/jpeg"
+          />
+          <label htmlFor="photo1">RIB</label>
+          <input
+            type="file"
+            id="photo1"
+            name="file"
+            accept="image/png, image/jpg, image/jpeg"
+          />
           <input
             className="form-parent"
             required
             type="text"
             name="nomParent"
-            placeholder="Nom"
+            placeholder="Numéro allocataire CAF"
           />
           <input
             className="form-parent"
             required
             type="text"
-            name="prénomParent"
-            placeholder="Prénom"
-          />
-          <input
-            className="form-parent"
-            required
-            type="text"
-            name="Birthdate"
-            placeholder="Profession"
-          />
-          <input
-            className="form-parent"
-            required
-            type="text"
-            name="nomStructure"
-            placeholder="Téléphone Portable"
-          />
-          <input
-            className="form-parent"
-            required
-            type="text"
-            name="nomStructure"
-            placeholder="Mail"
-          />
-          <input
-            className="form-parent"
-            required
-            type="text"
-            name="nomStructure"
-            placeholder="Adresse postale"
+            name="nomParent"
+            placeholder="Numéro de sécurité sociale"
           />
         </div>
         <Link to="/profil" type="button" className="button-children">
