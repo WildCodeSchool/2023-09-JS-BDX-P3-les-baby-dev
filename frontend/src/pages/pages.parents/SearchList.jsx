@@ -10,6 +10,7 @@ import {
   MDBListGroupItem,
 } from "mdb-react-ui-kit";
 import { Link, useNavigate } from "react-router-dom";
+import NavProfil from "../../components/profile.components/NavProfil";
 
 function SearchList() {
   const navigate = useNavigate();
@@ -80,50 +81,53 @@ function SearchList() {
     },
   ];
   return (
-    <div className="card-container container">
-      {crechesData.map((creche) => (
-        <div key={creche.id}>
-          <MDBCard>
-            <MDBCardImage
-              position="top"
-              alt={creche.name}
-              src={creche.imageLink}
-            />
-            <MDBCardBody>
-              <MDBCardTitle>{creche.name}</MDBCardTitle>
-              <MDBCardText>{creche.presentation}</MDBCardText>
-            </MDBCardBody>
-            <MDBListGroup flush>
-              <MDBListGroupItem>{creche.openingHours}</MDBListGroupItem>
-              <MDBListGroupItem>{creche.contact.phone}</MDBListGroupItem>
-              <MDBListGroupItem>{creche.contact.email}</MDBListGroupItem>
-              <div className="days-container">
-                {Object.entries(creche.availability).map(
-                  ([day, isAvailable], index) => (
-                    <div
-                      className="days-availability"
-                      key={`index-${index + 1}`}
-                      style={{
-                        backgroundColor: isAvailable
-                          ? "green"
-                          : "rgb(105, 105, 105)",
-                      }}
-                    >
-                      {day}: {isAvailable ? "Disponible" : "Complet"}
-                    </div>
-                  )
-                )}
-              </div>
-            </MDBListGroup>
-            <MDBCardBody>
-              <MDBCardLink onClick={handleNavigate}>Nursery</MDBCardLink>
-              <MDBCardLink>
-                <Link to="/searchlist/nursery">Réserver</Link>
-              </MDBCardLink>
-            </MDBCardBody>
-          </MDBCard>
-        </div>
-      ))}
+    <div>
+      <div className="card-container container">
+        {crechesData.map((creche) => (
+          <div key={creche.id}>
+            <MDBCard>
+              <MDBCardImage
+                position="top"
+                alt={creche.name}
+                src={creche.imageLink}
+              />
+              <MDBCardBody>
+                <MDBCardTitle>{creche.name}</MDBCardTitle>
+                <MDBCardText>{creche.presentation}</MDBCardText>
+              </MDBCardBody>
+              <MDBListGroup flush>
+                <MDBListGroupItem>{creche.openingHours}</MDBListGroupItem>
+                <MDBListGroupItem>{creche.contact.phone}</MDBListGroupItem>
+                <MDBListGroupItem>{creche.contact.email}</MDBListGroupItem>
+                <div className="days-container">
+                  {Object.entries(creche.availability).map(
+                    ([day, isAvailable], index) => (
+                      <div
+                        className="days-availability"
+                        key={`index-${index + 1}`}
+                        style={{
+                          backgroundColor: isAvailable
+                            ? "green"
+                            : "rgb(105, 105, 105)",
+                        }}
+                      >
+                        {day}: {isAvailable ? "Disponible" : "Complet"}
+                      </div>
+                    )
+                  )}
+                </div>
+              </MDBListGroup>
+              <MDBCardBody>
+                <MDBCardLink onClick={handleNavigate}>Nursery</MDBCardLink>
+                <MDBCardLink>
+                  <Link to="/searchlist/nursery">Réserver</Link>
+                </MDBCardLink>
+              </MDBCardBody>
+            </MDBCard>
+          </div>
+        ))}
+      </div>
+      <NavProfil />
     </div>
   );
 }
