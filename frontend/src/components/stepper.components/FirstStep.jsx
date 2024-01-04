@@ -2,7 +2,6 @@ import "./firstStep.scss";
 import {
   MDBBtn,
   MDBInput,
-  MDBInputGroup,
   MDBValidation,
   MDBValidationItem,
 } from "mdb-react-ui-kit";
@@ -18,58 +17,57 @@ function FirstStep() {
         <MDBValidation className="row g-3" isValidated>
           <MDBValidationItem className="col-md-4">
             <MDBInput
-              value={data.fname}
-              name="fname"
+              value={data.structureName}
+              name="structureName"
               onChange={onChange}
               id="validationCustom01"
               required
-              label="First name"
+              label="Nom de l'établissement"
             />
           </MDBValidationItem>
           <MDBValidationItem className="col-md-4">
             <MDBInput
-              value={data.lname}
-              name="lname"
+              label="Numéro"
+              id="typePhone"
+              type="tel"
+              name="tel"
               onChange={onChange}
-              id="validationCustom02"
+              value={data.tel}
               required
-              label="Last name"
             />
           </MDBValidationItem>
           <MDBValidationItem
-            feedback="Please choose a username."
+            feedback="Veuillez entrer une adresse."
             invalid
             className="col-md-4"
           >
-            <MDBInputGroup textBefore="@">
-              <input
-                type="text"
-                value={data.email}
-                onChange={onChange}
-                className="form-control"
-                id="validationCustomUsername"
-                placeholder="Email"
-                required
-              />
-            </MDBInputGroup>
+            <MDBInput
+              label="N° et nom de rue"
+              id="validationCustomUsername"
+              type="text"
+              name="adresse"
+              onChange={onChange}
+              value={data.address}
+              required
+            />
           </MDBValidationItem>
           <MDBValidationItem
             className="col-md-3"
-            feedback="Please provide a valid city."
+            feedback="Veuillez entrer une ville."
             invalid
           >
             <MDBInput
               value={data.city}
-              name="city"
+              name="ville"
               onChange={onChange}
               id="validationCustom03"
               required
-              label="City"
+              label="Ville"
             />
           </MDBValidationItem>
           <MDBValidationItem
-            className="col-md-2"
-            feedback="Please provide a valid zip."
+            className="col-md-4"
+            feedback="Veuillez entrer un code postal."
             invalid
           >
             <MDBInput
@@ -78,7 +76,7 @@ function FirstStep() {
               onChange={onChange}
               id="validationCustom05"
               required
-              label="Zip"
+              label="Code postal"
             />
           </MDBValidationItem>
           <div className="col-12">
@@ -90,11 +88,10 @@ function FirstStep() {
       </div>
       <div className="greyBg">
         <div className="infoRegisterCard">
-          <h5>Choisissez votre catégorie d'annonce</h5>
+          <h5>Où se situe votre structure ?</h5>
           <p>
-            En sélectionnant les catégories adéquates, vous aidez les parents à
-            savoir à quoi s'attendre concernant l'accueil de leur enfant au sein
-            de votre structure.
+            Les parents n'obtiendront l'adresse exacte qu'après avoir effectué
+            la réservation
           </p>
         </div>
       </div>

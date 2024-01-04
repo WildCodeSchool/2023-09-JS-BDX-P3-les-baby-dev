@@ -19,7 +19,7 @@ function StructureRegister() {
   return (
     <>
       <Navbar />
-      <MDBStepper type="vertical" externalNext={handleSubmit}>
+      <MDBStepper type="vertical" externalNext={handleSubmit} linear>
         <MDBStepperStep
           contentClassName="stepContent"
           headIcon={1}
