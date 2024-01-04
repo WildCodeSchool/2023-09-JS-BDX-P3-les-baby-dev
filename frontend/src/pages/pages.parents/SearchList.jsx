@@ -11,6 +11,7 @@ import {
 } from "mdb-react-ui-kit";
 import { Link, useNavigate } from "react-router-dom";
 import NavProfil from "../../components/profile.components/NavProfil";
+import FilterComponent from "../../components/searchList.components/FilterComponent";
 
 function SearchList() {
   const navigate = useNavigate();
@@ -82,6 +83,7 @@ function SearchList() {
   ];
   return (
     <div>
+      <FilterComponent />
       <div className="card-container container">
         {crechesData.map((creche) => (
           <div key={creche.id}>

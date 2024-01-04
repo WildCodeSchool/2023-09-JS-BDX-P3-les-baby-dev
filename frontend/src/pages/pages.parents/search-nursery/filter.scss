@@ -1,0 +1,41 @@
+.filter_container {
+  background-color: #f7f6fe;
+  width: 100%;
+  margin: 0 auto;
+  height: 115vh;
+  padding-top: 20px;
+
+  .returnBar {
+    background-color: white;
+    height: 100px;
+    display: flex;
+    box-shadow: 3px 3px 3px rgb(187, 187, 187);
+  }
+
+  .arrowBack {
+    margin-top: 70%;
+    margin-left: 20px;
+    width: 80%;
+  }
+
+  h1 {
+    align-self: center;
+    font-weight: bold;
+    margin-left: 30px;
+  }
+  .lines_filter {
+    margin-top: 100px;
+
+    .line_filter {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 30px 30px;
+
+      h2 {
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+    }
+  }
+}
