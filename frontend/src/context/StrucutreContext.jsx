@@ -25,6 +25,7 @@ function StructureContextProvider({ children }) {
       isNightCareEnabled: false,
       maxNightCare: 0,
     },
+    employees: [],
   });
 
   const onChange = (e) => {

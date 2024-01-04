@@ -21,8 +21,6 @@
       }
 
       label {
-        // position: absolute;
-        // z-index: 3;
         transform: translateY(6px) translateX(10px);
         font-weight: 600;
         color: #9696a0;
@@ -33,5 +31,15 @@
   .greyBg {
     width: 50%;
     background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+
+    .infoRegisterCard {
+      padding: 20px;
+      background-color: #fff;
+      margin: 10px;
+      box-shadow: -3px 3px 3px rgba(75, 93, 104, 0.1);
+    }
   }
 }

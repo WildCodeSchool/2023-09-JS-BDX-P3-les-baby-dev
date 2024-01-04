@@ -1,6 +1,7 @@
 import { MDBSwitch } from "mdb-react-ui-kit";
 import React from "react";
 import { useStructure } from "../../context/StrucutreContext";
+import "./sixthStep.scss";
 
 function SixthStep() {
   const { data, updateAmenities } = useStructure();
@@ -45,117 +46,123 @@ function SixthStep() {
   };
 
   return (
-    <div className="step6">
-      <div>
-        <h4>Nombre de places ou agrements</h4>
-        <p>A total, de combien d'aggrément disposez vous ?</p>
-        <div className="inputContainer">
-          <label htmlFor="maxPlaces">
+    <div className="fifty">
+      <div className="step6">
+        <div>
+          <h4>Nombre de places ou agrements</h4>
+          <p>A total, de combien de place disposez vous ?</p>
+          <div className="inputContainer">
+            <label htmlFor="maxPlaces">
+              <input
+                type="number"
+                min="1"
+                name="maxPlaces"
+                value={data.amenities.maxPlaces}
+                onChange={(e) => handleMaxPlacesChange(e.target.value)}
+              />
+              &nbsp;place(s)
+            </label>
+          </div>
+          <br />
+        </div>
+        <div>
+          <div className="inputContainer">
+            <MDBSwitch
+              id="handicapEnabled"
+              label="Enfant handicapé"
+              onChange={() =>
+                updateAmenities(
+                  "isHandicapEnabled",
+                  !data.amenities.isHandicapEnabled
+                )
+              }
+            />
             <input
               type="number"
-              min="1"
-              name="maxPlaces"
-              value={data.amenities.maxPlaces}
-              onChange={(e) => handleMaxPlacesChange(e.target.value)}
+              min="0"
+              max={data.amenities.maxPlaces}
+              name="maxHandicap"
+              value={data.amenities.maxHandicap}
+              onChange={(e) =>
+                handleMaxChildInputChange("maxHandicap", e.target.value)
+              }
+              disabled={!data.amenities.isHandicapEnabled}
             />
-            place(s)
-          </label>
+            <MDBSwitch
+              id="under18Month"
+              label="Enfant de moins de 18 mois"
+              onChange={() =>
+                updateAmenities(
+                  "isUnder18MonthsEnabled",
+                  !data.amenities.isUnder18MonthsEnabled
+                )
+              }
+            />
+            <input
+              type="number"
+              min="0"
+              max={data.amenities.maxPlaces}
+              name="maxUnder18Month"
+              value={data.amenities.maxUnder18Months}
+              onChange={(e) =>
+                handleMaxChildInputChange("maxUnder18Months", e.target.value)
+              }
+              disabled={!data.amenities.isUnder18MonthsEnabled}
+            />
+            <MDBSwitch
+              id="typicalHours"
+              label="Horaires atypique"
+              onChange={() =>
+                updateAmenities(
+                  "isAtypicalHoursEnabled",
+                  !data.amenities.isAtypicalHoursEnabled
+                )
+              }
+            />
+            <input
+              type="number"
+              min="0"
+              max={data.amenities.maxPlaces}
+              name="maxAtypicalHours"
+              value={data.amenities.maxAtypicalHours}
+              onChange={(e) =>
+                handleMaxChildInputChange("maxAtypicalHours", e.target.value)
+              }
+              disabled={!data.amenities.isAtypicalHoursEnabled}
+            />
+            <MDBSwitch
+              id="nightCare"
+              label="Accueil de nuit"
+              onChange={() =>
+                updateAmenities(
+                  "isNightCareEnabled",
+                  !data.amenities.isNightCareEnabled
+                )
+              }
+            />
+            <input
+              type="number"
+              min="0"
+              max={data.amenities.maxPlaces}
+              name="maxNightCare"
+              value={data.amenities.maxNightCare}
+              onChange={(e) =>
+                handleMaxChildInputChange("maxNightCare", e.target.value)
+              }
+              disabled={!data.amenities.isNightCareEnabled}
+            />
+          </div>
         </div>
       </div>
-      <div>
-        <h4>Agréments</h4>
-        <p>
-          Disposez vous de restriction d'agrément ? Mettez le nombre
-          <strong>maximum</strong>
-          d'enfant que vous pouvez accueillir en fonction des conditions
-          d'accueil.
-        </p>
-        <div className="inputContainer">
-          <p>Enfant(s) handicapé(s)</p>
-          <MDBSwitch
-            id="handicapEnabled"
-            label="Enfant handicapé"
-            onChange={() =>
-              updateAmenities(
-                "isHandicapEnabled",
-                !data.amenities.isHandicapEnabled
-              )
-            }
-          />
-          <input
-            type="number"
-            min="0"
-            max={data.amenities.maxPlaces}
-            name="maxHandicap"
-            value={data.amenities.maxHandicap}
-            onChange={(e) =>
-              handleMaxChildInputChange("maxHandicap", e.target.value)
-            }
-            disabled={!data.amenities.isHandicapEnabled}
-          />
-          <MDBSwitch
-            id="under18Month"
-            label="Enfant de moins de 18 mois"
-            onChange={() =>
-              updateAmenities(
-                "isUnder18MonthsEnabled",
-                !data.amenities.isUnder18MonthsEnabled
-              )
-            }
-          />
-          <input
-            type="number"
-            min="0"
-            max={data.amenities.maxPlaces}
-            name="maxUnder18Month"
-            value={data.amenities.maxUnder18Months}
-            onChange={(e) =>
-              handleMaxChildInputChange("maxUnder18Months", e.target.value)
-            }
-            disabled={!data.amenities.isUnder18MonthsEnabled}
-          />
-          <MDBSwitch
-            id="typicalHours"
-            label="Horaires atypique"
-            onChange={() =>
-              updateAmenities(
-                "isAtypicalHoursEnabled",
-                !data.amenities.isAtypicalHoursEnabled
-              )
-            }
-          />
-          <input
-            type="number"
-            min="0"
-            max={data.amenities.maxPlaces}
-            name="maxAtypicalHours"
-            value={data.amenities.maxAtypicalHours}
-            onChange={(e) =>
-              handleMaxChildInputChange("maxAtypicalHours", e.target.value)
-            }
-            disabled={!data.amenities.isAtypicalHoursEnabled}
-          />
-          <MDBSwitch
-            id="nightCare"
-            label="Accueil de nuit"
-            onChange={() =>
-              updateAmenities(
-                "isNightCareEnabled",
-                !data.amenities.isNightCareEnabled
-              )
-            }
-          />
-          <input
-            type="number"
-            min="0"
-            max={data.amenities.maxPlaces}
-            name="maxNightCare"
-            value={data.amenities.maxNightCare}
-            onChange={(e) =>
-              handleMaxChildInputChange("maxNightCare", e.target.value)
-            }
-            disabled={!data.amenities.isNightCareEnabled}
-          />
+      <div className="greyBg">
+        <div className="infoRegisterCard">
+          <h4>Nombre de places & d'agréments</h4>
+          <p>
+            Disposez vous de restriction d'agrément ? Mettez le nombre
+            <strong> maximum </strong>
+            d'enfant que vous pouvez accueillir en fonction des conditions
+            d'accueil.
+          </p>
         </div>
       </div>
     </div>
