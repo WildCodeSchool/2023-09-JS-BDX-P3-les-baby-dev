@@ -22,10 +22,30 @@ function SixthStep() {
     );
     const updatedMaxNightCare = Math.min(data.amenities.maxNightCare, newValue);
 
-    updateAmenities("maxHandicap", updatedMaxHandicap);
-    updateAmenities("maxUnder18Months", updatedMaxUnder18Months);
-    updateAmenities("maxAtypicalHours", updatedMaxAtypicalHours);
-    updateAmenities("maxNightCare", updatedMaxNightCare);
+    // Vérifiez si le champ maxHandicap est désactivé et ajustez la valeur en conséquence
+    const actualMaxHandicapValue = !data.amenities.isHandicapEnabled
+      ? ""
+      : updatedMaxHandicap;
+
+    // Vérifiez si le champ maxUnder18Months est désactivé et ajustez la valeur en conséquence
+    const actualMaxUnder18MonthsValue = !data.amenities.isUnder18MonthsEnabled
+      ? ""
+      : updatedMaxUnder18Months;
+
+    // Vérifiez si le champ maxAtypicalHours est désactivé et ajustez la valeur en conséquence
+    const actualMaxAtypicalHoursValue = !data.amenities.isAtypicalHoursEnabled
+      ? ""
+      : updatedMaxAtypicalHours;
+
+    // Vérifiez si le champ maxNightCare est désactivé et ajustez la valeur en conséquence
+    const actualMaxNightCareValue = !data.amenities.isNightCareEnabled
+      ? ""
+      : updatedMaxNightCare;
+
+    updateAmenities("maxHandicap", actualMaxHandicapValue);
+    updateAmenities("maxUnder18Months", actualMaxUnder18MonthsValue);
+    updateAmenities("maxAtypicalHours", actualMaxAtypicalHoursValue);
+    updateAmenities("maxNightCare", actualMaxNightCareValue);
   };
 
   const handleMaxChildInputChange = (fieldName, value) => {
@@ -33,16 +53,26 @@ function SixthStep() {
     const updatedValue =
       value === "" ? "" : Math.min(value, data.amenities.maxPlaces);
 
-    // Vérifiez que la somme des champs individuels ne dépasse pas maxPlaces
-    const sumOfOtherFields =
-      data.amenities.maxHandicap +
-      data.amenities.maxUnder18Months +
-      data.amenities.maxAtypicalHours +
-      data.amenities.maxNightCare;
+    // Vérifiez si le champ est désactivé et ajustez la valeur en conséquence
+    const actualValue =
+      fieldName === "maxHandicap" && !data.amenities.isHandicapEnabled
+        ? ""
+        : updatedValue;
+    const updatedValueAfterDisabledCheck =
+      fieldName === "maxUnder18Months" && !data.amenities.isUnder18MonthsEnabled
+        ? ""
+        : actualValue;
+    const updatedValueAfterDisabledCheck2 =
+      fieldName === "maxAtypicalHours" && !data.amenities.isAtypicalHoursEnabled
+        ? ""
+        : updatedValueAfterDisabledCheck;
+    const updatedValueAfterDisabledCheck3 =
+      fieldName === "maxNightCare" && !data.amenities.isNightCareEnabled
+        ? ""
+        : updatedValueAfterDisabledCheck2;
 
-    if (sumOfOtherFields <= data.amenities.maxPlaces) {
-      updateAmenities(fieldName, updatedValue);
-    }
+    // Mettez à jour les données avec la valeur ajustée
+    updateAmenities(fieldName, updatedValueAfterDisabledCheck3);
   };
 
   return (
