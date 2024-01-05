@@ -15,6 +15,7 @@ const userControllers = require("./controllers/userControllers");
 // Route to add a new item
 router.get("/users", userControllers.getUser);
 router.post("/users", userControllers.addUser);
+router.post("/login", userControllers.postLogin);
 
 /* ************************************************************************* */
 
