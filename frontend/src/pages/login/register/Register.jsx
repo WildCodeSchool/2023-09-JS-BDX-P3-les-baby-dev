@@ -8,6 +8,7 @@ function Register() {
   const [formValue, setFormValue] = useState({
     email: "mathieulebg@gmail.com",
     password: "1234",
+    is_admin: false,
   });
 
   const [isProfessional, setIsProfessional] = useState(false);
@@ -63,6 +64,7 @@ function Register() {
             onChange={onSwitchChange}
           />
         </ul>
+
         <Link to={isProfessional ? "/pro" : "/searchlist"}>
           <button type="button" onClick={() => register(formValue)}>
             Inscription

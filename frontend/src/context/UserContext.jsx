@@ -1,35 +1,44 @@
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 const UserContext = createContext();
 
 function UserContextProvider({ children }) {
-  const getUser = () => JSON.parse(localStorage.getItem("users") ?? "[]");
+  // eslint-disable-next-line no-unused-vars
+  const [user, setUser] = useState({ admin: false });
+  const navigate = useNavigate();
 
-  const login = (credential) => {
-    const users = getUser();
-    const memoryUser = users.find(
-      (userdb) =>
-        userdb.email === credential.email &&
-        userdb.password === credential.password
-    );
-    if (!memoryUser) {
-      alert("Identifiants incorrects !");
-    } else {
-      alert(`Content de vous revoir ${credential.email}`);
+  const login = async (credentials) => {
+    try {
+      const { data } = await axios.post(
+        `http://localhost:3310/api/login`,
+        credentials
+      );
+      localStorage.setItem("token", data.token);
+      const tokenData = jwtDecode(data.token);
+      alert(`Content de vous revoir ${credentials.email}`);
+      setUser(tokenData);
+      if (tokenData.is_admin === 1) {
+        return navigate("/admin/demo");
+      }
+      return navigate("/demo");
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
     }
+
+    return null;
   };
-  // const [userType, setUserType] = useState(false);
 
-  const register = (user) => {
-    const users = getUser();
-
-    if (!users.find((userdb) => userdb.email === user.email)) {
-      users.push(user);
-      localStorage.setItem("users", JSON.stringify(users));
-      alert(`Bienvenue ${user.email}`);
-    } else {
-      alert("Vous êtes déjà inscrit !");
+  const register = async (newUser) => {
+    try {
+      setUser(await axios.post("http://localhost:3310/users", newUser));
+      alert(`Bienvenue ${newUser.email}`);
+    } catch (err) {
+      alert(err.message);
     }
   };
 
