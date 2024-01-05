@@ -21,7 +21,7 @@ function UserContextProvider({ children }) {
       const tokenData = jwtDecode(data.token);
       alert(`Content de vous revoir ${credentials.email}`);
       setUser(tokenData);
-      if (tokenData.is_admin === 1) {
+      if (tokenData.isAdmin === 1) {
         return navigate("/admin/demo");
       }
       return navigate("/demo");

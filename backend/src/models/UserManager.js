@@ -8,13 +8,12 @@ class UserManager extends AbstractManager {
     super({ table: "user" });
   }
 
-  create(user) {
-    return UserManager.hashPassword(user.password).then((hash) => {
-      return this.database.query(
-        `insert into ${this.table} (email, password, is_admin) values (?,?,?)`,
-        [user.email, hash, user.is_admin]
-      );
-    });
+  async create(user) {
+    const hash = await UserManager.hashPassword(user.password);
+    return this.database.query(
+      `insert into ${this.table} (email, password, isAdmin) values (?,?,?)`,
+      [user.email, hash, user.isAdmin]
+    );
   }
 
   async login({ email, password }) {
@@ -26,6 +25,7 @@ class UserManager extends AbstractManager {
       return undefined;
     }
     const user = rows[0];
+    console.info(user);
     const result = await bcrypt.compare(password, user.password);
     return result ? user : undefined;
   }
