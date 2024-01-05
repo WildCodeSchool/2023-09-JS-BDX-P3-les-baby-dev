@@ -20,7 +20,7 @@ const addUser = (req, res) => {
       res.send({
         id: rows.insertId,
         email: req.body.email,
-        is_admin: req.body.is_admin,
+        isAdmin: req.body.isAdmin,
       });
     })
     .catch((err) => {
@@ -38,7 +38,8 @@ const postLogin = (req, res) => {
   models.user.login(req.body).then((user) => {
     if (user) {
       // todo : filtrer les données à envoyer
-      const token = generateAccessToken(user);
+      const { id, isAdmin } = user;
+      const token = generateAccessToken({ id, isAdmin, moncul: "trouduc" });
       res.send({ token });
     } else {
       res.status(401).send({ error: "Identifiant incorrect!!!" });
