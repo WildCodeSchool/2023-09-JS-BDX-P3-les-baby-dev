@@ -11,3 +11,5 @@ create table user (
 );
 
 insert into user (email, password, isAdmin) values ('user@demo.com', '1234', 0), ('admin@demo.com', '1234', 1);
+
+alter table user rename column is_admin to isAdmin;

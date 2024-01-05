@@ -7,6 +7,7 @@ import { jwtDecode } from "jwt-decode";
 const UserContext = createContext();
 
 function UserContextProvider({ children }) {
+  const [isProfessional, setIsProfessional] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useState({ admin: false });
   const navigate = useNavigate();
@@ -22,9 +23,9 @@ function UserContextProvider({ children }) {
       alert(`Content de vous revoir ${credentials.email}`);
       setUser(tokenData);
       if (tokenData.isAdmin === 1) {
-        return navigate("/admin/demo");
+        return navigate("/structure");
       }
-      return navigate("/demo");
+      return navigate("/searchlist");
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -35,14 +36,23 @@ function UserContextProvider({ children }) {
 
   const register = async (newUser) => {
     try {
-      setUser(await axios.post("http://localhost:3310/users", newUser));
+      setUser(await axios.post("http://localhost:3310/api/users", newUser));
       alert(`Bienvenue ${newUser.email}`);
+      if (isProfessional === 1) {
+        return navigate("/structure");
+      }
+      return navigate("/searchlist");
     } catch (err) {
       alert(err.message);
     }
+
+    return null;
   };
 
-  const contextValue = useMemo(() => ({ login, register }), [login, register]);
+  const contextValue = useMemo(
+    () => ({ login, register, setIsProfessional, isProfessional }),
+    [login, register, setIsProfessional, isProfessional]
+  );
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
   );
