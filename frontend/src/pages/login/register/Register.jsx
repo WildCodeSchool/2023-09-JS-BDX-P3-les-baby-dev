@@ -11,9 +11,7 @@ function Register() {
     is_admin: false,
   });
 
-  const [isProfessional, setIsProfessional] = useState(false);
-
-  const { register } = useUser();
+  const { register, setIsProfessional, isProfessional } = useUser();
 
   const onChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
@@ -65,11 +63,9 @@ function Register() {
           />
         </ul>
 
-        <Link to={isProfessional ? "/pro" : "/searchlist"}>
-          <button type="button" onClick={() => register(formValue)}>
-            Inscription
-          </button>
-        </Link>
+        <button type="button" onClick={() => register(formValue)}>
+          Inscription
+        </button>
       </div>
     </div>
   );
