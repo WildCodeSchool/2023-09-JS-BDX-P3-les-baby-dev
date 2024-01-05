@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 import HomePro from "./pages/pages.pro/HomePro";
 import SearchList from "./pages/pages.parents/SearchList";
@@ -29,9 +30,13 @@ import StructureRegister from "./pages/pages.pro/StructureRegister";
 import ReservationFinal from "./pages/pages.parents/reservation/ReservationFinal";
 import StructureContextProvider from "./context/StrucutreContext";
 
+const token = localStorage.getItem("token");
+const memoryUser = token ? jwtDecode(token) : undefined;
+
 const router = createBrowserRouter([
   {
     path: "/",
+    loader: () => ({ memoryUser }),
     element: (
       <UserContextProvider>
         <App />

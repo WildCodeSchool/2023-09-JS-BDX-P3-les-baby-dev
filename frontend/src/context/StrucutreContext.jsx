@@ -1,10 +1,24 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useUser } from "./UserContext";
 
 const StructureContext = createContext();
 
 function StructureContextProvider({ children }) {
+  const { user } = useUser();
+  const navigate = useNavigate();
   // const [proType, setProType] = useState(false);
+
+  useEffect(() => {
+    if (user?.is_admin === 0) {
+      console.info(user);
+      return navigate("/login");
+    }
+    console.info(user);
+    return undefined;
+  }, [user]);
+
   const [data, setData] = useState({
     schedules: {
       monday: false,

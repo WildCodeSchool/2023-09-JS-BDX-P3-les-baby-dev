@@ -19,6 +19,7 @@ function Register() {
 
   const onSwitchChange = () => {
     setIsProfessional(!isProfessional);
+    setFormValue({ ...formValue, is_admin: !formValue.is_admin });
   };
 
   return (
@@ -59,6 +60,7 @@ function Register() {
           <MDBSwitch
             id="flexSwitchCheckDefault"
             label="Je suis professionnel"
+            name="is_admin"
             onChange={onSwitchChange}
           />
         </ul>

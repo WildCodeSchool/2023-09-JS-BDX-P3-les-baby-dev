@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const jwt = require("jsonwebtoken");
 const models = require("../models");
 
@@ -38,8 +39,8 @@ const postLogin = (req, res) => {
   models.user.login(req.body).then((user) => {
     if (user) {
       // todo : filtrer les données à envoyer
-      const { id, isAdmin } = user;
-      const token = generateAccessToken({ id, isAdmin, moncul: "trouduc" });
+      const { id, is_admin, email } = user;
+      const token = generateAccessToken({ id, is_admin, email });
       res.send({ token });
     } else {
       res.status(401).send({ error: "Identifiant incorrect!!!" });

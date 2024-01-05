@@ -2,8 +2,10 @@ import React from "react";
 import "./profil.scss";
 import { Link } from "react-router-dom";
 import NavProfil from "../../components/profile.components/NavProfil";
+import { useUser } from "../../context/UserContext";
 
 function Profil() {
+  const { logout } = useUser();
   return (
     <div className="profil_container">
       <div className="header_profil">
@@ -22,6 +24,9 @@ function Profil() {
             <li>Mes réservations</li>
           </Link>
           <li>Mes favoris</li>
+          <button type="button" onClick={logout}>
+            déco
+          </button>
         </ul>
       </div>
       <NavProfil />
