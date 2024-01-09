@@ -2,6 +2,8 @@ create DATABASE if not exists DBBabyplace;
 
 use DBBabyplace;
 
+DROP TABLE IF EXISTS user;
+
 create table IF NOT EXISTS
     user (
         id int unsigned primary key auto_increment not null,
