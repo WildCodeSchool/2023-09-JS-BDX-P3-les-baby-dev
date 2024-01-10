@@ -22,7 +22,21 @@ function ProfilResa() {
           <h2>Papa Poule</h2>
         </div>
       </div>
-      <div className="myResa_container">ok</div>
+      <div className="myResa_container">
+        <h1>Mes réservations</h1>
+        <div className="card_myresa">
+          <div className="img_structure">
+            <img src="../src/assets/creche3.jpeg" alt="" />
+          </div>
+          <div className="title_resa">
+            <h2>Bibiche Structure</h2>
+            <p>Réservation confirmé</p>
+          </div>
+          <div className="date_resa">
+            <h3>Lundi 3 janvier 2024</h3>
+          </div>
+        </div>
+      </div>
       <NavProfil />
     </div>
   );
