@@ -17,7 +17,9 @@ function Profil() {
       </div>
       <div className="list_options">
         <ul>
-          <li>Dossier d'inscription</li>
+          <Link to="/profil/inscription">
+            <li>Dossier d'inscription</li>
+          </Link>
           <Link to="/profil/myresa">
             <li>Mes réservations</li>
           </Link>
