@@ -117,3 +117,43 @@
     }
   }
 }
+
+@media (min-width: 768px) {
+  .card_container {
+    .infos_card {
+      margin: 20px auto;
+      background-color: white;
+      width: 70%;
+      height: 90%;
+      border-radius: 10px;
+      box-shadow: 1px 2px 1px 2px;
+      padding: 0 100px;
+
+      .picture_card {
+        width: 500px;
+        height: auto;
+        margin: 0 auto;
+        padding-top: 10px;
+      }
+
+      .description_card {
+        h3 {
+          text-align: end;
+          color: #6200ee;
+          padding-right: 50px;
+          padding-top: 25px;
+          font-size: 1.4em;
+        }
+
+        h4 {
+          font-weight: bold;
+        }
+
+        p {
+          padding: 0 15px;
+          font-size: 0.8em;
+        }
+      }
+    }
+  }
+}
