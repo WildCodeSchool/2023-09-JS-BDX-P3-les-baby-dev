@@ -33,7 +33,7 @@ function EighthStep() {
           <p>
             Le contrat de travail est automatiquement envoyé, vous n'avez plus
             qu'à signer ! <br />
-            La fiche de présence est égallement automatiquement établie à la fin
+            La fiche de présence est également automatiquement établie à la fin
             de la mission.
           </p>
         </div>

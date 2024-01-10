@@ -13,6 +13,7 @@ import UserContextProvider from "./context/UserContext";
 import ProContextProvider from "./context/ProContext";
 import App from "./App";
 import Login from "./pages/login/register/Login";
+import Dashboard from "./pages/pages.pro/Dashboard";
 import Register from "./pages/login/register/Register";
 import Filter from "./pages/pages.parents/search-nursery/Filter";
 import FilterDate from "./pages/pages.parents/search-nursery/FilterDate";
@@ -117,6 +118,7 @@ const router = createBrowserRouter([
         path: "/register",
         element: <Register />,
       },
+      { path: "/dashboard", element: <Dashboard /> },
       {
         path: "/pro",
         element: (
