@@ -6,4 +6,16 @@
 
 .step7 {
   width: 50%;
+
+  @media (max-width: 500px) {
+    width: 100%;
+
+    .switchRules {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 10px 0px;
+      line-height: 21px;
+    }
+  }
 }

@@ -1,35 +1,17 @@
 import { MDBFileUpload } from "mdb-react-file-upload";
-import { MDBBtn } from "mdb-react-ui-kit";
+import {
+  MDBBtn,
+  MDBInput,
+  MDBInputGroup,
+  MDBValidation,
+  MDBValidationItem,
+} from "mdb-react-ui-kit";
 // import React, { useState } from "react";
 import "./thirdStep.scss";
 import { useStructure } from "../../context/StrucutreContext";
 
 function ThirdStep() {
   const { data, setData } = useStructure();
-
-  // const [employee, setEmployee] = useState([
-  //   { files: null, name: null, fName: null, mail: null },
-  // ]);
-
-  // const HandleAdd = () => {
-  //   const abc = [
-  //     ...employee,
-  //     { files: null, name: null, fName: null, mail: null },
-  //   ];
-  //   setEmployee(abc);
-  // };
-
-  // const handleChange = (value, i, propertyName) => {
-  //   const inputData = [...employee];
-  //   inputData[i][propertyName] = value;
-  //   setEmployee(inputData);
-  // };
-
-  // const handleDelete = (i) => {
-  //   const deleteEmployee = [...employee];
-  //   deleteEmployee.splice(i, 1);
-  //   setEmployee(deleteEmployee);
-  // };
   const HandleAdd = () => {
     const newEmployee = {
       files: "",
@@ -46,7 +28,6 @@ function ThirdStep() {
   };
 
   const handleChange = (value, i, propertyName) => {
-    console.info(value);
     setData((prevData) => {
       const updatedEmployees = [...prevData.employees];
       updatedEmployees[i][propertyName] = value;
@@ -64,74 +45,142 @@ function ThirdStep() {
   return (
     <div className="fifty">
       <div className="step3">
-        <div className="pageContent">
-          {data.employees &&
-            data.employees.map((employee, i) => (
-              <div key={`${i + 1}`} className="photoContainer">
-                <div className="fileUpload">
-                  <MDBFileUpload
-                    defaultFile="../src/assets/profil-picture.svg"
-                    onChange={(e) => handleChange(e[0], i, "files")}
+        {data.employees &&
+          data.employees.map((employee, i) => (
+            <div key={`${i + 1}`} className="photoContainer">
+              <div className="fileUpload">
+                <MDBFileUpload
+                  defaultFile="../src/assets/profil-picture.svg"
+                  onChange={(e) => handleChange(e[0], i, "files")}
+                />
+              </div>
+              <div className="thirdInputContainer">
+                <div>
+                  <label htmlFor="nomProfil" className="labelChecked">
+                    Nom
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    name="nomStructure"
+                    placeholder="Nom"
+                    onChange={(e) => handleChange(e.target.value, i, "name")}
+                  />
+                  <label htmlFor="nomProfil" className="labelChecked">
+                    Prenom
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    name="nomStructure"
+                    placeholder="Prenom"
+                    onChange={(e) => handleChange(e.target.value, i, "fName")}
                   />
                 </div>
-                <div className="thirdInputContainer">
-                  <div>
-                    <label htmlFor="nomProfil" className="labelChecked">
-                      Nom
-                    </label>
-                    <input
-                      required
-                      type="text"
-                      name="nomStructure"
-                      placeholder="Nom"
-                      onChange={(e) => handleChange(e.target.value, i, "name")}
-                    />
-                    <label htmlFor="nomProfil" className="labelChecked">
-                      Prenom
-                    </label>
-                    <input
-                      required
-                      type="text"
-                      name="nomStructure"
-                      placeholder="Prenom"
-                      onChange={(e) => handleChange(e.target.value, i, "fName")}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="nomProfil" className="labelChecked">
-                      Mail
-                    </label>
-                    <input
-                      required
-                      type="text"
-                      name="nomStructure"
-                      placeholder="Mail"
-                      onChange={(e) => handleChange(e.target.value, i, "mail")}
-                    />
-                    <label htmlFor="nomProfil" className="labelChecked">
-                      Fonction
-                    </label>
-                    <input
-                      required
-                      type="text"
-                      name="nomStructure"
-                      placeholder="Fonction"
+                <div>
+                  <label htmlFor="nomProfil" className="labelChecked">
+                    Mail
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    name="nomStructure"
+                    placeholder="Mail"
+                    onChange={(e) => handleChange(e.target.value, i, "mail")}
+                  />
+                  <label htmlFor="nomProfil" className="labelChecked">
+                    Fonction
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    name="nomStructure"
+                    placeholder="Fonction"
+                    onChange={(e) =>
+                      handleChange(e.target.value, i, "fonction")
+                    }
+                  />
+                </div>
+                <MDBValidation className="row g-3" isValidated>
+                  <MDBValidationItem className="col-md-4">
+                    <MDBInput
+                      name="fname"
                       onChange={(e) =>
                         handleChange(e.target.value, i, "fonction")
                       }
+                      id="validationCustom01"
+                      required
+                      label="First name"
                     />
-                  </div>
-                </div>
-                {data.employees.length > 1 && (
-                  <MDBBtn type="submit" onClick={() => handleDelete(i)}>
-                    x
-                  </MDBBtn>
-                )}
+                  </MDBValidationItem>
+                  <MDBValidationItem className="col-md-4">
+                    <MDBInput
+                      name="lname"
+                      onChange={(e) =>
+                        handleChange(e.target.value, i, "fonction")
+                      }
+                      id="validationCustom02"
+                      required
+                      label="Last name"
+                    />
+                  </MDBValidationItem>
+                  <MDBValidationItem
+                    feedback="Please choose a username."
+                    invalid
+                    className="col-md-4"
+                  >
+                    <MDBInputGroup textBefore="@">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="validationCustomUsername"
+                        placeholder="Username"
+                        required
+                      />
+                    </MDBInputGroup>
+                  </MDBValidationItem>
+                  <MDBValidationItem
+                    className="col-md-6"
+                    feedback="Please provide a valid city."
+                    invalid
+                  >
+                    <MDBInput
+                      name="city"
+                      onChange={(e) =>
+                        handleChange(e.target.value, i, "fonction")
+                      }
+                      id="validationCustom03"
+                      required
+                      label="City"
+                    />
+                  </MDBValidationItem>
+                  <MDBValidationItem
+                    className="col-md-6"
+                    feedback="Please provide a valid zip."
+                    invalid
+                  >
+                    <MDBInput
+                      name="zip"
+                      onChange={(e) =>
+                        handleChange(e.target.value, i, "fonction")
+                      }
+                      id="validationCustom05"
+                      required
+                      label="fonction"
+                    />
+                  </MDBValidationItem>
+                </MDBValidation>
               </div>
-            ))}
-
+              {data.employees.length > 0 && (
+                <MDBBtn type="submit" onClick={() => handleDelete(i)}>
+                  x
+                </MDBBtn>
+              )}
+            </div>
+          ))}
+        <div className="addbtn">
           <MDBBtn type="submit" onClick={HandleAdd}>
-            +
+            ajouter un employé
           </MDBBtn>
         </div>
       </div>

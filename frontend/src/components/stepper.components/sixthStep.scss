@@ -6,4 +6,25 @@
 
 .step6 {
   width: 50%;
+  .finputContainer {
+    margin-left: 30px;
+  }
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 50px;
+    gap: 20px;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  @media (max-width: 500px) {
+    width: 100%;
+
+    .inputContainer {
+      padding: 5px 30px;
+    }
+  }
 }
