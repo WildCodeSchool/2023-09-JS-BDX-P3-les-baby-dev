@@ -22,7 +22,9 @@ function ProfilResa() {
           <h2>Papa Poule</h2>
         </div>
       </div>
-      <div className="myResa_container">ok</div>
+      <div className="myResa_container">
+        <div className="card_myresa">ok</div>
+      </div>
       <NavProfil />
     </div>
   );

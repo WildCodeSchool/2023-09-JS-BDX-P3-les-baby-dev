@@ -51,5 +51,14 @@
   }
   .myResa_container {
     height: 630px;
+
+    .card_myresa {
+      background-color: white;
+      height: 60px;
+      width: 90%;
+      margin: 30px auto;
+      border-radius: 5px;
+      box-shadow: 1px 2px 2px grey;
+    }
   }
 }
