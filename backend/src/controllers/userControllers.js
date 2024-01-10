@@ -47,8 +47,14 @@ const postLogin = (req, res) => {
     }
   });
 };
+
+const getProfile = (req, res) => {
+  res.send(req.user);
+};
+
 module.exports = {
   addUser,
   getUser,
   postLogin,
+  getProfile,
 };

@@ -1,16 +1,18 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { createContext, useContext, useMemo, useState } from "react";
-import { jwtDecode } from "jwt-decode";
 import PropTypes from "prop-types";
 import axios from "axios";
+import ApiService from "../services/api.service";
 
 const UserContext = createContext();
 
-function UserContextProvider({ children }) {
-  const { memoryUser } = useLoaderData();
-  const [isProfessional, setIsProfessional] = useState(false);
+function UserContextProvider({ children, apiService }) {
+  const givenData = useLoaderData();
+  const [isProfessional, setIsProfessional] = useState(
+    givenData?.preloadUser?.data?.isAdmin
+  );
   // eslint-disable-next-line no-unused-vars
-  const [user, setUser] = useState(memoryUser);
+  const [user, setUser] = useState(givenData?.preloadUser?.data);
   const navigate = useNavigate();
 
   const login = async (credentials) => {
@@ -20,10 +22,15 @@ function UserContextProvider({ children }) {
         credentials
       );
       localStorage.setItem("token", data.token);
-      const tokenData = jwtDecode(data.token);
-      alert(`Content de vous revoir ${credentials.email}`);
-      setUser(tokenData);
-      if (tokenData.is_admin === 1) {
+      apiService.setToken(data.token);
+
+      const result = await apiService.get(
+        "http://localhost:3310/api/users/myprofil"
+      );
+
+      alert(`Content de vous revoir ${result.data.email}`);
+      setUser(result.data);
+      if (result.data.isAdmin === 1) {
         return navigate("/structure");
       }
       return navigate("/searchlist");
@@ -76,6 +83,7 @@ function UserContextProvider({ children }) {
 
 UserContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
+  apiService: PropTypes.instanceOf(ApiService).isRequired,
 };
 
 export default UserContextProvider;

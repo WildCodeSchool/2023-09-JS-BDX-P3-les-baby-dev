@@ -13,6 +13,8 @@ const upload = multer({ dest: "./public/uploads/" });
 
 // Import itemControllers module for handling item-related operations
 const userControllers = require("./controllers/userControllers");
+
+const { authMiddleware } = require("./middlewares/Security/auth.middleware");
 const structureControllers = require("./controllers/structureControllers");
 const models = require("./models");
 // Route to get a list of items
@@ -21,6 +23,7 @@ const models = require("./models");
 
 // Route to add a new user/stucture/parent/enfants
 router.get("/users", userControllers.getUser);
+router.get("/users/myprofil", authMiddleware, userControllers.getProfile);
 router.post("/users", userControllers.addUser);
 router.post("/login", userControllers.postLogin);
 
