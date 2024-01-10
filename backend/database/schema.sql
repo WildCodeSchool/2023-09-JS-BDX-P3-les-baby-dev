@@ -96,3 +96,39 @@ CREATE TABLE
         fonction VARCHAR(255) NOT NULL,
         FOREIGN KEY (structure_id) REFERENCES structure(id)
     );
+
+    DROP TABLE if EXISTS parent;
+
+CREATE TABLE
+    IF NOT EXISTS parent (
+        id int primary key auto_increment not null,
+        user_id INT NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        profession VARCHAR(255) NULL,
+        address VARCHAR(255) NOT NULL,
+        telephone VARCHAR(10) NOT NULL,
+        justificatifRevenu VARCHAR(255) NOT NULL,
+        declarationRevenu VARCHAR(255) NOT NULL,
+        justificatifDomicile VARCHAR(255) NOT NULL,
+        justificatifSituationPro VARCHAR(255) NOT NULL,
+        rib VARCHAR(255) NOT NULL,
+        numAllocataire INT NOT NULL,
+        securiteSocialNumber INT NOT NULL,
+        assurances VARCHAR(255) NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES user(id)
+    );
+
+        DROP TABLE if EXISTS child;
+
+CREATE TABLE
+    IF NOT EXISTS child (
+        id int primary key auto_increment not null,
+        parent_id INT NOT NULL,
+        firstname VARCHAR(255) NOT NULL,
+        lastname VARCHAR(255) NULL,
+        birthday VARCHAR(255) NOT NULL,
+        is_walking BOOLEAN DEFAULT 0,,
+        allergies BOOLEAN DEFAULT 0,
+        medecine_traitant_name VARCHAR(255) NOT NULL,
+        FOREIGN KEY (parent_id) REFERENCES parent(id)
+    );
