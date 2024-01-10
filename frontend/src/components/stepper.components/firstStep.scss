@@ -42,4 +42,14 @@
       box-shadow: -3px 3px 3px rgba(75, 93, 104, 0.1);
     }
   }
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    .step1,
+    .greyBg {
+      width: 100%;
+      margin-left: 0;
+      padding: 10px;
+    }
+  }
 }

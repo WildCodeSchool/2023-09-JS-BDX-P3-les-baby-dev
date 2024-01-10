@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Axios } from "axios";
 import PropTypes from "prop-types";
 import { useUser } from "./UserContext";
 
@@ -68,9 +69,21 @@ function StructureContextProvider({ children }) {
       amenities: { ...prevData.amenities, [key]: value },
     }));
   };
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.info(data);
+
+    try {
+      const response = await Axios.post("/structureInscription", data);
+
+      console.info(response.data);
+
+      // if (response.data.success) {
+      // }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const contextStructureValue = useMemo(

@@ -50,6 +50,9 @@ function Filter() {
           </Link>
         </div>
       </div>
+      <div className="btn_appliquer">
+        <button type="button">Appliquer</button>
+      </div>
     </div>
   );
 }
