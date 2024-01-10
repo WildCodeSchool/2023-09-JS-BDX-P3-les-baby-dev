@@ -7,14 +7,35 @@
 .step3 {
   width: 50%;
 
+  .fileUpload {
+    display: flex;
+    margin: 0 auto;
+  }
+
   .thirdInputContainer {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
     // gap: 20px;
 
     input {
       width: 30%;
+    }
+  }
+
+  .btn {
+    display: flex;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 500px) {
+    width: 100%;
+
+    .thirdInputContainer {
+      display: flex;
+      margin: 0 auto;
     }
   }
 }

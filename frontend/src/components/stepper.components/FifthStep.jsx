@@ -1,6 +1,7 @@
 import { MDBSwitch } from "mdb-react-ui-kit";
 import React from "react";
 import { useStructure } from "../../context/StrucutreContext";
+import "./fifthStep.scss";
 
 function FifthStep() {
   const { data, updateAllDays } = useStructure();
@@ -47,26 +48,32 @@ function FifthStep() {
               onChange={() => handleSwitch("saturday")}
             />
           </div>
-          <div className="hour">
+          <div>
             <h4>Même horaires pour tous les jours</h4>
-            <p>De</p>
-            <input
-              type="time"
-              name="openHour"
-              step="300"
-              value={data.schedules.openHour}
-              onChange={(e) => updateAllDays("openHour", e.target.value)}
-              onBlur={(e) => updateAllDays("openHour", e.target.value)}
-            />
-            <p>À</p>
-            <input
-              type="time"
-              name="closeHour"
-              step="300"
-              value={data.schedules.closeHour}
-              onChange={(e) => updateAllDays("closeHour", e.target.value)}
-              onBlur={(e) => updateAllDays("closeHour", e.target.value)}
-            />
+          </div>
+          <div className="hour">
+            <div>
+              <p>De</p>
+              <input
+                type="time"
+                name="openHour"
+                step="300"
+                value={data.schedules.openHour}
+                onChange={(e) => updateAllDays("openHour", e.target.value)}
+                onBlur={(e) => updateAllDays("openHour", e.target.value)}
+              />
+            </div>
+            <div>
+              <p>À</p>
+              <input
+                type="time"
+                name="closeHour"
+                step="300"
+                value={data.schedules.closeHour}
+                onChange={(e) => updateAllDays("closeHour", e.target.value)}
+                onBlur={(e) => updateAllDays("closeHour", e.target.value)}
+              />
+            </div>
           </div>
         </div>
       </div>

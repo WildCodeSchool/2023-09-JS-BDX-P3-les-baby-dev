@@ -6,4 +6,19 @@
 
 .step5 {
   width: 50%;
+
+  @media (max-width: 500px) {
+    width: 100%;
+    margin: 5px;
+
+    .checkboxsContainer,
+    .activitiesContainer {
+      .checkboxContainer {
+        padding: 3px;
+        display: flex;
+        gap: 10px;
+        line-height: 20px;
+      }
+    }
+  }
 }
