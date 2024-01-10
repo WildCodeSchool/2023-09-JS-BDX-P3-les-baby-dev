@@ -55,53 +55,7 @@ function ThirdStep() {
                 />
               </div>
               <div className="thirdInputContainer">
-                <div>
-                  <label htmlFor="nomProfil" className="labelChecked">
-                    Nom
-                  </label>
-                  <input
-                    required
-                    type="text"
-                    name="nomStructure"
-                    placeholder="Nom"
-                    onChange={(e) => handleChange(e.target.value, i, "name")}
-                  />
-                  <label htmlFor="nomProfil" className="labelChecked">
-                    Prenom
-                  </label>
-                  <input
-                    required
-                    type="text"
-                    name="nomStructure"
-                    placeholder="Prenom"
-                    onChange={(e) => handleChange(e.target.value, i, "fName")}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="nomProfil" className="labelChecked">
-                    Mail
-                  </label>
-                  <input
-                    required
-                    type="text"
-                    name="nomStructure"
-                    placeholder="Mail"
-                    onChange={(e) => handleChange(e.target.value, i, "mail")}
-                  />
-                  <label htmlFor="nomProfil" className="labelChecked">
-                    Fonction
-                  </label>
-                  <input
-                    required
-                    type="text"
-                    name="nomStructure"
-                    placeholder="Fonction"
-                    onChange={(e) =>
-                      handleChange(e.target.value, i, "fonction")
-                    }
-                  />
-                </div>
-                <MDBValidation className="row g-3" isValidated>
+                <MDBValidation className="row g-3">
                   <MDBValidationItem className="col-md-4">
                     <MDBInput
                       name="fname"
@@ -110,7 +64,7 @@ function ThirdStep() {
                       }
                       id="validationCustom01"
                       required
-                      label="First name"
+                      label="Prénom"
                     />
                   </MDBValidationItem>
                   <MDBValidationItem className="col-md-4">
@@ -121,7 +75,7 @@ function ThirdStep() {
                       }
                       id="validationCustom02"
                       required
-                      label="Last name"
+                      label="Nom"
                     />
                   </MDBValidationItem>
                   <MDBValidationItem
@@ -134,25 +88,10 @@ function ThirdStep() {
                         type="text"
                         className="form-control"
                         id="validationCustomUsername"
-                        placeholder="Username"
+                        placeholder="Mail"
                         required
                       />
                     </MDBInputGroup>
-                  </MDBValidationItem>
-                  <MDBValidationItem
-                    className="col-md-6"
-                    feedback="Please provide a valid city."
-                    invalid
-                  >
-                    <MDBInput
-                      name="city"
-                      onChange={(e) =>
-                        handleChange(e.target.value, i, "fonction")
-                      }
-                      id="validationCustom03"
-                      required
-                      label="City"
-                    />
                   </MDBValidationItem>
                   <MDBValidationItem
                     className="col-md-6"
@@ -160,7 +99,7 @@ function ThirdStep() {
                     invalid
                   >
                     <MDBInput
-                      name="zip"
+                      name="function"
                       onChange={(e) =>
                         handleChange(e.target.value, i, "fonction")
                       }

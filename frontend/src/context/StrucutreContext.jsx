@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Axios } from "axios";
+import axios from "axios";
 import PropTypes from "prop-types";
 import { useUser } from "./UserContext";
 
@@ -9,7 +9,6 @@ const StructureContext = createContext();
 function StructureContextProvider({ children }) {
   const { user } = useUser();
   const navigate = useNavigate();
-  // const [proType, setProType] = useState(false);
 
   useEffect(() => {
     if (user?.is_admin === 0) {
@@ -75,7 +74,7 @@ function StructureContextProvider({ children }) {
     console.info(data);
 
     try {
-      const response = await Axios.post("/structureInscription", data);
+      const response = await axios.post("/structureInscription", data);
 
       console.info(response.data);
 
