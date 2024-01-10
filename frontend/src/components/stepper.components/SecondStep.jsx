@@ -1,9 +1,23 @@
+import axios from "axios";
+import { useRef } from "react";
 import { MDBFileUpload } from "mdb-react-file-upload";
+import { MDBBtn, MDBTextArea } from "mdb-react-ui-kit";
 import { useStructure } from "../../context/StrucutreContext";
 import "./secondStep.scss";
 
 function SecondStep() {
   const { data, onChange, onChangeFiles } = useStructure();
+  const inputRef = useRef();
+  const maxLength = 500;
+  const descriptionLength = data.description ? data.description.length : 0;
+
+  const handleSubmitFiles = (event) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("avatar", inputRef.current.files[0]);
+    axios.post("http://localhost:3310/api/avatar", formData);
+  };
   return (
     <div className="fifty">
       <div className="step2">
@@ -14,12 +28,22 @@ function SecondStep() {
               <form encType="multipart/form-data">
                 <MDBFileUpload
                   defaultFile="../src/assets/profil-picture.svg"
-                  name="profilPic"
+                  name="avatar"
+                  ref={inputRef}
                   getInputFiles={onChangeFiles}
                   maxFileQuantity={3}
                 />
+                <MDBBtn
+                  type="button"
+                  onClick={handleSubmitFiles}
+                  className="filebtn"
+                >
+                  Enregister
+                </MDBBtn>
               </form>
             </div>
+            <br />
+            <br />
             <label htmlFor="file">
               Formats acceptés : .jpg, .jpeg, .png <br /> 3 photos Maximum
             </label>
@@ -27,14 +51,18 @@ function SecondStep() {
         </div>
         <div className="structure4">
           <div className="pageContent">
-            <textarea
-              id="description"
-              name="description"
-              maxLength="500"
+            <MDBTextArea
+              label="Message"
+              id="textAreaExample"
+              maxLength={maxLength}
+              rows={4}
               value={data.description}
               onChange={onChange}
+              name="stuctureDesc"
             />
-            <legend>Maximum 500 caractères.</legend>
+            <legend>
+              Maximum {`${maxLength - descriptionLength}`} caractères.
+            </legend>
           </div>
         </div>
       </div>

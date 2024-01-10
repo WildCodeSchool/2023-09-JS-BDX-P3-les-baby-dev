@@ -78,10 +78,10 @@ function SixthStep() {
   return (
     <div className="fifty">
       <div className="step6">
-        <div>
+        <div className="finputContainer">
           <h4>Nombre de places ou agrements</h4>
           <p>A total, de combien de place disposez vous ?</p>
-          <div className="inputContainer">
+          <div className="inputContainer1">
             <label htmlFor="maxPlaces">
               <input
                 type="number"
@@ -95,8 +95,9 @@ function SixthStep() {
           </div>
           <br />
         </div>
-        <div>
-          <div className="inputContainer">
+
+        <div className="inputContainer">
+          <div>
             <MDBSwitch
               id="handicapEnabled"
               label="Enfant handicapé"
@@ -118,9 +119,11 @@ function SixthStep() {
               }
               disabled={!data.amenities.isHandicapEnabled}
             />
+          </div>
+          <div>
             <MDBSwitch
               id="under18Month"
-              label="Enfant de moins de 18 mois"
+              label="Enfant < 18 mois"
               onChange={() =>
                 updateAmenities(
                   "isUnder18MonthsEnabled",
@@ -139,6 +142,8 @@ function SixthStep() {
               }
               disabled={!data.amenities.isUnder18MonthsEnabled}
             />
+          </div>
+          <div>
             <MDBSwitch
               id="typicalHours"
               label="Horaires atypique"
@@ -160,6 +165,8 @@ function SixthStep() {
               }
               disabled={!data.amenities.isAtypicalHoursEnabled}
             />
+          </div>
+          <div>
             <MDBSwitch
               id="nightCare"
               label="Accueil de nuit"

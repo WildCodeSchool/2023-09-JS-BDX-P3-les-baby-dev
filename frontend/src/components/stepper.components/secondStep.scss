@@ -6,4 +6,28 @@
 
 .step2 {
   width: 50%;
+
+  .fileUpload {
+    display: flex;
+    margin: 0 auto;
+
+    .filebtn {
+      display: flex;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 500px) {
+    width: 100%;
+
+    .fileUpload {
+      display: flex;
+      margin: 0 auto;
+
+      .filebtn {
+        display: flex;
+        margin: 0 auto;
+      }
+    }
+  }
 }
