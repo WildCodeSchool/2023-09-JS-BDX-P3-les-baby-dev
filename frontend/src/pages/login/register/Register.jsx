@@ -26,48 +26,55 @@ function Register() {
     <div className="register_container">
       <div className="left_part">
         <h2>BabyPlace</h2>
+        <h3>Gérer votre Agenda</h3>
+        <h4>24h/24 et 7j/7</h4>
       </div>
       <div className="right_part">
-        <div className="already_register">
-          <Link to="/login">
-            <h4>Déjà inscrit?</h4>
-          </Link>
+        <div className="cadre">
+          <div className="already_register">
+            <Link to="/login">
+              <h4>Déjà inscrit?</h4>
+            </Link>
+          </div>
+          <h3> Je m'inscris sur Baby Place</h3>
+          <ul>
+            <li>
+              <input
+                value={formValue.email}
+                name="email"
+                onChange={onChange}
+                required
+                label="Email"
+                type="email"
+              />
+            </li>
+
+            <li>
+              <input
+                className="input2"
+                value={formValue.password}
+                name="password"
+                onChange={onChange}
+                required
+                label="Password"
+                type="password"
+              />
+            </li>
+          </ul>
+          <div className="switch">
+            <MDBSwitch
+              id="flexSwitchCheckDefault"
+              label="Je suis professionnel"
+              name="is_admin"
+              onChange={onSwitchChange}
+            />
+          </div>
+          <div className="btnConnect">
+            <button type="button" onClick={() => register(formValue)}>
+              Inscription
+            </button>
+          </div>
         </div>
-        <h3> Je m'inscris sur Baby Place</h3>
-        <ul>
-          <li>
-            <input
-              value={formValue.email}
-              name="email"
-              onChange={onChange}
-              required
-              label="Email"
-              type="email"
-            />
-          </li>
-
-          <li>
-            <input
-              className="input2"
-              value={formValue.password}
-              name="password"
-              onChange={onChange}
-              required
-              label="Password"
-              type="password"
-            />
-          </li>
-          <MDBSwitch
-            id="flexSwitchCheckDefault"
-            label="Je suis professionnel"
-            name="is_admin"
-            onChange={onSwitchChange}
-          />
-        </ul>
-
-        <button type="button" onClick={() => register(formValue)}>
-          Inscription
-        </button>
       </div>
     </div>
   );
