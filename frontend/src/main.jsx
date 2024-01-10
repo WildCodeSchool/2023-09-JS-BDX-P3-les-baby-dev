@@ -30,6 +30,7 @@ import StructureRegister from "./pages/pages.pro/StructureRegister";
 import ReservationFinal from "./pages/pages.parents/reservation/ReservationFinal";
 import StructureContextProvider from "./context/StrucutreContext";
 import ApiService from "./services/api.service";
+import ParentContextProvider from "./context/ParentContext";
 
 const apiService = new ApiService();
 
@@ -104,15 +105,27 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "/profil/inscription",
-                element: <InscriptionParent />,
+                element: (
+                  <ParentContextProvider>
+                    <InscriptionParent />
+                  </ParentContextProvider>
+                ),
               },
               {
                 path: "/profil/inscription/children",
-                element: <IncriptionChildren />,
+                element: (
+                  <ParentContextProvider>
+                    <IncriptionChildren />
+                  </ParentContextProvider>
+                ),
               },
               {
                 path: "/profil/inscription/inscription",
-                element: <DocInscription />,
+                element: (
+                  <ParentContextProvider>
+                    <DocInscription />
+                  </ParentContextProvider>
+                ),
               },
             ],
           },
