@@ -117,3 +117,57 @@
     }
   }
 }
+
+@media (min-width: 768px) {
+  .card_container {
+    h1 {
+      color: white;
+      padding-top: 30px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 2.6em;
+    }
+
+    h2 {
+      color: white;
+      text-align: center;
+      font-size: 1.6em;
+      font-weight: bold;
+    }
+    .infos_card {
+      margin: 20px auto;
+      background-color: white;
+      width: 70%;
+      height: 90%;
+      border-radius: 10px;
+      box-shadow: 1px 2px 1px 2px;
+      padding: 0 100px;
+
+      .picture_card {
+        width: 500px;
+        height: auto;
+        margin: 0 auto;
+        padding-top: 10px;
+      }
+
+      .description_card {
+        h3 {
+          text-align: end;
+          color: #6200ee;
+          padding-right: 50px;
+          padding-top: 25px;
+          font-size: 1.4em;
+        }
+
+        h4 {
+          font-weight: bold;
+        }
+
+        p {
+          padding: 0 15px;
+          font-size: 0.8em;
+        }
+      }
+    }
+  }
+}
