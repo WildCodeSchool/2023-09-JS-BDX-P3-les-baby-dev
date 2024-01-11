@@ -19,6 +19,7 @@ function SearchList() {
   const handleNavigate = () => {
     navigate("/searchlist/nursery/:id");
   };
+
   const crechesData = [
     {
       id: 1,
@@ -81,6 +82,7 @@ function SearchList() {
       },
     },
   ];
+
   return (
     <div>
       <FilterComponent />

@@ -1,7 +1,7 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { createContext, useContext, useMemo, useState } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
 import ApiService from "../services/api.service";
 
 const UserContext = createContext();

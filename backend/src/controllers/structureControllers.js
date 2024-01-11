@@ -82,6 +82,19 @@ const postStructure = async (req, res) => {
   }
 };
 
+const getStructure = async (_, res) => {
+  models.structure
+    .findAll()
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   postStructure,
+  getStructure,
 };
