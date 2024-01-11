@@ -31,7 +31,7 @@ function UserContextProvider({ children, apiService }) {
       alert(`Content de vous revoir ${result.data.email}`);
       setUser(result.data);
       if (result.data.isAdmin === 1) {
-        return navigate("/structure");
+        return navigate("/dashboard");
       }
       return navigate("/searchlist");
     } catch (err) {
