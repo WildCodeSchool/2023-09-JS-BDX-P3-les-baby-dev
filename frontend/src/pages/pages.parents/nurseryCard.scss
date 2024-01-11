@@ -154,7 +154,6 @@
         h3 {
           text-align: end;
           color: #6200ee;
-          padding-right: 50px;
           padding-top: 25px;
           font-size: 1.4em;
         }
@@ -166,6 +165,55 @@
         p {
           padding: 0 15px;
           font-size: 0.8em;
+        }
+
+        .disponibility_nursery {
+          .days-availability {
+            width: 100px;
+            border: none;
+            border-radius: 1px;
+          }
+        }
+      }
+      .horaires_nursery {
+        width: 80%;
+        margin: 20px auto;
+        height: 80px;
+
+        ul {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          justify-content: center;
+
+          li {
+            list-style: none;
+            font-size: 1em;
+          }
+        }
+      }
+      .disponibility_nursery {
+        .days-availability {
+          width: 200px;
+          border: none;
+          border-radius: 1px;
+        }
+      }
+      .button_reservation {
+        text-align: center;
+        padding-right: 30px;
+        padding-bottom: 30px;
+
+        button {
+          border: none;
+          background-color: #6200ee;
+          color: white;
+          width: 150px;
+          height: 60px;
+          font-size: 1.4em;
+          border-radius: 5px;
+          font-weight: bold;
+          border: 1px solid #f8a56f;
         }
       }
     }

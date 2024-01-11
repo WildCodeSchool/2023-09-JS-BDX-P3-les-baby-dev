@@ -97,7 +97,7 @@ CREATE TABLE
         FOREIGN KEY (structure_id) REFERENCES structure(id)
     );
 
-    DROP TABLE if EXISTS parent;
+    /* DROP TABLE if EXISTS parent;
 
 CREATE TABLE
     IF NOT EXISTS parent (
@@ -131,4 +131,4 @@ CREATE TABLE
         allergies BOOLEAN DEFAULT 0,
         medecine_traitant_name VARCHAR(255) NOT NULL,
         FOREIGN KEY (parent_id) REFERENCES parent(id)
-    );
+    ); */
