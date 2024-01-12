@@ -2,7 +2,6 @@ import { MDBFileUpload } from "mdb-react-file-upload";
 import {
   MDBBtn,
   MDBInput,
-  MDBInputGroup,
   MDBValidation,
   MDBValidationItem,
 } from "mdb-react-ui-kit";
@@ -56,7 +55,12 @@ function ThirdStep() {
               </div>
               <div className="thirdInputContainer">
                 <MDBValidation className="row g-3">
-                  <MDBValidationItem className="col-md-4">
+                  <MDBValidationItem
+                    className="col-md-4"
+                    feedback="Veuillez entrer un prénom valide"
+                    invalid
+                    isValidated
+                  >
                     <MDBInput
                       name="fname"
                       onChange={(e) =>
@@ -67,7 +71,12 @@ function ThirdStep() {
                       label="Prénom"
                     />
                   </MDBValidationItem>
-                  <MDBValidationItem className="col-md-4">
+                  <MDBValidationItem
+                    className="col-md-4"
+                    feedback="Veuillez entrer un nom valide"
+                    invalid
+                    isValidated
+                  >
                     <MDBInput
                       name="lname"
                       onChange={(e) =>
@@ -79,23 +88,27 @@ function ThirdStep() {
                     />
                   </MDBValidationItem>
                   <MDBValidationItem
-                    feedback="Please choose a username."
+                    feedback="Veuillez entrer un email valide"
                     invalid
+                    isValidated
                     className="col-md-4"
                   >
-                    <MDBInputGroup textBefore="@">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="validationCustomUsername"
-                        placeholder="Mail"
-                        required
-                      />
-                    </MDBInputGroup>
+                    <MDBInput
+                      type="email"
+                      className="form-control"
+                      id="validationCustomUsername"
+                      placeholder="Mail"
+                      onChange={(e) =>
+                        handleChange(e.target.value, i, "fonction")
+                      }
+                      pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\.[a-zA-Z]+"
+                      required
+                      label="Mail"
+                    />
                   </MDBValidationItem>
                   <MDBValidationItem
                     className="col-md-6"
-                    feedback="Please provide a valid zip."
+                    feedback="Veuillez entrer une fonction valide"
                     invalid
                   >
                     <MDBInput

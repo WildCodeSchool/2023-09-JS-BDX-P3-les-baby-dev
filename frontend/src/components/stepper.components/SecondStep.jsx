@@ -1,7 +1,12 @@
 import axios from "axios";
 import { useRef } from "react";
 import { MDBFileUpload } from "mdb-react-file-upload";
-import { MDBBtn, MDBTextArea } from "mdb-react-ui-kit";
+import {
+  MDBBtn,
+  MDBTextArea,
+  MDBValidation,
+  MDBValidationItem,
+} from "mdb-react-ui-kit";
 import { useStructure } from "../../context/StrucutreContext";
 import "./secondStep.scss";
 
@@ -51,15 +56,25 @@ function SecondStep() {
         </div>
         <div className="structure4">
           <div className="pageContent">
-            <MDBTextArea
-              label="Message"
-              id="textAreaExample"
-              maxLength={maxLength}
-              rows={4}
-              value={data.description}
-              onChange={onChange}
-              name="stuctureDesc"
-            />
+            <MDBValidation className="row g-3">
+              <MDBValidationItem
+                className="col-md-4"
+                feedback="Veuillez entrer un nom valide"
+                invalid
+                isValidated
+              >
+                <MDBTextArea
+                  label="Message"
+                  id="textAreaExample"
+                  maxLength={maxLength}
+                  rows={4}
+                  value={data.description}
+                  onChange={onChange}
+                  name="stuctureDesc"
+                  required
+                />
+              </MDBValidationItem>
+            </MDBValidation>
             <legend>
               Maximum {`${maxLength - descriptionLength}`} caractères.
             </legend>

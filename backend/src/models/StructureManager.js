@@ -10,10 +10,10 @@ class StuctureManager extends AbstractManager {
   post(
     structureName,
     tel,
-    adress,
+    adresse,
     zip,
-    city,
-    stuctureDescpcsi,
+    ville,
+
     nesting,
     montessori,
     handicap,
@@ -40,14 +40,14 @@ class StuctureManager extends AbstractManager {
     isMedicationAdminRequired
   ) {
     return this.database.query(
-      "INSERT INTO structure( structureName, tel, adress, zip, city, stuctureDescpcsi, nesting, montessori, handicap, jardin, sorties, promenades, eveil, musique,  art, bilingue, bibli, transport, maxplace, maxHandicap, maxUnder18Months, maxAtypicalHours, maxNightCare, isAdaptationRequired, isRespectRequired, isDoorRespectRequired, isInfoTransmissionRequired, isCleanArrivalRequired, isJewelryRemovalRequired, isMedicationAdminRequired) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO structure( name, tel, adress, zip, city,  nesting, montessori, handicap, jardin, sorties, promenades, eveil, musique,  art, bilingue, bibli, transport, maxplace, maxHandicap, maxUnder18Months, maxAtypicalHours, maxNightCare, isAdaptationRequired, isRespectRequired, isDoorRespectRequired, isInfoTransmissionRequired, isCleanArrivalRequired, isJewelryRemovalRequired, isMedicationAdminRequired) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         structureName,
         tel,
-        adress,
+        adresse,
         zip,
-        city,
-        stuctureDescpcsi,
+        ville,
+
         nesting,
         montessori,
         handicap,
@@ -76,17 +76,13 @@ class StuctureManager extends AbstractManager {
     );
   }
 
-  async update(id, structure) {
-    let sql = "UPDATE structure set";
-    const sqlValues = [];
-    for (const [key, value] of Object.entries(structure)) {
-      sql += `${sqlValues.length ? "," : ""} ${key} = ?`;
-      sqlValues.push(value);
-    }
-    sql += " where id = ?";
-    sqlValues.push(id);
+  async getUsersStructure(id) {
+    const [rows] = await this.database.query(
+      "SELECT * FROM structure where user_id = ?",
+      [id]
+    );
 
-    return this.database.query(sql, sqlValues);
+    return rows[0] ?? null;
   }
 }
 
