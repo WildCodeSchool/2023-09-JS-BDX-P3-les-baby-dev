@@ -36,6 +36,7 @@ function InscriptionParent() {
                 pattern=".{4,}"
                 required
                 label="Nom"
+                className="input-parent"
               />
             </MDBValidationItem>
             <MDBValidationItem
@@ -52,6 +53,7 @@ function InscriptionParent() {
                 pattern=".{4,}"
                 required
                 label="Prénom"
+                className="input-parent"
               />
             </MDBValidationItem>
 
@@ -69,6 +71,7 @@ function InscriptionParent() {
                 onChange={handleClick}
                 value={dataParent.profession}
                 required
+                className="input-parent"
               />
             </MDBValidationItem>
             <MDBValidationItem
@@ -86,6 +89,7 @@ function InscriptionParent() {
                 onChange={handleClick}
                 value={dataParent.adresse}
                 required
+                className="input-parent"
               />
             </MDBValidationItem>
             <MDBValidationItem
@@ -102,6 +106,7 @@ function InscriptionParent() {
                 required
                 label="Ville"
                 pattern="[A-Za-z-]+"
+                className="input-parent"
               />
             </MDBValidationItem>
             <MDBValidationItem
@@ -119,6 +124,7 @@ function InscriptionParent() {
                 onChange={handleClick}
                 value={dataParent.tel}
                 required
+                className="input-parent"
               />
             </MDBValidationItem>
             <div>
