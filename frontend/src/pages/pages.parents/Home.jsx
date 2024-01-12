@@ -2,7 +2,7 @@ import FooterMdb from "../../components/home.components/FooterMdb";
 import Header from "../../components/home.components/Header";
 import Navbar from "../../components/home.components/Navbar";
 
-import "./Home.css";
+import "./Home.scss";
 
 function Home() {
   return (

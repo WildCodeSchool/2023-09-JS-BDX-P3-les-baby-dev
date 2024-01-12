@@ -10,8 +10,12 @@ import {
   MDBListGroupItem,
 } from "mdb-react-ui-kit";
 import { Link, useNavigate } from "react-router-dom";
+// import { useState, useEffect } from "react";
 import NavProfil from "../../components/profile.components/NavProfil";
 import FilterComponent from "../../components/searchList.components/FilterComponent";
+// import ApiService from "../../services/api.service";
+
+// const [structure, setStructure] = useState([]);
 
 function SearchList() {
   const navigate = useNavigate();
@@ -19,6 +23,20 @@ function SearchList() {
   const handleNavigate = () => {
     navigate("/searchlist/nursery/:id");
   };
+
+  /* async function afficherCreches() {
+    try {
+      const response = await axios.get("http://localhost:3310/api/structure");
+      setStructure(response.data); 
+    } catch (error) {
+      console.error(err);
+    }
+  }
+
+  useEffect(() => {
+    afficherCreches(); // Appelez la fonction une fois que le composant est monté
+  }, []);
+ */
   const crechesData = [
     {
       id: 1,
@@ -81,6 +99,7 @@ function SearchList() {
       },
     },
   ];
+
   return (
     <div>
       <FilterComponent />

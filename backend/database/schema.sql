@@ -127,9 +127,13 @@ CREATE TABLE
         rib VARCHAR(255) NOT NULL,
         numAllocataire INT NOT NULL,
         securiteSocialNumber INT NOT NULL,
-        assurances VARCHAR(255) NOT NULL,
-        FOREIGN KEY (user_id) REFERENCES user(id)
+        assurances VARCHAR(255) NOT NULL
+        /* FOREIGN KEY (user_id) REFERENCES user(id) */
     );
+
+ALTER TABLE parent
+ADD
+    CONSTRAINT `fk_user_id` FOREIGN KEY (user_id) REFERENCES user(id);
 
 DROP TABLE if EXISTS child;
 
