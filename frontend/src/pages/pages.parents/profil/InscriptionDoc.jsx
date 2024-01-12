@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+// import { MDBFileUpload } from "mdb-react-file-upload";
 import HeaderProfile from "../../../components/profile.components/HeaderProfile";
 import NavProfil from "../../../components/profile.components/NavProfil";
 
@@ -17,6 +18,7 @@ function DocInscription() {
             id="photo1"
             name="file"
             accept="image/png, image/jpg, image/jpeg"
+            className="form-control"
           />
           <label htmlFor="photo1">Déclaration de revenu (année en cours)</label>
           <input
@@ -24,6 +26,7 @@ function DocInscription() {
             id="photo1"
             name="file"
             accept="image/png, image/jpg, image/jpeg"
+            className="form-control"
           />
           <label htmlFor="photo1">Justificatif de domicile</label>
           <input
@@ -31,6 +34,7 @@ function DocInscription() {
             id="photo1"
             name="file"
             accept="image/png, image/jpg, image/jpeg"
+            className="form-control"
           />
           <label htmlFor="photo1">
             Justificatif de situation professionnelles
@@ -40,6 +44,7 @@ function DocInscription() {
             id="photo1"
             name="file"
             accept="image/png, image/jpg, image/jpeg"
+            className="form-control"
           />
           <label htmlFor="photo1">RIB</label>
           <input
@@ -47,16 +52,17 @@ function DocInscription() {
             id="photo1"
             name="file"
             accept="image/png, image/jpg, image/jpeg"
+            className="form-control"
           />
           <input
-            className="form-parent"
+            className="form-parent form-control"
             required
             type="text"
             name="nomParent"
             placeholder="Numéro allocataire CAF"
           />
           <input
-            className="form-parent"
+            className="form-parent form-control"
             required
             type="text"
             name="nomParent"

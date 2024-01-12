@@ -13,6 +13,7 @@ function ParentContextProvider({ children }) {
       [e.target.name]: e.target.value,
     });
   };
+
   const handleClickChild = (e) => {
     setDataChildren({
       ...dataChildren,
@@ -24,6 +25,9 @@ function ParentContextProvider({ children }) {
     event.preventDefault();
     console.info(dataParent, dataChildren);
   };
+
+  // const handleSubmitFiles = (event) => {
+  //   event.preventDefault();
 
   const contextParentValue = useMemo(
     () => ({
