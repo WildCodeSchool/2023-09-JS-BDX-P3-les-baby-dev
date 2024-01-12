@@ -1,5 +1,10 @@
 import React from "react";
-import { MDBTimepicker, MDBDatepicker } from "mdb-react-ui-kit";
+import {
+  MDBTimepicker,
+  MDBDatepicker,
+  MDBValidation,
+  MDBValidationItem,
+} from "mdb-react-ui-kit";
 import "./reservation.scss";
 import { Link } from "react-router-dom";
 
@@ -40,29 +45,39 @@ function Reservation() {
             </div>
             <h2>Demande de réservation</h2>
             <h3>{creche.name}</h3>
-            <div className="time_resa">
-              <ul>
-                <li>
-                  <h4>Votre date de réservation:</h4>
-                  <MDBDatepicker inline />
-                </li>
-                <li>
-                  <h4>Heure de début souhaité:</h4>
-                  <MDBTimepicker inline format="24h" />
-                </li>
-                <li>
-                  <h4>Heure de fin souhaité:</h4>
-                  <MDBTimepicker inline format="24h" />
-                </li>
-              </ul>
-            </div>
-            <div className="bottom_resa">
-              <Link to="/searchlist/conditions">
-                <button type="button" className="btn_next">
-                  Suivant
-                </button>
-              </Link>
-            </div>
+            <MDBValidation>
+              <div className="time_resa">
+                <ul>
+                  <li>
+                    <h4>Votre date de réservation:</h4>
+                    <MDBValidationItem
+                      className="col-md-4"
+                      feedback="Veuillez entrer une date"
+                      invalid
+                      isValidated
+                    >
+                      <MDBDatepicker inline required />
+                    </MDBValidationItem>
+                  </li>
+                  <li>
+                    <h4>Heure de début souhaité:</h4>
+                    <MDBTimepicker inline format="24h" />
+                  </li>
+                  <li>
+                    <h4>Heure de fin souhaité:</h4>
+                    <MDBTimepicker inline format="24h" />
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bottom_resa">
+                <Link to="/searchlist/conditions">
+                  <button type="button" className="btn_next">
+                    Suivant
+                  </button>
+                </Link>
+              </div>
+            </MDBValidation>
           </div>
         </div>
       ))}
