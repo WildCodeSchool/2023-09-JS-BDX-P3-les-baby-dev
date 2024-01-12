@@ -42,6 +42,25 @@ function StructureContextProvider({ children }) {
     employees: [],
   });
 
+  /* const [crechesData, setCrechesData] = useState([]);
+
+  useEffect(() => {
+    const fetchDataCreche = async () => {
+      try {
+        const response = await fetch("http://localhost:3310/api/structure");
+        if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des données");
+        }
+        const items = await response.json();
+        setCrechesData(items);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchDataCreche();
+  }, []); */
+
   const onChange = (e) => {
     setData({
       ...data,
