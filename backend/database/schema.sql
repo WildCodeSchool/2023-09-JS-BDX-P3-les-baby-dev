@@ -8,7 +8,7 @@ DROP TABLE if EXISTS user;
 
 create table
     IF NOT EXISTS user (
-        id int unsigned primary key auto_increment not null,
+        id int primary key auto_increment not null,
         email varchar(255) not null,
         password varchar(255) not null,
         is_admin bool,
@@ -97,7 +97,7 @@ CREATE TABLE
         FOREIGN KEY (structure_id) REFERENCES structure(id)
     );
 
-    DROP TABLE if EXISTS parent;
+DROP TABLE if EXISTS parent;
 
 CREATE TABLE
     IF NOT EXISTS parent (
@@ -114,9 +114,13 @@ CREATE TABLE
         rib VARCHAR(255) NOT NULL,
         numAllocataire INT NOT NULL,
         securiteSocialNumber INT NOT NULL,
-        assurances VARCHAR(255) NOT NULL,
-        FOREIGN KEY (user_id) REFERENCES user(id)
+        assurances VARCHAR(255) NOT NULL
+        /* FOREIGN KEY (user_id) REFERENCES user(id) */
     );
+
+    ALTER TABLE parent
+ADD
+    CONSTRAINT `fk_user_id` FOREIGN KEY (user_id) REFERENCES user(id);
 
         DROP TABLE if EXISTS child;
 
