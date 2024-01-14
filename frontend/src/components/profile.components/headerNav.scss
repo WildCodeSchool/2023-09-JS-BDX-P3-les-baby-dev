@@ -51,6 +51,8 @@
 
 @media (max-width: 768px) {
   .headerNav_container {
-    display: none;
+    .sections_nav {
+      display: none;
+    }
   }
 }
