@@ -12,6 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import NavProfil from "../../components/profile.components/NavProfil";
 import FilterComponent from "../../components/searchList.components/FilterComponent";
+import HeaderNav from "../../components/profile.components/HeaderNav";
 // import { useStructure } from "../../context/StrucutreContext";
 // import ApiService from "../../services/api.service";
 
@@ -151,6 +152,7 @@ function SearchList() {
       <NavProfil />
     </div> */
     <div className="searchlist_container">
+      <HeaderNav />
       <FilterComponent />
       <div className="card-container">
         {crechesData.map((creche) => (
