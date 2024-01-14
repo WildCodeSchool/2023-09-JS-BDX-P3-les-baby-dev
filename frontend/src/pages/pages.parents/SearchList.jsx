@@ -1,7 +1,6 @@
 import "./SearchList.scss";
 import {
   MDBCard,
-  MDBCardImage,
   MDBCardBody,
   MDBCardTitle,
   // MDBCardText,
@@ -151,31 +150,33 @@ function SearchList() {
       </div>
       <NavProfil />
     </div> */
-    <div>
+    <div className="searchlist_container">
       <FilterComponent />
-      <div className="card-container container">
+      <div className="card-container">
         {crechesData.map((creche) => (
           <div key={creche.id}>
-            <MDBCard>
-              <MDBCardImage
-                position="top"
-                alt={creche.name}
-                src="./src/assets/creche.jpeg"
-              />
-            </MDBCard>
-            <MDBCardBody>
-              <MDBCardTitle>{creche.name}</MDBCardTitle>
-            </MDBCardBody>
-            <MDBListGroup flush>
-              <MDBListGroupItem>{creche.tel}</MDBListGroupItem>
-              <MDBListGroupItem>{creche.adress}</MDBListGroupItem>
-            </MDBListGroup>
-            <MDBCardBody>
-              <MDBCardLink onClick={handleNavigate}>Nursery</MDBCardLink>
-              <MDBCardLink>
-                <Link to="/searchlist/nursery">Réserver</Link>
-              </MDBCardLink>
-            </MDBCardBody>
+            <div className="oneCard">
+              <MDBCard>
+                <div className="img_creche">
+                  <img alt={creche.name} src="./src/assets/creche.jpeg" />
+                  <h3>{creche.name}</h3>
+                </div>
+
+                <MDBCardBody>
+                  <MDBCardTitle>{creche.name}</MDBCardTitle>
+                </MDBCardBody>
+                <MDBListGroup flush>
+                  <MDBListGroupItem>{creche.tel}</MDBListGroupItem>
+                  <MDBListGroupItem>{creche.city}</MDBListGroupItem>
+                </MDBListGroup>
+                <MDBCardBody>
+                  <MDBCardLink onClick={handleNavigate}>Nursery</MDBCardLink>
+                  <MDBCardLink>
+                    <Link to="/searchlist/nursery">Réserver</Link>
+                  </MDBCardLink>
+                </MDBCardBody>
+              </MDBCard>
+            </div>
           </div>
         ))}
       </div>

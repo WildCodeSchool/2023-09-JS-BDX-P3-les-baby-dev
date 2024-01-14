@@ -70,9 +70,7 @@ function NurseryCard() {
                         className="days-availability"
                         key={`index-${index + 1}`}
                         style={{
-                          backgroundColor: isAvailable
-                            ? "green"
-                            : "rgb(105, 105, 105)",
+                          backgroundColor: isAvailable ? "green" : "silver",
                         }}
                       >
                         {day}
