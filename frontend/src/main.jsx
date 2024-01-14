@@ -73,7 +73,7 @@ const router = createBrowserRouter([
             ],
           },
           {
-            path: "/searchlist/nursery",
+            path: "/searchlist/nursery/:id",
             element: <NurseryCard />,
           },
           {
