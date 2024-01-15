@@ -1,5 +1,5 @@
-import React from "react";
-import { MDBStepper, MDBStepperStep } from "mdb-react-ui-kit";
+import React, { useRef } from "react";
+import { MDBBtn, MDBStepper, MDBStepperStep } from "mdb-react-ui-kit";
 import "./structureRegister.scss";
 import FirstStep from "../../components/stepper.components/FirstStep";
 import SecondStep from "../../components/stepper.components/SecondStep";
@@ -15,18 +15,30 @@ import { useStructure } from "../../context/StrucutreContext";
 import Navbar from "../../components/stepper.components/Navbar";
 
 function StructureRegister() {
+  const nextRef = useRef(null);
+  const prevRef = useRef(null);
+
   const { handleSubmit } = useStructure();
+
   return (
     <>
       <Navbar />
-      <MDBStepper type="vertical" externalNext={handleSubmit} linear>
+
+      <button ref={nextRef} type="button" className="d-none">
+        test
+      </button>
+      <button ref={prevRef} type="button" className="d-none">
+        test
+      </button>
+
+      <MDBStepper type="vertical" externalNext={nextRef} externalPrev={prevRef}>
         <MDBStepperStep
           contentClassName="stepContent"
           headIcon={1}
           headText="Stucture d'accueil"
           itemId={1}
         >
-          <FirstStep />
+          <FirstStep nextRef={nextRef} />
         </MDBStepperStep>
         <MDBStepperStep headIcon={2} headText="Présentation" itemId={2}>
           <SecondStep />
@@ -58,6 +70,11 @@ function StructureRegister() {
         </MDBStepperStep>
         <MDBStepperStep headIcon={8} headText="Récapitulatif" itemId={8}>
           <EighthStep />
+          <div className="submitForm">
+            <MDBBtn type="submit" onClick={handleSubmit}>
+              M'enregistrer
+            </MDBBtn>
+          </div>
         </MDBStepperStep>
         <MDBStepperStep headIcon={9} headText="Bienvenue" itemId={9}>
           <NinthStep />
