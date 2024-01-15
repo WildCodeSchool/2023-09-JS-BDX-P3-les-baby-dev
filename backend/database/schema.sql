@@ -80,18 +80,12 @@ values (
         '33130',
         'bèglesZoo'
     ), (
+        2,
         'Mat',
         '0678252910',
         '17 rue ailleurs',
         '33130',
         'Bordeaux'
-    ),
-    (
-        'Vic',
-        '0678252910',
-        '17 rue ailleurs',
-        '33130',
-        'Biarritz'
     );
 
 DROP TABLE if EXISTS hours;
@@ -140,8 +134,8 @@ CREATE TABLE
         rib VARCHAR(255) NOT NULL,
         numAllocataire INT NOT NULL,
         securiteSocialNumber INT NOT NULL,
-        assurances VARCHAR(255) NOT NULL
-        /* FOREIGN KEY (user_id) REFERENCES user(id) */
+        assurances VARCHAR(255) NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES user(id)
     );
 
 ALTER TABLE parent

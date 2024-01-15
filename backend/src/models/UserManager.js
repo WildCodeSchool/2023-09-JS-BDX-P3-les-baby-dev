@@ -19,16 +19,25 @@ class UserManager extends AbstractManager {
     const rows = result[0];
     const userId = rows.insertId;
 
-    const [userStructure] = await this.database.query(
-      `INSERT INTO structure (user_id) values (?)`,
+    if (user.is_admin) {
+      const [userStructure] = await this.database.query(
+        `INSERT INTO structure (user_id) values (?)`,
+        [userId]
+      );
+      const structureId = userStructure.insertId;
+      return {
+        id: userId,
+        structureId,
+      };
+    }
+    const [userParent] = await this.database.query(
+      `INSERT INTO parent (user_id) values (?)`,
       [userId]
     );
-
-    const structureId = userStructure.insertId;
-
+    const parentId = userParent.insertId;
     return {
       id: userId,
-      structureId,
+      parentId,
     };
   }
 

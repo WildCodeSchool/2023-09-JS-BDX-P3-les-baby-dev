@@ -28,6 +28,7 @@ function ParentContextProvider({ children }) {
 
   // const handleSubmitFiles = (event) => {
   //   event.preventDefault();
+  // };
 
   const contextParentValue = useMemo(
     () => ({
@@ -35,8 +36,15 @@ function ParentContextProvider({ children }) {
       dataParent,
       handleSubmit,
       handleClickChild,
+      // handleSubmitFiles,
     }),
-    [handleClick, dataParent, handleSubmit, handleClickChild]
+    [
+      handleClick,
+      dataParent,
+      handleSubmit,
+      handleClickChild,
+      // handleSubmitFiles
+    ]
   );
 
   return (
