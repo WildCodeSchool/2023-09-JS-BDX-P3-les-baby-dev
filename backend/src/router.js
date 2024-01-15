@@ -14,6 +14,7 @@ const userControllers = require("./controllers/userControllers");
 
 const { authMiddleware } = require("./middlewares/Security/auth.middleware");
 const structureControllers = require("./controllers/structureControllers");
+const reservationControllers = require("./controllers/reservationControllers");
 // Route to get a list of items
 
 // Route to get a specific item by ID
@@ -45,6 +46,8 @@ router.get(
   authMiddleware,
   structureControllers.getUserStructure
 );
+
+router.get("/reservations", reservationControllers.getReservation);
 
 /* ************************************************************************* */
 

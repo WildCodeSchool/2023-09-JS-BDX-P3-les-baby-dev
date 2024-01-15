@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./dashboard.scss";
 import {
   MDBSideNav,
@@ -21,8 +21,9 @@ export default function App() {
   const [colorCollapse2, setColorCollapse2] = useState(false);
   // const [color, setColor] = useState("primary");
   const [filter, setFilter] = useState("Tous");
+  const [resaData, setResaData] = useState([]);
 
-  const data = [
+  /* const data = [
     {
       id: 1,
       name: "Mat Doe",
@@ -90,9 +91,26 @@ export default function App() {
       img: "https://mdbootstrap.com/img/new/avatars/7.jpg",
     },
     // ... autres données
-  ];
+  ]; */
 
-  const filteredData = data.filter((item) => {
+  useEffect(() => {
+    const fetchResaData = async () => {
+      try {
+        const response = await fetch("http://localhost:3310/api/reservations");
+        if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des données");
+        }
+        const data = await response.json();
+        setResaData(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchResaData();
+  }, []);
+
+  const filteredData = resaData.filter((item) => {
     if (filter === "Tous") {
       return true;
     }
@@ -132,7 +150,7 @@ export default function App() {
               <td>
                 <div className="d-flex align-items-center">
                   <img
-                    src={item.img}
+                    src={item.picture}
                     alt=""
                     style={{ width: "45px", height: "45px" }}
                     className="rounded-circle"
@@ -154,7 +172,7 @@ export default function App() {
                 <p className="fw-normal mb-1">{item.finishHour}</p>
               </td>
               <td>
-                <h2 className="fw-normal mb-1">{item.price}</h2>
+                <h2 className="fw-normal mb-1">{item.price}€/heure</h2>
               </td>
               {item.status === "Accepté" && (
                 <MDBBadge className="badge" color="success" pill>
