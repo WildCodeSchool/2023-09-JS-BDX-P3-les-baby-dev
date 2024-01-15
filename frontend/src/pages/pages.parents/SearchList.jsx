@@ -4,11 +4,10 @@ import {
   MDBCardBody,
   MDBCardTitle,
   // MDBCardText,
-  MDBCardLink,
   MDBListGroup,
   MDBListGroupItem,
 } from "mdb-react-ui-kit";
-import { Link /* useNavigate */ } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import NavProfil from "../../components/profile.components/NavProfil";
 import FilterComponent from "../../components/searchList.components/FilterComponent";
@@ -17,14 +16,14 @@ import HeaderNav from "../../components/profile.components/HeaderNav";
 // import ApiService from "../../services/api.service";
 
 function SearchList() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [crechesData, setCrechesData] = useState([]);
 
   // const { fetchDataCreche } = useStructure();
 
-  /* const handleNavigate = () => {
-    navigate("/searchlist/nursery/:id");
-  }; */
+  const handleNavigate = (crecheId) => {
+    navigate(`/searchlist/nursery/${crecheId}`);
+  };
 
   useEffect(() => {
     const fetchDataCreche = async () => {
@@ -42,64 +41,6 @@ function SearchList() {
 
     fetchDataCreche();
   }, []);
-
-  /*
-  const crechesData = [
-    {
-      id: 1,
-      name: "Picoti Picota",
-      avatarPath: "./src/assets/creche3.jpeg",
-      stuctureDesc:
-        "La crèche « Picoti Picota » n’est pas qu’un lieu de garde, c’est surtout un lieu d’échange et d’accueil des enfants et des familles dans une confiance réciproque où le respect, l’autonomie et la sécurité sont des références privilégiées dans notre projet.",
-      openingHours: "Lundi - Samedi : 9h-16h",
-        tel: "05 56 56 56 56",
-        adress: "contact@picotipicota.fr",
-      availability: {
-        "lundi 14": false,
-        "mardi 15": true,
-        "mercredi 16": false,
-        "jeudi 17": true,
-        "vendredi 18": false,
-        "samedi 19": true,
-      },
-    },
-    {
-      id: 2,
-      name: "Joyeux P'tits Loups",
-      avatarPath: "./src/assets/creche2.jpeg",
-      stuctureDesc:
-        "Bienvenue chez les Joyeux P'tits Loups ! Une crèche où le bonheur et l'épanouissement des tout-petits sont au cœur de nos préoccupations. Nous offrons un environnement chaleureux et sécurisé pour que vos enfants grandissent dans la joie et la confiance.",
-      openingHours: "Lundi - Vendredi : 8h-18h",
-        tel: "07 77 77 77 77",
-        adress: "contact@joyeuxptitsloups.com",
-      availability: {
-        "lundi 14": false,
-        "mardi 15": false,
-        "mercredi 16": false,
-        "jeudi 17": true,
-        "vendredi 18": false,
-        "samedi 19": false,
-      },
-    },
-    {
-      id: 3,
-      name: "Les Petites Canailles",
-      avatarPath: "./src/assets/creche.jpeg",
-      stuctureDesc:
-        "Les Petites Canailles, une crèche où chaque enfant est unique ! Nous favorisons le développement global de l'enfant en lui offrant des activités ludiques et éducatives. Notre équipe dévouée assure un environnement sécurisé et bienveillant.",
-      openingHours: "Lundi - Jeudi : 7h-18h, Vendredi : 7h-16h",
-        tel: "06 66 66 66 66",
-        adress: "contact@petitescanailles.fr",
-      availability: {
-        "lundi 14": true,
-        "mardi 15": true,
-        "mercredi 16": false,
-        "jeudi 17": true,
-        "vendredi 18": true,
-        "samedi 19": false,
-      },
-    },
-  ]; */
 
   return (
     /* <div>
@@ -197,11 +138,15 @@ function SearchList() {
                   </div>
                 </MDBCardBody>
                 <MDBCardBody>
-                  <MDBCardLink>
-                    <Link to="/searchlist/nursery">
-                      <div className="btn_reservation">Réserver</div>
-                    </Link>
-                  </MDBCardLink>
+                  <Link to={`/searchlist/nursery/${creche.id}`}>
+                    <button
+                      type="button"
+                      className="btn_reservation"
+                      onClick={() => handleNavigate(creche.id)}
+                    >
+                      Réserver
+                    </button>
+                  </Link>
                 </MDBCardBody>
               </MDBCard>
             </div>

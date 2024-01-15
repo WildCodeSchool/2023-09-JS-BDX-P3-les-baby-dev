@@ -26,6 +26,8 @@ router.post("/login", userControllers.postLogin);
 
 router.put("/structure/inscription", structureControllers.postStructure);
 router.get("/structure", structureControllers.getStructure);
+router.get("/structure/:id", structureControllers.getStructureById);
+router.post("/structureInscription", structureControllers.postStructure);
 
 router.put(
   "/structures/:id([0-9]+)/avatar",
