@@ -1,0 +1,22 @@
+* body {
+  background: linear-gradient(to bottom right, #e0e3ff, #f3e4ff);
+}
+
+* .filters {
+  margin-top: 20px;
+  margin-left: 200px;
+  margin-right: 400px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.sideNav_container {
+  background-color: #7847ff;
+  .sideMenu {
+    background-color: #7847ff;
+    color: white;
+  }
+  .scrollbar-container {
+    background-color: #7847ff;
+  }
+}
