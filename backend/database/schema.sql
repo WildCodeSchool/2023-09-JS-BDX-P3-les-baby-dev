@@ -93,6 +93,19 @@ values (
         '33130',
         'Biarritz'
     );
+DROP TABLE if EXISTS reservation;
+
+CREATE TABLE
+    IF NOT EXISTS reservation (
+        id int primary key auto_increment not null,
+        structure_id INT NOT NULL,
+        parent_id INT NOT NULL,
+        dayResa VARCHAR(10) NOT NULL,
+        startHour TIME NOT NULL,
+        finishHour TIME NOT NULL, -- FOREIGN KEY (structure_id) REFERENCES structure (id)
+        FOREIGN KEY (structure_id) REFERENCES structure(id),
+        FOREIGN KEY (parent_id) REFERENCES parent(id)
+    );
 
 DROP TABLE if EXISTS hours;
 

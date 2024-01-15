@@ -13,6 +13,7 @@ import {
   MDBTableHead,
   MDBTableBody,
 } from "mdb-react-ui-kit";
+import Babyplace from "../../assets/Babyplace.svg";
 
 export default function App() {
   const [colorOpen, setColorOpen] = useState(true);
@@ -25,7 +26,10 @@ export default function App() {
     {
       id: 1,
       name: "Mat Doe",
-      title: "Software engineer",
+      dayResa: "Lundi 17 mars",
+      startHour: "9h",
+      finishHour: "17h",
+      price: "15euros",
       status: "Accepté",
       position: "Senior",
       img: "https://mdbootstrap.com/img/new/avatars/8.jpg",
@@ -33,7 +37,10 @@ export default function App() {
     {
       id: 2,
       name: "Alex Ray",
-      title: "Consultant",
+      dayResa: "Mardi 18 mars",
+      startHour: "9h",
+      finishHour: "17h",
+      price: "15euros",
       status: "Refusé",
       position: "Junior",
       img: "https://mdbootstrap.com/img/new/avatars/6.jpg",
@@ -41,7 +48,10 @@ export default function App() {
     {
       id: 3,
       name: "Kate Hunington",
-      title: "Designer",
+      dayResa: "Mercredi 19 mars",
+      startHour: "9h",
+      finishHour: "17h",
+      price: "15euros",
       status: "En attente",
       position: "Senior",
       img: "https://mdbootstrap.com/img/new/avatars/4.jpg",
@@ -49,7 +59,10 @@ export default function App() {
     {
       id: 4,
       name: "John Doe",
-      title: "Software engineer",
+      dayResa: "Vendredi 19 mars",
+      startHour: "9h",
+      finishHour: "17h",
+      price: "15euros",
       status: "Accepté",
       position: "Senior",
       img: "https://mdbootstrap.com/img/new/avatars/5.jpg",
@@ -57,7 +70,10 @@ export default function App() {
     {
       id: 5,
       name: "Alex Ray",
-      title: "Consultant",
+      dayResa: "Mardi 03 avril",
+      startHour: "9h",
+      finishHour: "17h",
+      price: "15euros",
       status: "Accepté",
       position: "Junior",
       img: "https://mdbootstrap.com/img/new/avatars/6.jpg",
@@ -65,7 +81,10 @@ export default function App() {
     {
       id: 6,
       name: "Kate Hunington",
-      title: "Designer",
+      dayResa: "Mercredi 04 avril",
+      startHour: "9h",
+      finishHour: "17h",
+      price: "15euros",
       status: "En attente",
       position: "Senior",
       img: "https://mdbootstrap.com/img/new/avatars/7.jpg",
@@ -99,9 +118,11 @@ export default function App() {
         <MDBTableHead>
           <tr>
             <th scope="col">Name</th>
-            <th scope="col">Title</th>
+            <th scope="col">Jour de réservation</th>
+            <th scope="col">Heure d'arrivée</th>
+            <th scope="col">Heure de sortie</th>
+            <th scope="col">Tarifs</th>
             <th scope="col">Status</th>
-            <th scope="col">Position</th>
             <th scope="col">Actions</th>
           </tr>
         </MDBTableHead>
@@ -123,11 +144,20 @@ export default function App() {
                 </div>
               </td>
               <td>
-                <p className="fw-normal mb-1">{item.title}</p>
+                <p className="fw-normal mb-1">{item.dayResa}</p>
                 <p className="text-muted mb-0">{item.department}</p>
               </td>
+              <td>
+                <p className="fw-normal mb-1">{item.startHour}</p>
+              </td>
+              <td>
+                <p className="fw-normal mb-1">{item.finishHour}</p>
+              </td>
+              <td>
+                <h2 className="fw-normal mb-1">{item.price}</h2>
+              </td>
               {item.status === "Accepté" && (
-                <MDBBadge color="success" pill>
+                <MDBBadge className="badge" color="success" pill>
                   {item.status}
                 </MDBBadge>
               )}
@@ -141,7 +171,6 @@ export default function App() {
                   {item.status}
                 </MDBBadge>
               )}
-              <td>Senior</td>
               <td>
                 <MDBBtn color="link" rounded size="sm">
                   Edit
@@ -160,6 +189,9 @@ export default function App() {
           <div className="sideMenu">
             <MDBSideNavMenu>
               <MDBSideNavItem>
+                <div className="logo">
+                  <img src={Babyplace} alt="" />
+                </div>
                 <MDBSideNavLink
                   icon="angle-down"
                   shouldBeExpanded={colorCollapse1}

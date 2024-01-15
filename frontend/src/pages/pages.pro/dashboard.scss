@@ -13,10 +13,25 @@
 .sideNav_container {
   background-color: #7847ff;
   .sideMenu {
-    background-color: #7847ff;
     color: white;
+    .logo {
+      margin: 0 auto;
+      img {
+        width: 500px;
+        margin: 10px;
+        padding-right: 300px;
+      }
+    }
   }
   .scrollbar-container {
-    background-color: #7847ff;
+    background: linear-gradient(to bottom right, #7847ff, #e37acc);
   }
+}
+
+h2 {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+.badge {
+  margin-top: 15px;
 }
