@@ -76,6 +76,14 @@ function IncriptionChildren() {
               id="flexSwitchCheckDefault"
               label="Mon enfant marche"
               name="walkingChild"
+              onChange={() =>
+                handleClickChild({
+                  target: {
+                    name: "walkingChild",
+                    value: !dataParent.walkingChild,
+                  },
+                })
+              }
             />
             <MDBValidationItem
               className="col-md-4"

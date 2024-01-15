@@ -12,7 +12,6 @@ function StructureContextProvider({ children }) {
 
   useEffect(() => {
     if (user?.is_admin === 0) {
-      console.info(user);
       return navigate("/login");
     }
     console.info(user);
@@ -88,12 +87,14 @@ function StructureContextProvider({ children }) {
     }));
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
     console.info(data);
 
     try {
-      const response = await axios.post("/structureInscription", data);
+      const response = await axios.put(
+        "http://localhost:3310/api/structure/inscription",
+        data
+      );
 
       console.info(response.data);
 

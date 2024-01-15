@@ -8,7 +8,7 @@ DROP TABLE if EXISTS user;
 
 create table
     IF NOT EXISTS user (
-        id int unsigned primary key auto_increment not null,
+        id int primary key auto_increment not null,
         email varchar(255) not null,
         password varchar(255) not null,
         is_admin bool,
@@ -24,11 +24,12 @@ DROP TABLE if EXISTS structure;
 CREATE TABLE
     if NOT exists structure (
         id int primary key auto_increment not null,
-        name VARCHAR(255) NOT NULL,
-        tel VARCHAR(10) NOT NULL,
-        adress VARCHAR(255) NOT NULL,
-        zip VARCHAR(6) NOT NULL,
-        city VARCHAR(255) NOT NULL,
+        user_id INT NOT NULL,
+        name VARCHAR(255),
+        tel VARCHAR(10),
+        adress VARCHAR(255),
+        zip VARCHAR(6),
+        city VARCHAR(255),
         avatarPath VARCHAR(255),
         stuctureDesc VARCHAR(500),
         pcsi BOOLEAN DEFAULT 0,
@@ -58,9 +59,21 @@ CREATE TABLE
         isMedicationAdminRequired BOOLEAN DEFAULT 0
     );
 
+ALTER TABLE structure
+ADD
+    CONSTRAINT `fk_user_id` FOREIGN KEY (user_id) REFERENCES user(id);
+
 insert into
-    structure (name, tel, adress, zip, city)
+    structure (
+        user_id,
+        name,
+        tel,
+        adress,
+        zip,
+        city
+    )
 values (
+        1,
         'daamn',
         '0678252910',
         '17 rue gambetta',
@@ -110,7 +123,7 @@ CREATE TABLE
         FOREIGN KEY (structure_id) REFERENCES structure(id)
     );
 
-    DROP TABLE if EXISTS parent;
+DROP TABLE if EXISTS parent;
 
 CREATE TABLE
     IF NOT EXISTS parent (
@@ -127,11 +140,15 @@ CREATE TABLE
         rib VARCHAR(255) NOT NULL,
         numAllocataire INT NOT NULL,
         securiteSocialNumber INT NOT NULL,
-        assurances VARCHAR(255) NOT NULL,
-        FOREIGN KEY (user_id) REFERENCES user(id)
+        assurances VARCHAR(255) NOT NULL
+        /* FOREIGN KEY (user_id) REFERENCES user(id) */
     );
 
-        DROP TABLE if EXISTS child;
+ALTER TABLE parent
+ADD
+    CONSTRAINT `fk_user_id` FOREIGN KEY (user_id) REFERENCES user(id);
+
+DROP TABLE if EXISTS child;
 
 CREATE TABLE
     IF NOT EXISTS child (
@@ -140,7 +157,7 @@ CREATE TABLE
         firstname VARCHAR(255) NOT NULL,
         lastname VARCHAR(255) NULL,
         birthday VARCHAR(255) NOT NULL,
-        is_walking BOOLEAN DEFAULT 0,,
+        is_walking BOOLEAN DEFAULT 0,
         allergies BOOLEAN DEFAULT 0,
         medecine_traitant_name VARCHAR(255) NOT NULL,
         FOREIGN KEY (parent_id) REFERENCES parent(id)

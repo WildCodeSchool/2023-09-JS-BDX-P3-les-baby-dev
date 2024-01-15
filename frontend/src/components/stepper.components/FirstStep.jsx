@@ -1,20 +1,36 @@
+import { useState } from "react";
+import PropTypes from "prop-types";
 import "./firstStep.scss";
 import {
   MDBBtn,
   MDBInput,
+  MDBSpinner,
   MDBValidation,
   MDBValidationItem,
 } from "mdb-react-ui-kit";
 import { useStructure } from "../../context/StrucutreContext";
 
-function FirstStep() {
-  const { data, onChange, handleSubmit } = useStructure();
+function FirstStep({ nextRef }) {
+  const { data, onChange } = useStructure();
+  const [loading, setLoading] = useState(false);
+
+  const { handleSubmit } = useStructure();
+
+  const validateFirstStep = async () => {
+    setLoading(true);
+    // a supprimer et remplacer par axios .....
+    setTimeout(() => {
+      nextRef.current.click();
+      handleSubmit();
+      setLoading(false);
+    }, 5000);
+  };
 
   return (
     <div className="fifty">
       <div className="step1">
         <h4>Complétez et vérifiez vos informations</h4>
-        <MDBValidation className="row g-3">
+        <MDBValidation className="row g-3" isValidated>
           <MDBValidationItem
             className="col-md-4"
             feedback="Veuillez entrer un nom valide"
@@ -93,14 +109,16 @@ function FirstStep() {
               id="validationCustom03"
               required
               label="Ville"
-              pattern="[A-Za-z-]+"
             />
           </MDBValidationItem>
-          <div>
-            <MDBBtn type="submit" onClick={handleSubmit}>
-              M'enregistrer
-            </MDBBtn>
-          </div>
+          <MDBBtn type="submit" onClick={validateFirstStep}>
+            {loading ? "" : "next"}
+            {loading && (
+              <MDBSpinner role="status">
+                <span className="visually-hidden">loading...</span>
+              </MDBSpinner>
+            )}
+          </MDBBtn>
         </MDBValidation>
       </div>
       <div className="greyBg">
@@ -115,5 +133,14 @@ function FirstStep() {
     </div>
   );
 }
+
+FirstStep.propTypes = {
+  nextRef: PropTypes.oneOfType([
+    // Either a function
+    PropTypes.func,
+    // Or the instance of a DOM native element (see the note about SSR)
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]).isRequired,
+};
 
 export default FirstStep;

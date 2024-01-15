@@ -21,6 +21,20 @@ class AbstractManager {
   findAll() {
     return this.database.query(`select * from ${this.table}`);
   }
+
+  async update(id, dataValue) {
+    let sql = `UPDATE ${this.table} set`;
+    const sqlValues = [];
+    for (const [key, value] of Object.entries(dataValue)) {
+      sql += `${sqlValues.length ? "," : ""} ${key} = ?`;
+
+      sqlValues.push(value);
+    }
+    sql += " where id = ?";
+    sqlValues.push(id);
+
+    return this.database.query(sql, sqlValues);
+  }
 }
 
 // Ready to export

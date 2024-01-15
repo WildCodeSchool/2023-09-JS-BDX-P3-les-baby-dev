@@ -2,11 +2,12 @@
   background-image: url("../src/assets/background-profil.svg");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 19vh;
+  height: auto;
   width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 20px;
 }
 .inscription-titre {
   color: white;
@@ -24,39 +25,38 @@
   justify-content: space-evenly;
   margin-top: 0.5vh;
 }
-.blue-button {
-  background-image: url("../src/assets/blue-button.svg");
+.color-button {
   background-repeat: no-repeat;
   background-size: contain;
   width: 20vw;
+  max-width: 115px;
   aspect-ratio: 1/1;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-weight: bold;
+
+  &.blue-button {
+    background-image: url("../src/assets/blue-button.svg");
+  }
+  &.green-button {
+    background-image: url("../src/assets/green-button.svg");
+  }
+  &.orange-button {
+    background-image: url("../src/assets/orange-button.svg");
+  }
 }
-.green-button {
-  background-image: url("../src/assets/green-button.svg");
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 20vw;
-  aspect-ratio: 1/1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
+
+@media screen and (min-width: 750px) {
+  .inscription-sous-titre {
+    font-size: 2vh;
+  }
 }
-.orange-button {
-  background-image: url("../src/assets/orange-button.svg");
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 20vw;
-  aspect-ratio: 1/1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
+@media screen and (min-width: 1000px) {
+  .inscription-titre {
+    font-size: 6vh;
+  }
+}
+@media screen and (min-width: 1200px) {
 }

@@ -17,11 +17,12 @@ const getUser = (_, res) => {
 const addUser = (req, res) => {
   models.user
     .create(req.body)
-    .then(([rows]) => {
+    .then((rows) => {
       res.send({
         id: rows.insertId,
         email: req.body.email,
         isAdmin: req.body.isAdmin,
+        structureId: rows.structureId,
       });
     })
     .catch((err) => {
@@ -32,7 +33,7 @@ const addUser = (req, res) => {
 };
 
 function generateAccessToken(data) {
-  return jwt.sign(data, process.env.APP_SECRET, { expiresIn: "1800s" });
+  return jwt.sign(data, process.env.APP_SECRET, { expiresIn: "86400s" });
 }
 
 const postLogin = (req, res) => {
