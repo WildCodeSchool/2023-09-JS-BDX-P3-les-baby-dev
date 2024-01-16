@@ -1,5 +1,4 @@
 .filterComponent_container {
-  background-color: white;
   width: 100%;
   height: 50px;
   border: 1px solid #dfdede;
@@ -7,13 +6,16 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 5px;
+  color: white;
+  box-shadow: 2px 2px 2px 2px rgb(0, 0, 0, 0.6);
+  border: none;
 
   a {
     text-decoration: none;
     display: flex;
     align-items: center;
     color: inherit;
-    margin-left: 20px;
+    margin-left: 40px;
 
     h2 {
       margin: 0;
@@ -25,7 +27,6 @@
       display: flex;
       flex-direction: row;
       align-items: center;
-      background-color: red;
       height: 100%;
 
       img {

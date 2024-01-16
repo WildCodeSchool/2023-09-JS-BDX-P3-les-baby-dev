@@ -97,6 +97,19 @@ values (
         '17 rue gambetta',
         '33130',
         'bèglesZoo'
+    ), (
+        'Mat',
+        '0678252910',
+        '17 rue ailleurs',
+        '33130',
+        'Bordeaux'
+    ),
+    (
+        'Vic',
+        '0678252910',
+        '17 rue ailleurs',
+        '33130',
+        'Biarritz'
     );
 
 DROP TABLE if EXISTS hours;
