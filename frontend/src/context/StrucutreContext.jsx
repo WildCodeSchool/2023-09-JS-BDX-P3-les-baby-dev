@@ -10,6 +10,7 @@ function StructureContextProvider({ children }) {
   const structureData = useLoaderData();
   const { data } = structureData.preloadUserStructure;
   // const [oldData, setOldData] = useState(data);
+
   const { user } = useUser();
   const navigate = useNavigate();
 
