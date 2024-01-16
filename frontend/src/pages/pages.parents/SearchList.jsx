@@ -101,7 +101,10 @@ function SearchList() {
             <div className="oneCard">
               <MDBCard>
                 <div className="img_creche">
-                  <img alt={creche.name} src="./src/assets/creche.jpeg" />
+                  <img
+                    alt={creche.name}
+                    src={creche.avatarPath || "./src/assets/defaultImage.png"}
+                  />
                   <h3>{creche.name}</h3>
                 </div>
 

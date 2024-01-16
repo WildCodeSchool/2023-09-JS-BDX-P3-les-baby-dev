@@ -26,16 +26,16 @@
         h3 {
           position: absolute;
           top: 85%;
-          left: 20%;
+          left: 25%;
           transform: translate(-50%, -50%);
           z-index: 1;
           color: white;
-          font-size: 2em;
+          font-size: 2.2em;
           font-weight: bolder;
-          text-shadow: 1px 2px 1px black;
+          text-shadow: 2px 2px 10px black;
         }
       }
-      /*  .days-container {
+      /* .days-container {
         width: 100%;
         display: flex;
         flex-wrap: wrap;
