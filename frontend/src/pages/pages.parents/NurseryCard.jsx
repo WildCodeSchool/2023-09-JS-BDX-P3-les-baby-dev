@@ -10,6 +10,7 @@ import {
 } from "mdb-react-ui-kit";
 import { Link, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
+import imageDefault from "../../assets/defaultImage.png";
 
 function NurseryCard() {
   const [scrollableModal, setScrollableModal] = useState(false);
@@ -191,6 +192,9 @@ function NurseryCard() {
         <h1>Créche {creche.name}</h1>
         <h2>{creche.name}</h2>
         <div className="infos_card">
+          <div className="picture_card">
+            <img alt={creche.name} src={creche.avatarPath || imageDefault} />
+          </div>
           <div className="description_card">
             <h3>3/5</h3>
             <h4>Description</h4>
