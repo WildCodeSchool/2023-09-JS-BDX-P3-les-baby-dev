@@ -1,8 +1,10 @@
-import axios from "axios";
-import { useRef } from "react";
+// import axios from "axios";
+import { useRef, useState } from "react";
+import PropTypes from "prop-types";
 import { MDBFileUpload } from "mdb-react-file-upload";
 import {
   MDBBtn,
+  MDBSpinner,
   MDBTextArea,
   MDBValidation,
   MDBValidationItem,
@@ -10,19 +12,47 @@ import {
 import { useStructure } from "../../context/StrucutreContext";
 import "./secondStep.scss";
 
-function SecondStep() {
-  const { data, onChange, onChangeFiles } = useStructure();
+function SecondStep({ nextRef, prevRef }) {
+  const [loading, setLoading] = useState(false);
+
+  const { newData, onChange, onChangeFiles, data } = useStructure();
   const inputRef = useRef();
   const maxLength = 500;
-  const descriptionLength = data.description ? data.description.length : 0;
+  const descriptionLength = newData.description
+    ? newData.description.length
+    : 0;
 
-  const handleSubmitFiles = (event) => {
-    event.preventDefault();
+  const { handleSubmit } = useStructure();
 
-    const formData = new FormData();
-    formData.append("avatar", inputRef.current.files[0]);
-    axios.post("http://localhost:3310/api/avatar", formData);
+  // const handleSubmitFiles = (event) => {
+  //   event.preventDefault();
+
+  //   const formData = new FormData();
+  //   formData.append("avatar", inputRef.current.files[0]);
+  //   axios.put("http://localhost:3310/api/avatar", formData);
+  // };
+
+  const validateSecondStep = () => {
+    // const isFileValid = inputRef.current.files.length > 0;
+    const isDescValid = newData.stuctureDesc;
+
+    const isValid = isDescValid;
+
+    if (isValid) {
+      setLoading(true);
+      setTimeout(() => {
+        handleSubmit();
+        // handleSubmitFiles();
+
+        nextRef.current.click();
+        setLoading(false);
+      }, 1000);
+    } else {
+      // eslint-disable-next-line no-alert
+      alert("Les champs ne sont pas valides");
+    }
   };
+
   return (
     <div className="fifty">
       <div className="step2">
@@ -40,7 +70,7 @@ function SecondStep() {
                 />
                 <MDBBtn
                   type="button"
-                  onClick={handleSubmitFiles}
+                  // onClick={handleSubmitFiles}
                   className="filebtn"
                 >
                   Enregister
@@ -68,7 +98,7 @@ function SecondStep() {
                   id="textAreaExample"
                   maxLength={maxLength}
                   rows={4}
-                  value={data.description}
+                  value={data.stuctureDesc ?? newData.description}
                   onChange={onChange}
                   name="stuctureDesc"
                   required
@@ -78,6 +108,17 @@ function SecondStep() {
             <legend>
               Maximum {`${maxLength - descriptionLength}`} caractères.
             </legend>
+            <MDBBtn type="button" onClick={validateSecondStep}>
+              {loading ? "" : "suivant"}
+              {loading && (
+                <MDBSpinner role="status" size="sml">
+                  <span className="visually-hidden">loading...</span>
+                </MDBSpinner>
+              )}
+            </MDBBtn>
+            <MDBBtn type="button" onClick={() => prevRef.current.click()}>
+              précédent
+            </MDBBtn>
           </div>
         </div>
       </div>
@@ -95,5 +136,16 @@ function SecondStep() {
     </div>
   );
 }
+
+SecondStep.propTypes = {
+  nextRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]).isRequired,
+  prevRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]).isRequired,
+};
 
 export default SecondStep;

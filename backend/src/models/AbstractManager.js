@@ -4,10 +4,7 @@
 // Provide database access through AbstractManager class
 class AbstractManager {
   constructor({ table }) {
-    // Store the table name
     this.table = table;
-
-    // Provide access to the database client
   }
 
   setDatabase(database) {
@@ -37,5 +34,4 @@ class AbstractManager {
   }
 }
 
-// Ready to export
 module.exports = AbstractManager;

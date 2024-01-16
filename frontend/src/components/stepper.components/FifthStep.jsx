@@ -1,13 +1,26 @@
-import { MDBSwitch } from "mdb-react-ui-kit";
-import React from "react";
+import { MDBBtn, MDBSpinner, MDBSwitch } from "mdb-react-ui-kit";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
 import { useStructure } from "../../context/StrucutreContext";
 import "./fifthStep.scss";
 
-function FifthStep() {
-  const { data, updateAllDays } = useStructure();
+function FifthStep({ nextRef, prevRef }) {
+  const [loading, setLoading] = useState(false);
+
+  const { dataSchedules, updateAllDays, handleSubmitSchedules } =
+    useStructure();
+
+  const validateFifthStep = () => {
+    setLoading(true);
+    setTimeout(() => {
+      handleSubmitSchedules();
+      nextRef.current.click();
+      setLoading(false);
+    }, 1000);
+  };
 
   const handleSwitch = (key) => {
-    updateAllDays(key, !data.schedules[key]);
+    updateAllDays(key, !dataSchedules[key]);
   };
 
   return (
@@ -58,7 +71,7 @@ function FifthStep() {
                 type="time"
                 name="openHour"
                 step="300"
-                value={data.schedules.openHour}
+                value={dataSchedules.openHour}
                 onChange={(e) => updateAllDays("openHour", e.target.value)}
                 onBlur={(e) => updateAllDays("openHour", e.target.value)}
               />
@@ -69,13 +82,24 @@ function FifthStep() {
                 type="time"
                 name="closeHour"
                 step="300"
-                value={data.schedules.closeHour}
+                value={dataSchedules.closeHour}
                 onChange={(e) => updateAllDays("closeHour", e.target.value)}
                 onBlur={(e) => updateAllDays("closeHour", e.target.value)}
               />
             </div>
           </div>
         </div>
+        <MDBBtn type="button" onClick={validateFifthStep}>
+          {loading ? "" : "suivant"}
+          {loading && (
+            <MDBSpinner role="status" size="sml">
+              <span className="visually-hidden">loading...</span>
+            </MDBSpinner>
+          )}
+        </MDBBtn>
+        <MDBBtn type="button" onClick={() => prevRef.current.click()}>
+          précédent
+        </MDBBtn>
       </div>
       <div className="greyBg">
         <div className="infoRegisterCard">
@@ -90,5 +114,16 @@ function FifthStep() {
     </div>
   );
 }
+
+FifthStep.propTypes = {
+  nextRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]).isRequired,
+  prevRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]).isRequired,
+};
 
 export default FifthStep;

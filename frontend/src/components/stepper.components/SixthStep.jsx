@@ -1,44 +1,55 @@
-import { MDBSwitch } from "mdb-react-ui-kit";
-import React from "react";
+import { MDBBtn, MDBSpinner, MDBSwitch } from "mdb-react-ui-kit";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
 import { useStructure } from "../../context/StrucutreContext";
 import "./sixthStep.scss";
 
-function SixthStep() {
-  const { data, updateAmenities } = useStructure();
+function SixthStep({ nextRef, prevRef }) {
+  const { newData, updateAmenities, handleSubmit, data } = useStructure();
+  const [loading, setLoading] = useState(false);
+
+  const validateSixthStep = () => {
+    setLoading(true);
+    setTimeout(() => {
+      handleSubmit();
+      nextRef.current.click();
+      setLoading(false);
+    }, 1000);
+  };
 
   const handleMaxPlacesChange = (newValue) => {
     // Mise à jour de maxPlaces
     updateAmenities("maxPlaces", newValue);
 
     // Mise à jour des autres champs en fonction de la nouvelle valeur de maxPlaces
-    const updatedMaxHandicap = Math.min(data.amenities.maxHandicap, newValue);
+    const updatedMaxHandicap = Math.min(newData.maxHandicap, newValue);
     const updatedMaxUnder18Months = Math.min(
-      data.amenities.maxUnder18Months,
+      newData.maxUnder18Months,
       newValue
     );
     const updatedMaxAtypicalHours = Math.min(
-      data.amenities.maxAtypicalHours,
+      newData.maxAtypicalHours,
       newValue
     );
-    const updatedMaxNightCare = Math.min(data.amenities.maxNightCare, newValue);
+    const updatedMaxNightCare = Math.min(newData.maxNightCare, newValue);
 
     // Vérifiez si le champ maxHandicap est désactivé et ajustez la valeur en conséquence
-    const actualMaxHandicapValue = !data.amenities.isHandicapEnabled
+    const actualMaxHandicapValue = !newData.isHandicapEnabled
       ? ""
       : updatedMaxHandicap;
 
     // Vérifiez si le champ maxUnder18Months est désactivé et ajustez la valeur en conséquence
-    const actualMaxUnder18MonthsValue = !data.amenities.isUnder18MonthsEnabled
+    const actualMaxUnder18MonthsValue = !newData.isUnder18MonthsEnabled
       ? ""
       : updatedMaxUnder18Months;
 
     // Vérifiez si le champ maxAtypicalHours est désactivé et ajustez la valeur en conséquence
-    const actualMaxAtypicalHoursValue = !data.amenities.isAtypicalHoursEnabled
+    const actualMaxAtypicalHoursValue = !newData.isAtypicalHoursEnabled
       ? ""
       : updatedMaxAtypicalHours;
 
     // Vérifiez si le champ maxNightCare est désactivé et ajustez la valeur en conséquence
-    const actualMaxNightCareValue = !data.amenities.isNightCareEnabled
+    const actualMaxNightCareValue = !newData.isNightCareEnabled
       ? ""
       : updatedMaxNightCare;
 
@@ -49,29 +60,25 @@ function SixthStep() {
   };
 
   const handleMaxChildInputChange = (fieldName, value) => {
-    // Limitez la valeur du champ à la valeur de maxPlaces
-    const updatedValue =
-      value === "" ? "" : Math.min(value, data.amenities.maxPlaces);
+    const updatedValue = value === "" ? "" : Math.min(value, newData.maxPlaces);
 
-    // Vérifiez si le champ est désactivé et ajustez la valeur en conséquence
     const actualValue =
-      fieldName === "maxHandicap" && !data.amenities.isHandicapEnabled
+      fieldName === "maxHandicap" && !newData.isHandicapEnabled
         ? ""
         : updatedValue;
     const updatedValueAfterDisabledCheck =
-      fieldName === "maxUnder18Months" && !data.amenities.isUnder18MonthsEnabled
+      fieldName === "maxUnder18Months" && !newData.isUnder18MonthsEnabled
         ? ""
         : actualValue;
     const updatedValueAfterDisabledCheck2 =
-      fieldName === "maxAtypicalHours" && !data.amenities.isAtypicalHoursEnabled
+      fieldName === "maxAtypicalHours" && !newData.isAtypicalHoursEnabled
         ? ""
         : updatedValueAfterDisabledCheck;
     const updatedValueAfterDisabledCheck3 =
-      fieldName === "maxNightCare" && !data.amenities.isNightCareEnabled
+      fieldName === "maxNightCare" && !newData.isNightCareEnabled
         ? ""
         : updatedValueAfterDisabledCheck2;
 
-    // Mettez à jour les données avec la valeur ajustée
     updateAmenities(fieldName, updatedValueAfterDisabledCheck3);
   };
 
@@ -87,7 +94,7 @@ function SixthStep() {
                 type="number"
                 min="1"
                 name="maxPlaces"
-                value={data.amenities.maxPlaces}
+                value={data.maxPlaces ?? newData.maxPlaces}
                 onChange={(e) => handleMaxPlacesChange(e.target.value)}
               />
               &nbsp;place(s)
@@ -102,22 +109,20 @@ function SixthStep() {
               id="handicapEnabled"
               label="Enfant handicapé"
               onChange={() =>
-                updateAmenities(
-                  "isHandicapEnabled",
-                  !data.amenities.isHandicapEnabled
-                )
+                updateAmenities("isHandicapEnabled", !newData.isHandicapEnabled)
               }
+              value={data.isHandicapEnabled}
             />
             <input
               type="number"
               min="0"
-              max={data.amenities.maxPlaces}
+              max={newData.maxPlaces}
               name="maxHandicap"
-              value={data.amenities.maxHandicap}
+              value={data.maxHandicap ?? newData.maxHandicap}
               onChange={(e) =>
                 handleMaxChildInputChange("maxHandicap", e.target.value)
               }
-              disabled={!data.amenities.isHandicapEnabled}
+              disabled={!newData.isHandicapEnabled}
             />
           </div>
           <div>
@@ -127,20 +132,20 @@ function SixthStep() {
               onChange={() =>
                 updateAmenities(
                   "isUnder18MonthsEnabled",
-                  !data.amenities.isUnder18MonthsEnabled
+                  !newData.isUnder18MonthsEnabled
                 )
               }
             />
             <input
               type="number"
               min="0"
-              max={data.amenities.maxPlaces}
+              max={newData.maxPlaces}
               name="maxUnder18Month"
-              value={data.amenities.maxUnder18Months}
+              value={data.maxUnder18Months ?? newData.maxUnder18Months}
               onChange={(e) =>
                 handleMaxChildInputChange("maxUnder18Months", e.target.value)
               }
-              disabled={!data.amenities.isUnder18MonthsEnabled}
+              disabled={!newData.isUnder18MonthsEnabled}
             />
           </div>
           <div>
@@ -150,20 +155,20 @@ function SixthStep() {
               onChange={() =>
                 updateAmenities(
                   "isAtypicalHoursEnabled",
-                  !data.amenities.isAtypicalHoursEnabled
+                  !newData.isAtypicalHoursEnabled
                 )
               }
             />
             <input
               type="number"
               min="0"
-              max={data.amenities.maxPlaces}
+              max={newData.maxPlaces}
               name="maxAtypicalHours"
-              value={data.amenities.maxAtypicalHours}
+              value={data.maxAtypicalHours ?? newData.maxAtypicalHours}
               onChange={(e) =>
                 handleMaxChildInputChange("maxAtypicalHours", e.target.value)
               }
-              disabled={!data.amenities.isAtypicalHoursEnabled}
+              disabled={!newData.isAtypicalHoursEnabled}
             />
           </div>
           <div>
@@ -173,23 +178,34 @@ function SixthStep() {
               onChange={() =>
                 updateAmenities(
                   "isNightCareEnabled",
-                  !data.amenities.isNightCareEnabled
+                  !newData.isNightCareEnabled
                 )
               }
             />
             <input
               type="number"
               min="0"
-              max={data.amenities.maxPlaces}
+              max={newData.maxPlaces}
               name="maxNightCare"
-              value={data.amenities.maxNightCare}
+              value={data.maxNightCare ?? newData.maxNightCare}
               onChange={(e) =>
                 handleMaxChildInputChange("maxNightCare", e.target.value)
               }
-              disabled={!data.amenities.isNightCareEnabled}
+              disabled={!newData.isNightCareEnabled}
             />
           </div>
         </div>
+        <MDBBtn type="button" onClick={validateSixthStep}>
+          {loading ? "" : "suivant"}
+          {loading && (
+            <MDBSpinner role="status" size="sml">
+              <span className="visually-hidden">loading...</span>
+            </MDBSpinner>
+          )}
+        </MDBBtn>
+        <MDBBtn type="button" onClick={() => prevRef.current.click()}>
+          précédent
+        </MDBBtn>
       </div>
       <div className="greyBg">
         <div className="infoRegisterCard">
@@ -205,5 +221,16 @@ function SixthStep() {
     </div>
   );
 }
+
+SixthStep.propTypes = {
+  nextRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]).isRequired,
+  prevRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]).isRequired,
+};
 
 export default SixthStep;

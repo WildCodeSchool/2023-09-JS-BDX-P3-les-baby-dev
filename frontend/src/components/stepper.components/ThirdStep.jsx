@@ -1,16 +1,21 @@
+import { useState } from "react";
+import PropTypes from "prop-types";
 import { MDBFileUpload } from "mdb-react-file-upload";
 import {
   MDBBtn,
   MDBInput,
+  MDBSpinner,
   MDBValidation,
   MDBValidationItem,
 } from "mdb-react-ui-kit";
+import { useStructure } from "../../context/StrucutreContext";
 // import React, { useState } from "react";
 import "./thirdStep.scss";
-import { useStructure } from "../../context/StrucutreContext";
 
-function ThirdStep() {
-  const { data, setData } = useStructure();
+function ThirdStep({ nextRef, prevRef }) {
+  const [loading, setLoading] = useState(false);
+
+  const { newData, setData } = useStructure();
   const HandleAdd = () => {
     const newEmployee = {
       files: "",
@@ -24,6 +29,14 @@ function ThirdStep() {
       ...prevData,
       employees: [...prevData.employees, newEmployee],
     }));
+  };
+
+  const validateThirdStep = () => {
+    setLoading(true);
+    setTimeout(() => {
+      nextRef.current.click();
+      setLoading(false);
+    }, 1000);
   };
 
   const handleChange = (value, i, propertyName) => {
@@ -44,8 +57,8 @@ function ThirdStep() {
   return (
     <div className="fifty">
       <div className="step3">
-        {data.employees &&
-          data.employees.map((employee, i) => (
+        {newData.employees &&
+          newData.employees.map((employee, i) => (
             <div key={`${i + 1}`} className="photoContainer">
               <div className="fileUpload">
                 <MDBFileUpload
@@ -123,7 +136,7 @@ function ThirdStep() {
                   </MDBValidationItem>
                 </MDBValidation>
               </div>
-              {data.employees.length > 0 && (
+              {newData.employees.length > 0 && (
                 <MDBBtn type="submit" onClick={() => handleDelete(i)}>
                   x
                 </MDBBtn>
@@ -133,6 +146,17 @@ function ThirdStep() {
         <div className="addbtn">
           <MDBBtn type="submit" onClick={HandleAdd}>
             ajouter un employé
+          </MDBBtn>
+          <MDBBtn type="button" onClick={validateThirdStep}>
+            {loading ? "" : "suivant"}
+            {loading && (
+              <MDBSpinner role="status" size="sml">
+                <span className="visually-hidden">loading...</span>
+              </MDBSpinner>
+            )}
+          </MDBBtn>
+          <MDBBtn type="button" onClick={() => prevRef.current.click()}>
+            précédent
           </MDBBtn>
         </div>
       </div>
@@ -152,5 +176,16 @@ function ThirdStep() {
     </div>
   );
 }
+
+ThirdStep.propTypes = {
+  nextRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]).isRequired,
+  prevRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]).isRequired,
+};
 
 export default ThirdStep;
