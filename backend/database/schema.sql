@@ -24,7 +24,7 @@ DROP TABLE if EXISTS structure;
 CREATE TABLE
     if NOT exists structure (
         id int primary key auto_increment not null,
-      /*  user_id INT NOT NULL, */
+        /*  user_id INT NOT NULL, */
         name VARCHAR(255),
         tel VARCHAR(10),
         adress VARCHAR(255),
@@ -45,7 +45,7 @@ CREATE TABLE
         bilingue BOOLEAN DEFAULT 0,
         bibli BOOLEAN DEFAULT 0,
         transport BOOLEAN DEFAULT 0,
-        maxplace int DEFAULT 1,
+        maxPlace int DEFAULT 1,
         maxHandicap int DEFAULT 0,
         maxUnder18Months int DEFAULT 0,
         maxAtypicalHours int DEFAULT 0,
@@ -59,13 +59,32 @@ CREATE TABLE
         isMedicationAdminRequired BOOLEAN DEFAULT 0
     );
 
-/*ALTER TABLE structure
+ALTER TABLE structure CHANGE COLUMN maxplace maxPlaces INT DEFAULT 1;
+
+ALTER TABLE structure CHANGE COLUMN pcsi psci INT DEFAULT 1;
+
+ALTER TABLE structure ADD COLUMN isHandicapEnabled BOOLEAN DEFAULT 0;
+
+ALTER TABLE structure
 ADD
-    CONSTRAINT `fk_user_id` FOREIGN KEY (user_id) REFERENCES user(id); */
+    COLUMN isUnder18MonthsEnabled BOOLEAN DEFAULT 0;
+
+ALTER TABLE structure
+ADD
+    COLUMN isAtypicalHoursEnabled BOOLEAN DEFAULT 0;
+
+ALTER TABLE structure
+ADD
+    COLUMN isNightCareEnabled BOOLEAN DEFAULT 0;
+
+ALTER TABLE structure
+    /*ALTER TABLE structure
+     ADD
+     CONSTRAINT `fk_user_id` FOREIGN KEY (user_id) REFERENCES user(id); */
 
 insert into
     structure (
-     /*   user_id, */
+        /*   user_id, */
         name,
         tel,
         adress,
@@ -73,7 +92,7 @@ insert into
         city
     )
 values (
-      /*  1, */
+        /*  1, */
         'daamn',
         '0678252910',
         '17 rue gambetta',
@@ -85,8 +104,7 @@ values (
         '17 rue ailleurs',
         '33130',
         'Bordeaux'
-    ),
-    (
+    ), (
         'Vic',
         '0678252910',
         '17 rue ailleurs',
@@ -94,12 +112,12 @@ values (
         'Biarritz'
     );
 
-    DROP TABLE if EXISTS parent;
+DROP TABLE if EXISTS parent;
 
 CREATE TABLE
     IF NOT EXISTS parent (
         id int primary key auto_increment not null,
-       /* user_id INT NOT NULL, */
+        /* user_id INT NOT NULL, */
         name VARCHAR(255) NOT NULL,
         profession VARCHAR(255) NULL,
         address VARCHAR(255) NOT NULL,
@@ -116,19 +134,19 @@ CREATE TABLE
     );
 
 /* ALTER TABLE parent
-ADD
-    CONSTRAINT `fk_user_id` FOREIGN KEY (user_id) REFERENCES user(id); */
+ ADD
+ CONSTRAINT `fk_user_id` FOREIGN KEY (user_id) REFERENCES user(id); */
 
-    insert into
+insert into
     parent (
-     /*   user_id, */
+        /*   user_id, */
         name,
         profession,
         address,
         telephone
     )
 values (
-      /*  1, */
+        /*  1, */
         'daamn',
         'Ambulancier',
         '17 rue gambetta',
@@ -138,8 +156,7 @@ values (
         'Pompier',
         '17 rue ailleurs',
         '33130'
-    ),
-    (
+    ), (
         'Vic',
         'Garagiste',
         '17 rue ailleurs',
@@ -151,22 +168,23 @@ DROP TABLE if EXISTS reservation;
 CREATE TABLE
     IF NOT EXISTS reservation (
         id int primary key auto_increment not null,
-       /* structure_id INT NOT NULL,
-        parent_id INT NOT NULL, */
+        /* structure_id INT NOT NULL,
+         parent_id INT NOT NULL, */
         picture VARCHAR(255),
         name VARCHAR(255) NOT NULL,
         dayResa VARCHAR(10) NOT NULL,
         startHour TIME NOT NULL,
-        finishHour TIME NOT NULL, -- FOREIGN KEY (structure_id) REFERENCES structure (id)
+        finishHour TIME NOT NULL,
+        -- FOREIGN KEY (structure_id) REFERENCES structure (id)
         price INT,
         status VARCHAR(255)
-     /*   FOREIGN KEY (structure_id) REFERENCES structure(id),
-        FOREIGN KEY (parent_id) REFERENCES parent(id) */
+        /*   FOREIGN KEY (structure_id) REFERENCES structure(id),
+         FOREIGN KEY (parent_id) REFERENCES parent(id) */
     );
 
-        insert into
-        reservation (
-     /*   user_id, */
+insert into
+    reservation (
+        /*   user_id, */
         picture,
         name,
         dayResa,
@@ -189,16 +207,15 @@ values (
         'mercredi',
         '10:00:00',
         '19:00:00',
-         2,
+        2,
         'En attente'
-    ),
-    (
+    ), (
         'https://mdbootstrap.com/img/new/avatars/2.jpg',
         'Victor',
         'jeudi',
         '07:00:00',
         '16:00:00',
-         4,
+        4,
         'Refusé'
     );
 
@@ -208,7 +225,12 @@ CREATE TABLE
     IF NOT EXISTS hours (
         id int primary key auto_increment not null,
         structure_id INT NOT NULL,
-        day VARCHAR(10) NOT NULL,
+        monday BOOLEAN DEFAULT 0,
+        tuesday BOOLEAN DEFAULT 0,
+        wednesday BOOLEAN DEFAULT 0,
+        thursday BOOLEAN DEFAULT 0,
+        friday BOOLEAN DEFAULT 0,
+        saturday BOOLEAN DEFAULT 0,
         openHour TIME NOT NULL,
         closeHour TIME NOT NULL -- FOREIGN KEY (structure_id) REFERENCES structure (id)
     );

@@ -11,26 +11,44 @@ import {
 import { useStructure } from "../../context/StrucutreContext";
 
 function FirstStep({ nextRef }) {
-  const { data, onChange } = useStructure();
+  const { newData, onChange, data } = useStructure();
   const [loading, setLoading] = useState(false);
 
   const { handleSubmit } = useStructure();
 
-  const validateFirstStep = async () => {
-    setLoading(true);
-    // a supprimer et remplacer par axios .....
-    setTimeout(() => {
-      nextRef.current.click();
-      handleSubmit();
-      setLoading(false);
-    }, 5000);
+  const validateFirstStep = () => {
+    const isStructureNameValid = data.name;
+    const isTelValid = /^\d{10}$/.test(data.tel);
+    const isAddressValid = /^\d+\s[\w\s]+$/.test(data.adress);
+    const isZipValid = data.zip;
+    const isCityValid = data.city;
+
+    const isValid =
+      isStructureNameValid &&
+      isTelValid &&
+      isAddressValid &&
+      isZipValid &&
+      isCityValid;
+
+    if (isValid) {
+      setLoading(true);
+      setTimeout(() => {
+        handleSubmit();
+
+        nextRef.current.click();
+        setLoading(false);
+      }, 1000);
+    } else {
+      // eslint-disable-next-line no-alert
+      alert("Les champs ne sont pas valides");
+    }
   };
 
   return (
     <div className="fifty">
       <div className="step1">
         <h4>Complétez et vérifiez vos informations</h4>
-        <MDBValidation className="row g-3" isValidated>
+        <MDBValidation className="row g-3">
           <MDBValidationItem
             className="col-md-4"
             feedback="Veuillez entrer un nom valide"
@@ -38,8 +56,8 @@ function FirstStep({ nextRef }) {
             isValidated
           >
             <MDBInput
-              value={data.structureName}
-              name="structureName"
+              value={data.name ?? newData.structureName}
+              name="name"
               onChange={onChange}
               id="validationCustom01"
               pattern=".{4,}"
@@ -60,7 +78,7 @@ function FirstStep({ nextRef }) {
               name="tel"
               pattern="\d{10}"
               onChange={onChange}
-              value={data.tel}
+              value={data.tel ?? newData.tel}
               required
             />
           </MDBValidationItem>
@@ -74,10 +92,10 @@ function FirstStep({ nextRef }) {
               label="N° et nom de rue"
               id="validationCustomUsername"
               type="text"
-              name="adresse"
+              name="adress"
               pattern="^\d+\s[\w\s]+$"
               onChange={onChange}
-              value={data.address}
+              value={data.adress ?? newData.adress}
               required
             />
           </MDBValidationItem>
@@ -88,9 +106,10 @@ function FirstStep({ nextRef }) {
             isValidated
           >
             <MDBInput
-              value={data.zip}
+              value={data.zip ?? newData.zip}
               name="zip"
               onChange={onChange}
+              pattern="^\d{5}$"
               id="validationCustom05"
               required
               label="Code postal"
@@ -103,23 +122,23 @@ function FirstStep({ nextRef }) {
             isValidated
           >
             <MDBInput
-              value={data.city}
-              name="ville"
+              value={data.city ?? newData.ville}
+              name="city"
               onChange={onChange}
               id="validationCustom03"
               required
               label="Ville"
             />
           </MDBValidationItem>
-          <MDBBtn type="submit" onClick={validateFirstStep}>
-            {loading ? "" : "next"}
-            {loading && (
-              <MDBSpinner role="status">
-                <span className="visually-hidden">loading...</span>
-              </MDBSpinner>
-            )}
-          </MDBBtn>
         </MDBValidation>
+        <MDBBtn type="button" onClick={validateFirstStep}>
+          {loading ? "" : "suivant"}
+          {loading && (
+            <MDBSpinner role="status" size="sml">
+              <span className="visually-hidden">loading...</span>
+            </MDBSpinner>
+          )}
+        </MDBBtn>
       </div>
       <div className="greyBg">
         <div className="infoRegisterCard">
@@ -136,9 +155,7 @@ function FirstStep({ nextRef }) {
 
 FirstStep.propTypes = {
   nextRef: PropTypes.oneOfType([
-    // Either a function
     PropTypes.func,
-    // Or the instance of a DOM native element (see the note about SSR)
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]).isRequired,
 };
