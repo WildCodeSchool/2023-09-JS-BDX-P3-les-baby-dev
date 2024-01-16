@@ -24,7 +24,7 @@ DROP TABLE if EXISTS structure;
 CREATE TABLE
     if NOT exists structure (
         id int primary key auto_increment not null,
-        /*  user_id INT NOT NULL, */
+        user_id INT NOT NULL,
         name VARCHAR(255),
         tel VARCHAR(10),
         adress VARCHAR(255),
