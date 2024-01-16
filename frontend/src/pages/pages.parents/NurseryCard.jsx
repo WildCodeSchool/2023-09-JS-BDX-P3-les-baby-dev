@@ -8,7 +8,7 @@ import {
   MDBModalBody,
   MDBModalFooter,
 } from "mdb-react-ui-kit";
-import { Link /* useParams */ } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import imageDefault from "../../assets/defaultImage.png";
 import { useParent } from "../../context/ParentContext";
@@ -18,35 +18,11 @@ function NurseryCard() {
 
   const { creche } = useParent();
 
-  /* const { id } = useParams();
-  const [creche, setCreche] = useState(null);
+  const navigate = useNavigate();
 
-
-  useEffect(() => {
-    const fetchDataCreche = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:3310/api/structure/${id}`
-        );
-        if (!response.ok) {
-          throw new Error("Erreur lors de la récupération des données");
-        }
-        const data = await response.json();
-        setCreche(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchDataCreche();
-  }, [id]); 
-
-  if (!creche) {
-    // Ajoutez une vérification pour éviter d'accéder à creche si elle est undefined
-    return null;
-  }
-
-  */
+  const handleNavigate = (crecheId) => {
+    navigate(`/searchlist/nursery/${crecheId}/reservation`);
+  };
 
   return (
     /* 
@@ -183,9 +159,9 @@ function NurseryCard() {
                     >
                       Close
                     </MDBBtn>
-                    <Link to="/searchlist/reservation">
-                      <MDBBtn>J'ai compris</MDBBtn>
-                    </Link>
+                    <MDBBtn onClick={() => handleNavigate(creche.id)}>
+                      J'ai compris
+                    </MDBBtn>
                   </MDBModalFooter>
                 </MDBModalContent>
               </MDBModalDialog>

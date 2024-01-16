@@ -7,6 +7,7 @@ import {
 } from "mdb-react-ui-kit";
 import "./reservation.scss";
 import { Link } from "react-router-dom";
+import imageDefault from "../../../assets/defaultImage.png";
 import { useParent } from "../../../context/ParentContext";
 
 function Reservation() {
@@ -40,13 +41,13 @@ function Reservation() {
   return (
     <div className="reservation_container">
       <div key={creche.id}>
-        <h1>{creche.name}</h1>
+        <h1>Créche {creche.name}</h1>
         <div className="card_reservation">
           <div className="picture_card">
-            <img src={creche.imageLink} alt={creche.name} />
+            <img src={creche.avatarPath || imageDefault} alt={creche.name} />
           </div>
           <h2>Demande de réservation</h2>
-          <h3>{creche.name}</h3>
+          <h3>Créche {creche.name}</h3>
           <MDBValidation>
             <div className="time_resa">
               <ul>

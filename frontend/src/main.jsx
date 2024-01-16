@@ -81,7 +81,7 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: "/searchlist/reservation",
+            path: "/searchlist/nursery/:id/reservation",
             element: (
               <ParentContextProvider>
                 <Reservation />

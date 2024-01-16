@@ -14,6 +14,7 @@ import {
   MDBTableBody,
 } from "mdb-react-ui-kit";
 import Babyplace from "../../assets/Babyplace.svg";
+import { useUser } from "../../context/UserContext";
 
 export default function App() {
   const [colorOpen, setColorOpen] = useState(true);
@@ -22,6 +23,7 @@ export default function App() {
   // const [color, setColor] = useState("primary");
   const [filter, setFilter] = useState("Tous");
   const [resaData, setResaData] = useState([]);
+  const { logout } = useUser();
 
   /* const data = [
     {
@@ -235,6 +237,7 @@ export default function App() {
                 <MDBSideNavCollapse open={colorCollapse2}>
                   <MDBSideNavLink>Modifier ma structure</MDBSideNavLink>
                   <MDBSideNavLink>Paramètre</MDBSideNavLink>
+                  <MDBSideNavLink onClick={logout}>Déconnextion</MDBSideNavLink>
                 </MDBSideNavCollapse>
               </MDBSideNavItem>
             </MDBSideNavMenu>
