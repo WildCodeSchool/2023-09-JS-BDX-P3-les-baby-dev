@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { useUser } from "./UserContext";
@@ -7,6 +7,9 @@ import { useUser } from "./UserContext";
 const StructureContext = createContext();
 
 function StructureContextProvider({ children }) {
+  const structureData = useLoaderData();
+  const { data } = structureData.preloadUserStructure;
+  // const [oldData, setOldData] = useState(data);
   const { user } = useUser();
   const navigate = useNavigate();
 
@@ -18,69 +21,76 @@ function StructureContextProvider({ children }) {
     return undefined;
   }, [user]);
 
-  const [data, setData] = useState({
-    schedules: {
-      monday: false,
-      tuesday: false,
-      wednesday: false,
-      thursday: false,
-      friday: false,
-      saturday: false,
-    },
-    amenities: {
-      maxPlaces: 1,
-      isHandicapEnabled: false,
-      maxHandicap: 0,
-      isUnder18MonthsEnabled: false,
-      maxUnder18Months: 0,
-      isAtypicalHoursEnabled: false,
-      maxAtypicalHours: 0,
-      isNightCareEnabled: false,
-      maxNightCare: 0,
-    },
-    employees: [],
+  const [newData, setData] = useState({
+    maxPlaces: 1,
+    isHandicapEnabled: false,
+    maxHandicap: 0,
+    isUnder18MonthsEnabled: false,
+    maxUnder18Months: 0,
+    isAtypicalHoursEnabled: false,
+    maxAtypicalHours: 0,
+    isNightCareEnabled: false,
+    maxNightCare: 0,
+  });
+
+  const [dataSchedules, setdataSchedules] = useState({
+    monday: false,
+    tuesday: false,
+    wednesday: false,
+    thursday: false,
+    friday: false,
+    saturday: false,
   });
 
   const onChange = (e) => {
     setData({
-      ...data,
+      ...newData,
       [e.target.name]:
         e.target.type === "checkbox" ? e.target.checked : e.target.value,
     });
   };
-  const onChangeFiles = (value) => {
-    if (value[0] !== data.profilPic) {
-      setData({ ...data, profilPic: value[0] });
-    }
-  };
+
+  // const onChangeFiles = (value) => {
+  //   if (value[0] !== data.profilPic) {
+  //     setData({ ...data, profilPic: value[0] });
+  //   }
+  // };
 
   const updateAllDays = (key, value) => {
-    setData({
-      ...data,
-      schedules: { ...data.schedules, [key]: value },
-    });
+    setdataSchedules((prevData) => ({
+      ...prevData,
+      [key]: value,
+    }));
   };
 
   const updateAmenities = (key, value) => {
     setData((prevData) => ({
       ...prevData,
-      amenities: { ...prevData.amenities, [key]: value },
+      [key]: value,
     }));
   };
 
-  const handleSubmit = async () => {
-    console.info(data);
-
+  const handleSubmitSchedules = async () => {
     try {
       const response = await axios.put(
-        "http://localhost:3310/api/structure/inscription",
-        data
+        `http://localhost:3310/api/structure/${data.id}/adaptation/hours`,
+        dataSchedules
       );
 
       console.info(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-      // if (response.data.success) {
-      // }
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:3310/api/structure/${structureData.preloadUserStructure.data.id}/adaptation`,
+        newData
+      );
+
+      console.info(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -89,21 +99,27 @@ function StructureContextProvider({ children }) {
   const contextStructureValue = useMemo(
     () => ({
       handleSubmit,
+      handleSubmitSchedules,
+      newData,
       data,
       setData,
       onChange,
-      onChangeFiles,
+      // onChangeFiles,
       updateAllDays,
       updateAmenities,
+      dataSchedules,
     }),
     [
       handleSubmit,
+      handleSubmitSchedules,
+      newData,
       data,
       setData,
       onChange,
-      onChangeFiles,
+      // onChangeFiles,
       updateAllDays,
       updateAmenities,
+      dataSchedules,
     ]
   );
 

@@ -24,7 +24,6 @@ router.get("/users/myprofil", authMiddleware, userControllers.getProfile);
 router.post("/users", userControllers.addUser);
 router.post("/login", userControllers.postLogin);
 
-router.put("/structure/inscription", structureControllers.postStructure);
 router.get("/structure", structureControllers.getStructure);
 
 router.put(

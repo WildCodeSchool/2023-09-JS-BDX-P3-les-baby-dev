@@ -45,7 +45,7 @@ CREATE TABLE
         bilingue BOOLEAN DEFAULT 0,
         bibli BOOLEAN DEFAULT 0,
         transport BOOLEAN DEFAULT 0,
-        maxplace int DEFAULT 1,
+        maxPlace int DEFAULT 1,
         maxHandicap int DEFAULT 0,
         maxUnder18Months int DEFAULT 0,
         maxAtypicalHours int DEFAULT 0,
@@ -58,6 +58,24 @@ CREATE TABLE
         isJewelryRemovalRequired BOOLEAN DEFAULT 0,
         isMedicationAdminRequired BOOLEAN DEFAULT 0
     );
+
+ALTER TABLE structure CHANGE COLUMN maxplace maxPlaces INT DEFAULT 1;
+
+ALTER TABLE structure CHANGE COLUMN pcsi psci INT DEFAULT 1;
+
+ALTER TABLE structure ADD COLUMN isHandicapEnabled BOOLEAN DEFAULT 0;
+
+ALTER TABLE structure
+ADD
+    COLUMN isUnder18MonthsEnabled BOOLEAN DEFAULT 0;
+
+ALTER TABLE structure
+ADD
+    COLUMN isAtypicalHoursEnabled BOOLEAN DEFAULT 0;
+
+ALTER TABLE structure
+ADD
+    COLUMN isNightCareEnabled BOOLEAN DEFAULT 0;
 
 ALTER TABLE structure
 ADD
@@ -87,7 +105,12 @@ CREATE TABLE
     IF NOT EXISTS hours (
         id int primary key auto_increment not null,
         structure_id INT NOT NULL,
-        day VARCHAR(10) NOT NULL,
+        monday BOOLEAN DEFAULT 0,
+        tuesday BOOLEAN DEFAULT 0,
+        wednesday BOOLEAN DEFAULT 0,
+        thursday BOOLEAN DEFAULT 0,
+        friday BOOLEAN DEFAULT 0,
+        saturday BOOLEAN DEFAULT 0,
         openHour TIME NOT NULL,
         closeHour TIME NOT NULL -- FOREIGN KEY (structure_id) REFERENCES structure (id)
     );

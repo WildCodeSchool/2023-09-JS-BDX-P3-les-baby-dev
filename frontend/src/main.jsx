@@ -154,10 +154,10 @@ const router = createBrowserRouter([
         path: "/structure",
         loader: async () => {
           try {
-            const data = await apiService.get(
+            const structureData = await apiService.get(
               `http://localhost:3310/api/users/structure`
             );
-            return { preloadUserStructure: data ?? null };
+            return { preloadUserStructure: structureData ?? null };
           } catch (error) {
             console.error(error.message);
             return null;

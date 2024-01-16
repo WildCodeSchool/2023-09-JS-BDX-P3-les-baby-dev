@@ -25,13 +25,18 @@ function StructureRegister() {
       <Navbar />
 
       <button ref={nextRef} type="button" className="d-none">
-        test
+        suivant
       </button>
       <button ref={prevRef} type="button" className="d-none">
-        test
+        précédent
       </button>
 
-      <MDBStepper type="vertical" externalNext={nextRef} externalPrev={prevRef}>
+      <MDBStepper
+        type="vertical"
+        externalNext={nextRef}
+        externalPrev={prevRef}
+        // disableHeadSteps
+      >
         <MDBStepperStep
           contentClassName="stepContent"
           headIcon={1}
@@ -41,7 +46,7 @@ function StructureRegister() {
           <FirstStep nextRef={nextRef} />
         </MDBStepperStep>
         <MDBStepperStep headIcon={2} headText="Présentation" itemId={2}>
-          <SecondStep />
+          <SecondStep nextRef={nextRef} prevRef={prevRef} />
         </MDBStepperStep>
 
         <MDBStepperStep
@@ -50,29 +55,32 @@ function StructureRegister() {
           headText="Votre équipe"
           itemId={3}
         >
-          <ThirdStep />
+          <ThirdStep nextRef={nextRef} prevRef={prevRef} />
         </MDBStepperStep>
         <MDBStepperStep
           headIcon={4}
           headText="Services et Activitées"
           itemId={4}
         >
-          <FourthStep />
+          <FourthStep nextRef={nextRef} prevRef={prevRef} />
         </MDBStepperStep>
         <MDBStepperStep headIcon={5} headText="Vos disponibilitées" itemId={5}>
-          <FifthStep />
+          <FifthStep nextRef={nextRef} prevRef={prevRef} />
         </MDBStepperStep>
         <MDBStepperStep headIcon={6} headText="Nombre de places" itemId={6}>
-          <SixthStep />
+          <SixthStep nextRef={nextRef} prevRef={prevRef} />
         </MDBStepperStep>
         <MDBStepperStep headIcon={7} headText="Règlement intérieur" itemId={7}>
-          <SeventhStep />
+          <SeventhStep nextRef={nextRef} prevRef={prevRef} />
         </MDBStepperStep>
         <MDBStepperStep headIcon={8} headText="Récapitulatif" itemId={8}>
-          <EighthStep />
+          <EighthStep prevRef={prevRef} />
           <div className="submitForm">
             <MDBBtn type="submit" onClick={handleSubmit}>
-              M'enregistrer
+              terminé
+            </MDBBtn>
+            <MDBBtn type="button" onClick={() => prevRef.current.click()}>
+              précédent
             </MDBBtn>
           </div>
         </MDBStepperStep>
