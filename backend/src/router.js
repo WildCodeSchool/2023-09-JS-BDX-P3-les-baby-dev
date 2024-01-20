@@ -15,15 +15,20 @@ const userControllers = require("./controllers/userControllers");
 const { authMiddleware } = require("./middlewares/Security/auth.middleware");
 const structureControllers = require("./controllers/structureControllers");
 const reservationControllers = require("./controllers/reservationControllers");
+const parentControllers = require("./controllers/parentControllers");
 // Route to get a list of items
 
 // Route to get a specific item by ID
+
+/* *********** Route User ************** */
 
 // Route to add a new user/stucture/parent/enfants
 router.get("/users", userControllers.getUser);
 router.get("/users/myprofil", authMiddleware, userControllers.getProfile);
 router.post("/users", userControllers.addUser);
 router.post("/login", userControllers.postLogin);
+
+/* *********** Route Structure ************** */
 
 router.get("/structure", structureControllers.getStructure);
 router.get("/structure/:id", structureControllers.getStructureById);
@@ -54,6 +59,17 @@ router.get(
   authMiddleware,
   structureControllers.getUserStructure
 );
+
+/* *********** Routes Parent ************** */
+
+router.get(
+  "/users/parent/myprofil",
+  authMiddleware,
+  parentControllers.getMyParentProfil
+);
+router.get("/users/parent", authMiddleware, parentControllers.getListParent);
+
+/* *********** Routes reservation ************** */
 
 router.get("/reservations", reservationControllers.getReservation);
 
