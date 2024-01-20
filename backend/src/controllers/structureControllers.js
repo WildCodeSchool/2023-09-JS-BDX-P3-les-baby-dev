@@ -2,88 +2,6 @@ const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 const models = require("../models");
 
-const postStructure = async (req, res) => {
-  try {
-    const {
-      structureName,
-      tel,
-      adresse,
-      zip,
-      ville,
-      stuctureDescpcsi,
-      nesting,
-      montessori,
-      handicap,
-      jardin,
-      sorties,
-      promenades,
-      eveil,
-      musique,
-      art,
-      bilingue,
-      bibli,
-      transport,
-      maxplace,
-      maxHandicap,
-      maxUnder18Months,
-      maxAtypicalHours,
-      maxNightCare,
-      isAdaptationRequired,
-      isRespectRequired,
-      isDoorRespectRequired,
-      isInfoTransmissionRequired,
-      isCleanArrivalRequired,
-      isJewelryRemovalRequired,
-      isMedicationAdminRequired,
-    } = req.body;
-
-    await models.structure.post(
-      structureName,
-      tel,
-      adresse,
-      zip,
-      ville,
-      stuctureDescpcsi,
-      nesting,
-      montessori,
-      handicap,
-      jardin,
-      sorties,
-      promenades,
-      eveil,
-      musique,
-      art,
-      bilingue,
-      bibli,
-      transport,
-      maxplace,
-      maxHandicap,
-      maxUnder18Months,
-      maxAtypicalHours,
-      maxNightCare,
-      isAdaptationRequired,
-      isRespectRequired,
-      isDoorRespectRequired,
-      isInfoTransmissionRequired,
-      isCleanArrivalRequired,
-      isJewelryRemovalRequired,
-      isMedicationAdminRequired
-    );
-
-    res.status(201).json({
-      success: true,
-      message: "Structure registered successfully",
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-      error: error.message,
-    });
-  }
-};
-
 const updateUpload = async (req, res) => {
   const { originalname, filename } = req.file;
 
@@ -109,6 +27,42 @@ const updateStructure = async (req, res) => {
     res.status(201).json({
       success: true,
       message: "Structure registered successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      error: error.message,
+    });
+  }
+};
+
+const updateHours = async (req, res) => {
+  try {
+    await models.hours.update(+req.params.id, req.body);
+
+    res.status(201).json({
+      success: true,
+      message: "Hours registered successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      error: error.message,
+    });
+  }
+};
+
+const updateEmployee = async (req, res) => {
+  try {
+    await models.employee.update(+req.params.id, req.body);
+
+    res.status(201).json({
+      success: true,
+      message: "Hours registered successfully",
     });
   } catch (error) {
     console.error(error);
@@ -165,10 +119,11 @@ const getStructureById = (req, res) => {
 };
 
 module.exports = {
-  postStructure,
   updateStructure,
   updateUpload,
   getUserStructure,
   getStructure,
   getStructureById,
+  updateHours,
+  updateEmployee,
 };

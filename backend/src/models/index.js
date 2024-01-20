@@ -31,13 +31,20 @@ const models = {};
 const UserManager = require("./UserManager");
 const StuctureManager = require("./StructureManager");
 const ReservationManager = require("./ReservationManager");
+const HoursManager = require("./HoursManager");
+const EmployeeManager = require("./EmployeeManager");
 
 models.user = new UserManager();
 models.structure = new StuctureManager();
 models.reservation = new ReservationManager();
+models.hours = new HoursManager();
+models.employee = new EmployeeManager();
+
 models.user.setDatabase(pool);
 models.structure.setDatabase(pool);
 models.reservation.setDatabase(pool);
+models.hours.setDatabase(pool);
+models.employee.setDatabase(pool);
 
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model

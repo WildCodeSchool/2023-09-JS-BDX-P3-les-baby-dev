@@ -11,7 +11,7 @@ import {
 import { useStructure } from "../../context/StrucutreContext";
 
 function FirstStep({ nextRef }) {
-  const { newData, onChange, data } = useStructure();
+  const { onChange, data } = useStructure();
   const [loading, setLoading] = useState(false);
 
   const { handleSubmit } = useStructure();
@@ -56,7 +56,7 @@ function FirstStep({ nextRef }) {
             isValidated
           >
             <MDBInput
-              value={data.name ?? newData.structureName}
+              value={data?.name ?? ""}
               name="name"
               onChange={onChange}
               id="validationCustom01"
@@ -78,7 +78,7 @@ function FirstStep({ nextRef }) {
               name="tel"
               pattern="\d{10}"
               onChange={onChange}
-              value={data.tel ?? newData.tel}
+              value={data?.tel ?? ""}
               required
             />
           </MDBValidationItem>
@@ -95,7 +95,7 @@ function FirstStep({ nextRef }) {
               name="adress"
               pattern="^\d+\s[\w\s]+$"
               onChange={onChange}
-              value={data.adress ?? newData.adress}
+              value={data?.adress ?? ""}
               required
             />
           </MDBValidationItem>
@@ -106,7 +106,7 @@ function FirstStep({ nextRef }) {
             isValidated
           >
             <MDBInput
-              value={data.zip ?? newData.zip}
+              value={data?.zip ?? ""}
               name="zip"
               onChange={onChange}
               pattern="^\d{5}$"
@@ -122,7 +122,7 @@ function FirstStep({ nextRef }) {
             isValidated
           >
             <MDBInput
-              value={data.city ?? newData.ville}
+              value={data?.city ?? ""}
               name="city"
               onChange={onChange}
               id="validationCustom03"
