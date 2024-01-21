@@ -15,7 +15,9 @@ import "./thirdStep.scss";
 function ThirdStep({ nextRef, prevRef }) {
   const [loading, setLoading] = useState(false);
 
-  const { newData, setData } = useStructure();
+  const { handleSubmitEmployee } = useStructure();
+
+  const { data, setData } = useStructure();
   const HandleAdd = () => {
     const newEmployee = {
       files: "",
@@ -27,13 +29,14 @@ function ThirdStep({ nextRef, prevRef }) {
 
     setData((prevData) => ({
       ...prevData,
-      employees: [...prevData.employees, newEmployee],
+      employees: [...(prevData.employees || []), newEmployee],
     }));
   };
 
   const validateThirdStep = () => {
     setLoading(true);
     setTimeout(() => {
+      handleSubmitEmployee();
       nextRef.current.click();
       setLoading(false);
     }, 1000);
@@ -57,8 +60,8 @@ function ThirdStep({ nextRef, prevRef }) {
   return (
     <div className="fifty">
       <div className="step3">
-        {newData.employees &&
-          newData.employees.map((employee, i) => (
+        {data.employees &&
+          data.employees.map((employee, i) => (
             <div key={`${i + 1}`} className="photoContainer">
               <div className="fileUpload">
                 <MDBFileUpload
@@ -136,7 +139,7 @@ function ThirdStep({ nextRef, prevRef }) {
                   </MDBValidationItem>
                 </MDBValidation>
               </div>
-              {newData.employees.length > 0 && (
+              {data.employees.length > 0 && (
                 <MDBBtn type="submit" onClick={() => handleDelete(i)}>
                   x
                 </MDBBtn>

@@ -32,7 +32,6 @@ router.post("/login", userControllers.postLogin);
 
 router.get("/structure", structureControllers.getStructure);
 router.get("/structure/:id", structureControllers.getStructureById);
-router.post("/structureInscription", structureControllers.postStructure);
 
 router.put(
   "/structures/:id([0-9]+)/avatar",
@@ -43,6 +42,16 @@ router.put(
 router.put(
   "/structure/:id([0-9]+)/adaptation",
   structureControllers.updateStructure
+);
+
+router.put(
+  "/structure/:id([0-9]+)/adaptation/hours",
+  structureControllers.updateHours
+);
+
+router.put(
+  "/structure/:id([0-9]+)/adaptation/employees",
+  structureControllers.updateEmployee
 );
 
 router.get(

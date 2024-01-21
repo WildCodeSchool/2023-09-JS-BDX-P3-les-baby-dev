@@ -7,7 +7,7 @@ import "./seventhStep.scss";
 function SeventhStep({ nextRef, prevRef }) {
   const [loading, setLoading] = useState(false);
 
-  const { newData, updateAmenities, handleSubmit, data } = useStructure();
+  const { updateAmenities, handleSubmit, data } = useStructure();
 
   const validateSeventhStep = () => {
     setLoading(true);
@@ -36,7 +36,7 @@ function SeventhStep({ nextRef, prevRef }) {
             onChange={(e) =>
               handleSwitchChange("isAdaptationRequired", e.target.checked)
             }
-            checked={data.isAdaptationRequired ?? newData.isAdaptationRequired}
+            checked={data?.isAdaptationRequired ?? false}
           />
           <MDBSwitch
             id="isRespectRequired"
@@ -44,7 +44,7 @@ function SeventhStep({ nextRef, prevRef }) {
             onChange={(e) =>
               handleSwitchChange("isRespectRequired", e.target.checked)
             }
-            checked={data.isRespectRequired ?? newData.isRespectRequired}
+            checked={data?.isRespectRequired ?? false}
           />
           <MDBSwitch
             id="isDoorRespectRequired"
@@ -52,9 +52,7 @@ function SeventhStep({ nextRef, prevRef }) {
             onChange={(e) =>
               handleSwitchChange("isDoorRespectRequired", e.target.checked)
             }
-            checked={
-              data.isDoorRespectRequired ?? newData.isDoorRespectRequired
-            }
+            checked={data?.isDoorRespectRequired ?? false}
           />
           <MDBSwitch
             id="isInfoTransmissionRequired"
@@ -62,10 +60,7 @@ function SeventhStep({ nextRef, prevRef }) {
             onChange={(e) =>
               handleSwitchChange("isInfoTransmissionRequired", e.target.checked)
             }
-            checked={
-              data.isInfoTransmissionRequired ??
-              newData.isInfoTransmissionRequired
-            }
+            checked={data?.isInfoTransmissionRequired ?? false}
           />
           <MDBSwitch
             id="isCleanArrivalRequired"
@@ -73,9 +68,7 @@ function SeventhStep({ nextRef, prevRef }) {
             onChange={(e) =>
               handleSwitchChange("isCleanArrivalRequired", e.target.checked)
             }
-            checked={
-              data.isCleanArrivalRequired ?? newData.isCleanArrivalRequired
-            }
+            checked={data?.isCleanArrivalRequired ?? false}
           />
           <MDBSwitch
             id="isJewelryRemovalRequired"
@@ -83,9 +76,7 @@ function SeventhStep({ nextRef, prevRef }) {
             onChange={(e) =>
               handleSwitchChange("isJewelryRemovalRequired", e.target.checked)
             }
-            checked={
-              data.isJewelryRemovalRequired ?? newData.isJewelryRemovalRequired
-            }
+            checked={data?.isJewelryRemovalRequired ?? false}
           />
           <MDBSwitch
             id="isMedicationAdminRequired"
@@ -93,10 +84,7 @@ function SeventhStep({ nextRef, prevRef }) {
             onChange={(e) =>
               handleSwitchChange("isMedicationAdminRequired", e.target.checked)
             }
-            checked={
-              data.isMedicationAdminRequired ??
-              newData.isMedicationAdminRequired
-            }
+            checked={data?.isMedicationAdminRequired ?? false}
           />
         </div>
         <MDBBtn type="button" onClick={validateSeventhStep}>

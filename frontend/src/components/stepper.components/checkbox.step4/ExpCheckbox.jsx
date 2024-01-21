@@ -2,7 +2,7 @@ import React from "react";
 import { useStructure } from "../../../context/StrucutreContext";
 
 function ExpCheckbox() {
-  const { newData, onChange, data } = useStructure();
+  const { onChange, data } = useStructure();
   return (
     <div className="expContainer">
       <h4>Les petits plus de votre accueil</h4>
@@ -19,7 +19,7 @@ function ExpCheckbox() {
               type="checkbox"
               id="psci"
               name="psci"
-              checked={data.psci ?? newData.psci}
+              checked={data?.psci ?? false}
               onChange={onChange}
             />
             <label htmlFor="psci">Formation premiers secours (PSCI)</label>
@@ -29,7 +29,7 @@ function ExpCheckbox() {
               type="checkbox"
               id="nesting"
               name="nesting"
-              checked={data.nesting ?? newData.nesting}
+              checked={data?.nesting ?? false}
               onChange={onChange}
             />
             <label htmlFor="nesting">
@@ -41,7 +41,7 @@ function ExpCheckbox() {
               type="checkbox"
               id="montessori"
               name="montessori"
-              checked={data.montessori ?? newData.montessori}
+              checked={data?.montessori ?? false}
               onChange={onChange}
             />
             <label htmlFor="montessori">
@@ -53,7 +53,7 @@ function ExpCheckbox() {
               type="checkbox"
               id="handicap"
               name="handicap"
-              checked={data.handicap ?? newData.handicap}
+              checked={data?.handicap ?? false}
               onChange={onChange}
             />
             <label htmlFor="handi">Formation accueil d'enfant handicapés</label>
