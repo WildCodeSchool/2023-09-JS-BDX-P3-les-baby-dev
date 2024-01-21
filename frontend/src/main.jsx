@@ -42,6 +42,7 @@ const router = createBrowserRouter([
         const data = await apiService.get(
           "http://localhost:3310/api/users/myprofil"
         );
+
         return { preloadUser: data ?? null };
       } catch (err) {
         console.error(err.message);
@@ -162,10 +163,10 @@ const router = createBrowserRouter([
         path: "/structure",
         loader: async () => {
           try {
-            const structureData = await apiService.get(
+            const data = await apiService.get(
               `http://localhost:3310/api/users/structure`
             );
-            return { preloadUserStructure: structureData ?? null };
+            return { preloadUserStructure: data ?? null };
           } catch (error) {
             console.error(error.message);
             return null;

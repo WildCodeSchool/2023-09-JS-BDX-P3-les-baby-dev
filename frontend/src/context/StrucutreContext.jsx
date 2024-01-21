@@ -7,22 +7,10 @@ import { useUser } from "./UserContext";
 const StructureContext = createContext();
 
 function StructureContextProvider({ children }) {
-  const structureData = useLoaderData();
-  const { data } = structureData.preloadUserStructure;
-  // const [oldData, setOldData] = useState(data);
-
   const { user } = useUser();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user?.is_admin === 0) {
-      return navigate("/login");
-    }
-    console.info(user);
-    return undefined;
-  }, [user]);
-
-  const [newData, setData] = useState({
+  const loaderData = useLoaderData();
+  const [data, setData] = useState({
+    jardin: false,
     maxPlaces: 1,
     isHandicapEnabled: false,
     maxHandicap: 0,
@@ -32,6 +20,7 @@ function StructureContextProvider({ children }) {
     maxAtypicalHours: 0,
     isNightCareEnabled: false,
     maxNightCare: 0,
+    ...loaderData?.preloadUserStructure?.data,
   });
 
   const [dataSchedules, setdataSchedules] = useState({
@@ -41,30 +30,22 @@ function StructureContextProvider({ children }) {
     thursday: false,
     friday: false,
     saturday: false,
+    openHour: "08:00",
+    closeHour: "17:00",
   });
 
-  /* const [crechesData, setCrechesData] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
-    const fetchDataCreche = async () => {
-      try {
-        const response = await fetch("http://localhost:3310/api/structure");
-        if (!response.ok) {
-          throw new Error("Erreur lors de la récupération des données");
-        }
-        const items = await response.json();
-        setCrechesData(items);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchDataCreche();
-  }, []); */
+    if (user?.is_admin === 0) {
+      return navigate("/login");
+    }
+    console.info(user);
+    return undefined;
+  }, [user]);
 
   const onChange = (e) => {
     setData({
-      ...newData,
+      ...data,
       [e.target.name]:
         e.target.type === "checkbox" ? e.target.checked : e.target.value,
     });
@@ -90,11 +71,24 @@ function StructureContextProvider({ children }) {
     }));
   };
 
+  const handleSubmitEmployee = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:3310/api/structure/${data?.id}/adaptation/employees`,
+        data ?? {}
+      );
+
+      console.info(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleSubmitSchedules = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:3310/api/structure/${data.id}/adaptation/hours`,
-        dataSchedules
+        `http://localhost:3310/api/structure/${data?.id}/adaptation/hours`,
+        dataSchedules ?? {}
       );
 
       console.info(response.data);
@@ -106,8 +100,8 @@ function StructureContextProvider({ children }) {
   const handleSubmit = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:3310/api/structure/${structureData.preloadUserStructure.data.id}/adaptation`,
-        newData
+        `http://localhost:3310/api/structure/${data?.id}/adaptation`,
+        data ?? {}
       );
 
       console.info(response.data);
@@ -120,7 +114,6 @@ function StructureContextProvider({ children }) {
     () => ({
       handleSubmit,
       handleSubmitSchedules,
-      newData,
       data,
       setData,
       onChange,
@@ -128,11 +121,11 @@ function StructureContextProvider({ children }) {
       updateAllDays,
       updateAmenities,
       dataSchedules,
+      handleSubmitEmployee,
     }),
     [
       handleSubmit,
       handleSubmitSchedules,
-      newData,
       data,
       setData,
       onChange,
@@ -140,6 +133,7 @@ function StructureContextProvider({ children }) {
       updateAllDays,
       updateAmenities,
       dataSchedules,
+      handleSubmitEmployee,
     ]
   );
 

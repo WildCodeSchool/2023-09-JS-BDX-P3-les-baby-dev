@@ -23,6 +23,8 @@ const addUser = (req, res) => {
         email: req.body.email,
         isAdmin: req.body.isAdmin,
         structureId: rows.structureId,
+        hoursId: rows.hoursId,
+        emplyeeId: rows.emplyeeId,
       });
     })
     .catch((err) => {

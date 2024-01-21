@@ -15,26 +15,22 @@ import "./secondStep.scss";
 function SecondStep({ nextRef, prevRef }) {
   const [loading, setLoading] = useState(false);
 
-  const { newData, onChange, onChangeFiles, data } = useStructure();
+  const { onChange, onChangeFiles, data } = useStructure();
   const inputRef = useRef();
   const maxLength = 500;
-  const descriptionLength = newData.description
-    ? newData.description.length
-    : 0;
+  const descriptionLength = data.description ? data.description.length : 0;
 
   const { handleSubmit } = useStructure();
 
-  // const handleSubmitFiles = (event) => {
-  //   event.preventDefault();
-
+  // const handleSubmitFiles = () => {
   //   const formData = new FormData();
   //   formData.append("avatar", inputRef.current.files[0]);
-  //   axios.put("http://localhost:3310/api/avatar", formData);
+  //   axios.put(`http://localhost:3310/api/${data?.id}/avatar`, formData ?? {});
   // };
 
   const validateSecondStep = () => {
     // const isFileValid = inputRef.current.files.length > 0;
-    const isDescValid = newData.stuctureDesc;
+    const isDescValid = data.structureDesc;
 
     const isValid = isDescValid;
 
@@ -66,19 +62,10 @@ function SecondStep({ nextRef, prevRef }) {
                   name="avatar"
                   ref={inputRef}
                   getInputFiles={onChangeFiles}
-                  maxFileQuantity={3}
                 />
-                <MDBBtn
-                  type="button"
-                  // onClick={handleSubmitFiles}
-                  className="filebtn"
-                >
-                  Enregister
-                </MDBBtn>
               </form>
             </div>
-            <br />
-            <br />
+
             <label htmlFor="file">
               Formats acceptés : .jpg, .jpeg, .png <br /> 3 photos Maximum
             </label>
@@ -98,9 +85,9 @@ function SecondStep({ nextRef, prevRef }) {
                   id="textAreaExample"
                   maxLength={maxLength}
                   rows={4}
-                  value={data.stuctureDesc ?? newData.description}
+                  value={data?.structureDesc ?? ""}
                   onChange={onChange}
-                  name="stuctureDesc"
+                  name="structureDesc"
                   required
                 />
               </MDBValidationItem>

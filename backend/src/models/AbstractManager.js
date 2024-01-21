@@ -29,7 +29,6 @@ class AbstractManager {
     }
     sql += " where id = ?";
     sqlValues.push(id);
-
     return this.database.query(sql, sqlValues);
   }
 }
