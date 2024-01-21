@@ -6,21 +6,27 @@
 
 .fifty {
   display: flex;
-  flex-direction: row;
+  flex-direction: column-reverse;
+  gap: 30px;
 
   .step1 {
-    width: 50%;
-
     .valdiationContainer {
       margin: 10px;
     }
     label {
       color: #9696a0;
     }
+
+    .btn {
+      background: #9c69e2;
+
+      &:focus {
+        box-shadow: none !important;
+      }
+    }
   }
 
   .greyBg {
-    width: 50%;
     background-color: #f9f9f9;
     display: flex;
     align-items: center;
@@ -35,7 +41,7 @@
   }
 
   @media (max-width: 500px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
     .step1,
     .greyBg {
       width: 100%;

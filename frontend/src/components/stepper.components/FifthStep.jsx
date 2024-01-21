@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useStructure } from "../../context/StrucutreContext";
 import "./fifthStep.scss";
 
-function FifthStep({ nextRef, prevRef }) {
+function FifthStep({ nextQuestion, prevQuestion }) {
   const [loading, setLoading] = useState(false);
 
   const { dataSchedules, updateAllDays, handleSubmitSchedules } =
@@ -14,7 +14,7 @@ function FifthStep({ nextRef, prevRef }) {
     setLoading(true);
     setTimeout(() => {
       handleSubmitSchedules();
-      nextRef.current.click();
+      nextQuestion();
       setLoading(false);
     }, 1000);
   };
@@ -26,6 +26,19 @@ function FifthStep({ nextRef, prevRef }) {
   return (
     <div className="fifty">
       <div className="step5">
+        <div className="next-prev">
+          <MDBBtn type="button" onClick={validateFifthStep}>
+            {loading ? "" : "suivant"}
+            {loading && (
+              <MDBSpinner role="status" size="sm">
+                <span className="visually-hidden">loading...</span>
+              </MDBSpinner>
+            )}
+          </MDBBtn>
+          <MDBBtn type="button" onClick={prevQuestion}>
+            précédent
+          </MDBBtn>
+        </div>
         <h4>Quels sont vos horaires d'ouverture (à titre indicatif) ? </h4>
 
         <div className="hourContainer">
@@ -89,17 +102,6 @@ function FifthStep({ nextRef, prevRef }) {
             </div>
           </div>
         </div>
-        <MDBBtn type="button" onClick={validateFifthStep}>
-          {loading ? "" : "suivant"}
-          {loading && (
-            <MDBSpinner role="status" size="sml">
-              <span className="visually-hidden">loading...</span>
-            </MDBSpinner>
-          )}
-        </MDBBtn>
-        <MDBBtn type="button" onClick={() => prevRef.current.click()}>
-          précédent
-        </MDBBtn>
       </div>
       <div className="greyBg">
         <div className="infoRegisterCard">
@@ -116,14 +118,8 @@ function FifthStep({ nextRef, prevRef }) {
 }
 
 FifthStep.propTypes = {
-  nextRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
-  prevRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
+  nextQuestion: PropTypes.func.isRequired,
+  prevQuestion: PropTypes.func.isRequired,
 };
 
 export default FifthStep;

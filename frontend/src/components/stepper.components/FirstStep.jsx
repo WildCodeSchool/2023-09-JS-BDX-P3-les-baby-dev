@@ -10,7 +10,7 @@ import {
 } from "mdb-react-ui-kit";
 import { useStructure } from "../../context/StrucutreContext";
 
-function FirstStep({ nextRef }) {
+function FirstStep({ nextQuestion }) {
   const { onChange, data } = useStructure();
   const [loading, setLoading] = useState(false);
 
@@ -34,8 +34,8 @@ function FirstStep({ nextRef }) {
       setLoading(true);
       setTimeout(() => {
         handleSubmit();
+        nextQuestion();
 
-        nextRef.current.click();
         setLoading(false);
       }, 1000);
     } else {
@@ -47,6 +47,16 @@ function FirstStep({ nextRef }) {
   return (
     <div className="fifty">
       <div className="step1">
+        <div className="next-prev">
+          <MDBBtn type="button" onClick={validateFirstStep}>
+            {loading ? "" : "suivant"}
+            {loading && (
+              <MDBSpinner size="sm" role="status">
+                <span className="visually-hidden">loading...</span>
+              </MDBSpinner>
+            )}
+          </MDBBtn>
+        </div>
         <h4>Complétez et vérifiez vos informations</h4>
         <MDBValidation className="row g-3">
           <MDBValidationItem
@@ -131,14 +141,6 @@ function FirstStep({ nextRef }) {
             />
           </MDBValidationItem>
         </MDBValidation>
-        <MDBBtn type="button" onClick={validateFirstStep}>
-          {loading ? "" : "suivant"}
-          {loading && (
-            <MDBSpinner role="status" size="sml">
-              <span className="visually-hidden">loading...</span>
-            </MDBSpinner>
-          )}
-        </MDBBtn>
       </div>
       <div className="greyBg">
         <div className="infoRegisterCard">
@@ -154,10 +156,7 @@ function FirstStep({ nextRef }) {
 }
 
 FirstStep.propTypes = {
-  nextRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
+  nextQuestion: PropTypes.func.isRequired,
 };
 
 export default FirstStep;

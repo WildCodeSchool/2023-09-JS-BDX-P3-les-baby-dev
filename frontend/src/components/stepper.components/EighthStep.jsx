@@ -1,6 +1,24 @@
-import React from "react";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  MDBBtn,
+  MDBModal,
+  MDBModalBody,
+  MDBModalContent,
+  MDBModalDialog,
+  MDBModalFooter,
+  MDBModalHeader,
+  MDBModalTitle,
+} from "mdb-react-ui-kit";
+import "./eighthStep.scss";
 
-function EighthStep() {
+function EighthStep({ prevQuestion }) {
+  const [centredModal, setCentredModal] = useState(false);
+  const navigate = useNavigate();
+
+  const toggleOpen = () => setCentredModal(!centredModal);
+
   return (
     <div className="step8">
       <div className="pageContainer">
@@ -37,9 +55,53 @@ function EighthStep() {
             de la mission.
           </p>
         </div>
+        <div className="next-prev">
+          <MDBBtn type="submit" onClick={toggleOpen}>
+            terminé
+          </MDBBtn>
+          <MDBBtn type="button" onClick={prevQuestion}>
+            précédent
+          </MDBBtn>
+        </div>
       </div>
+      <MDBModal tabIndex="-1" open={centredModal} setOpen={setCentredModal}>
+        <MDBModalDialog centered>
+          <MDBModalContent>
+            <MDBModalHeader>
+              <MDBModalTitle>Hourra !</MDBModalTitle>
+              <MDBBtn className="btn-close" color="none" onClick={toggleOpen}>
+                {" "}
+              </MDBBtn>
+            </MDBModalHeader>
+            <MDBModalBody>
+              <p>
+                Nous avons bien pris en compte tous les éléments pour paramétrer
+                votre profil Babyplace Il ne reste plus qu'une dernière étape de
+                sécurité à franchir !
+              </p>
+              <p>
+                Votre compte sera vérifié par nos équipes dans un délai de 48h
+              </p>
+              <h4>Sécurité</h4>
+              <p>
+                Nous avons besoin d'effectuer une dernière vérification avant
+                validation définitive de votre compte sous 48h jour ouvré:
+              </p>
+            </MDBModalBody>
+            <MDBModalFooter>
+              <MDBBtn onClick={() => navigate("/dashboard")}>
+                aller sur mon dashboard
+              </MDBBtn>
+            </MDBModalFooter>
+          </MDBModalContent>
+        </MDBModalDialog>
+      </MDBModal>
     </div>
   );
 }
+
+EighthStep.propTypes = {
+  prevQuestion: PropTypes.func.isRequired,
+};
 
 export default EighthStep;

@@ -5,8 +5,6 @@
 }
 
 .step2 {
-  width: 50%;
-
   .fileUpload {
     display: flex;
     margin: 0 auto;
@@ -15,6 +13,43 @@
       display: flex;
       margin: 0 auto;
       background: #9c69e2;
+    }
+  }
+
+  .btn {
+    background: #9c69e2;
+
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
+
+  .pageContent {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+
+    .format {
+      text-align: center;
+    }
+
+    .second-validation {
+      display: flex;
+      margin: 0 auto;
+
+      .text-area {
+        width: 500px !important;
+      }
+    }
+  }
+
+  @media (max-width: 800px) {
+    .pageContent {
+      .second-validation {
+        .text-area {
+          width: 300px !important;
+        }
+      }
     }
   }
 
