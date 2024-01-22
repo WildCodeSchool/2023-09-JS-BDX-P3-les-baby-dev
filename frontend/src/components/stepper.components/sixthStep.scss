@@ -5,7 +5,13 @@
 }
 
 .step6 {
-  width: 50%;
+  .btn {
+    background: #9c69e2;
+
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
   .finputContainer {
     margin-left: 30px;
   }

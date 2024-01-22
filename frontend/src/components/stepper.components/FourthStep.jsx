@@ -6,7 +6,7 @@ import ActivitiesCheckbox from "./checkbox.step4/ActivitiesCheckbox";
 import "./fourthStep.scss";
 import { useStructure } from "../../context/StrucutreContext";
 
-function FourthStep({ nextRef, prevRef }) {
+function FourthStep({ nextQuestion, prevQuestion }) {
   const [loading, setLoading] = useState(false);
   const { handleSubmit } = useStructure();
 
@@ -14,7 +14,7 @@ function FourthStep({ nextRef, prevRef }) {
     setLoading(true);
     setTimeout(() => {
       handleSubmit();
-      nextRef.current.click();
+      nextQuestion();
       setLoading(false);
     }, 1000);
   };
@@ -22,19 +22,29 @@ function FourthStep({ nextRef, prevRef }) {
   return (
     <div className="fifty">
       <div className="step5">
-        <ExpCheckbox />
-        <ActivitiesCheckbox />
-        <MDBBtn type="button" onClick={validateFourthStep}>
-          {loading ? "" : "suivant"}
-          {loading && (
-            <MDBSpinner role="status" size="sml">
-              <span className="visually-hidden">loading...</span>
-            </MDBSpinner>
-          )}
-        </MDBBtn>
-        <MDBBtn type="button" onClick={() => prevRef.current.click()}>
-          précédent
-        </MDBBtn>
+        <div className="next-prev">
+          <MDBBtn type="button" onClick={validateFourthStep}>
+            {loading ? "" : "suivant"}
+            {loading && (
+              <MDBSpinner role="status" size="sm">
+                <span className="visually-hidden">loading...</span>
+              </MDBSpinner>
+            )}
+          </MDBBtn>
+          <MDBBtn type="button" onClick={prevQuestion}>
+            précédent
+          </MDBBtn>
+        </div>
+        <h4>Les petits plus de votre accueil</h4>
+        <p>
+          Il s'agit en général des services que les parents souhaitent retrouver
+          pour l'accueil de leurs enfants, mais vous pourrez en ajouter d'autres
+          auprès la publication.
+        </p>
+        <div className="check">
+          <ExpCheckbox />
+          <ActivitiesCheckbox />
+        </div>
       </div>
       <div className="greyBg">
         <div className="infoRegisterCard">
@@ -52,13 +62,7 @@ function FourthStep({ nextRef, prevRef }) {
 }
 
 FourthStep.propTypes = {
-  nextRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
-  prevRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
+  nextQuestion: PropTypes.func.isRequired,
+  prevQuestion: PropTypes.func.isRequired,
 };
 export default FourthStep;

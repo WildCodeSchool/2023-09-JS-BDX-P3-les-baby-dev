@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useStructure } from "../../context/StrucutreContext";
 import "./sixthStep.scss";
 
-function SixthStep({ nextRef, prevRef }) {
+function SixthStep({ nextQuestion, prevQuestion }) {
   const { updateAmenities, handleSubmit, data } = useStructure();
   const [loading, setLoading] = useState(false);
 
@@ -12,7 +12,7 @@ function SixthStep({ nextRef, prevRef }) {
     setLoading(true);
     setTimeout(() => {
       handleSubmit();
-      nextRef.current.click();
+      nextQuestion();
       setLoading(false);
     }, 1000);
   };
@@ -79,6 +79,19 @@ function SixthStep({ nextRef, prevRef }) {
   return (
     <div className="fifty">
       <div className="step6">
+        <div className="next-prev">
+          <MDBBtn type="button" onClick={validateSixthStep}>
+            {loading ? "" : "suivant"}
+            {loading && (
+              <MDBSpinner role="status" size="sm">
+                <span className="visually-hidden">loading...</span>
+              </MDBSpinner>
+            )}
+          </MDBBtn>
+          <MDBBtn type="button" onClick={prevQuestion}>
+            précédent
+          </MDBBtn>
+        </div>
         <div className="finputContainer">
           <h4>Nombre de places ou agrements</h4>
           <p>A total, de combien de place disposez vous ?</p>
@@ -185,17 +198,6 @@ function SixthStep({ nextRef, prevRef }) {
             />
           </div>
         </div>
-        <MDBBtn type="button" onClick={validateSixthStep}>
-          {loading ? "" : "suivant"}
-          {loading && (
-            <MDBSpinner role="status" size="sml">
-              <span className="visually-hidden">loading...</span>
-            </MDBSpinner>
-          )}
-        </MDBBtn>
-        <MDBBtn type="button" onClick={() => prevRef.current.click()}>
-          précédent
-        </MDBBtn>
       </div>
       <div className="greyBg">
         <div className="infoRegisterCard">
@@ -213,14 +215,8 @@ function SixthStep({ nextRef, prevRef }) {
 }
 
 SixthStep.propTypes = {
-  nextRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
-  prevRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
+  nextQuestion: PropTypes.func.isRequired,
+  prevQuestion: PropTypes.func.isRequired,
 };
 
 export default SixthStep;

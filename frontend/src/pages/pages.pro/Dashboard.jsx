@@ -13,6 +13,7 @@ import {
   MDBTableHead,
   MDBTableBody,
 } from "mdb-react-ui-kit";
+import { useNavigate } from "react-router-dom";
 import Babyplace from "../../assets/Babyplace.svg";
 import { useUser } from "../../context/UserContext";
 
@@ -24,6 +25,8 @@ export default function App() {
   const [filter, setFilter] = useState("Tous");
   const [resaData, setResaData] = useState([]);
   const { logout } = useUser();
+
+  const navigate = useNavigate();
 
   /* const data = [
     {
@@ -235,7 +238,9 @@ export default function App() {
                   Administration
                 </MDBSideNavLink>
                 <MDBSideNavCollapse open={colorCollapse2}>
-                  <MDBSideNavLink>Modifier ma structure</MDBSideNavLink>
+                  <MDBSideNavLink onClick={() => navigate("/structure")}>
+                    Modifier ma structure
+                  </MDBSideNavLink>
                   <MDBSideNavLink>Paramètre</MDBSideNavLink>
                   <MDBSideNavLink onClick={logout}>Déconnextion</MDBSideNavLink>
                 </MDBSideNavCollapse>

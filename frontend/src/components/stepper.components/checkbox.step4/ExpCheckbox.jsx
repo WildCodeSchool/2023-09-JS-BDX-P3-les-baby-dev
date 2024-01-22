@@ -5,12 +5,6 @@ function ExpCheckbox() {
   const { onChange, data } = useStructure();
   return (
     <div className="expContainer">
-      <h4>Les petits plus de votre accueil</h4>
-      <p>
-        Il s'agit en général des services que les parents souhaitent retrouver
-        pour l'accueil de leurs enfants, mais vous pourrez en ajouter d'autres
-        auprès la publication.
-      </p>
       <div className="checkContainer">
         <div className="checkboxsContainer">
           <h5> Expérience & Formations</h5>
