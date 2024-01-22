@@ -12,6 +12,7 @@ import { useState, useEffect } from "react";
 import NavProfil from "../../components/profile.components/NavProfil";
 import FilterComponent from "../../components/searchList.components/FilterComponent";
 import HeaderNav from "../../components/profile.components/HeaderNav";
+import imageDefault from "../../assets/defaultImage.png";
 // import { useStructure } from "../../context/StrucutreContext";
 // import ApiService from "../../services/api.service";
 
@@ -102,7 +103,7 @@ function SearchList() {
               <div className="img_creche">
                 <img
                   alt={creche.name}
-                  src={creche.avatarPath || "./src/assets/defaultImage.png"}
+                  src={creche.avatarPath || imageDefault}
                 />
                 <h3>{creche.name}</h3>
               </div>
