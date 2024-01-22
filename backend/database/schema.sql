@@ -102,9 +102,11 @@ CREATE TABLE
     IF NOT EXISTS parent (
         id int primary key auto_increment not null,
         user_id INT NOT NULL,
-        name VARCHAR(255),
+        parentName VARCHAR(255),
+        parentFName VARCHAR(255),
         profession VARCHAR(255),
         address VARCHAR(255),
+        ville VARCHAR(255),
         telephone VARCHAR(10),
         justificatifRevenu VARCHAR(255),
         declarationRevenu VARCHAR(255),
@@ -123,29 +125,37 @@ ADD
 insert into
     parent (
         user_id,
-        name,
+        parentName,
+        parentFName,
         profession,
         address,
+        ville,
         telephone
     )
 values (
         4,
         'daamn',
+        'kebabier',
         'Ambulancier',
         '17 rue gambetta',
-        '33130'
+        'Bdxzoo',
+        '0686699696'
     ), (
         5,
         'daamn',
+        'kebabier',
         'Ambulancier',
         '17 rue gambetta',
-        '33130'
+        'Bdxzoo',
+        '0686699696'
     ), (
         6,
         'daamn',
+        'kebabiste',
         'Ambulancier',
         '17 rue gambetta',
-        '33130'
+        'Bdxzoo',
+        '0686699696'
     );
 
 DROP TABLE if EXISTS reservation;

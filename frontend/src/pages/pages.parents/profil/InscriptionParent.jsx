@@ -84,7 +84,7 @@ function InscriptionParent() {
                 label="N° et nom de rue"
                 id="validationCustomUsername"
                 type="text"
-                name="adresse"
+                name="address"
                 pattern="^\d+\s[\w\s]+$"
                 onChange={handleClick}
                 value={dataParent.adresse}
@@ -119,7 +119,7 @@ function InscriptionParent() {
                 label="Téléphone portable"
                 id="typePhone"
                 type="tel"
-                name="tel"
+                name="telephone"
                 pattern="\d{10}"
                 onChange={handleClick}
                 value={dataParent.tel}

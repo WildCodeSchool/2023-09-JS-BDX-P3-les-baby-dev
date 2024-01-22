@@ -15,6 +15,7 @@ const getUser = (_, res) => {
 };
 
 const addUser = (req, res) => {
+  // console.log(req.body);
   models.user
     .create(req.body)
     .then((rows) => {
@@ -23,6 +24,7 @@ const addUser = (req, res) => {
         email: req.body.email,
         isAdmin: req.body.isAdmin,
         structureId: rows.structureId,
+        parentId: rows.parentId,
       });
     })
     .catch((err) => {
@@ -53,9 +55,28 @@ const getProfile = (req, res) => {
   res.send(req.user);
 };
 
+const updateParent = async (req, res) => {
+  try {
+    await models.user.update(req.params.id, req.body);
+
+    res.status(201).json({
+      success: true,
+      message: "Parent registered successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   addUser,
   getUser,
   postLogin,
   getProfile,
+  updateParent,
 };
