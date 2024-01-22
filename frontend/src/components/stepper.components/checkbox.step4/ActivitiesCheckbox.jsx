@@ -2,7 +2,7 @@ import React from "react";
 import { useStructure } from "../../../context/StrucutreContext";
 
 function ActivitiesCheckbox() {
-  const { newData, onChange, data } = useStructure();
+  const { onChange, data } = useStructure();
   return (
     <div className="activitiesContainer">
       <h5>Activités</h5>
@@ -11,7 +11,7 @@ function ActivitiesCheckbox() {
           type="checkbox"
           id="jardin"
           name="jardin"
-          checked={data.jardin ?? newData.jardin}
+          checked={data?.jardin ?? false}
           onChange={onChange}
         />
         <label htmlFor="jardin">Espace extérieur / jardin</label>
@@ -21,7 +21,7 @@ function ActivitiesCheckbox() {
           type="checkbox"
           id="sorties"
           name="sorties"
-          checked={data.sorties ?? newData.sorties}
+          checked={data?.sorties ?? false}
           onChange={onChange}
         />
         <label htmlFor="sorties">Sorties extérieures</label>
@@ -31,7 +31,7 @@ function ActivitiesCheckbox() {
           type="checkbox"
           id="promenades"
           name="promenades"
-          checked={data.promenades ?? newData.promenades}
+          checked={data?.promenades ?? false}
           onChange={onChange}
         />
         <label htmlFor="promenades">Promenades</label>
@@ -41,7 +41,7 @@ function ActivitiesCheckbox() {
           type="checkbox"
           id="eveil"
           name="eveil"
-          checked={data.eveil ?? newData.eveil}
+          checked={data?.eveil ?? false}
           onChange={onChange}
         />
         <label htmlFor="eveil">Activités d'éveil</label>
@@ -51,7 +51,7 @@ function ActivitiesCheckbox() {
           type="checkbox"
           id="musique"
           name="musique"
-          checked={data.musique ?? newData.musique}
+          checked={data?.musique ?? false}
           onChange={onChange}
         />
         <label htmlFor="musique">Atelier musique</label>
@@ -61,7 +61,7 @@ function ActivitiesCheckbox() {
           type="checkbox"
           id="art"
           name="art"
-          checked={data.art ?? newData.art}
+          checked={data?.art ?? false}
           onChange={onChange}
         />
         <label htmlFor="art">Activité artistique</label>
@@ -71,7 +71,7 @@ function ActivitiesCheckbox() {
           type="checkbox"
           id="bilingue"
           name="bilingue"
-          checked={data.bilingue ?? newData.bilingue}
+          checked={data?.bilingue ?? false}
           onChange={onChange}
         />
         <label htmlFor="bilingue">Bilingue/internationale</label>
@@ -81,7 +81,7 @@ function ActivitiesCheckbox() {
           type="checkbox"
           id="bibli"
           name="bibli"
-          checked={data.bibli ?? newData.bibli}
+          checked={data?.bibli ?? false}
           onChange={onChange}
         />
         <label htmlFor="bibli">Bibliothèque / Ludothèque / RAM</label>
@@ -91,7 +91,7 @@ function ActivitiesCheckbox() {
           type="checkbox"
           id="transport"
           name="transport"
-          checked={data.transport ?? newData.transport}
+          checked={data?.transport ?? false}
           onChange={onChange}
         />
         <label htmlFor="transport">Transport d'enfant</label>

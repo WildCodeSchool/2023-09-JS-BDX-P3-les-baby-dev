@@ -10,8 +10,8 @@ import {
 } from "mdb-react-ui-kit";
 import { useStructure } from "../../context/StrucutreContext";
 
-function FirstStep({ nextRef }) {
-  const { newData, onChange, data } = useStructure();
+function FirstStep({ nextQuestion }) {
+  const { onChange, data } = useStructure();
   const [loading, setLoading] = useState(false);
 
   const { handleSubmit } = useStructure();
@@ -34,8 +34,8 @@ function FirstStep({ nextRef }) {
       setLoading(true);
       setTimeout(() => {
         handleSubmit();
+        nextQuestion();
 
-        nextRef.current.click();
         setLoading(false);
       }, 1000);
     } else {
@@ -47,6 +47,16 @@ function FirstStep({ nextRef }) {
   return (
     <div className="fifty">
       <div className="step1">
+        <div className="next-prev">
+          <MDBBtn type="button" onClick={validateFirstStep}>
+            {loading ? "" : "suivant"}
+            {loading && (
+              <MDBSpinner size="sm" role="status">
+                <span className="visually-hidden">loading...</span>
+              </MDBSpinner>
+            )}
+          </MDBBtn>
+        </div>
         <h4>Complétez et vérifiez vos informations</h4>
         <MDBValidation className="row g-3">
           <MDBValidationItem
@@ -56,7 +66,7 @@ function FirstStep({ nextRef }) {
             isValidated
           >
             <MDBInput
-              value={data.name ?? newData.structureName}
+              value={data?.name ?? ""}
               name="name"
               onChange={onChange}
               id="validationCustom01"
@@ -78,7 +88,7 @@ function FirstStep({ nextRef }) {
               name="tel"
               pattern="\d{10}"
               onChange={onChange}
-              value={data.tel ?? newData.tel}
+              value={data?.tel ?? ""}
               required
             />
           </MDBValidationItem>
@@ -95,7 +105,7 @@ function FirstStep({ nextRef }) {
               name="adress"
               pattern="^\d+\s[\w\s]+$"
               onChange={onChange}
-              value={data.adress ?? newData.adress}
+              value={data?.adress ?? ""}
               required
             />
           </MDBValidationItem>
@@ -106,7 +116,7 @@ function FirstStep({ nextRef }) {
             isValidated
           >
             <MDBInput
-              value={data.zip ?? newData.zip}
+              value={data?.zip ?? ""}
               name="zip"
               onChange={onChange}
               pattern="^\d{5}$"
@@ -122,7 +132,7 @@ function FirstStep({ nextRef }) {
             isValidated
           >
             <MDBInput
-              value={data.city ?? newData.ville}
+              value={data?.city ?? ""}
               name="city"
               onChange={onChange}
               id="validationCustom03"
@@ -131,14 +141,6 @@ function FirstStep({ nextRef }) {
             />
           </MDBValidationItem>
         </MDBValidation>
-        <MDBBtn type="button" onClick={validateFirstStep}>
-          {loading ? "" : "suivant"}
-          {loading && (
-            <MDBSpinner role="status" size="sml">
-              <span className="visually-hidden">loading...</span>
-            </MDBSpinner>
-          )}
-        </MDBBtn>
       </div>
       <div className="greyBg">
         <div className="infoRegisterCard">
@@ -154,10 +156,7 @@ function FirstStep({ nextRef }) {
 }
 
 FirstStep.propTypes = {
-  nextRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
+  nextQuestion: PropTypes.func.isRequired,
 };
 
 export default FirstStep;

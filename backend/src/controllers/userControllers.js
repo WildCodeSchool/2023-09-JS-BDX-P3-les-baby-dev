@@ -25,6 +25,8 @@ const addUser = (req, res) => {
         isAdmin: req.body.isAdmin,
         structureId: rows.structureId,
         parentId: rows.parentId,
+        hoursId: rows.hoursId,
+        employeeId: rows.employeeId,
       });
     })
     .catch((err) => {

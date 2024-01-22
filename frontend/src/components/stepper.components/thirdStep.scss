@@ -5,25 +5,68 @@
 }
 
 .step3 {
-  width: 50%;
+  .employees {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .needs-validation {
+    display: flex;
+    flex-direction: column;
+
+    .form-outline {
+      width: 200px;
+    }
+  }
+
+  .employee-card {
+    display: flex;
+    flex-direction: column;
+  }
 
   .fileUpload {
     display: flex;
-    margin: 0 auto;
+    margin: 10px auto;
   }
 
   .thirdInputContainer {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
   }
 
-  .btn {
-    display: flex;
-    margin: 5px auto;
+  .delete {
+    margin: 10px auto;
     background: #9c69e2;
+
+    &:hover {
+      background: #9c69e2;
+      box-shadow: none !important;
+    }
   }
+
+  .add-employee {
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    background: #9c69e2;
+
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
+  // .btn {
+  //   display: flex;
+  //   margin: 0 auto;
+  //   background: #9c69e2;
+
+  //   &:focus {
+  //     box-shadow: none !important;
+  //   }
+  // }
 
   @media (max-width: 500px) {
     width: 100%;

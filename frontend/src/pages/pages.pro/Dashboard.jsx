@@ -13,6 +13,7 @@ import {
   MDBTableHead,
   MDBTableBody,
 } from "mdb-react-ui-kit";
+import { useNavigate } from "react-router-dom";
 import Babyplace from "../../assets/Babyplace.svg";
 
 export default function App() {
@@ -22,6 +23,8 @@ export default function App() {
   // const [color, setColor] = useState("primary");
   const [filter, setFilter] = useState("Tous");
   const [resaData, setResaData] = useState([]);
+
+  const navigate = useNavigate();
 
   /* const data = [
     {
@@ -233,7 +236,9 @@ export default function App() {
                   Administration
                 </MDBSideNavLink>
                 <MDBSideNavCollapse open={colorCollapse2}>
-                  <MDBSideNavLink>Modifier ma structure</MDBSideNavLink>
+                  <MDBSideNavLink onClick={() => navigate("/structure")}>
+                    Modifier ma structure
+                  </MDBSideNavLink>
                   <MDBSideNavLink>Paramètre</MDBSideNavLink>
                 </MDBSideNavCollapse>
               </MDBSideNavItem>

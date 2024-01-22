@@ -29,7 +29,32 @@ class AbstractManager {
     }
     sql += " where id = ?";
     sqlValues.push(id);
+    return this.database.query(sql, sqlValues);
+  }
 
+  async updateE(id, dataValue) {
+    let sql = `UPDATE ${this.table} set`;
+    const sqlValues = [];
+    for (const [key, value] of Object.entries(dataValue)) {
+      sql += `${sqlValues.length ? "," : ""} ${key} = ?`;
+
+      sqlValues.push(value);
+    }
+    sql += " where structure_id = ?";
+    sqlValues.push(id);
+    return this.database.query(sql, sqlValues);
+  }
+
+  async updateH(id, dataValue) {
+    let sql = `UPDATE ${this.table} set`;
+    const sqlValues = [];
+    for (const [key, value] of Object.entries(dataValue)) {
+      sql += `${sqlValues.length ? "," : ""} ${key} = ?`;
+
+      sqlValues.push(value);
+    }
+    sql += " where structure_id = ?";
+    sqlValues.push(id);
     return this.database.query(sql, sqlValues);
   }
 }
