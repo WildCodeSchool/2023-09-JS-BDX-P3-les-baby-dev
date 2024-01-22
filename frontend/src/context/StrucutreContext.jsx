@@ -33,6 +33,7 @@ function StructureContextProvider({ children }) {
     openHour: "08:00",
     closeHour: "17:00",
   });
+  const [dataEmployee, setDataEmployee] = useState({});
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -75,7 +76,7 @@ function StructureContextProvider({ children }) {
     try {
       const response = await axios.put(
         `http://localhost:3310/api/structure/${data?.id}/adaptation/employees`,
-        data ?? {}
+        dataEmployee ?? {}
       );
 
       console.info(response.data);
@@ -122,6 +123,8 @@ function StructureContextProvider({ children }) {
       updateAmenities,
       dataSchedules,
       handleSubmitEmployee,
+      dataEmployee,
+      setDataEmployee,
     }),
     [
       handleSubmit,
@@ -134,6 +137,8 @@ function StructureContextProvider({ children }) {
       updateAmenities,
       dataSchedules,
       handleSubmitEmployee,
+      dataEmployee,
+      setDataEmployee,
     ]
   );
 

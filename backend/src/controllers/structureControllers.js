@@ -40,7 +40,7 @@ const updateStructure = async (req, res) => {
 
 const updateHours = async (req, res) => {
   try {
-    await models.hours.update(+req.params.id, req.body);
+    await models.hours.updateH(+req.params.id, req.body);
 
     res.status(201).json({
       success: true,
@@ -58,7 +58,18 @@ const updateHours = async (req, res) => {
 
 const updateEmployee = async (req, res) => {
   try {
-    await models.employee.update(+req.params.id, req.body);
+    const employeeData = req.body.employees[0]; // Accédez à l'objet employee dans req.body
+
+    const { files, name, fName, mail, fonction } = employeeData;
+    // Ajoutez tous les champs nécessaires ici
+
+    await models.employee.updateE(+req.params.id, {
+      files,
+      fName,
+      name,
+      mail,
+      fonction,
+    });
 
     res.status(201).json({
       success: true,

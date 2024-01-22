@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useStructure } from "../../context/StrucutreContext";
 import "./seventhStep.scss";
 
-function SeventhStep({ nextRef, prevRef }) {
+function SeventhStep({ nextQuestion, prevQuestion }) {
   const [loading, setLoading] = useState(false);
 
   const { updateAmenities, handleSubmit, data } = useStructure();
@@ -13,7 +13,7 @@ function SeventhStep({ nextRef, prevRef }) {
     setLoading(true);
     setTimeout(() => {
       handleSubmit();
-      nextRef.current.click();
+      nextQuestion();
       setLoading(false);
     }, 1000);
   };
@@ -24,6 +24,19 @@ function SeventhStep({ nextRef, prevRef }) {
   return (
     <div className="fifty">
       <div className="step7">
+        <div className="next-prev">
+          <MDBBtn type="button" onClick={validateSeventhStep}>
+            {loading ? "" : "suivant"}
+            {loading && (
+              <MDBSpinner role="status" size="sm">
+                <span className="visually-hidden">loading...</span>
+              </MDBSpinner>
+            )}
+          </MDBBtn>
+          <MDBBtn type="button" onClick={prevQuestion}>
+            précédent
+          </MDBBtn>
+        </div>
         <h1>Fixez un règlement intérieur</h1>
         <p>
           Les parents doivent accepter votre règlement intérieur avant de
@@ -87,17 +100,6 @@ function SeventhStep({ nextRef, prevRef }) {
             checked={data?.isMedicationAdminRequired ?? false}
           />
         </div>
-        <MDBBtn type="button" onClick={validateSeventhStep}>
-          {loading ? "" : "suivant"}
-          {loading && (
-            <MDBSpinner role="status" size="sml">
-              <span className="visually-hidden">loading...</span>
-            </MDBSpinner>
-          )}
-        </MDBBtn>
-        <MDBBtn type="button" onClick={() => prevRef.current.click()}>
-          précédent
-        </MDBBtn>
       </div>
       <div className="greyBg">
         <div className="infoRegisterCard">
@@ -115,14 +117,8 @@ function SeventhStep({ nextRef, prevRef }) {
 }
 
 SeventhStep.propTypes = {
-  nextRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
-  prevRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
+  nextQuestion: PropTypes.func.isRequired,
+  prevQuestion: PropTypes.func.isRequired,
 };
 
 export default SeventhStep;

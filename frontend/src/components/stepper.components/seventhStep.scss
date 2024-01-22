@@ -5,8 +5,13 @@
 }
 
 .step7 {
-  width: 50%;
+  .btn {
+    background: #9c69e2;
 
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
   @media (max-width: 500px) {
     width: 100%;
 
