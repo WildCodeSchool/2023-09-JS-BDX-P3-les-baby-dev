@@ -1,0 +1,100 @@
+.conditions_container {
+  background-color: #f7f6fe;
+  width: 100%;
+  margin: 0 auto;
+  height: 100vh;
+  padding-top: 20px;
+
+  .choisen_creche {
+    background-color: white;
+    height: 100px;
+    display: flex;
+    box-shadow: 3px 3px 3px rgb(187, 187, 187);
+
+    .arrowBack {
+      margin-top: 70%;
+      margin-left: 20px;
+      width: 80%;
+    }
+
+    .picture_creche {
+      width: 70px;
+      height: 70px;
+      margin-top: 10px;
+      border-radius: 100%;
+      margin-left: 20px;
+
+      img {
+        height: 100%;
+        width: 100%;
+        border: 1px solid #5121ff;
+        border-radius: 100%;
+      }
+    }
+
+    .title_creche {
+      h1 {
+        color: blueviolet;
+        font-size: 1em;
+        margin-left: 20px;
+        padding-top: 15px;
+      }
+
+      h2 {
+        color: black;
+        margin-left: 20px;
+        font-size: 1.1em;
+        font-weight: bold;
+      }
+    }
+  }
+
+  h3 {
+    color: #1d0042;
+    margin-top: 50px;
+    text-align: center;
+    font-size: 1.8em;
+  }
+
+  .list_conditions {
+    margin-top: 70px;
+    ul {
+      list-style: none;
+
+      li {
+        display: flex;
+        align-self: center;
+        margin: 10px 0;
+        margin-bottom: 20px;
+
+        img {
+          align-items: center;
+        }
+
+        p {
+          margin-left: 30px;
+          font-size: 1.3em;
+          margin: 10px 30px;
+        }
+      }
+    }
+  }
+
+  .btn_accepted {
+    text-align: center;
+    margin-top: 60px;
+
+    button {
+      width: 300px;
+      height: 60px;
+      border: none;
+      background-color: #6200ee;
+      color: white;
+      font-size: 1.4em;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 1.2em;
+      text-align: center;
+    }
+  }
+}

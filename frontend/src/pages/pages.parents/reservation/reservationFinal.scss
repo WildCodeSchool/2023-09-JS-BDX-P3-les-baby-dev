@@ -1,0 +1,122 @@
+.finalResa_container {
+  background-color: #f7f6fe;
+  width: 100%;
+  margin: 0 auto;
+  height: 100vh;
+  padding-top: 20px;
+
+  .choisen_creche {
+    background-color: white;
+    height: 100px;
+    display: flex;
+    box-shadow: 3px 3px 3px rgb(187, 187, 187);
+
+    .arrowBack {
+      margin-top: 70%;
+      margin-left: 20px;
+      width: 80%;
+    }
+
+    .picture_creche {
+      width: 70px;
+      height: 70px;
+      margin-top: 10px;
+      border-radius: 100%;
+      margin-left: 20px;
+
+      img {
+        height: 100%;
+        width: 100%;
+        border: 1px solid #5121ff;
+        border-radius: 100%;
+      }
+    }
+    .title_creche {
+      h1 {
+        color: blueviolet;
+        font-size: 1em;
+        margin-left: 20px;
+        padding-top: 15px;
+      }
+
+      h2 {
+        color: black;
+        margin-left: 20px;
+        font-size: 1.1em;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .infos_container {
+    background: linear-gradient(to bottom right, #7847ff, #e37acc);
+    width: 80%;
+    margin: 0 auto;
+    height: 400px;
+    border-radius: 5px;
+
+    h3 {
+      color: white;
+      margin-top: 50px;
+      text-align: center;
+      font-size: 1.8em;
+      padding-top: 30px;
+    }
+
+    .switch {
+      margin-top: 30px;
+      margin-left: 30px;
+      color: white;
+      margin-bottom: 50px;
+    }
+
+    .textArea {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+
+      h4 {
+        color: white;
+        margin-left: 40px;
+      }
+
+      textarea {
+        padding: 10px;
+        width: 70%;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-shadow: 1px 1px 1px #999;
+        height: 100px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  .acceptation {
+    margin: 30px 30px;
+
+    h5 {
+      font-size: 0.9em;
+      font-weight: bold;
+    }
+    li {
+      font-size: 0.9em;
+    }
+  }
+  .btn_confirmation {
+    text-align: center;
+
+    button {
+      width: 300px;
+      height: 60px;
+      border: none;
+      background-color: #6200ee;
+      color: white;
+      font-size: 1.4em;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 1.2em;
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+.filterDate_container {
+  background-color: #f7f6fe;
+  width: 100%;
+  margin: 0 auto;
+  height: 115vh;
+  padding-top: 20px;
+
+  .returnBar {
+    background-color: white;
+    height: 100px;
+    display: flex;
+    box-shadow: 3px 3px 3px rgb(187, 187, 187);
+
+    .arrowBack {
+      margin-top: 70%;
+      margin-left: 20px;
+      width: 80%;
+    }
+
+    h1 {
+      align-self: center;
+      font-weight: bold;
+      margin-left: 30px;
+    }
+  }
+
+  .date_container {
+    width: 90%;
+    text-align: center;
+    margin: 50px auto;
+
+    button {
+      color: #6200ee;
+      padding-right: 20px;
+    }
+  }
+
+  .btn_appliquer {
+    text-align: center;
+    margin-top: 500px;
+
+    button {
+      width: 300px;
+      height: 60px;
+      border: none;
+      background-color: #6200ee;
+      color: white;
+      font-size: 1.4em;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 1.2em;
+      text-align: center;
+    }
+  }
+}

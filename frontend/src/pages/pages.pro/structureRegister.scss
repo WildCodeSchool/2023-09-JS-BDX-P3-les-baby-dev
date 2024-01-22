@@ -1,0 +1,158 @@
+.fileUpload {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.file-upload-preview-img {
+  border-radius: 50%;
+}
+//stepper text et icon
+
+.half-cover {
+  height: 100%;
+}
+.steppers {
+  padding: 20px;
+}
+
+.stepper-head-text {
+  display: none;
+}
+
+.stepper-head-icon {
+  background-color: rgba(211, 211, 211, 0.547);
+  transition: 0.5s ease-in-out;
+}
+
+.stepper-active .stepper-head-icon {
+  background-color: white !important;
+}
+
+.stepper-completed .stepper-head-icon {
+  background-color: rgba(211, 211, 211, 0.547);
+}
+
+// input border-color
+.form-control:focus ~ .form-notch div {
+  border-bottom-color: #9c69e2 !important;
+  --mdb-form-outline-select-notch-border-color: none !important;
+  outline-color: none !important;
+  box-shadow: none;
+}
+
+.form-control:focus ~ .form-notch-leading {
+  border-color: #9c69e2 !important;
+}
+
+.form-outline .form-control:focus ~ .form-notch .form-notch-leading {
+  border-color: #9c69e2;
+  box-shadow: none;
+}
+
+.form-outline .form-control:focus ~ .form-notch .form-notch-trailing {
+  border-left: none;
+  border-color: #9c69e2;
+  border-bottom-color: #9c69e2 !important;
+
+  box-shadow: none;
+}
+
+.form-outline .form-control:focus ~ .form-notch .form-notch-middle {
+  border-color: #9c69e2;
+  border-top-color: transparent;
+  border-bottom-color: #9c69e2 !important;
+  box-shadow: none !important;
+}
+
+.form-control:focus ~ .form-label {
+  color: #9c69e2 !important;
+}
+
+// button
+.next-prev {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.btn {
+  background: #9c69e2;
+  box-shadow: none;
+  min-width: 120px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: #9c69e2;
+    box-shadow: none !important;
+  }
+
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+
+@media (min-width: 700px) {
+  .half-cover {
+    display: flex;
+    align-items: center;
+    width: 30%;
+    height: 100vh;
+    background: linear-gradient(to bottom right, #7847ff, #e37acc);
+  }
+
+  .other-half {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    height: 100%;
+    // background-color: red;
+  }
+
+  .steppers {
+    display: flex;
+    padding: 0;
+  }
+
+  .stepper-head-text {
+    color: rgba(211, 211, 211, 0.547);
+    transition: 0.5s ease-in-out;
+    display: block;
+  }
+
+  .steps-active-head-text,
+  .timeline-head-text,
+  .stepper-active .stepper-head-text {
+    color: white;
+  }
+}
+
+@media (max-width: 500px) {
+  .stepper-head-icon {
+    width: 100%;
+    height: 25px;
+  }
+}
+
+@media (max-width: 300px) {
+  .steppers {
+    padding: 50px;
+    margin: 100px;
+
+    .stepper-head-icon {
+      width: 100%;
+      height: 10px;
+    }
+
+    .half-cover {
+      height: 50px;
+    }
+  }
+}

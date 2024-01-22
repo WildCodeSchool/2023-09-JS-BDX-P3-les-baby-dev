@@ -1,0 +1,154 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  max-width: 1280px;
+}
+.div-visuel {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.text {
+  font-family: "Adamina", serif;
+  font-size: 4vw;
+  text-align: center;
+  justify-content: center;
+}
+.info-text {
+  font-family: "Adamina", serif;
+  font-size: 2vw;
+}
+.grid {
+  display: flex;
+  justify-content: center;
+}
+
+.visuel-simple {
+  width: 60%;
+  margin: 3vh;
+}
+.visuel {
+  width: 30%;
+  position: relative;
+}
+.text-overlay {
+  position: absolute;
+  top: 23px;
+  left: 0;
+  margin-left: 47%;
+  width: 32%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Adamina", serif;
+  font-size: 1vw;
+}
+.titre-overlay {
+  top: -5vw;
+  font-size: 2vw;
+}
+.text-svg {
+  position: absolute;
+  top: 3px;
+  left: 15%;
+  margin-left: 20%;
+  width: 13%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Adamina", serif;
+  font-size: 1.1vw;
+}
+.one {
+  left: 15%;
+  top: -8.5%;
+}
+.two {
+  left: 43%;
+  top: -8.5%;
+}
+.four {
+  left: 44%;
+}
+.contents {
+  display: contents;
+  position: relative;
+}
+
+@media screen and (min-width: 750px) {
+  .text-overlay {
+    top: 40px;
+  }
+  .titre-overlay {
+    top: -7vw;
+    font-size: 2vw;
+  }
+  .one {
+    left: 15%;
+    top: 7%;
+  }
+  .two {
+    left: 43%;
+    top: 8%;
+  }
+  .three {
+    left: 15%;
+    top: 21%;
+  }
+  .four {
+    left: 44%;
+    top: 21%;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .one {
+    left: 15%;
+    top: 57%;
+  }
+  .two {
+    left: 45%;
+    top: 58%;
+  }
+  .three {
+    left: 15%;
+    top: 90%;
+  }
+  .four {
+    left: 44%;
+    top: 91%;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .one {
+    left: 16%;
+    top: 46%;
+  }
+  .two {
+    left: 42%;
+    top: 46%;
+  }
+  .three {
+    left: 15%;
+    top: 73%;
+  }
+  .four {
+    left: 42%;
+    top: 73vh;
+  }
+}

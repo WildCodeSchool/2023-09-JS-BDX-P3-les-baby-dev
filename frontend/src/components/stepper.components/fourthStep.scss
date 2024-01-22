@@ -1,0 +1,50 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.step5 {
+  .check {
+    display: flex;
+    // align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .checkboxsContainer,
+  .activitiesContainer {
+    .checkboxContainer {
+      padding: 3px;
+      display: flex;
+      gap: 10px;
+      line-height: 20px;
+    }
+  }
+
+  .expContainer {
+    width: 50%;
+  }
+
+  .btn {
+    background: #9c69e2;
+
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
+
+  @media (max-width: 700px) {
+    width: 100%;
+    margin: 5px;
+
+    .checkboxsContainer,
+    .activitiesContainer {
+      .checkboxContainer {
+        padding: 3px;
+        display: flex;
+        gap: 10px;
+        line-height: 20px;
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+.filterComponent_container {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #dfdede;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  color: white;
+  box-shadow: 2px 2px 2px 2px rgb(0, 0, 0, 0.6);
+  border: none;
+
+  a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color: inherit;
+    margin-left: 40px;
+
+    h2 {
+      margin: 0;
+      font-size: 1.1em;
+      margin-left: 10px;
+    }
+
+    .btn_filter {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      height: 100%;
+
+      img {
+        height: 70%;
+        margin: 10px 20px;
+        padding: 10px 10px;
+        border: none;
+        border-radius: 5px;
+      }
+    }
+  }
+}
