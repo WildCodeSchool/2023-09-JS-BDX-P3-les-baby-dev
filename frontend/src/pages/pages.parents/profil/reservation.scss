@@ -85,3 +85,21 @@
     text-align: center;
   }
 }
+
+@media (min-width: 768px) {
+  .reservation_container {
+    .card_reservation {
+      .picture_card {
+        width: 60%;
+        margin: 0 auto;
+
+        img {
+          width: 70%;
+          margin: 0 auto;
+          padding-top: 10px;
+          display: flex;
+        }
+      }
+    }
+  }
+}
