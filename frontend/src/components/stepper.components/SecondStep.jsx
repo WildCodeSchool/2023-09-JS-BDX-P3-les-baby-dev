@@ -31,7 +31,7 @@ function SecondStep({ nextQuestion, prevQuestion }) {
 
     axios
       .put(
-        `http://localhost:3310/api/structures/${data?.id}/avatar`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/structures/${data?.id}/avatar`,
         formData ?? {}
       )
       .then((response) => {

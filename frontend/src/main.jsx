@@ -41,7 +41,7 @@ const router = createBrowserRouter([
     loader: async () => {
       try {
         const data = await apiService.get(
-          "http://localhost:3310/api/users/myprofil"
+          `${import.meta.env.VITE_BACKEND_URL}/api/users/myprofil`
         );
         return { preloadUser: data ?? null };
       } catch (err) {
@@ -166,7 +166,7 @@ const router = createBrowserRouter([
         loader: async () => {
           try {
             const data = await apiService.get(
-              `http://localhost:3310/api/users/structure`
+              `${import.meta.env.VITE_BACKEND_URL}/api/users/structure`
             );
             return { preloadUserStructure: data ?? null };
           } catch (error) {

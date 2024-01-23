@@ -19,14 +19,14 @@ function UserContextProvider({ children, apiService }) {
   const login = async (credentials) => {
     try {
       const { data } = await axios.post(
-        `http://localhost:3310/api/login`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/login`,
         credentials
       );
       localStorage.setItem("token", data.token);
       apiService.setToken(data.token);
 
       const result = await apiService.get(
-        "http://localhost:3310/api/users/myprofil"
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/myprofil`
       );
 
       alert(`Content de vous revoir ${result.data.email}`);
@@ -45,7 +45,12 @@ function UserContextProvider({ children, apiService }) {
 
   const register = async (newUser) => {
     try {
-      setUser(await axios.post("http://localhost:3310/api/users", newUser));
+      setUser(
+        await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/api/users`,
+          newUser
+        )
+      );
       alert(`Bienvenue ${newUser.email}`);
       if (newUser.is_admin) {
         return navigate("/structure");

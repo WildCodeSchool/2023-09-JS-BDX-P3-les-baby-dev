@@ -29,7 +29,9 @@ function SearchList() {
   useEffect(() => {
     const fetchDataCreche = async () => {
       try {
-        const response = await fetch("http://localhost:3310/api/structure");
+        const response = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/structure`
+        );
         if (!response.ok) {
           throw new Error("Erreur lors de la récupération des données");
         }

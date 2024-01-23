@@ -43,7 +43,7 @@ function ParentContextProvider({ children }) {
     // console.log(dataParent);
     try {
       const response = await axios.put(
-        `http://localhost:3310/api/parents/${dataParent.id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/parents/${dataParent.id}`,
         dataParent ?? {}
       );
 
@@ -60,7 +60,7 @@ function ParentContextProvider({ children }) {
     const fetchDataCreche = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3310/api/structure/${id}`
+          `${import.meta.env.VITE_BACKEND_URL}/api/structure/${id}`
         );
         if (!response.ok) {
           throw new Error("Erreur lors de la récupération des données");
@@ -85,7 +85,7 @@ function ParentContextProvider({ children }) {
     const fetchDataParent = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3310/api/users/parent/myprofil`
+          `${import.meta.env.VITE_BACKEND_URL}/api/users/parent/myprofil`
         );
         if (!response.ok) {
           throw new Error("Erreur lors de la récupération des données");

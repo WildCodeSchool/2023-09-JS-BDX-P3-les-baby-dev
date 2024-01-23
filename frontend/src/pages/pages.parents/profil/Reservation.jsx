@@ -34,7 +34,7 @@ function Reservation() {
 
     try {
       const response = await Axios.post(
-        "http://localhost:3310/api/reservation",
+        `${import.meta.env.VITE_BACKEND_URL}/api/reservation`,
         reservationData
       );
       console.info(response.data);
@@ -50,7 +50,7 @@ function Reservation() {
     const getParent = async () => {
       try {
         const response = await Axios.post(
-          "http://localhost:3310/api/users/parent/myprofil"
+          `${import.meta.env.VITE_BACKEND_URL}/api/users/parent/myprofil`
         );
         console.info(response);
         // console.log(response.data);

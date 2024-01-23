@@ -101,7 +101,9 @@ export default function App() {
   useEffect(() => {
     const fetchResaData = async () => {
       try {
-        const response = await fetch("http://localhost:3310/api/reservations");
+        const response = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/reservations`
+        );
         if (!response.ok) {
           throw new Error("Erreur lors de la récupération des données");
         }

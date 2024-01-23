@@ -80,7 +80,9 @@ function StructureContextProvider({ children }) {
     // console.log("dataEmployee", dataEmployee);
     try {
       const response = await axios.put(
-        `http://localhost:3310/api/structure/${data?.id}/adaptation/employees`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/structure/${
+          data?.id
+        }/adaptation/employees`,
         dataEmployee ?? {}
       );
 
@@ -93,7 +95,9 @@ function StructureContextProvider({ children }) {
   const handleSubmitSchedules = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:3310/api/structure/${data?.id}/adaptation/hours`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/structure/${
+          data?.id
+        }/adaptation/hours`,
         dataSchedules ?? {}
       );
 
@@ -106,7 +110,9 @@ function StructureContextProvider({ children }) {
   const handleSubmit = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:3310/api/structure/${data?.id}/adaptation`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/structure/${
+          data?.id
+        }/adaptation`,
         data ?? {}
       );
 
