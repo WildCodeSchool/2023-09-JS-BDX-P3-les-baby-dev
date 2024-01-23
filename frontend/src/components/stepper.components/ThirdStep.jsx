@@ -20,6 +20,7 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
   const { dataEmployee, setDataEmployee } = useStructure();
   const HandleAdd = () => {
     const newEmployee = {
+      // id: null,
       files: "",
       name: "",
       fName: "",

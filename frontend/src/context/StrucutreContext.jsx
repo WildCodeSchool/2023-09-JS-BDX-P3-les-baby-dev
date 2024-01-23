@@ -9,6 +9,7 @@ const StructureContext = createContext();
 function StructureContextProvider({ children }) {
   const { user } = useUser();
   const loaderData = useLoaderData();
+  const [dataImage, setDataImage] = useState({});
   const [data, setData] = useState({
     jardin: false,
     maxPlaces: 1,
@@ -52,11 +53,14 @@ function StructureContextProvider({ children }) {
     });
   };
 
-  // const onChangeFiles = (value) => {
-  //   if (value[0] !== data.profilPic) {
-  //     setData({ ...data, profilPic: value[0] });
-  //   }
-  // };
+  const onChangeFiles = (value) => {
+    if (value[0] !== dataImage.avatar) {
+      setDataImage((prevDataImage) => ({
+        ...prevDataImage,
+        avatar: value[0],
+      }));
+    }
+  };
 
   const updateAllDays = (key, value) => {
     setdataSchedules((prevData) => ({
@@ -73,6 +77,7 @@ function StructureContextProvider({ children }) {
   };
 
   const handleSubmitEmployee = async () => {
+    // console.log("dataEmployee", dataEmployee);
     try {
       const response = await axios.put(
         `http://localhost:3310/api/structure/${data?.id}/adaptation/employees`,
@@ -118,13 +123,14 @@ function StructureContextProvider({ children }) {
       data,
       setData,
       onChange,
-      // onChangeFiles,
+      onChangeFiles,
       updateAllDays,
       updateAmenities,
       dataSchedules,
       handleSubmitEmployee,
       dataEmployee,
       setDataEmployee,
+      dataImage,
     }),
     [
       handleSubmit,
@@ -132,13 +138,14 @@ function StructureContextProvider({ children }) {
       data,
       setData,
       onChange,
-      // onChangeFiles,
+      onChangeFiles,
       updateAllDays,
       updateAmenities,
       dataSchedules,
       handleSubmitEmployee,
       dataEmployee,
       setDataEmployee,
+      dataImage,
     ]
   );
 
