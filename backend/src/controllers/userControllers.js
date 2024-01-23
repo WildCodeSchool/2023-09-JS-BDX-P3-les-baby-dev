@@ -2,7 +2,7 @@
 const jwt = require("jsonwebtoken");
 const models = require("../models");
 
-const getUser = (_, res) => {
+const getUsers = (_, res) => {
   models.user
     .findAll()
     .then(([rows]) => {
@@ -22,9 +22,10 @@ const addUser = (req, res) => {
         id: rows.insertId,
         email: req.body.email,
         isAdmin: req.body.isAdmin,
-        /*  structureId: rows.structureId,
+        structureId: rows.structureId,
+        parentId: rows.parentId,
         hoursId: rows.hoursId,
-        emplyeeId: rows.emplyeeId, */
+        employeeId: rows.employeeId,
       });
     })
     .catch((err) => {
@@ -51,13 +52,53 @@ const postLogin = (req, res) => {
   });
 };
 
-const getProfile = (req, res) => {
-  res.send(req.user);
+const getProfile = async (req, res) => {
+  try {
+    const user = await models.user.getUsers(req.user.id);
+
+    if (user) {
+      delete user.password;
+    }
+
+    return user ? res.send(user) : res.sendStatus(404);
+  } catch (error) {
+    return res.status(500).send({ msg: error.message });
+  }
+};
+
+const getParent = async (req, res) => {
+  try {
+    const user = await models.user.getParent(req.user.id);
+
+    return user ? res.send(user) : res.sendStatus(404);
+  } catch (error) {
+    return res.status(500).send({ msg: error.message });
+  }
+};
+
+const updateParent = async (req, res) => {
+  try {
+    await models.parent.updateP(req.params.id, req.body);
+
+    res.status(201).json({
+      success: true,
+      message: "Parent registered successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      error: error.message,
+    });
+  }
 };
 
 module.exports = {
   addUser,
-  getUser,
+  getUsers,
   postLogin,
   getProfile,
+  updateParent,
+  getParent,
 };

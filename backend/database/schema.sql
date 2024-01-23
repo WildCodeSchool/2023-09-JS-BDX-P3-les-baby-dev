@@ -41,16 +41,38 @@ values (
 
 DROP TABLE if EXISTS parent;
 
-CREATE TABLE IF NOT EXISTS parent (
-    id int primary key auto_increment not null, user_id INT NOT NULL, name VARCHAR(255), profession VARCHAR(255), address VARCHAR(255), telephone VARCHAR(10), justificatifRevenu VARCHAR(255), declarationRevenu VARCHAR(255), justificatifDomicile VARCHAR(255), justificatifSituationPro VARCHAR(255), rib VARCHAR(255), numAllocataire INT, securiteSocialNumber INT, assurances VARCHAR(255)
-);
+CREATE TABLE
+    IF NOT EXISTS parent (
+        id int primary key auto_increment not null,
+        user_id INT NOT NULL,
+        parentName VARCHAR(255),
+        parentFName VARCHAR(255),
+        profession VARCHAR(255),
+        address VARCHAR(255),
+        ville VARCHAR(255),
+        telephone VARCHAR(10),
+        justificatifRevenu VARCHAR(255),
+        declarationRevenu VARCHAR(255),
+        justificatifDomicile VARCHAR(255),
+        justificatifSituationPro VARCHAR(255),
+        rib VARCHAR(255),
+        numAllocataire INT,
+        securiteSocialNumber INT,
+        assurances VARCHAR(255)
+    );
 
 ALTER TABLE parent
 ADD CONSTRAINT `fk_user_id` FOREIGN KEY (user_id) REFERENCES user (id);
 
 insert into
     parent (
-        user_id, name, profession, address, telephone
+        user_id,
+        parentName,
+        parentFName,
+        profession,
+        address,
+        ville,
+        telephone
     )
 values (
         1, 'daamn', 'Ambulancier', '17 rue gambetta', '33130'
