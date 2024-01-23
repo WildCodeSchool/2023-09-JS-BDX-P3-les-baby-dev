@@ -28,9 +28,9 @@ import DocInscription from "./pages/pages.parents/profil/InscriptionDoc";
 import ConfirmationResa from "./pages/pages.parents/reservation/ConfirmationResa";
 import StructureRegister from "./pages/pages.pro/StructureRegister";
 import ReservationFinal from "./pages/pages.parents/reservation/ReservationFinal";
+import ParentContextProvider from "./context/ParentContext";
 import StructureContextProvider from "./context/StrucutreContext";
 import ApiService from "./services/api.service";
-import ParentContextProvider from "./context/ParentContext";
 
 const apiService = new ApiService();
 
@@ -77,11 +77,19 @@ const router = createBrowserRouter([
           },
           {
             path: "/searchlist/nursery/:id",
-            element: <NurseryCard />,
+            element: (
+              <ParentContextProvider>
+                <NurseryCard />
+              </ParentContextProvider>
+            ),
           },
           {
-            path: "/searchlist/reservation",
-            element: <Reservation />,
+            path: "/searchlist/nursery/:id/reservation",
+            element: (
+              <ParentContextProvider>
+                <Reservation />
+              </ParentContextProvider>
+            ),
           },
           {
             path: "/searchlist/conditions",

@@ -75,6 +75,7 @@ router.get("/users/parent", authMiddleware, parentControllers.getListParent);
 /* *********** Routes reservation ************** */
 
 router.get("/reservations", reservationControllers.getReservation);
+router.post("/reservation", reservationControllers.addReservation);
 
 /* ************************************************************************* */
 
