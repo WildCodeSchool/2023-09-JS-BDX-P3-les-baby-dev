@@ -57,6 +57,26 @@ function ParentContextProvider({ children }) {
     return null;
   }
 
+  useEffect(() => {
+    const fetchDataParent = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3310/api/users/parent/myprofil`
+        );
+        if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des données");
+        }
+        const result = await response.json();
+        setDataParent(result);
+      } catch (err) {
+        console.error(err);
+      }
+      return null;
+    };
+
+    fetchDataParent();
+  });
+
   const contextParentValue = useMemo(
     () => ({
       handleClick,

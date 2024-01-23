@@ -13,7 +13,16 @@ const getListParent = async (_, res) => {
 };
 
 const getMyParentProfil = (req, res) => {
-  res.send(req.user);
+  const id = +req.params.id;
+  models.parent
+    .find(id)
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
 };
 
 module.exports = {

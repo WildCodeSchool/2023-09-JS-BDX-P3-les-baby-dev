@@ -162,7 +162,7 @@ export default function App() {
                   />
                   <div className="ms-3">
                     <p className="fw-bold mb-1">{item.name}</p>
-                    <p className="text-muted mb-0">{item.email}</p>
+                    <p className="text-muted mb-0">{item.name}</p>
                   </div>
                 </div>
               </td>

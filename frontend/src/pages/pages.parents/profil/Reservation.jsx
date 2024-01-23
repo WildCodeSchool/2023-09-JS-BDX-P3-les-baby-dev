@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
 import {
   MDBTimepicker,
   MDBDatepicker,
@@ -11,7 +12,55 @@ import imageDefault from "../../../assets/defaultImage.png";
 import { useParent } from "../../../context/ParentContext";
 
 function Reservation() {
-  const { creche } = useParent();
+  const { creche, dataParent } = useParent();
+
+  // console.log(creche);
+  // console.log(dataParent);
+  // const { structureId } = useParams();
+
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [startTime, setStartTime] = useState(null);
+  const [endTime, setEndTime] = useState(null);
+
+  const handleNextButtonClick = async () => {
+    // Étape 3: Récupérer les données sélectionnées
+    const reservationData = {
+      dayResa: selectedDate,
+      startHour: startTime,
+      finishHour: endTime,
+      structure_id: creche.id,
+      parent_id: dataParent.id,
+    };
+
+    try {
+      const response = await Axios.post(
+        "http://localhost:3310/api/reservation",
+        reservationData
+      );
+      console.info(response.data);
+    } catch (error) {
+      console.error("Erreur lors de l'envoi de la réservation :", error);
+    }
+
+    // Ajouter les données à la table de réservation
+    // console.log("Données de réservation :", reservationData);
+  };
+
+  useEffect(() => {
+    const getParent = async () => {
+      try {
+        const response = await Axios.post(
+          "http://localhost:3310/api/users/parent/myprofil"
+        );
+        console.info(response);
+        // console.log(response.data);
+      } catch (error) {
+        console.error("Erreur lors de l'envoi de la réservation :", error);
+      }
+    };
+
+    getParent();
+  }, []);
 
   /* const crechesData = [
     {
@@ -59,23 +108,42 @@ function Reservation() {
                     invalid
                     isValidated
                   >
-                    <MDBDatepicker inline required />
+                    <MDBDatepicker
+                      inline
+                      required
+                      value={selectedDate}
+                      onChange={(date) => setSelectedDate(date)}
+                    />
                   </MDBValidationItem>
                 </li>
                 <li>
                   <h4>Heure de début souhaité:</h4>
-                  <MDBTimepicker inline format="24h" />
+                  <MDBTimepicker
+                    inline
+                    format="24h"
+                    value={startTime}
+                    onChange={(time) => setStartTime(time)}
+                  />
                 </li>
                 <li>
                   <h4>Heure de fin souhaité:</h4>
-                  <MDBTimepicker inline format="24h" />
+                  <MDBTimepicker
+                    inline
+                    format="24h"
+                    value={endTime}
+                    onChange={(time) => setEndTime(time)}
+                  />
                 </li>
               </ul>
             </div>
 
             <div className="bottom_resa">
               <Link to="/searchlist/conditions">
-                <button type="button" className="btn_next">
+                <button
+                  type="button"
+                  className="btn_next"
+                  onClick={handleNextButtonClick}
+                >
                   Suivant
                 </button>
               </Link>
