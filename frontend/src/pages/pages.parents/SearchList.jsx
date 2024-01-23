@@ -12,6 +12,7 @@ import { useState, useEffect } from "react";
 import NavProfil from "../../components/profile.components/NavProfil";
 import FilterComponent from "../../components/searchList.components/FilterComponent";
 import HeaderNav from "../../components/profile.components/HeaderNav";
+import imageDefault from "../../assets/defaultImage.png";
 // import { useStructure } from "../../context/StrucutreContext";
 // import ApiService from "../../services/api.service";
 
@@ -97,62 +98,60 @@ function SearchList() {
       <FilterComponent />
       <div className="card-container">
         {crechesData.map((creche) => (
-          <div key={creche.id}>
-            <div className="oneCard">
-              <MDBCard>
-                <div className="img_creche">
-                  <img
-                    alt={creche.name}
-                    src={creche.avatarPath || "./src/assets/defaultImage.png"}
-                  />
-                  <h3>{creche.name}</h3>
-                </div>
+          <div className="oneCard" key={creche.id}>
+            <MDBCard>
+              <div className="img_creche">
+                <img
+                  alt={creche.name}
+                  src={creche.avatarPath || imageDefault}
+                />
+                <h3>{creche.name}</h3>
+              </div>
 
-                <MDBCardBody>
-                  <MDBCardTitle>{creche.name}</MDBCardTitle>
-                </MDBCardBody>
-                <MDBListGroup flush>
-                  <MDBListGroupItem>{creche.tel}</MDBListGroupItem>
-                  <MDBListGroupItem>{creche.city}</MDBListGroupItem>
-                  <MDBListGroupItem>
-                    <h4>3€/heure</h4>
-                  </MDBListGroupItem>
-                </MDBListGroup>
-                <MDBCardBody>
-                  <div className="days-container">
-                    <div className="days-availability">
-                      <p>Lundi: Disponible</p>
-                    </div>
-                    <div className="days-availability">
-                      <p>Mardi: Disponible</p>
-                    </div>
-                    <div className="days-availability">
-                      <p>Mercredi: Disponible</p>
-                    </div>
-                    <div className="days-availability">
-                      <p>Jeudi: Disponible</p>
-                    </div>
-                    <div className="days-availability">
-                      <p>Vendredi: Disponible</p>
-                    </div>
-                    <div className="days-availability">
-                      <p>Samedi: Disponible</p>
-                    </div>
+              <MDBCardBody>
+                <MDBCardTitle>{creche.name}</MDBCardTitle>
+              </MDBCardBody>
+              <MDBListGroup flush>
+                <MDBListGroupItem>{creche.tel}</MDBListGroupItem>
+                <MDBListGroupItem>{creche.city}</MDBListGroupItem>
+                <MDBListGroupItem>
+                  <h4>3€/heure</h4>
+                </MDBListGroupItem>
+              </MDBListGroup>
+              <MDBCardBody>
+                <div className="days-container">
+                  <div className="days-availability">
+                    <p>Lundi: Disponible</p>
                   </div>
-                </MDBCardBody>
-                <MDBCardBody>
-                  <Link to={`/searchlist/nursery/${creche.id}`}>
-                    <button
-                      type="button"
-                      className="btn_reservation"
-                      onClick={() => handleNavigate(creche.id)}
-                    >
-                      Réserver
-                    </button>
-                  </Link>
-                </MDBCardBody>
-              </MDBCard>
-            </div>
+                  <div className="days-availability">
+                    <p>Mardi: Disponible</p>
+                  </div>
+                  <div className="days-availability">
+                    <p>Mercredi: Disponible</p>
+                  </div>
+                  <div className="days-availability">
+                    <p>Jeudi: Disponible</p>
+                  </div>
+                  <div className="days-availability">
+                    <p>Vendredi: Disponible</p>
+                  </div>
+                  <div className="days-availability">
+                    <p>Samedi: Disponible</p>
+                  </div>
+                </div>
+              </MDBCardBody>
+              <MDBCardBody>
+                <Link to={`/searchlist/nursery/${creche.id}`}>
+                  <button
+                    type="button"
+                    className="btn_reservation"
+                    onClick={() => handleNavigate(creche.id)}
+                  >
+                    Réserver
+                  </button>
+                </Link>
+              </MDBCardBody>
+            </MDBCard>
           </div>
         ))}
       </div>

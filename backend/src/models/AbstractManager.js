@@ -13,7 +13,9 @@ class AbstractManager {
   }
 
   find(id) {
-    return this.database.query(`select * from ${this.table} where id=?`, [id]);
+    return this.database.query(`select * from ${this.table} where user_id=?`, [
+      id,
+    ]);
   }
 
   findAll() {
@@ -129,6 +131,19 @@ class AbstractManager {
       sqlValues.push(value);
     }
     sql += " where structure_id = ?";
+    sqlValues.push(id);
+    return this.database.query(sql, sqlValues);
+  }
+
+  async updateP(id, dataValue) {
+    let sql = `UPDATE ${this.table} set`;
+    const sqlValues = [];
+    for (const [key, value] of Object.entries(dataValue)) {
+      sql += `${sqlValues.length ? "," : ""} ${key} = ?`;
+
+      sqlValues.push(value);
+    }
+    sql += " where user_id = ?";
     sqlValues.push(id);
     return this.database.query(sql, sqlValues);
   }

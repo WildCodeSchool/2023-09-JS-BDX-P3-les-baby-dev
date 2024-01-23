@@ -19,32 +19,44 @@ class UserManager extends AbstractManager {
     const rows = result[0];
     const userId = rows.insertId;
 
-    const [userStructure] = await this.database.query(
-      `INSERT INTO structure (user_id) values (?)`,
+    if (user.is_admin) {
+      const [userStructure] = await this.database.query(
+        `INSERT INTO structure (user_id) values (?)`,
+        [userId]
+      );
+      const structureId = userStructure.insertId;
+
+      const [hoursStructure] = await this.database.query(
+        `INSERT INTO hours (structure_id) values (?)`,
+        [structureId]
+      );
+
+      const hoursId = hoursStructure.insertId;
+
+      const [employeeStructure] = await this.database.query(
+        `INSERT INTO employee (structure_id) values (?)`,
+        [structureId]
+      );
+
+      const employeeId = employeeStructure.insertId;
+
+      return {
+        id: userId,
+        structureId,
+        hoursId,
+        employeeId,
+      };
+    }
+    const [userParent] = await this.database.query(
+      `INSERT INTO parent (user_id) values (?)`,
       [userId]
     );
-
-    const structureId = userStructure.insertId;
-
-    const [hoursStructure] = await this.database.query(
-      `INSERT INTO hours (structure_id) values (?)`,
-      [structureId]
-    );
-
-    const hoursId = hoursStructure.insertId;
-
-    const [employeeStructure] = await this.database.query(
-      `INSERT INTO employee (structure_id) values (?)`,
-      [structureId]
-    );
-
-    const emplyeeId = employeeStructure.insertId;
+    const parentId = userParent.insertId;
 
     return {
       id: userId,
-      structureId,
-      hoursId,
-      emplyeeId,
+
+      parentId,
     };
   }
 
@@ -67,6 +79,22 @@ class UserManager extends AbstractManager {
       `SELECT id, email, is_admin AS isAdmin FROM ${this.table} WHERE id = ?`,
       [id]
     );
+  }
+
+  async getUsers(id) {
+    const [rows] = await this.database.query(
+      "select * from user where id = ?",
+      [id]
+    );
+    return rows[0] ?? null;
+  }
+
+  async getParent(id) {
+    const [rows] = await this.database.query(
+      "select * from parent where id = ?",
+      [id]
+    );
+    return rows[0] ?? null;
   }
 
   static hashPassword(password, workFactor = 5) {
