@@ -1,4 +1,4 @@
-// import axios from "axios";
+import axios from "axios";
 import { useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { MDBFileUpload } from "mdb-react-file-upload";
@@ -15,18 +15,32 @@ import "./secondStep.scss";
 function SecondStep({ nextQuestion, prevQuestion }) {
   const [loading, setLoading] = useState(false);
 
-  const { onChange, onChangeFiles, data } = useStructure();
+  const { onChange, onChangeFiles, data, dataImage } = useStructure();
   const inputRef = useRef();
   const maxLength = 500;
   const descriptionLength = data.description ? data.description.length : 0;
 
   const { handleSubmit } = useStructure();
 
-  // const handleSubmitFiles = () => {
-  //   const formData = new FormData();
-  //   formData.append("avatar", inputRef.current.files[0]);
-  //   axios.put(`http://localhost:3310/api/${data?.id}/avatar`, formData ?? {});
-  // };
+  const handleSubmitFiles = () => {
+    // console.log("dataimage ", dataImage);
+    const formData = new FormData();
+    formData.append("avatarPath", dataImage);
+    // console.log(dataImage);
+    // console.log("formdata ", formData);
+
+    axios
+      .put(
+        `http://localhost:3310/api/structures/${data?.id}/avatar`,
+        formData ?? {}
+      )
+      .then((response) => {
+        console.info(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const validateSecondStep = () => {
     // const isFileValid = inputRef.current.files.length > 0;
@@ -39,7 +53,7 @@ function SecondStep({ nextQuestion, prevQuestion }) {
       setTimeout(() => {
         handleSubmit();
         nextQuestion();
-        // handleSubmitFiles();
+        handleSubmitFiles();
 
         setLoading(false);
       }, 1000);

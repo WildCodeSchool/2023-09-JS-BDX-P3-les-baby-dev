@@ -39,7 +39,7 @@ router.get("/structure/:id", structureControllers.getStructureById);
 router.put(
   "/structures/:id([0-9]+)/avatar",
   upload.single("avatar"),
-  structureControllers.updateUpload
+  structureControllers.upload
 );
 
 router.put(

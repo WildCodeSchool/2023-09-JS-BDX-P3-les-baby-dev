@@ -1,23 +1,35 @@
-const fs = require("fs");
-const { v4: uuidv4 } = require("uuid");
+// const fs = require("fs");
+// const { v4: uuidv4 } = require("uuid");
 const models = require("../models");
 
-const updateUpload = async (req, res) => {
-  const { originalname, filename } = req.file;
+// const updateUpload = async (req, res) => {
+//   console.log(req.file);
+// const { filename, originalname } = req.file;
 
-  const avatarPath = `./public/uploads/${uuidv4()}-${originalname}`;
-  fs.rename(`./public/uploads/${filename}`, avatarPath, async (err) => {
-    if (err) throw err;
+// const avatarPath = `./public/uploads/${uuidv4()}-${originalname}`;
+// fs.rename(`./public/uploads/${filename}`, avatarPath, async (err) => {
+//   if (err) throw err;
+//   console.log("c la merde", avatarPath);
 
-    try {
-      await models.structure.update(req.params.id, {
-        avatarPath,
-      });
-      return res.status(201).send({ id: req.params.id, avatarPath });
-    } catch (error) {
-      return res.status(422).send({ message: error.message });
-    }
-  });
+//   try {
+//     await models.structure.updateU(req.params.id, {
+//       req.file,
+//     });
+//     return res.status(201).send({ id: req.params.id, req.file });
+//   } catch (error) {
+//     return res.status(422).send({ message: error.message });
+//   }
+// };
+
+const upload = async (req, res) => {
+  // console.log("req.body:", req.body);
+  try {
+    const [result] = await models.structure.update(req.strucutre.id, req.file);
+    // await models.user.addAvatar(req.user.id, result.id);
+    return res.status(201).send({ ...req.user, avatar: result });
+  } catch (err) {
+    return res.status(400).send({ message: err.message });
+  }
 };
 
 const updateStructure = async (req, res) => {
@@ -57,23 +69,25 @@ const updateHours = async (req, res) => {
 };
 
 const updateEmployee = async (req, res) => {
+  // console.log("req.body: ", req.body);
   try {
-    const employeeData = req.body.employees[0]; // Accédez à l'objet employee dans req.body
+    await Promise.all(
+      req.body.employees.map((employeeData) => {
+        const { id, files, name, fName, mail, fonction } = employeeData;
 
-    const { files, name, fName, mail, fonction } = employeeData;
-    // Ajoutez tous les champs nécessaires ici
-
-    await models.employee.updateE(+req.params.id, {
-      files,
-      fName,
-      name,
-      mail,
-      fonction,
-    });
+        return models.employee.updateE(+req.params.id, id, {
+          files,
+          fName,
+          name,
+          mail,
+          fonction,
+        });
+      })
+    );
 
     res.status(201).json({
       success: true,
-      message: "Hours registered successfully",
+      message: "Employee registered successfully",
     });
   } catch (error) {
     console.error(error);
@@ -131,7 +145,8 @@ const getStructureById = (req, res) => {
 
 module.exports = {
   updateStructure,
-  updateUpload,
+  // updateUpload,
+  upload,
   getUserStructure,
   getStructure,
   getStructureById,
