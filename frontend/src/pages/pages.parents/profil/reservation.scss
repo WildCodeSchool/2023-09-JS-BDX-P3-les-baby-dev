@@ -2,7 +2,7 @@
   background: linear-gradient(to bottom right, #7847ff, #e37acc);
   width: 100%;
   margin: 0 auto;
-  height: 100vh;
+  height: 105vh;
 
   h1 {
     color: white;
@@ -15,16 +15,17 @@
     margin: 20px auto;
     background-color: white;
     width: 95%;
-    height: 600px;
+    height: 85vh;
     border-radius: 3px;
 
     .picture_card {
-      height: 150px;
       width: 100%;
 
       img {
-        height: 100%;
-        width: 100%;
+        width: 70%;
+        margin: 0 auto;
+        padding-top: 10px;
+        display: flex;
       }
     }
 
@@ -82,5 +83,23 @@
     color: white;
     padding-bottom: 20px;
     text-align: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .reservation_container {
+    .card_reservation {
+      .picture_card {
+        width: 60%;
+        margin: 0 auto;
+
+        img {
+          width: 70%;
+          margin: 0 auto;
+          padding-top: 10px;
+          display: flex;
+        }
+      }
+    }
   }
 }

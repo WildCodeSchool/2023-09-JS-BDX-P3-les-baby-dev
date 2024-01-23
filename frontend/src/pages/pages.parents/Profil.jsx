@@ -3,11 +3,13 @@ import "./profil.scss";
 import { Link } from "react-router-dom";
 import NavProfil from "../../components/profile.components/NavProfil";
 import { useUser } from "../../context/UserContext";
+import HeaderNav from "../../components/profile.components/HeaderNav";
 
 function Profil() {
   const { logout } = useUser();
   return (
     <div className="profil_container">
+      <HeaderNav />
       <div className="cadre">
         <div className="header_profil">
           <div className="picture_creche">
@@ -28,12 +30,12 @@ function Profil() {
             </Link>
             <li>Mes favoris</li>
             <button type="button" onClick={logout}>
-              déco
+              Déconnexion
             </button>
           </ul>
         </div>
-        <NavProfil />
       </div>
+      <NavProfil />
     </div>
   );
 }

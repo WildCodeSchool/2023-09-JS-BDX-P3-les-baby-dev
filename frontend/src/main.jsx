@@ -75,11 +75,19 @@ const router = createBrowserRouter([
           },
           {
             path: "/searchlist/nursery/:id",
-            element: <NurseryCard />,
+            element: (
+              <ParentContextProvider>
+                <NurseryCard />
+              </ParentContextProvider>
+            ),
           },
           {
-            path: "/searchlist/reservation",
-            element: <Reservation />,
+            path: "/searchlist/nursery/:id/reservation",
+            element: (
+              <ParentContextProvider>
+                <Reservation />
+              </ParentContextProvider>
+            ),
           },
           {
             path: "/searchlist/conditions",

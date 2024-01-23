@@ -53,13 +53,13 @@ insert into
         user_id, name, profession, address, telephone
     )
 values (
-        4, 'daamn', 'Ambulancier', '17 rue gambetta', '33130'
+        1, 'daamn', 'Ambulancier', '17 rue gambetta', '33130'
     ),
     (
-        5, 'daamn', 'Ambulancier', '17 rue gambetta', '33130'
+        2, 'daamn', 'Ambulancier', '17 rue gambetta', '33130'
     ),
     (
-        6, 'daamn', 'Ambulancier', '17 rue gambetta', '33130'
+        3, 'daamn', 'Ambulancier', '17 rue gambetta', '33130'
     );
 
 DROP TABLE if EXISTS reservation;
@@ -102,3 +102,17 @@ DROP TABLE if EXISTS child;
 CREATE TABLE IF NOT EXISTS child (
     id int primary key auto_increment not null, parent_id INT NOT NULL, firstname VARCHAR(255) NOT NULL, lastname VARCHAR(255) NULL, birthday VARCHAR(255) NOT NULL, is_walking BOOLEAN DEFAULT 0, allergies BOOLEAN DEFAULT 0, medecine_traitant_name VARCHAR(255) NOT NULL, FOREIGN KEY (parent_id) REFERENCES parent (id)
 );
+
+insert into
+    child (
+        parent_id, firstname, lastname, birthday, is_walking, allergies, medecine_traitant_name
+    )
+values (
+        1, 'daamn', 'neo', '12/09/2019', 0, 0, 'Dr Brigand'
+    ), 
+    (
+        2, 'vic', 'neo', '12/09/2019', 0, 0, 'Dr Brigand'
+    ),
+    (
+        3, 'mat', 'neo', '12/09/2019', 0, 0, 'Dr Brigand'
+    );

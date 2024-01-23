@@ -15,6 +15,7 @@ import {
 } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
 import Babyplace from "../../assets/Babyplace.svg";
+import { useUser } from "../../context/UserContext";
 
 export default function App() {
   const [colorOpen, setColorOpen] = useState(true);
@@ -23,6 +24,7 @@ export default function App() {
   // const [color, setColor] = useState("primary");
   const [filter, setFilter] = useState("Tous");
   const [resaData, setResaData] = useState([]);
+  const { logout } = useUser();
 
   const navigate = useNavigate();
 
@@ -160,7 +162,7 @@ export default function App() {
                   />
                   <div className="ms-3">
                     <p className="fw-bold mb-1">{item.name}</p>
-                    <p className="text-muted mb-0">{item.email}</p>
+                    <p className="text-muted mb-0">{item.name}</p>
                   </div>
                 </div>
               </td>
@@ -240,6 +242,7 @@ export default function App() {
                     Modifier ma structure
                   </MDBSideNavLink>
                   <MDBSideNavLink>Paramètre</MDBSideNavLink>
+                  <MDBSideNavLink onClick={logout}>Déconnextion</MDBSideNavLink>
                 </MDBSideNavCollapse>
               </MDBSideNavItem>
             </MDBSideNavMenu>

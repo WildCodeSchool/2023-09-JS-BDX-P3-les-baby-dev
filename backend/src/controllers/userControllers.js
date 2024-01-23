@@ -22,9 +22,9 @@ const addUser = (req, res) => {
         id: rows.insertId,
         email: req.body.email,
         isAdmin: req.body.isAdmin,
-        structureId: rows.structureId,
+        /*  structureId: rows.structureId,
         hoursId: rows.hoursId,
-        emplyeeId: rows.emplyeeId,
+        emplyeeId: rows.emplyeeId, */
       });
     })
     .catch((err) => {
