@@ -8,6 +8,7 @@ const UserContext = createContext();
 
 function UserContextProvider({ children, apiService }) {
   const givenData = useLoaderData();
+
   const [isProfessional, setIsProfessional] = useState(
     givenData?.preloadUser?.data?.isAdmin
   );

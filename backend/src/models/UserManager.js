@@ -81,6 +81,22 @@ class UserManager extends AbstractManager {
     );
   }
 
+  async getUsers(id) {
+    const [rows] = await this.database.query(
+      "select * from user where id = ?",
+      [id]
+    );
+    return rows[0] ?? null;
+  }
+
+  async getParent(id) {
+    const [rows] = await this.database.query(
+      "select * from parent where id = ?",
+      [id]
+    );
+    return rows[0] ?? null;
+  }
+
   static hashPassword(password, workFactor = 5) {
     return bcrypt.hash(password, workFactor);
   }

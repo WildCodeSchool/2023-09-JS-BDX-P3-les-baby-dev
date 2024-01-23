@@ -2,7 +2,7 @@
 const jwt = require("jsonwebtoken");
 const models = require("../models");
 
-const getUser = (_, res) => {
+const getUsers = (_, res) => {
   models.user
     .findAll()
     .then(([rows]) => {
@@ -15,7 +15,6 @@ const getUser = (_, res) => {
 };
 
 const addUser = (req, res) => {
-  // console.log(req.body);
   models.user
     .create(req.body)
     .then((rows) => {
@@ -53,13 +52,33 @@ const postLogin = (req, res) => {
   });
 };
 
-const getProfile = (req, res) => {
-  res.send(req.user);
+const getProfile = async (req, res) => {
+  try {
+    const user = await models.user.getUsers(req.user.id);
+
+    if (user) {
+      delete user.password;
+    }
+
+    return user ? res.send(user) : res.sendStatus(404);
+  } catch (error) {
+    return res.status(500).send({ msg: error.message });
+  }
+};
+
+const getParent = async (req, res) => {
+  try {
+    const user = await models.user.getParent(req.user.id);
+
+    return user ? res.send(user) : res.sendStatus(404);
+  } catch (error) {
+    return res.status(500).send({ msg: error.message });
+  }
 };
 
 const updateParent = async (req, res) => {
   try {
-    await models.user.update(req.params.id, req.body);
+    await models.parent.updateP(req.params.id, req.body);
 
     res.status(201).json({
       success: true,
@@ -77,8 +96,9 @@ const updateParent = async (req, res) => {
 
 module.exports = {
   addUser,
-  getUser,
+  getUsers,
   postLogin,
   getProfile,
   updateParent,
+  getParent,
 };

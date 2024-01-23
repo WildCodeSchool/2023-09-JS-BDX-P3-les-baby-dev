@@ -1,10 +1,26 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
+import { useLoaderData } from "react-router-dom";
 
 const ParentContext = createContext();
 
 function ParentContextProvider({ children }) {
-  const [dataParent, setDataParent] = useState({});
+  const loaderData = useLoaderData();
+  // console.log(loaderData);
+
+  const [dataParent, setDataParent] = useState({
+    address: "12 fdf",
+    parentFName: "dsfdf",
+    parentName: "sfdfsdf",
+    profession: "sdfsdf",
+    telephone: "1234678910",
+    ville: "fdfdf",
+    ...loaderData?.preloadUser?.data,
+  });
+
+  // console.log(dataParent.id);
+
   const [dataChildren, setDataChildren] = useState({});
 
   const handleClick = (e) => {
@@ -21,11 +37,19 @@ function ParentContextProvider({ children }) {
     });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.info(dataParent, dataChildren);
-  };
+  const handleSubmit = async () => {
+    // console.log(dataParent);
+    try {
+      const response = await axios.put(
+        `http://localhost:3310/api/parents/${dataParent.id}`,
+        dataParent ?? {}
+      );
 
+      console.info(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   // const handleSubmitFiles = (event) => {
   //   event.preventDefault();
   // };
