@@ -3,45 +3,22 @@ import {
   MDBCard,
   MDBCardBody,
   MDBCardTitle,
-  // MDBCardText,
   MDBListGroup,
   MDBListGroupItem,
 } from "mdb-react-ui-kit";
-import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import NavProfil from "../../components/profile.components/NavProfil";
 import FilterComponent from "../../components/searchList.components/FilterComponent";
 import HeaderNav from "../../components/profile.components/HeaderNav";
 import imageDefault from "../../assets/defaultImage.png";
-// import { useStructure } from "../../context/StrucutreContext";
-// import ApiService from "../../services/api.service";
 
 function SearchList() {
   const navigate = useNavigate();
-  const [crechesData, setCrechesData] = useState([]);
-
-  // const { fetchDataCreche } = useStructure();
+  const loaderData = useLoaderData();
 
   const handleNavigate = (crecheId) => {
     navigate(`/searchlist/nursery/${crecheId}`);
   };
-
-  useEffect(() => {
-    const fetchDataCreche = async () => {
-      try {
-        const response = await fetch("http://localhost:3310/api/structure");
-        if (!response.ok) {
-          throw new Error("Erreur lors de la récupération des données");
-        }
-        const data = await response.json();
-        setCrechesData(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchDataCreche();
-  }, []);
 
   return (
     /* <div>
@@ -97,7 +74,7 @@ function SearchList() {
       <HeaderNav />
       <FilterComponent />
       <div className="card-container">
-        {crechesData.map((creche) => (
+        {loaderData.structures.map((creche) => (
           <div className="oneCard" key={creche.id}>
             <MDBCard>
               <div className="img_creche">

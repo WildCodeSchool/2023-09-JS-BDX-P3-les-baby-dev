@@ -1,5 +1,5 @@
-import { useParams, useLoaderData } from "react-router-dom";
-import { createContext, useContext, useMemo, useState, useEffect } from "react";
+import { useLoaderData } from "react-router-dom";
+import { createContext, useContext, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
@@ -7,7 +7,6 @@ const ParentContext = createContext();
 
 function ParentContextProvider({ children }) {
   const loaderData = useLoaderData();
-  // console.log(loaderData);
 
   const [dataParent, setDataParent] = useState({
     address: "12 fdf",
@@ -16,14 +15,10 @@ function ParentContextProvider({ children }) {
     profession: "sdfsdf",
     telephone: "1234678910",
     ville: "fdfdf",
-    ...loaderData?.preloadUser?.data,
+    ...loaderData?.parentProfil,
   });
 
-  // console.log(dataParent.id);
-
   const [dataChildren, setDataChildren] = useState({});
-  const [creche, setCreche] = useState({});
-  const { id } = useParams();
 
   const handleClick = (e) => {
     setDataParent({
@@ -52,54 +47,6 @@ function ParentContextProvider({ children }) {
       console.error(error);
     }
   };
-  // const handleSubmitFiles = (event) => {
-  //   event.preventDefault();
-  // };
-
-  useEffect(() => {
-    const fetchDataCreche = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:3310/api/structure/${id}`
-        );
-        if (!response.ok) {
-          throw new Error("Erreur lors de la récupération des données");
-        }
-        const result = await response.json();
-        setCreche(result);
-      } catch (err) {
-        console.error(err);
-      }
-      return null;
-    };
-
-    fetchDataCreche();
-  }, [id]);
-
-  if (!creche) {
-    // Ajoutez une vérification pour éviter d'accéder à creche si elle est undefined
-    return null;
-  }
-
-  useEffect(() => {
-    const fetchDataParent = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:3310/api/users/parent/myprofil`
-        );
-        if (!response.ok) {
-          throw new Error("Erreur lors de la récupération des données");
-        }
-        const result = await response.json();
-        setDataParent(result);
-      } catch (err) {
-        console.error(err);
-      }
-      return null;
-    };
-
-    fetchDataParent();
-  });
 
   const contextParentValue = useMemo(
     () => ({
@@ -107,17 +54,8 @@ function ParentContextProvider({ children }) {
       dataParent,
       handleSubmit,
       handleClickChild,
-      // handleSubmitFiles,
-      creche,
     }),
-    [
-      handleClick,
-      dataParent,
-      handleSubmit,
-      handleClickChild,
-      // handleSubmitFiles,
-      creche,
-    ]
+    [handleClick, dataParent, handleSubmit, handleClickChild]
   );
 
   return (

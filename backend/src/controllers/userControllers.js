@@ -32,7 +32,6 @@ const addUser = (req, res) => {
       console.error(err);
       res.status(400).send({ message: err.message });
     });
-  // res.status(418).send(req.body)
 };
 
 function generateAccessToken(data) {

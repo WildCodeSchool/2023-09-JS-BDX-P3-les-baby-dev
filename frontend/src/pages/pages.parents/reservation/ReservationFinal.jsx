@@ -44,8 +44,8 @@ function ReservationFinal() {
         <ul>
           <li>les conditions générales de réservations</li>
           <li>
-            le règlement intérieur de la structure d’envoyer mes information et
-            dossier d’inscription à la crèche
+            le règlement intérieur de la structure d'envoyer mes information et
+            dossier d'inscription à la crèche
           </li>
         </ul>
       </div>

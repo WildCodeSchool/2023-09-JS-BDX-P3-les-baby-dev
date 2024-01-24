@@ -34,7 +34,7 @@ function Reservation() {
 
     try {
       const response = await Axios.post(
-        "http://localhost:3310/api/reservation",
+        `${import.meta.env.VITE_BACKEND_URL}/api/reservation`,
         reservationData
       );
       console.info(response.data);
@@ -42,7 +42,6 @@ function Reservation() {
       console.error("Erreur lors de l'envoi de la réservation :", error);
     }
 
-    // Ajouter les données à la table de réservation
     // console.log("Données de réservation :", reservationData);
   };
 
@@ -50,7 +49,7 @@ function Reservation() {
     const getParent = async () => {
       try {
         const response = await Axios.post(
-          "http://localhost:3310/api/users/parent/myprofil"
+          `${import.meta.env.VITE_BACKEND_URL}/api/users/parent/myprofil`
         );
         console.info(response);
         // console.log(response.data);
@@ -61,31 +60,6 @@ function Reservation() {
 
     getParent();
   }, []);
-
-  /* const crechesData = [
-    {
-      id: 1,
-      name: "Picoti Picota",
-      imageLink: "../src/assets/creche3.jpeg",
-      presentation:
-        "La crèche « Picoti Picota » n’est pas qu’un lieu de garde, c’est surtout un lieu d’échange et d’accueil des enfants et des familles dans une confiance réciproque où le respect, l’autonomie et la sécurité sont des références privilégiées dans notre projet.",
-      openingHours: "Lundi - Samedi : 9h-16h",
-      contact: {
-        phone: "05 56 56 56 56",
-        email: "contact@picotipicota.fr",
-      },
-      availability: {
-        "lundi 14": false,
-        "mardi 15": true,
-        "mercredi 16": false,
-        "jeudi 17": true,
-        "vendredi 18": false,
-        "samedi 19": true,
-      },
-      type: "créche parentale",
-      rate: "4,5/5",
-    },
-  ]; */
 
   return (
     <div className="reservation_container">

@@ -141,7 +141,7 @@ function InscriptionParent() {
                     className="button-children"
                   >
                     {" "}
-                    Enfant →{" "}
+                    Enfant →
                   </Link>
                   M'enregistrer
                 </MDBBtn>

@@ -1,4 +1,4 @@
-import React, { useState /* useEffect */ } from "react";
+import React, { useState } from "react";
 import "./nurseryCard.scss";
 import {
   MDBBtn,
@@ -8,15 +8,14 @@ import {
   MDBModalBody,
   MDBModalFooter,
 } from "mdb-react-ui-kit";
-import { useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import imageDefault from "../../assets/defaultImage.png";
-import { useParent } from "../../context/ParentContext";
 
 function NurseryCard() {
   const [scrollableModal, setScrollableModal] = useState(false);
+  const loaderData = useLoaderData();
 
-  const { creche } = useParent();
+  const creche = loaderData?.preloadNursery;
 
   const navigate = useNavigate();
 
@@ -178,14 +177,5 @@ function NurseryCard() {
     </div>
   );
 }
-
-NurseryCard.propTypes = {
-  creche: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    tel: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default NurseryCard;

@@ -8,35 +8,38 @@ const UserContext = createContext();
 
 function UserContextProvider({ children, apiService }) {
   const givenData = useLoaderData();
+  // console.log("user", givenData);
 
   const [isProfessional, setIsProfessional] = useState(
     givenData?.preloadUser?.data?.isAdmin
   );
-  // eslint-disable-next-line no-unused-vars
+
   const [user, setUser] = useState(givenData?.preloadUser?.data);
   const navigate = useNavigate();
 
   const login = async (credentials) => {
     try {
       const { data } = await axios.post(
-        `http://localhost:3310/api/login`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/login`,
         credentials
       );
       localStorage.setItem("token", data.token);
       apiService.setToken(data.token);
 
       const result = await apiService.get(
-        "http://localhost:3310/api/users/myprofil"
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/myprofil`
       );
 
+      // eslint-disable-next-line no-alert
       alert(`Content de vous revoir ${result.data.email}`);
       setUser(result.data);
-      if (result.data.isAdmin === 1) {
+      if (result.data.is_admin === 1) {
         return navigate("/dashboard");
       }
       return navigate("/searchlist");
     } catch (err) {
       console.error(err);
+      // eslint-disable-next-line no-alert
       alert(err.message);
     }
 
@@ -45,7 +48,13 @@ function UserContextProvider({ children, apiService }) {
 
   const register = async (newUser) => {
     try {
-      setUser(await axios.post("http://localhost:3310/api/users", newUser));
+      setUser(
+        await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/api/users`,
+          newUser
+        )
+      );
+      // eslint-disable-next-line no-alert
       alert(`Bienvenue ${newUser.email}`);
       if (newUser.is_admin) {
         return navigate("/structure");
@@ -53,6 +62,7 @@ function UserContextProvider({ children, apiService }) {
       return navigate("/searchlist");
     } catch (err) {
       console.error(err);
+      // eslint-disable-next-line no-alert
       alert(err.response.data.message);
     }
 
@@ -67,6 +77,7 @@ function UserContextProvider({ children, apiService }) {
 
   const contextValue = useMemo(
     () => ({
+      apiService,
       login,
       register,
       setIsProfessional,
@@ -74,7 +85,15 @@ function UserContextProvider({ children, apiService }) {
       user,
       logout,
     }),
-    [login, register, setIsProfessional, isProfessional, user, logout]
+    [
+      apiService,
+      login,
+      register,
+      setIsProfessional,
+      isProfessional,
+      user,
+      logout,
+    ]
   );
 
   return (

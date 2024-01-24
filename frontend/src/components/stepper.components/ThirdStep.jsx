@@ -14,10 +14,9 @@ import "./thirdStep.scss";
 
 function ThirdStep({ nextQuestion, prevQuestion }) {
   const [loading, setLoading] = useState(false);
-
   const { handleSubmitEmployee } = useStructure();
-
   const { dataEmployee, setDataEmployee } = useStructure();
+
   const HandleAdd = () => {
     const newEmployee = {
       // id: null,
@@ -90,7 +89,6 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
                       className="col-md-4"
                       feedback="Veuillez entrer un prénom valide"
                       invalid
-                      isValidated
                     >
                       <MDBInput
                         name="fName"
@@ -106,7 +104,6 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
                       className="col-md-4"
                       feedback="Veuillez entrer un nom valide"
                       invalid
-                      isValidated
                     >
                       <MDBInput
                         name="name"
@@ -121,7 +118,6 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
                     <MDBValidationItem
                       feedback="Veuillez entrer un email valide"
                       invalid
-                      isValidated
                       className="col-md-4"
                     >
                       <MDBInput
