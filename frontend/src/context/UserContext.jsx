@@ -8,11 +8,12 @@ const UserContext = createContext();
 
 function UserContextProvider({ children, apiService }) {
   const givenData = useLoaderData();
+  // console.log("user", givenData);
 
   const [isProfessional, setIsProfessional] = useState(
     givenData?.preloadUser?.data?.isAdmin
   );
-  // eslint-disable-next-line no-unused-vars
+
   const [user, setUser] = useState(givenData?.preloadUser?.data);
   const navigate = useNavigate();
 
@@ -29,14 +30,16 @@ function UserContextProvider({ children, apiService }) {
         `${import.meta.env.VITE_BACKEND_URL}/api/users/myprofil`
       );
 
+      // eslint-disable-next-line no-alert
       alert(`Content de vous revoir ${result.data.email}`);
       setUser(result.data);
-      if (result.data.isAdmin === 1) {
+      if (result.data.is_admin === 1) {
         return navigate("/dashboard");
       }
       return navigate("/searchlist");
     } catch (err) {
       console.error(err);
+      // eslint-disable-next-line no-alert
       alert(err.message);
     }
 
@@ -51,6 +54,7 @@ function UserContextProvider({ children, apiService }) {
           newUser
         )
       );
+      // eslint-disable-next-line no-alert
       alert(`Bienvenue ${newUser.email}`);
       if (newUser.is_admin) {
         return navigate("/structure");
@@ -58,6 +62,7 @@ function UserContextProvider({ children, apiService }) {
       return navigate("/searchlist");
     } catch (err) {
       console.error(err);
+      // eslint-disable-next-line no-alert
       alert(err.response.data.message);
     }
 
@@ -72,6 +77,7 @@ function UserContextProvider({ children, apiService }) {
 
   const contextValue = useMemo(
     () => ({
+      apiService,
       login,
       register,
       setIsProfessional,
@@ -79,7 +85,15 @@ function UserContextProvider({ children, apiService }) {
       user,
       logout,
     }),
-    [login, register, setIsProfessional, isProfessional, user, logout]
+    [
+      apiService,
+      login,
+      register,
+      setIsProfessional,
+      isProfessional,
+      user,
+      logout,
+    ]
   );
 
   return (

@@ -47,6 +47,7 @@ class UserManager extends AbstractManager {
         employeeId,
       };
     }
+
     const [userParent] = await this.database.query(
       `INSERT INTO parent (user_id) values (?)`,
       [userId]
@@ -55,7 +56,6 @@ class UserManager extends AbstractManager {
 
     return {
       id: userId,
-
       parentId,
     };
   }

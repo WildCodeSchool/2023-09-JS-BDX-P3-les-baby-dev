@@ -62,19 +62,6 @@ class AbstractManager {
     });
   }
 
-  // async updateE(id, dataValue) {
-  //   let sql = `UPDATE ${this.table} set`;
-  //   const sqlValues = [];
-  //   for (const [key, value] of Object.entries(dataValue)) {
-  //     sql += `${sqlValues.length ? "," : ""} ${key} = ?`;
-
-  //     sqlValues.push(value);
-  //   }
-  //   sql += " where structure_id = ?";
-  //   sqlValues.push(id);
-  //   return this.database.query(sql, sqlValues);
-  // }
-
   async updateE(structureId, employeeId, dataValue) {
     try {
       const existingEmployee = await this.database.query(

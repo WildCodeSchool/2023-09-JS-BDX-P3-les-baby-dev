@@ -31,29 +31,20 @@ import ReservationFinal from "./pages/pages.parents/reservation/ReservationFinal
 import ParentContextProvider from "./context/ParentContext";
 import StructureContextProvider from "./context/StrucutreContext";
 import ApiService from "./services/api.service";
+import currentProfilLoader from "./loaders/current-profil.loader";
+import currentParentProfilLoader from "./loaders/current-parent-profil.loader";
+import structuresLoader from "./loaders/structues.loader";
+import currentNurseryLoader from "./loaders/current-nursery.loader";
 
 const apiService = new ApiService();
 
 const router = createBrowserRouter([
   {
     path: "/",
-
-    loader: async () => {
-      try {
-        const data = await apiService.get(
-          `${import.meta.env.VITE_BACKEND_URL}/api/users/myprofil`
-        );
-        return { preloadUser: data ?? null };
-      } catch (err) {
-        console.error(err.message);
-        return null;
-      }
-    },
+    loader: async () => currentProfilLoader(apiService),
     element: (
       <UserContextProvider apiService={apiService}>
-        <ParentContextProvider>
-          <App />
-        </ParentContextProvider>
+        <App />
       </UserContextProvider>
     ),
     children: [
@@ -64,7 +55,18 @@ const router = createBrowserRouter([
       {
         path: "/searchlist",
         children: [
-          { path: "/searchlist", element: <SearchList /> },
+          {
+            path: "/searchlist",
+            loader: async () => ({
+              ...(await currentParentProfilLoader(apiService)),
+              ...(await structuresLoader(apiService)),
+            }),
+            element: (
+              <ParentContextProvider>
+                <SearchList />
+              </ParentContextProvider>
+            ),
+          },
           {
             children: [
               { path: "/searchlist/filter", element: <Filter /> },
@@ -77,6 +79,10 @@ const router = createBrowserRouter([
           },
           {
             path: "/searchlist/nursery/:id",
+            loader: async ({ params }) => ({
+              ...(await currentParentProfilLoader(apiService)),
+              ...(await currentNurseryLoader(apiService, params.id)),
+            }),
             element: (
               <ParentContextProvider>
                 <NurseryCard />
@@ -85,6 +91,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/searchlist/nursery/:id/reservation",
+            loader: async () => currentParentProfilLoader(apiService),
             element: (
               <ParentContextProvider>
                 <Reservation />
@@ -113,6 +120,7 @@ const router = createBrowserRouter([
           { path: "/profil/myresa", element: <ProfilResa /> },
           {
             path: "/profil/inscription",
+            loader: async () => currentParentProfilLoader(apiService),
             children: [
               {
                 path: "/profil/inscription",
@@ -142,7 +150,6 @@ const router = createBrowserRouter([
           },
         ],
       },
-
       {
         path: "/login",
         element: <Login />,
@@ -159,7 +166,6 @@ const router = createBrowserRouter([
             <HomePro />
           </ProContextProvider>
         ),
-        children: [],
       },
       {
         path: "/structure",

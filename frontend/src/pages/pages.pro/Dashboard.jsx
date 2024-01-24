@@ -21,82 +21,11 @@ export default function App() {
   const [colorOpen, setColorOpen] = useState(true);
   const [colorCollapse1, setColorCollapse1] = useState(true);
   const [colorCollapse2, setColorCollapse2] = useState(false);
-  // const [color, setColor] = useState("primary");
   const [filter, setFilter] = useState("Tous");
   const [resaData, setResaData] = useState([]);
   const { logout } = useUser();
 
   const navigate = useNavigate();
-
-  /* const data = [
-    {
-      id: 1,
-      name: "Mat Doe",
-      dayResa: "Lundi 17 mars",
-      startHour: "9h",
-      finishHour: "17h",
-      price: "15euros",
-      status: "Accepté",
-      position: "Senior",
-      img: "https://mdbootstrap.com/img/new/avatars/8.jpg",
-    },
-    {
-      id: 2,
-      name: "Alex Ray",
-      dayResa: "Mardi 18 mars",
-      startHour: "9h",
-      finishHour: "17h",
-      price: "15euros",
-      status: "Refusé",
-      position: "Junior",
-      img: "https://mdbootstrap.com/img/new/avatars/6.jpg",
-    },
-    {
-      id: 3,
-      name: "Kate Hunington",
-      dayResa: "Mercredi 19 mars",
-      startHour: "9h",
-      finishHour: "17h",
-      price: "15euros",
-      status: "En attente",
-      position: "Senior",
-      img: "https://mdbootstrap.com/img/new/avatars/4.jpg",
-    },
-    {
-      id: 4,
-      name: "John Doe",
-      dayResa: "Vendredi 19 mars",
-      startHour: "9h",
-      finishHour: "17h",
-      price: "15euros",
-      status: "Accepté",
-      position: "Senior",
-      img: "https://mdbootstrap.com/img/new/avatars/5.jpg",
-    },
-    {
-      id: 5,
-      name: "Alex Ray",
-      dayResa: "Mardi 03 avril",
-      startHour: "9h",
-      finishHour: "17h",
-      price: "15euros",
-      status: "Accepté",
-      position: "Junior",
-      img: "https://mdbootstrap.com/img/new/avatars/6.jpg",
-    },
-    {
-      id: 6,
-      name: "Kate Hunington",
-      dayResa: "Mercredi 04 avril",
-      startHour: "9h",
-      finishHour: "17h",
-      price: "15euros",
-      status: "En attente",
-      position: "Senior",
-      img: "https://mdbootstrap.com/img/new/avatars/7.jpg",
-    },
-    // ... autres données
-  ]; */
 
   useEffect(() => {
     const fetchResaData = async () => {

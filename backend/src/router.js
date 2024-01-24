@@ -25,11 +25,9 @@ const parentControllers = require("./controllers/parentControllers");
 // Route to add a new user/stucture/parent/enfants
 router.get("/users", userControllers.getUsers);
 router.get("/users/myprofil", authMiddleware, userControllers.getProfile);
-router.get("user/parent", authMiddleware, userControllers.getParent);
 
 router.post("/users", userControllers.addUser);
 router.post("/login", userControllers.postLogin);
-router.put("/parents/:id", authMiddleware, userControllers.updateParent);
 
 /* *********** Route Structure ************** */
 
@@ -71,6 +69,9 @@ router.get(
   parentControllers.getMyParentProfil
 );
 router.get("/users/parent", authMiddleware, parentControllers.getListParent);
+router.get("user/parent", authMiddleware, userControllers.getParent);
+
+router.put("/parents/:id", authMiddleware, userControllers.updateParent);
 
 /* *********** Routes reservation ************** */
 

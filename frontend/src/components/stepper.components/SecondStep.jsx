@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { MDBFileUpload } from "mdb-react-file-upload";
 import {
@@ -16,7 +16,7 @@ function SecondStep({ nextQuestion, prevQuestion }) {
   const [loading, setLoading] = useState(false);
 
   const { onChange, onChangeFiles, data, dataImage } = useStructure();
-  const inputRef = useRef();
+
   const maxLength = 500;
   const descriptionLength = data.description ? data.description.length : 0;
 
@@ -87,7 +87,6 @@ function SecondStep({ nextQuestion, prevQuestion }) {
                 <MDBFileUpload
                   defaultFile="../src/assets/profil-picture.svg"
                   name="avatar"
-                  ref={inputRef}
                   getInputFiles={onChangeFiles}
                 />
               </form>
@@ -105,7 +104,6 @@ function SecondStep({ nextQuestion, prevQuestion }) {
                 className="col-md-4 text-area"
                 feedback="Veuillez entrer un nom valide"
                 invalid
-                isValidated
               >
                 <MDBTextArea
                   label="Message"

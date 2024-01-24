@@ -29,6 +29,9 @@ function FirstStep({ nextQuestion }) {
       isAddressValid &&
       isZipValid &&
       isCityValid;
+    // if (!isValid) {
+    //   return isValidated
+    // }
 
     if (isValid) {
       setLoading(true);
@@ -58,12 +61,11 @@ function FirstStep({ nextQuestion }) {
           </MDBBtn>
         </div>
         <h4>Complétez et vérifiez vos informations</h4>
-        <MDBValidation className="row g-3">
+        <MDBValidation className="row g-3" isValidated>
           <MDBValidationItem
             className="col-md-4"
             feedback="Veuillez entrer un nom valide"
             invalid
-            isValidated
           >
             <MDBInput
               value={data?.name ?? ""}
@@ -79,7 +81,6 @@ function FirstStep({ nextQuestion }) {
             className="col-md-4"
             feedback="Veuillez entrer un numéro valide"
             invalid
-            isValidated
           >
             <MDBInput
               label="Numéro"
@@ -95,8 +96,6 @@ function FirstStep({ nextQuestion }) {
           <MDBValidationItem
             className="col-md-4"
             feedback="Veuillez entrer adresse valide"
-            invalid
-            isValidated
           >
             <MDBInput
               label="N° et nom de rue"
@@ -113,7 +112,6 @@ function FirstStep({ nextQuestion }) {
             className="col-md-3"
             feedback="Veuillez entrer un code postale"
             invalid
-            isValidated
           >
             <MDBInput
               value={data?.zip ?? ""}
@@ -129,7 +127,6 @@ function FirstStep({ nextQuestion }) {
             className="col-md-4"
             feedback="Veuillez entrer une ville"
             invalid
-            isValidated
           >
             <MDBInput
               value={data?.city ?? ""}
