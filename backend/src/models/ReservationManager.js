@@ -10,15 +10,13 @@ class ReservationManager extends AbstractManager {
   async create(reservation) {
     console.info(reservation);
     const result = await this.database.query(
-      `insert into ${this.table} (structure_id, parent_id, name, dayResa, startHour, finishHour, price, status) values (?,?,?,?,?,?,?,?)`,
+      `insert into ${this.table} (structure_id, parent_id, dayResa, startHour, finishHour, status) values (?,?,?,?,?,?)`,
       [
         reservation.structure_id,
         reservation.parent_id,
-        reservation.name,
         reservation.dayResa,
         reservation.startHour,
         reservation.finishHour,
-        reservation.price,
         reservation.status,
       ]
     );

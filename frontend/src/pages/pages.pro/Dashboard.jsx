@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./dashboard.scss";
 import {
   MDBSideNav,
@@ -13,8 +13,8 @@ import {
   MDBTableHead,
   MDBTableBody,
 } from "mdb-react-ui-kit";
-import { useNavigate } from "react-router-dom";
-import Babyplace from "../../assets/Babyplace.svg";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import Babyplace from "../../assets/BabyplacePro-blanc.svg";
 import { useUser } from "../../context/UserContext";
 
 export default function App() {
@@ -22,35 +22,26 @@ export default function App() {
   const [colorCollapse1, setColorCollapse1] = useState(true);
   const [colorCollapse2, setColorCollapse2] = useState(false);
   const [filter, setFilter] = useState("Tous");
-  const [resaData, setResaData] = useState([]);
   const { logout } = useUser();
 
   const navigate = useNavigate();
+  const loaderDataParent = useLoaderData();
+  // console.log(loaderDataParent);
 
-  useEffect(() => {
-    const fetchResaData = async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_BACKEND_URL}/api/reservations`
-        );
-        if (!response.ok) {
-          throw new Error("Erreur lors de la récupération des données");
-        }
-        const data = await response.json();
-        setResaData(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
+  const parent = loaderDataParent?.preloadOneParent;
+  const reservation = loaderDataParent?.reservation;
 
-    fetchResaData();
-  }, []);
+  // console.log("les donées des parents ", parent);
+  // console.log("les donées des resa ", reservation);
 
-  const filteredData = resaData.filter((item) => {
+  const filteredData = reservation.filter((item) => {
     if (filter === "Tous") {
       return true;
     }
-    return item.status === filter;
+    if (filter === "Accepté") {
+      return item.status;
+    }
+    return !item.status;
   });
 
   return (
@@ -75,7 +66,7 @@ export default function App() {
             <th scope="col">Jour de réservation</th>
             <th scope="col">Heure d'arrivée</th>
             <th scope="col">Heure de sortie</th>
-            <th scope="col">Tarifs</th>
+            <th scope="col">Message</th>
             <th scope="col">Status</th>
             <th scope="col">Actions</th>
           </tr>
@@ -85,16 +76,17 @@ export default function App() {
             <tr key={item.id}>
               <td>
                 <div className="d-flex align-items-center">
-                  <img
-                    src={item.picture}
-                    alt=""
-                    style={{ width: "45px", height: "45px" }}
-                    className="rounded-circle"
-                  />
-                  <div className="ms-3">
-                    <p className="fw-bold mb-1">{item.name}</p>
-                    <p className="text-muted mb-0">{item.name}</p>
-                  </div>
+                  {parent.map((p) => (
+                    <div key={parent.id} className="ms-3">
+                      {item.parent_id === p.id && (
+                        <>
+                          <p className="fw-bold mb-1">{item.name}</p>
+
+                          <p className="text-muted mb-0">{p?.name ?? "yooo"}</p>
+                        </>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </td>
               <td>
@@ -108,23 +100,18 @@ export default function App() {
                 <p className="fw-normal mb-1">{item.finishHour}</p>
               </td>
               <td>
-                <h2 className="fw-normal mb-1">{item.price}€/heure</h2>
+                <p className="fw-normal mb-1">Ma fille est timide</p>
               </td>
-              {item.status === "Accepté" && (
+              {item.status ? (
                 <MDBBadge className="badge" color="success" pill>
-                  {item.status}
+                  Accepté
                 </MDBBadge>
-              )}
-              {item.status === "Refusé" && (
+              ) : (
                 <MDBBadge color="danger" pill>
-                  {item.status}
+                  Refusé
                 </MDBBadge>
               )}
-              {item.status === "En attente" && (
-                <MDBBadge color="warning" pill>
-                  {item.status}
-                </MDBBadge>
-              )}
+
               <td>
                 <MDBBtn color="link" rounded size="sm">
                   Edit

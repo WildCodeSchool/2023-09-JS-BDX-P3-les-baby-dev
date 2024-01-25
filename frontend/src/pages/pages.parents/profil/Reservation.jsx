@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Axios from "axios";
 import {
   MDBTimepicker,
@@ -7,20 +7,22 @@ import {
   MDBValidationItem,
 } from "mdb-react-ui-kit";
 import "./reservation.scss";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import imageDefault from "../../../assets/defaultImage.png";
-import { useParent } from "../../../context/ParentContext";
 
 function Reservation() {
-  const { creche, dataParent } = useParent();
+  const loaderData = useLoaderData();
+  // console.log(loaderData);
+
+  const creche = loaderData?.preloadNursery;
+  const parent = loaderData?.parentProfil;
 
   // console.log(creche);
-  // console.log(dataParent);
-  // const { structureId } = useParams();
 
   const [selectedDate, setSelectedDate] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
+  // const [status, setStatus] = useState(true);
 
   const handleNextButtonClick = async () => {
     // Étape 3: Récupérer les données sélectionnées
@@ -29,8 +31,11 @@ function Reservation() {
       startHour: startTime,
       finishHour: endTime,
       structure_id: creche.id,
-      parent_id: dataParent.id,
+      parent_id: parent.id,
+      status: true,
     };
+
+    // console.log(reservationData);
 
     try {
       const response = await Axios.post(
@@ -44,22 +49,6 @@ function Reservation() {
 
     // console.log("Données de réservation :", reservationData);
   };
-
-  useEffect(() => {
-    const getParent = async () => {
-      try {
-        const response = await Axios.post(
-          `${import.meta.env.VITE_BACKEND_URL}/api/users/parent/myprofil`
-        );
-        console.info(response);
-        // console.log(response.data);
-      } catch (error) {
-        console.error("Erreur lors de l'envoi de la réservation :", error);
-      }
-    };
-
-    getParent();
-  }, []);
 
   return (
     <div className="reservation_container">
