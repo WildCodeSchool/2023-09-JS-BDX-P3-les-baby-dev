@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Axios from "axios";
+
 import {
   MDBTimepicker,
   MDBDatepicker,
@@ -7,48 +7,31 @@ import {
   MDBValidationItem,
 } from "mdb-react-ui-kit";
 import "./reservation.scss";
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import imageDefault from "../../../assets/defaultImage.png";
+import { useParent } from "../../../context/ParentContext";
 
 function Reservation() {
   const loaderData = useLoaderData();
-  // console.log(loaderData);
-
-  const creche = loaderData?.preloadNursery;
-  const parent = loaderData?.parentProfil;
-
-  // console.log(creche);
-
+  const { /* reservationData */ updateReservationData } = useParent();
   const [selectedDate, setSelectedDate] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
-  // const [status, setStatus] = useState(true);
+  const navigate = useNavigate();
 
-  const handleNextButtonClick = async () => {
-    // Étape 3: Récupérer les données sélectionnées
-    const reservationData = {
-      dayResa: selectedDate,
-      startHour: startTime,
-      finishHour: endTime,
-      structure_id: creche.id,
-      parent_id: parent.id,
-      status: true,
-    };
+  // console.log(selectedDate);
+  // console.log(startTime);
+  // console.log(endTime);
+  // console.log(reservationData)
 
-    // console.log(reservationData);
+  const creche = loaderData?.preloadNursery;
 
-    try {
-      const response = await Axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/reservation`,
-        reservationData
-      );
-      console.info(response.data);
-    } catch (error) {
-      console.error("Erreur lors de l'envoi de la réservation :", error);
-    }
-
-    // console.log("Données de réservation :", reservationData);
+  const nextStep = async () => {
+    await updateReservationData(selectedDate, startTime, endTime);
+    navigate("/searchlist/conditions");
   };
+
+  // const [status, setStatus] = useState(true);
 
   return (
     <div className="reservation_container">
@@ -101,15 +84,9 @@ function Reservation() {
             </div>
 
             <div className="bottom_resa">
-              <Link to="/searchlist/conditions">
-                <button
-                  type="button"
-                  className="btn_next"
-                  onClick={handleNextButtonClick}
-                >
-                  Suivant
-                </button>
-              </Link>
+              <button type="button" className="btn_next" onClick={nextStep}>
+                Suivant
+              </button>
             </div>
           </MDBValidation>
         </div>

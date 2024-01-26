@@ -2,8 +2,11 @@ import React from "react";
 import "./reservationFinal.scss";
 import { Link } from "react-router-dom";
 import { MDBSwitch } from "mdb-react-ui-kit";
+// import { useParent } from "../../../context/ParentContext";
 
 function ReservationFinal() {
+  // const { reservationData } = useParent();
+
   return (
     <div className="finalResa_container">
       <div className="choisen_creche">
@@ -51,7 +54,9 @@ function ReservationFinal() {
       </div>
       <div className="btn_confirmation">
         <Link to="/searchlist/confirmation">
-          <button type="button">Je confirme ma réservation</button>
+          <button type="button" /* onClick={console.log(reservationData)} */>
+            Je confirme ma réservation
+          </button>
         </Link>
       </div>
     </div>

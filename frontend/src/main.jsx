@@ -105,15 +105,40 @@ const router = createBrowserRouter([
           },
           {
             path: "/searchlist/conditions",
-            element: <ConditonResa />,
+            loader: async ({ params }) => ({
+              ...(await currentParentProfilLoader(apiService)),
+              ...(await currentNurseryLoader(apiService, params.id)),
+            }),
+            element: (
+              <ParentContextProvider>
+                <ConditonResa />
+              </ParentContextProvider>
+            ),
           },
           {
             path: "/searchlist/reservation2",
-            element: <ReservationFinal />,
+            loader: async ({ params }) => ({
+              ...(await currentParentProfilLoader(apiService)),
+              ...(await currentNurseryLoader(apiService, params.id)),
+              ...(await structuresLoader(apiService)),
+            }),
+            element: (
+              <ParentContextProvider>
+                <ReservationFinal />
+              </ParentContextProvider>
+            ),
           },
           {
             path: "/searchlist/confirmation",
-            element: <ConfirmationResa />,
+            loader: async ({ params }) => ({
+              ...(await currentParentProfilLoader(apiService)),
+              ...(await currentNurseryLoader(apiService, params.id)),
+            }),
+            element: (
+              <ParentContextProvider>
+                <ConfirmationResa />
+              </ParentContextProvider>
+            ),
           },
         ],
       },

@@ -10,17 +10,24 @@ import {
 } from "mdb-react-ui-kit";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import imageDefault from "../../assets/defaultImage.png";
+import { useParent } from "../../context/ParentContext";
 
 function NurseryCard() {
   const [scrollableModal, setScrollableModal] = useState(false);
   const loaderData = useLoaderData();
+  const { setReservationData, reservationData } = useParent();
 
   const creche = loaderData?.preloadNursery;
 
   const navigate = useNavigate();
 
-  const handleNavigate = (crecheId) => {
-    navigate(`/searchlist/nursery/${crecheId}/reservation`);
+  const handleNavigate = () => {
+    // console.log("creche.id:", creche.id);
+    navigate(`/searchlist/nursery/${creche.id}/reservation`);
+    setReservationData({
+      ...reservationData,
+      structure_id: creche.id,
+    });
   };
 
   return (
@@ -158,7 +165,7 @@ function NurseryCard() {
                     >
                       Close
                     </MDBBtn>
-                    <MDBBtn onClick={() => handleNavigate(creche.id)}>
+                    <MDBBtn onClick={() => handleNavigate()}>
                       J'ai compris
                     </MDBBtn>
                   </MDBModalFooter>

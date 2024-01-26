@@ -15,6 +15,7 @@ import imageDefault from "../../assets/defaultImage.png";
 function SearchList() {
   const navigate = useNavigate();
   const loaderData = useLoaderData();
+  // console.log("dans searchlist:", loaderData);
 
   const handleNavigate = (crecheId) => {
     navigate(`/searchlist/nursery/${crecheId}`);
