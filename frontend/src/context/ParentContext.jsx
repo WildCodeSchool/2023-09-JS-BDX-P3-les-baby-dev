@@ -29,18 +29,17 @@ function ParentContextProvider({ children }) {
     structure_id: "",
     parent_id: parent.id,
     status: true,
+    message: "",
   });
 
-  const updateReservationData = (date, startTime, endTime) => {
-    return new Promise((resolve) => {
-      setReservationData({
-        ...reservationData,
-        dayResa: date,
-        startHour: startTime,
-        finishHour: endTime,
-      });
-      resolve();
-    });
+  const updateReservationData = (date, startTime, endTime, parentMessage) => {
+    setReservationData((prevData) => ({
+      ...prevData,
+      dayResa: date,
+      startHour: startTime,
+      finishHour: endTime,
+      message: parentMessage,
+    }));
   };
 
   const handleClick = (e) => {

@@ -1,11 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
+import Axios from "axios";
 import "./reservationFinal.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MDBSwitch } from "mdb-react-ui-kit";
-// import { useParent } from "../../../context/ParentContext";
+import { useParent } from "../../../context/ParentContext";
 
 function ReservationFinal() {
-  // const { reservationData } = useParent();
+  const { reservationData, updateReservationData } = useParent();
+  const [parentMessage, setParentMessage] = useState("");
+  const navigate = useNavigate();
+
+  const handleConfirmationClick = async () => {
+    updateReservationData(
+      reservationData.dayResa,
+      reservationData.startHour,
+      reservationData.finishHour,
+      parentMessage
+    );
+    // console.log(reservationData);
+
+    navigate("/searchlist/confirmation");
+    try {
+      const response = await Axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/reservation`,
+        {
+          ...reservationData,
+          message: parentMessage,
+        }
+      );
+      console.info(response.data);
+    } catch (error) {
+      console.error("Erreur lors de l'envoi de la réservation :", error);
+    }
+  };
 
   return (
     <div className="finalResa_container">
@@ -39,7 +66,10 @@ function ReservationFinal() {
         </div>
         <div className="textArea">
           <h4>Message Libre</h4>
-          <textarea>Votre message ici...</textarea>
+          <textarea
+            value={parentMessage}
+            onChange={(e) => setParentMessage(e.target.value)}
+          />
         </div>
       </div>
       <div className="acceptation">
@@ -53,11 +83,9 @@ function ReservationFinal() {
         </ul>
       </div>
       <div className="btn_confirmation">
-        <Link to="/searchlist/confirmation">
-          <button type="button" /* onClick={console.log(reservationData)} */>
-            Je confirme ma réservation
-          </button>
-        </Link>
+        <button type="button" onClick={handleConfirmationClick}>
+          Je confirme ma réservation
+        </button>
       </div>
     </div>
   );

@@ -19,10 +19,10 @@ function Reservation() {
   const [endTime, setEndTime] = useState(null);
   const navigate = useNavigate();
 
-  // console.log(selectedDate);
-  // console.log(startTime);
-  // console.log(endTime);
-  // console.log(reservationData)
+  /* console.log(selectedDate);
+  console.log(startTime);
+  console.log(endTime);
+  console.log(reservationData); */
 
   const creche = loaderData?.preloadNursery;
 
@@ -30,8 +30,6 @@ function Reservation() {
     await updateReservationData(selectedDate, startTime, endTime);
     navigate("/searchlist/conditions");
   };
-
-  // const [status, setStatus] = useState(true);
 
   return (
     <div className="reservation_container">

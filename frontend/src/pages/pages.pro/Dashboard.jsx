@@ -100,9 +100,7 @@ export default function App() {
                 <p className="fw-normal mb-1">{item.finishHour}</p>
               </td>
               <td>
-                <p className="fw-normal mb-1">
-                  Ma fille ne mange pas d'épinard
-                </p>
+                <p className="fw-normal mb-1">{item.message}</p>
               </td>
               {item.status ? (
                 <MDBBadge className="badge" color="success" pill>

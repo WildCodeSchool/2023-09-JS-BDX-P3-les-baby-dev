@@ -79,21 +79,21 @@ values (
 DROP TABLE if EXISTS reservation;
 
 CREATE TABLE IF NOT EXISTS reservation (
-    id int primary key auto_increment not null, structure_id INT NOT NULL, parent_id INT NOT NULL, dayResa VARCHAR(10) NOT NULL, startHour TIME NOT NULL, finishHour TIME NOT NULL, status BOOLEAN DEFAULT 0, FOREIGN KEY (structure_id) REFERENCES structure (id), FOREIGN KEY (parent_id) REFERENCES parent (id)
+    id int primary key auto_increment not null, structure_id INT NOT NULL, parent_id INT NOT NULL, dayResa VARCHAR(10) NOT NULL, startHour TIME NOT NULL, finishHour TIME NOT NULL, status BOOLEAN DEFAULT 0, message VARCHAR(300) NULL, FOREIGN KEY (structure_id) REFERENCES structure (id), FOREIGN KEY (parent_id) REFERENCES parent (id)
 );
 
 insert into
     reservation (
-        structure_id, parent_id, dayResa, startHour, finishHour, status
+        structure_id, parent_id, dayResa, startHour, finishHour, status, message
     )
 values (
-        1, 1, 'lundi', '09:00:00', '17:00:00', 0
+        1, 1, 'lundi', '09:00:00', '17:00:00', 0, 'Hello je suis nouveau'
     ),
     (
-        2, 2, 'mercredi', '10:00:00', '19:00:00', 0
+        2, 2, 'mercredi', '10:00:00', '19:00:00', 0, 'pas moi'
     ),
     (
-        3, 3, 'jeudi', '07:00:00', '16:00:00', 0
+        3, 3, 'jeudi', '07:00:00', '16:00:00', 0, 'top'
     );
 
 DROP TABLE if EXISTS hours;
