@@ -28,16 +28,16 @@ CREATE TABLE IF NOT EXISTS structure (
 
 insert into
     structure (
-        user_id, name, tel, adress, zip, city
+        user_id, name, tel, adress, zip, city, avatarPath, structureDesc
     )
 values (
-        1, 'daamn', '0678252910', '17 rue gambetta', '33130', 'bèglesZoo'
+        1, 'Adam Party', '0678252910', '17 rue gambetta', '33130', 'Bègles', '../src/assets/creche.jpeg', 'La crèche « Adam Party» n’est pas qu’un lieu de garde c’est surtout un lieu d’échange et d’accueil  des enfants et des familles dans une confiance réciproque où le respect, l’autonomie et la sécurité sont des références privilégiées dans notre projet.'
     ),
     (
-        2, 'Mat', '0678252910', '17 rue ailleurs', '33130', 'Bordeaux'
+        2, 'Chauchau Family', '0678252910', '12 rue Arsenal', '33000', 'Bordeaux', '../src/assets/creche2.jpeg', 'La crèche « Chauchau Family» n’est pas qu’un lieu de garde c’est surtout un lieu d’échange et d’accueil  des enfants et des familles dans une confiance réciproque où le respect, l’autonomie et la sécurité sont des références privilégiées dans notre projet.'
     ),
     (
-        3, 'Mat', '0678252910', '17 rue ailleurs', '33130', 'Bordeaux'
+        3, 'Victor and Co', '0678252910', '93 rue des praies', '33130', 'Villenave', '../src/assets/creche3.jpeg', 'La crèche « Victor and Co» n’est pas qu’un lieu de garde c’est surtout un lieu d’échange et d’accueil  des enfants et des familles dans une confiance réciproque où le respect, l’autonomie et la sécurité sont des références privilégiées dans notre projet.'
     );
 
 DROP TABLE if EXISTS parent;
@@ -55,7 +55,7 @@ CREATE TABLE
     );
 
 ALTER TABLE parent
-ADD CONSTRAINT `fk_user_id` FOREIGN KEY (user_id) REFERENCES user (id);
+ADD CONSTRAINT `fk_user_id` FOREIGN KEY (user_id) REFERENCES user(id);
 
 insert into
     parent (
@@ -68,33 +68,33 @@ insert into
         telephone
     )
 values (
-        1, 'daamn', 'Ambulancier', '17 rue gambetta', '33130'
+        1, 'Mumu', 'didi', 'ambulanciere', '17 rue gambetta', '33130', '070707070'
     ),
     (
-        2, 'daamn', 'Ambulancier', '17 rue gambetta', '33130'
+        3, 'Mateo', 'delavega', 'Pompier', '17 rue gambetta', '33130', '080808080'
     ),
-    (
-        3, 'daamn', 'Ambulancier', '17 rue gambetta', '33130'
+        (
+        3, 'rikit', 'aoaoab', 'Policier', '17 rue gambetta', '33130', '080808080'
     );
 
 DROP TABLE if EXISTS reservation;
 
 CREATE TABLE IF NOT EXISTS reservation (
-    id int primary key auto_increment not null, structure_id INT NOT NULL, parent_id INT NOT NULL, picture VARCHAR(255), name VARCHAR(255) NOT NULL, dayResa VARCHAR(10) NOT NULL, startHour TIME NOT NULL, finishHour TIME NOT NULL, price INT, status VARCHAR(255), FOREIGN KEY (structure_id) REFERENCES structure (id), FOREIGN KEY (parent_id) REFERENCES parent (id)
+    id int primary key auto_increment not null, structure_id INT NOT NULL, parent_id INT NOT NULL, dayResa VARCHAR(10) NOT NULL, startHour TIME NOT NULL, finishHour TIME NOT NULL, status BOOLEAN DEFAULT 0, message VARCHAR(300) NULL, FOREIGN KEY (structure_id) REFERENCES structure (id), FOREIGN KEY (parent_id) REFERENCES parent (id)
 );
 
 insert into
     reservation (
-        structure_id, parent_id, picture, name, dayResa, startHour, finishHour, price, status
+        structure_id, parent_id, dayResa, startHour, finishHour, status, message
     )
 values (
-        1, 1, 'https://mdbootstrap.com/img/new/avatars/6.jpg', 'Mathieu', 'lundi', '09:00:00', '17:00:00', 3, 'Accepté'
+        1, 1, 'lundi', '09:00:00', '17:00:00', 0, 'Hello je suis nouveau'
     ),
     (
-        2, 2, 'https://mdbootstrap.com/img/new/avatars/1.jpg', 'Adam', 'mercredi', '10:00:00', '19:00:00', 2, 'En attente'
+        2, 2, 'mercredi', '10:00:00', '19:00:00', 0, 'pas moi'
     ),
     (
-        3, 3, 'https://mdbootstrap.com/img/new/avatars/2.jpg', 'Victor', 'jeudi', '07:00:00', '16:00:00', 4, 'Refusé'
+        3, 3, 'jeudi', '07:00:00', '16:00:00', 0, 'top'
     );
 
 DROP TABLE if EXISTS hours;
@@ -105,6 +105,20 @@ CREATE TABLE IF NOT EXISTS hours (
 
 ALTER TABLE hours
 ADD CONSTRAINT `fk_structure_id` FOREIGN KEY (structure_id) REFERENCES structure (id);
+
+insert into
+    hours (
+        structure_id, monday, tuesday, wednesday, thursday, friday, saturday, openHour, closeHour
+    )
+values (
+        1, 0, 0, 1, 0, 0, 1, '08:00:00', '17:00:00'
+    ), 
+    (
+       2, 0, 0, 0, 0, 0, 1, '07:00:00', '16:00:00'
+    ),
+    (
+        3, 1, 0, 1, 0, 0, 0, '10:00:00', '19:00:00'
+    );
 
 DROP TABLE if EXISTS employee;
 

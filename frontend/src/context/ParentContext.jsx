@@ -8,6 +8,8 @@ const ParentContext = createContext();
 function ParentContextProvider({ children }) {
   const loaderData = useLoaderData();
 
+  const parent = loaderData?.parentProfil;
+
   const [dataParent, setDataParent] = useState({
     address: "",
     parentFName: "",
@@ -19,6 +21,26 @@ function ParentContextProvider({ children }) {
   });
 
   const { apiService } = useUser();
+
+  const [reservationData, setReservationData] = useState({
+    dayResa: "",
+    startHour: "",
+    finishHour: "",
+    structure_id: "",
+    parent_id: parent.id,
+    status: true,
+    message: "",
+  });
+
+  const updateReservationData = (date, startTime, endTime, parentMessage) => {
+    setReservationData((prevData) => ({
+      ...prevData,
+      dayResa: date,
+      startHour: startTime,
+      finishHour: endTime,
+      message: parentMessage,
+    }));
+  };
 
   const handleClick = (e) => {
     setDataParent({
@@ -54,13 +76,23 @@ function ParentContextProvider({ children }) {
       handleClick,
       dataParent,
       handleSubmit,
-      // handleClickChild,
+
+      handleClickChild,
+      reservationData,
+      setReservationData,
+      updateReservationData,
+
     }),
     [
       handleClick,
       dataParent,
       handleSubmit,
-      // handleClickChild
+
+      handleClickChild,
+      reservationData,
+      setReservationData,
+      updateReservationData,
+
     ]
   );
 

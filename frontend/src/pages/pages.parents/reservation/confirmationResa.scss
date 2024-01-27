@@ -4,42 +4,13 @@
   margin: 0 auto;
   height: 100vh;
 
-  .pictures_match {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 130px;
-    margin: 0 20px;
-
-    .pictureParent {
-      width: 150px;
-      height: 150px;
-      margin-top: 10px;
-      border-radius: 100%;
-
-      img {
-        height: 100%;
-        width: 100%;
-        border: 1px solid #5121ff;
-        border-radius: 100%;
-      }
-    }
-
-    .picturePro {
-      width: 150px;
-      height: 150px;
-      margin-top: 10px;
-      border-radius: 100%;
-
-      img {
-        height: 100%;
-        width: 100%;
-        border: 1px solid #5121ff;
-        border-radius: 100%;
-      }
-    }
-  }
   .picturelogo {
+    padding-top: 40%;
     text-align: center;
+
+    img {
+      width: 80px;
+    }
   }
 
   h1 {
@@ -91,5 +62,29 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.402);
+  }
+}
+
+@media (min-width: 768px) {
+  .confirmation_container {
+    .picturelogo {
+      padding-top: 10%;
+      text-align: center;
+
+      img {
+        width: 80px;
+      }
+    }
+    h3 {
+      text-align: center;
+      background-color: #2ecd7a;
+      color: white;
+      width: 20%;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 5px;
+      margin: 20px auto;
+    }
   }
 }

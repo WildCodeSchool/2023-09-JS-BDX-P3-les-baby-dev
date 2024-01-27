@@ -10,17 +10,27 @@ import {
 } from "mdb-react-ui-kit";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import imageDefault from "../../assets/defaultImage.png";
+import { useParent } from "../../context/ParentContext";
 
 function NurseryCard() {
   const [scrollableModal, setScrollableModal] = useState(false);
   const loaderData = useLoaderData();
+  const { setReservationData, reservationData } = useParent();
 
   const creche = loaderData?.preloadNursery;
+  const crecheHours = loaderData?.hours.find(
+    (hour) => hour.structure_id === creche.id
+  );
 
   const navigate = useNavigate();
 
-  const handleNavigate = (crecheId) => {
-    navigate(`/searchlist/nursery/${crecheId}/reservation`);
+  const handleNavigate = () => {
+    // console.log("creche.id:", creche.id);
+    navigate(`/searchlist/nursery/${creche.id}/reservation`);
+    setReservationData({
+      ...reservationData,
+      structure_id: creche.id,
+    });
   };
 
   return (
@@ -57,20 +67,86 @@ function NurseryCard() {
           <div className="description_card">
             <h3>3/5</h3>
             <h4>Description</h4>
-            <p>presentation</p>
+            <p>{creche.structureDesc}</p>
           </div>
-          <div className="horaires_nursery">
-            <ul>
-              <li>Lundi de 9h à 12h</li>
-              <li>{creche.tel}</li>
-              <li>{creche.city}</li>
-            </ul>
-          </div>
+          {crecheHours && (
+            <div className="horaires_nursery">
+              <ul>
+                <li>Du lundi au samedi</li>
+                <li>de {crecheHours.openHour} heure</li>
+                <li>à {crecheHours.closeHour} heure</li>
+              </ul>
+            </div>
+          )}
           <div className="critere_nursery">
             <div className="disponibility_nursery">
               <h5>Disponibilités</h5>
               <div className="days-container">
-                <h6>Container days</h6>
+                {crecheHours && (
+                  <>
+                    <p
+                      className="days-availability"
+                      style={{
+                        backgroundColor: crecheHours.monday
+                          ? "#32c766"
+                          : "gray",
+                      }}
+                    >
+                      Lundi: {crecheHours.monday ? "Disponible" : "Complet"}
+                    </p>
+                    <p
+                      className="days-availability"
+                      style={{
+                        backgroundColor: crecheHours.tuesday
+                          ? "#32c766"
+                          : "gray",
+                      }}
+                    >
+                      Mardi: {crecheHours.tuesday ? "Disponible" : "Complet"}
+                    </p>
+                    <p
+                      className="days-availability"
+                      style={{
+                        backgroundColor: crecheHours.wednesday
+                          ? "#32c766"
+                          : "gray",
+                      }}
+                    >
+                      Mercredi:{" "}
+                      {crecheHours.wednesday ? "Disponible" : "Complet"}
+                    </p>
+                    <p
+                      className="days-availability"
+                      style={{
+                        backgroundColor: crecheHours.thursday
+                          ? "#32c766"
+                          : "gray",
+                      }}
+                    >
+                      Jeudi: {crecheHours.thursday ? "Disponible" : "Complet"}
+                    </p>
+                    <p
+                      className="days-availability"
+                      style={{
+                        backgroundColor: crecheHours.friday
+                          ? "#32c766"
+                          : "gray",
+                      }}
+                    >
+                      Vendredi: {crecheHours.friday ? "Disponible" : "Complet"}
+                    </p>
+                    <p
+                      className="days-availability"
+                      style={{
+                        backgroundColor: crecheHours.saturday
+                          ? "#32c766"
+                          : "gray",
+                      }}
+                    >
+                      Samedi: {crecheHours.saturday ? "Disponible" : "Complet"}
+                    </p>
+                  </>
+                )}
               </div>
             </div>
             <div className="experience_nursery">
@@ -158,7 +234,7 @@ function NurseryCard() {
                     >
                       Close
                     </MDBBtn>
-                    <MDBBtn onClick={() => handleNavigate(creche.id)}>
+                    <MDBBtn onClick={() => handleNavigate()}>
                       J'ai compris
                     </MDBBtn>
                   </MDBModalFooter>
