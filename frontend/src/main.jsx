@@ -147,7 +147,14 @@ const router = createBrowserRouter([
         // element: <IncriptionChildren />,
         children: [
           { path: "/profil", element: <Profil /> },
-          { path: "/profil/myresa", element: <ProfilResa /> },
+          {
+            path: "/profil/myresa",
+            loader: async () => ({
+              ...(await currentOneParentLoader(apiService)),
+              ...(await reservationLoader(apiService)),
+            }),
+            element: <ProfilResa />,
+          },
           {
             path: "/profil/inscription",
             loader: async () => currentParentProfilLoader(apiService),

@@ -78,6 +78,7 @@ router.put("/parents/:id", authMiddleware, userControllers.updateParent);
 
 router.get("/reservations", reservationControllers.getReservation);
 router.post("/reservation", reservationControllers.addReservation);
+router.get("/reservation/:id", reservationControllers.getReservationById);
 
 /* ************************************************************************* */
 

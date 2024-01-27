@@ -5,14 +5,6 @@ import { Link } from "react-router-dom";
 function ConfirmationResa() {
   return (
     <div className="confirmation_container">
-      <div className="pictures_match">
-        <div className="pictureParent">
-          <img src="../src/assets/adam.jpeg" alt="" />
-        </div>
-        <div className="picturePro">
-          <img src="../src/assets/Victor.jpeg" alt="" />
-        </div>
-      </div>
       <div className="picturelogo">
         <img src="../src/assets/logoRondVert.svg" alt="" />
       </div>

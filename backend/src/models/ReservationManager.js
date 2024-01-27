@@ -27,6 +27,15 @@ class ReservationManager extends AbstractManager {
 
     return rows;
   }
+
+  async getOneReservation(parentId) {
+    const [rows] = await this.database.query(
+      "SELECT * FROM reservation where parent_id = ?",
+      [parentId]
+    );
+
+    return rows[0] ?? null;
+  }
 }
 
 module.exports = ReservationManager;

@@ -1,9 +1,13 @@
 import React from "react";
 import "./profilResa.scss";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import NavProfil from "../../../components/profile.components/NavProfil";
 
 function ProfilResa() {
+  const loaderDataParent = useLoaderData();
+
+  const reservation = loaderDataParent?.reservation;
+
   return (
     <div className="profilResa_container">
       <div className="choisen_profil">
@@ -24,18 +28,20 @@ function ProfilResa() {
       </div>
       <div className="myResa_container">
         <h1>Mes réservations</h1>
-        <div className="card_myresa">
-          <div className="img_structure">
-            <img src="../src/assets/creche3.jpeg" alt="" />
+        {reservation.map((item) => (
+          <div key={item.id} className="card_myresa">
+            <div className="img_structure">
+              <img src="../src/assets/creche3.jpeg" alt="" />
+            </div>
+            <div className="title_resa">
+              <h2>Bibiche Structure</h2>
+              <p>Réservation confirmé</p>
+            </div>
+            <div className="date_resa">
+              <h3>{item.dayResa}</h3>
+            </div>
           </div>
-          <div className="title_resa">
-            <h2>Bibiche Structure</h2>
-            <p>Réservation confirmé</p>
-          </div>
-          <div className="date_resa">
-            <h3>Lundi 3 janvier 2024</h3>
-          </div>
-        </div>
+        ))}
       </div>
       <NavProfil />
     </div>

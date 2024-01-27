@@ -47,21 +47,23 @@ export default function App() {
   return (
     <>
       <div className="filters">
-        <MDBBtn onClick={() => setFilter("Tous")}>Tous</MDBBtn>
-        <MDBBtn onClick={() => setFilter("En attente")} color="warning">
+        <MDBBtn onClick={() => setFilter("Tous")} className="btn-tous">
+          Tous
+        </MDBBtn>
+        <MDBBtn onClick={() => setFilter("En attente")} className="btn-attente">
           En attente
         </MDBBtn>
-        <MDBBtn onClick={() => setFilter("Accepté")} color="success">
+        <MDBBtn onClick={() => setFilter("Accepté")} className="btn-accepte">
           Accepté
         </MDBBtn>
-        <MDBBtn onClick={() => setFilter("Refusé")} color="danger">
+        <MDBBtn onClick={() => setFilter("Refusé")} className="btn-refuse">
           Refusé
         </MDBBtn>
       </div>
 
       <MDBTable align="middle">
         <MDBTableHead>
-          <tr>
+          <tr className="titreInfos">
             <th scope="col">Name</th>
             <th scope="col">Jour de réservation</th>
             <th scope="col">Heure d'arrivée</th>
@@ -77,12 +79,15 @@ export default function App() {
               <td>
                 <div className="d-flex align-items-center">
                   {parent.map((p) => (
-                    <div key={parent.id} className="ms-3">
+                    <div key={parent.id} className="ms-0">
                       {item.parent_id === p.id && (
                         <>
-                          <p className="fw-bold mb-1">{item.name}</p>
-
-                          <p className="text-muted mb-0">{p?.name ?? "yooo"}</p>
+                          <p className="fw-bold mb-0">
+                            Parent: {p.parentName} {p.parentFName}
+                          </p>
+                          <p className="text-muted mb-0">
+                            Enfant: {p?.parentName ?? "Juju"}
+                          </p>
                         </>
                       )}
                     </div>
