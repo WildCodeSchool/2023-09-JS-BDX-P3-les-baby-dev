@@ -73,7 +73,7 @@ router.get("/users/parent", authMiddleware, parentControllers.getListParent);
 router.get("user/parent", authMiddleware, userControllers.getParent);
 router.get("/parent/:id", parentControllers.getParentById);
 
-router.put("/parents/:id", authMiddleware, userControllers.updateParent);
+router.put("/parents/:id", authMiddleware, parentControllers.updateParent);
 
 /* *********** Routes reservation ************** */
 

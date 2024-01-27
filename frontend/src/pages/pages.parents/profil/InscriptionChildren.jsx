@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   MDBBtn,
   MDBInput,
@@ -11,25 +12,45 @@ import NavProfil from "../../../components/profile.components/NavProfil";
 import { useParent } from "../../../context/ParentContext";
 
 function IncriptionChildren() {
-  const { dataParent, handleClickChild, handleSubmit } = useParent();
+  const [dataChildren, setDataChildren] = useState([
+    {
+      childName: "",
+      childFName: "",
+      childDate: "",
+      walkingChild: "",
+      fonction: "",
+    },
+  ]);
+  const { handleClickChild, handleSubmit } = useParent();
+  const navigate = useNavigate();
+
+  const HandleAdd = () => {
+    const newChild = setDataChildren((prevData) => ({
+      ...prevData,
+      children: [...(prevData.children || []), newChild],
+    }));
+  };
+
   return (
     <div className="flex-inscription">
       <div>
         <HeaderProfile />
         <h1>Dossier Enfant</h1>
-        <button type="button" className="button-children">
-          Enfant 1
-        </button>
+        {dataChildren.map(() => (
+          // child
+          <button type="button" className="button-children">
+            Enfant 1
+          </button>
+        ))}
         <div className="div-form-parent">
           <MDBValidation className="row g-3">
             <MDBValidationItem
               className="col-md-4"
               feedback="Veuillez entrer un nom valide"
               invalid
-              isValidated
             >
               <MDBInput
-                value={dataParent.childName}
+                value={dataChildren.childName}
                 name="childName"
                 onChange={handleClickChild}
                 id="validationCustom01"
@@ -42,11 +63,10 @@ function IncriptionChildren() {
               className="col-md-4"
               feedback="Veuillez entrer un prénom valide"
               invalid
-              isValidated
             >
               <MDBInput
-                value={dataParent.childFName}
-                name="parentFName"
+                value={dataChildren.childFName}
+                name="childFName"
                 onChange={handleClickChild}
                 id="validationCustom01"
                 pattern=".{4,}"
@@ -59,15 +79,14 @@ function IncriptionChildren() {
               className="col-md-4"
               feedback="Veuillez entrer une profession valide"
               invalid
-              isValidated
             >
               <MDBInput
                 label="Date de naissance"
                 id="validationCustomUsername"
                 type="date"
-                name="Date"
+                name="childDate"
                 onChange={handleClickChild}
-                value={dataParent.childDate}
+                value={dataChildren.childDate}
                 pattern="/^\d{2}\/\d{2}\/\d{4}$/"
                 required
               />
@@ -80,7 +99,7 @@ function IncriptionChildren() {
                 handleClickChild({
                   target: {
                     name: "walkingChild",
-                    value: !dataParent.walkingChild,
+                    value: !dataChildren.walkingChild,
                   },
                 })
               }
@@ -89,11 +108,10 @@ function IncriptionChildren() {
               className="col-md-4"
               feedback="Veuillez entrer un prénom valide"
               invalid
-              isValidated
             >
               <MDBInput
-                value={dataParent.childDoctor}
-                name="Doctor"
+                value={dataChildren.childDoctor}
+                name="childDoctor"
                 onChange={handleClickChild}
                 id="validationCustom01"
                 pattern=".{4,}"
@@ -107,8 +125,8 @@ function IncriptionChildren() {
               feedback="Veuillez entrer les allergies"
             >
               <MDBInput
-                value={dataParent.parentFName}
-                name="Allergies"
+                value={dataChildren.childAllergies}
+                name="childAllergies"
                 onChange={handleClickChild}
                 id="validationCustom01"
                 pattern=".{4,}"
@@ -116,30 +134,27 @@ function IncriptionChildren() {
                 label="Allergies"
               />
             </MDBValidationItem>
-
-            <div>
-              <MDBValidationItem
-                className="col-md-4"
-                feedback="Veuillez entrer un numéro valide"
-                invalid
-                isValidated
-              >
-                <MDBBtn
-                  type="submit"
-                  className="button-children"
-                  onClick={handleSubmit}
-                >
-                  <Link
-                    to="/profil/inscription/inscription"
-                    type="button"
-                    className="link-children"
-                  >
-                    Documents →
-                  </Link>
-                </MDBBtn>
-              </MDBValidationItem>
-            </div>
           </MDBValidation>
+
+          <div>
+            <MDBBtn
+              type="submit"
+              className="button-children"
+              onClick={() => {
+                handleSubmit();
+                navigate("/profil/inscription/inscription");
+              }}
+            >
+              Doc
+            </MDBBtn>
+            <MDBBtn
+              type="submit"
+              className="button-children"
+              onClick={HandleAdd}
+            >
+              ajouter un enfant
+            </MDBBtn>
+          </div>
         </div>
       </div>
       <NavProfil />

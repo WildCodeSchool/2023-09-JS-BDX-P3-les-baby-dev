@@ -130,7 +130,7 @@ class AbstractManager {
 
       sqlValues.push(value);
     }
-    sql += " where user_id = ?";
+    sql += " where id = ?";
     sqlValues.push(id);
     return this.database.query(sql, sqlValues);
   }
