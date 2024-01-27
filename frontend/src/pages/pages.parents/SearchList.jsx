@@ -2,7 +2,6 @@ import "./SearchList.scss";
 import {
   MDBCard,
   MDBCardBody,
-  MDBCardTitle,
   MDBListGroup,
   MDBListGroupItem,
 } from "mdb-react-ui-kit";
@@ -41,13 +40,24 @@ function SearchList() {
                   />
                   <h3>{creche.name}</h3>
                 </div>
-
-                <MDBCardBody>
-                  <MDBCardTitle>{creche.name}</MDBCardTitle>
-                </MDBCardBody>
+                <div className="adress_nursery">
+                  <ul>
+                    <li>{creche.adress}</li>
+                    <li>
+                      {creche.zip} {creche.city}
+                    </li>
+                  </ul>
+                </div>
                 <MDBListGroup flush>
-                  <MDBListGroupItem>{creche.tel}</MDBListGroupItem>
-                  <MDBListGroupItem>{creche.city}</MDBListGroupItem>
+                  {crecheHours && (
+                    <div className="horaires_nursery">
+                      <ul>
+                        <li>Ouvert du</li>
+                        <li>lundi au samedi</li>
+                        <li>Téléphone: {creche.tel}</li>
+                      </ul>
+                    </div>
+                  )}
                   <MDBListGroupItem>
                     <h4>3€/heure</h4>
                   </MDBListGroupItem>

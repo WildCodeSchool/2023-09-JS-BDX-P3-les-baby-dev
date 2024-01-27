@@ -27,16 +27,16 @@ CREATE TABLE IF NOT EXISTS structure (
 
 insert into
     structure (
-        user_id, name, tel, adress, zip, city, structureDesc
+        user_id, name, tel, adress, zip, city, avatarPath, structureDesc
     )
 values (
-        1, 'Adam Party', '0678252910', '17 rue gambetta', '33130', 'bèglesZoo', 'La crèche « Adam Party» n’est pas qu’un lieu de garde c’est surtout un lieu d’échange et d’accueil  des enfants et des familles dans une confiance réciproque où le respect, l’autonomie et la sécurité sont des références privilégiées dans notre projet.'
+        1, 'Adam Party', '0678252910', '17 rue gambetta', '33130', 'Bègles', '../src/assets/creche.jpeg', 'La crèche « Adam Party» n’est pas qu’un lieu de garde c’est surtout un lieu d’échange et d’accueil  des enfants et des familles dans une confiance réciproque où le respect, l’autonomie et la sécurité sont des références privilégiées dans notre projet.'
     ),
     (
-        2, 'Chauchau Family', '0678252910', '17 rue ailleurs', '33130', 'Bordeaux', 'La crèche « Chauchau Family» n’est pas qu’un lieu de garde c’est surtout un lieu d’échange et d’accueil  des enfants et des familles dans une confiance réciproque où le respect, l’autonomie et la sécurité sont des références privilégiées dans notre projet.'
+        2, 'Chauchau Family', '0678252910', '12 rue Arsenal', '33000', 'Bordeaux', '../src/assets/creche2.jpeg', 'La crèche « Chauchau Family» n’est pas qu’un lieu de garde c’est surtout un lieu d’échange et d’accueil  des enfants et des familles dans une confiance réciproque où le respect, l’autonomie et la sécurité sont des références privilégiées dans notre projet.'
     ),
     (
-        3, 'Victor and Co', '0678252910', '17 rue ailleurs', '33130', 'Bordeaux', 'La crèche « Victor and Co» n’est pas qu’un lieu de garde c’est surtout un lieu d’échange et d’accueil  des enfants et des familles dans une confiance réciproque où le respect, l’autonomie et la sécurité sont des références privilégiées dans notre projet.'
+        3, 'Victor and Co', '0678252910', '93 rue des praies', '33130', 'Villenave', '../src/assets/creche3.jpeg', 'La crèche « Victor and Co» n’est pas qu’un lieu de garde c’est surtout un lieu d’échange et d’accueil  des enfants et des familles dans une confiance réciproque où le respect, l’autonomie et la sécurité sont des références privilégiées dans notre projet.'
     );
 
 DROP TABLE if EXISTS parent;
