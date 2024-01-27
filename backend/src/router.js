@@ -32,7 +32,12 @@ router.post("/login", userControllers.postLogin);
 /* *********** Route Structure ************** */
 
 router.get("/structure", structureControllers.getStructure);
-router.get("/structure/:id", structureControllers.getStructureById);
+router.get("/structure/:id([0-9]+)", structureControllers.getStructureById);
+router.get(
+  "/structures/:id([0-9]+)/employees",
+  authMiddleware,
+  structureControllers.getStructuresEmployees
+);
 
 router.put(
   "/structures/:id([0-9]+)/avatar",
@@ -71,12 +76,22 @@ router.get(
 router.get("/users/parent", authMiddleware, parentControllers.getListParent);
 router.get("user/parent", authMiddleware, userControllers.getParent);
 
-router.put("/parents/:id", authMiddleware, userControllers.updateParent);
+router.put(
+  "/parents/:id([0-9]+)",
+  authMiddleware,
+  userControllers.updateParent
+);
 
 /* *********** Routes reservation ************** */
 
 router.get("/reservations", reservationControllers.getReservation);
 router.post("/reservation", reservationControllers.addReservation);
+
+router.delete(
+  "/employees/:id([0-9]+)",
+  authMiddleware,
+  structureControllers.deleteEmployee
+);
 
 /* ************************************************************************* */
 

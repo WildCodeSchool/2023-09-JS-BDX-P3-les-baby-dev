@@ -29,22 +29,22 @@ function SixthStep({ nextQuestion, prevQuestion }) {
 
     // Vérifiez si le champ maxHandicap est désactivé et ajustez la valeur en conséquence
     const actualMaxHandicapValue = !data.isHandicapEnabled
-      ? ""
+      ? 0
       : updatedMaxHandicap;
 
     // Vérifiez si le champ maxUnder18Months est désactivé et ajustez la valeur en conséquence
     const actualMaxUnder18MonthsValue = !data.isUnder18MonthsEnabled
-      ? ""
+      ? 0
       : updatedMaxUnder18Months;
 
     // Vérifiez si le champ maxAtypicalHours est désactivé et ajustez la valeur en conséquence
     const actualMaxAtypicalHoursValue = !data.isAtypicalHoursEnabled
-      ? ""
+      ? 0
       : updatedMaxAtypicalHours;
 
     // Vérifiez si le champ maxNightCare est désactivé et ajustez la valeur en conséquence
     const actualMaxNightCareValue = !data.isNightCareEnabled
-      ? ""
+      ? 0
       : updatedMaxNightCare;
 
     updateAmenities("maxHandicap", actualMaxHandicapValue);
@@ -57,20 +57,18 @@ function SixthStep({ nextQuestion, prevQuestion }) {
     const updatedValue = value === "" ? "" : Math.min(value, data.maxPlaces);
 
     const actualValue =
-      fieldName === "maxHandicap" && !data.isHandicapEnabled
-        ? ""
-        : updatedValue;
+      fieldName === "maxHandicap" && !data.isHandicapEnabled ? 0 : updatedValue;
     const updatedValueAfterDisabledCheck =
       fieldName === "maxUnder18Months" && !data.isUnder18MonthsEnabled
-        ? ""
+        ? 0
         : actualValue;
     const updatedValueAfterDisabledCheck2 =
-      fieldName === "maxAtypicalHours" && !data.isAtypicalHoursEnabled
-        ? ""
+      fieldName === "maxAtypicalHours" && data.isAtypicalHoursEnabled
+        ? 0
         : updatedValueAfterDisabledCheck;
     const updatedValueAfterDisabledCheck3 =
-      fieldName === "maxNightCare" && !data.isNightCareEnabled
-        ? ""
+      fieldName === "maxNightCare" && data.isNightCareEnabled
+        ? 0
         : updatedValueAfterDisabledCheck2;
 
     updateAmenities(fieldName, updatedValueAfterDisabledCheck3);
@@ -118,6 +116,7 @@ function SixthStep({ nextQuestion, prevQuestion }) {
               onChange={() =>
                 updateAmenities("isHandicapEnabled", !data.isHandicapEnabled)
               }
+              checked={data?.isHandicapEnabled ?? false}
             />
             <input
               type="number"
@@ -141,6 +140,7 @@ function SixthStep({ nextQuestion, prevQuestion }) {
                   !data.isUnder18MonthsEnabled
                 )
               }
+              checked={data?.isUnder18MonthsEnabled ?? false}
             />
             <input
               type="number"
@@ -164,6 +164,7 @@ function SixthStep({ nextQuestion, prevQuestion }) {
                   !data.isAtypicalHoursEnabled
                 )
               }
+              checked={data?.isAtypicalHoursEnabled ?? false}
             />
             <input
               type="number"
@@ -184,13 +185,14 @@ function SixthStep({ nextQuestion, prevQuestion }) {
               onChange={() =>
                 updateAmenities("isNightCareEnabled", !data.isNightCareEnabled)
               }
+              checked={data?.isNightCareEnabled ?? false}
             />
             <input
               type="number"
               min="0"
               max={data.maxPlaces}
               name="maxNightCare"
-              value={data?.maxNightCare ?? ""}
+              value={!data.isNightCareEnabled ? 0 : data?.maxNightCare}
               onChange={(e) =>
                 handleMaxChildInputChange("maxNightCare", e.target.value)
               }

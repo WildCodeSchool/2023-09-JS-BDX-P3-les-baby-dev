@@ -34,8 +34,8 @@ class UserManager extends AbstractManager {
       const hoursId = hoursStructure.insertId;
 
       const [employeeStructure] = await this.database.query(
-        `INSERT INTO employee (structure_id) values (?)`,
-        [structureId]
+        `INSERT INTO employee (structure_id, mail) values (?, ?)`,
+        [structureId, user.email]
       );
 
       const employeeId = employeeStructure.insertId;

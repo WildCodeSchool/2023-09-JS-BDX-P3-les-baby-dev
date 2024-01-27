@@ -143,6 +143,30 @@ const getStructureById = (req, res) => {
     });
 };
 
+const getStructuresEmployees = async (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  return res.send(await models.employee.getByStructure(id));
+};
+
+const deleteEmployee = async (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  const structureId = await models.employee.getStructureId(id);
+  const [employee] = await models.employee.getByStructure(
+    structureId.structure_id
+  );
+
+  if (
+    id === employee.id &&
+    employee.structure_id !== structureId.structure_id
+  ) {
+    return res.sendStatus(401);
+  }
+
+  // const structureOwner = await models.employee.getOwerId();
+  await models.employee.deleteEmployeeById(id);
+  return res.sendStatus(204);
+};
+
 module.exports = {
   updateStructure,
   // updateUpload,
@@ -152,4 +176,6 @@ module.exports = {
   getStructureById,
   updateHours,
   updateEmployee,
+  getStructuresEmployees,
+  deleteEmployee,
 };

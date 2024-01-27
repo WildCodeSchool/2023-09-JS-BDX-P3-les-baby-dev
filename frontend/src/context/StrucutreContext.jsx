@@ -7,7 +7,7 @@ import { useUser } from "./UserContext";
 const StructureContext = createContext();
 
 function StructureContextProvider({ children }) {
-  const { user } = useUser();
+  const { user, apiService } = useUser();
   const loaderData = useLoaderData();
   const [dataImage, setDataImage] = useState({});
   const [data, setData] = useState({
@@ -77,7 +77,6 @@ function StructureContextProvider({ children }) {
   };
 
   const handleSubmitEmployee = async () => {
-    // console.log("dataEmployee", dataEmployee);
     try {
       const response = await axios.put(
         `${import.meta.env.VITE_BACKEND_URL}/api/structure/${
@@ -122,6 +121,35 @@ function StructureContextProvider({ children }) {
     }
   };
 
+  const getStructureEmployees = async (id) => {
+    try {
+      const employees = (
+        await apiService.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/structures/${id}/employees`
+        )
+      ).data;
+      const dictionary = new Map();
+      employees.forEach((element) => {
+        dictionary.set(element.id, element);
+      });
+      (dataEmployee?.employees ?? []).forEach((element) => {
+        dictionary.set(element.id, element);
+      });
+      setDataEmployee({
+        ...dataEmployee,
+        employees: [...dictionary.values()],
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const deleteEmployee = async (id) => {
+    return apiService.delete(
+      `${import.meta.env.VITE_BACKEND_URL}/api/employees/${id}`
+    );
+  };
+
   const contextStructureValue = useMemo(
     () => ({
       handleSubmit,
@@ -137,6 +165,8 @@ function StructureContextProvider({ children }) {
       dataEmployee,
       setDataEmployee,
       dataImage,
+      getStructureEmployees,
+      deleteEmployee,
     }),
     [
       handleSubmit,
@@ -152,6 +182,8 @@ function StructureContextProvider({ children }) {
       dataEmployee,
       setDataEmployee,
       dataImage,
+      getStructureEmployees,
+      deleteEmployee,
     ]
   );
 

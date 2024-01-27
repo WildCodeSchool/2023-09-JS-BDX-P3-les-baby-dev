@@ -1,8 +1,10 @@
 import React from "react";
 import { useStructure } from "../../../context/StrucutreContext";
+import "./expCheckbox.scss";
 
 function ExpCheckbox() {
   const { onChange, data } = useStructure();
+
   return (
     <div className="expContainer">
       <div className="checkContainer">
@@ -16,6 +18,7 @@ function ExpCheckbox() {
               checked={data?.psci ?? false}
               onChange={onChange}
             />
+            <span className="check"> </span>
             <label htmlFor="psci">Formation premiers secours (PSCI)</label>
           </div>
           <div className="checkboxContainer">
@@ -26,18 +29,22 @@ function ExpCheckbox() {
               checked={data?.nesting ?? false}
               onChange={onChange}
             />
+            <span className="check"> </span>
             <label htmlFor="nesting">
               Formation Nesting (pollution intérieure)
             </label>
           </div>
           <div className="checkboxContainer">
-            <input
-              type="checkbox"
-              id="montessori"
-              name="montessori"
-              checked={data?.montessori ?? false}
-              onChange={onChange}
-            />
+            <div>
+              <input
+                type="checkbox"
+                id="montessori"
+                name="montessori"
+                checked={data?.montessori ?? false}
+                onChange={onChange}
+              />
+              <span className="check"> </span>
+            </div>
             <label htmlFor="montessori">
               Pedagogie Montessori / Pikler Loczy
             </label>
@@ -50,7 +57,10 @@ function ExpCheckbox() {
               checked={data?.handicap ?? false}
               onChange={onChange}
             />
-            <label htmlFor="handi">Formation accueil d'enfant handicapés</label>
+            <span className="check"> </span>
+            <label htmlFor="handicap">
+              Formation accueil d'enfant handicapés
+            </label>
           </div>
         </div>
       </div>

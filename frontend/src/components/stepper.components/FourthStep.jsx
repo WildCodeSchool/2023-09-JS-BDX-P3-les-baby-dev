@@ -41,7 +41,7 @@ function FourthStep({ nextQuestion, prevQuestion }) {
           pour l'accueil de leurs enfants, mais vous pourrez en ajouter d'autres
           auprès la publication.
         </p>
-        <div className="check">
+        <div className="checkQestion">
           <ExpCheckbox />
           <ActivitiesCheckbox />
         </div>

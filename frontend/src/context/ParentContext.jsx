@@ -35,7 +35,6 @@ function ParentContextProvider({ children }) {
   };
 
   const handleSubmit = async () => {
-    // console.log(dataParent);
     try {
       const response = await axios.put(
         `http://localhost:3310/api/parents/${dataParent.id}`,
