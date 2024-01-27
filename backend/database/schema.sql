@@ -1,3 +1,4 @@
+-- Active: 1704704362175@@127.0.0.1@3306@DBBabyplace
 DROP DATABASE if EXISTS DBBabyplace;
 
 create DATABASE if not exists DBBabyplace;
@@ -50,15 +51,7 @@ CREATE TABLE
         profession VARCHAR(255),
         address VARCHAR(255),
         ville VARCHAR(255),
-        telephone VARCHAR(10),
-        justificatifRevenu VARCHAR(255),
-        declarationRevenu VARCHAR(255),
-        justificatifDomicile VARCHAR(255),
-        justificatifSituationPro VARCHAR(255),
-        rib VARCHAR(255),
-        numAllocataire INT,
-        securiteSocialNumber INT,
-        assurances VARCHAR(255)
+        telephone VARCHAR(10)
     );
 
 ALTER TABLE parent
