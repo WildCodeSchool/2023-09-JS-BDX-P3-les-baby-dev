@@ -58,7 +58,6 @@ function ParentContextProvider({ children }) {
   // };
 
   const handleSubmit = async () => {
-    // console.log(dataParent);
     try {
       const response = await apiService.put(
         `http://localhost:3310/api/parents/${dataParent.id}`,
@@ -76,23 +75,19 @@ function ParentContextProvider({ children }) {
       handleClick,
       dataParent,
       handleSubmit,
-
-      handleClickChild,
+      // handleClickChild,
       reservationData,
       setReservationData,
       updateReservationData,
-
     }),
     [
       handleClick,
       dataParent,
       handleSubmit,
-
-      handleClickChild,
+      // handleClickChild,
       reservationData,
       setReservationData,
       updateReservationData,
-
     ]
   );
 

@@ -33,7 +33,12 @@ router.post("/login", userControllers.postLogin);
 /* *********** Route Structure ************** */
 
 router.get("/structure", structureControllers.getStructure);
-router.get("/structure/:id", structureControllers.getStructureById);
+router.get("/structure/:id([0-9]+)", structureControllers.getStructureById);
+router.get(
+  "/structures/:id([0-9]+)/employees",
+  authMiddleware,
+  structureControllers.getStructuresEmployees
+);
 
 router.put(
   "/structures/:id([0-9]+)/avatar",
@@ -73,7 +78,11 @@ router.get("/users/parent", authMiddleware, parentControllers.getListParent);
 router.get("user/parent", authMiddleware, userControllers.getParent);
 router.get("/parent/:id", parentControllers.getParentById);
 
-router.put("/parents/:id", authMiddleware, parentControllers.updateParent);
+router.put(
+  "/parents/:id([0-9]+)",
+  authMiddleware,
+  parentControllers.updateParent
+);
 
 /* *********** Routes reservation ************** */
 
@@ -84,6 +93,13 @@ router.get("/reservation/:id", reservationControllers.getReservationById);
 /* *********** Routes Hour ************** */
 
 router.get("/hours", hoursControllers.getHours);
+router.get("/myhours", authMiddleware, structureControllers.getMyHours);
+
+router.delete(
+  "/employees/:id([0-9]+)",
+  authMiddleware,
+  structureControllers.deleteEmployee
+);
 
 /* ************************************************************************* */
 

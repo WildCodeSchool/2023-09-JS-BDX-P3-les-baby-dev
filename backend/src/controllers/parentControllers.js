@@ -29,7 +29,6 @@ const getMyParentProfil = (req, res) => {
     });
 };
 
-
 const updateParent = async (req, res) => {
   try {
     await models.parent.updateP(req.params.id, req.body);
@@ -46,6 +45,7 @@ const updateParent = async (req, res) => {
       error: error.message,
     });
   }
+};
 
 const getParentById = (req, res) => {
   const id = parseInt(req.params.id, 10);
@@ -62,15 +62,11 @@ const getParentById = (req, res) => {
       console.error(err);
       res.sendStatus(500);
     });
-
 };
 
 module.exports = {
   getListParent,
   getMyParentProfil,
-
   updateParent,
-
   getParentById,
-
 };

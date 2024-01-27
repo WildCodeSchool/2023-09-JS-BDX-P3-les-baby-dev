@@ -41,7 +41,6 @@ function generateAccessToken(data) {
 const postLogin = (req, res) => {
   models.user.login(req.body).then((user) => {
     if (user) {
-      // todo : filtrer les données à envoyer
       const { id, is_admin, email } = user;
       const token = generateAccessToken({ id, is_admin, email });
       res.send({ token });

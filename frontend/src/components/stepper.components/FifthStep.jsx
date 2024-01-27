@@ -47,31 +47,37 @@ function FifthStep({ nextQuestion, prevQuestion }) {
               id="mondaySwitch"
               label="Lundi"
               onChange={() => handleSwitch("monday")}
+              checked={dataSchedules?.monday ?? false}
             />
             <MDBSwitch
               id="tuesday"
               label="Mardi"
               onChange={() => handleSwitch("tuesday")}
+              checked={dataSchedules?.tuesday ?? false}
             />
             <MDBSwitch
               id="wednesday"
               label="Mercredi"
               onChange={() => handleSwitch("wednesday")}
+              checked={dataSchedules?.wednesday ?? false}
             />
             <MDBSwitch
               id="thursday"
               label="Jeudi"
               onChange={() => handleSwitch("thursday")}
+              checked={dataSchedules?.thursday ?? false}
             />
             <MDBSwitch
               id="friday"
               label="Vendredi"
               onChange={() => handleSwitch("friday")}
+              checked={dataSchedules?.friday ?? false}
             />
             <MDBSwitch
               id="saturday"
               label="Samedi"
               onChange={() => handleSwitch("saturday")}
+              checked={dataSchedules?.saturday ?? false}
             />
           </div>
           <div>
@@ -84,7 +90,7 @@ function FifthStep({ nextQuestion, prevQuestion }) {
                 type="time"
                 name="openHour"
                 step="300"
-                value={dataSchedules.openHour}
+                value={dataSchedules?.openHour ?? dataSchedules.openHour}
                 onChange={(e) => updateAllDays("openHour", e.target.value)}
                 onBlur={(e) => updateAllDays("openHour", e.target.value)}
               />
@@ -95,7 +101,7 @@ function FifthStep({ nextQuestion, prevQuestion }) {
                 type="time"
                 name="closeHour"
                 step="300"
-                value={dataSchedules.closeHour}
+                value={dataSchedules?.closeHour ?? dataSchedules.closeHour}
                 onChange={(e) => updateAllDays("closeHour", e.target.value)}
                 onBlur={(e) => updateAllDays("closeHour", e.target.value)}
               />

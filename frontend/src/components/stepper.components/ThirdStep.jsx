@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { MDBFileUpload } from "mdb-react-file-upload";
 import {
@@ -15,11 +15,16 @@ import "./thirdStep.scss";
 function ThirdStep({ nextQuestion, prevQuestion }) {
   const [loading, setLoading] = useState(false);
   const { handleSubmitEmployee } = useStructure();
-  const { dataEmployee, setDataEmployee } = useStructure();
+  const {
+    dataEmployee,
+    setDataEmployee,
+    getStructureEmployees,
+    data,
+    deleteEmployee,
+  } = useStructure();
 
   const HandleAdd = () => {
     const newEmployee = {
-      // id: null,
       files: "",
       name: "",
       fName: "",
@@ -50,13 +55,26 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
     });
   };
 
-  const handleDelete = (i) => {
-    setDataEmployee((prevData) => {
-      const updatedEmployees = [...prevData.employees];
-      updatedEmployees.splice(i, 1);
-      return { ...prevData, employees: updatedEmployees };
-    });
+  const handleDelete = async (i, id) => {
+    try {
+      if (id) {
+        await deleteEmployee(id);
+      }
+
+      setDataEmployee((prevData) => {
+        const updatedEmployees = [...prevData.employees];
+        updatedEmployees.splice(i, 1);
+        return { ...prevData, employees: updatedEmployees };
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  useEffect(() => {
+    getStructureEmployees(data.id);
+  }, []);
+
   return (
     <div className="fifty">
       <div className="step3">
@@ -74,8 +92,8 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
           </MDBBtn>
         </div>
         <div className="employees">
-          {dataEmployee.employees &&
-            dataEmployee.employees.map((employee, i) => (
+          {dataEmployee?.employees &&
+            dataEmployee?.employees.map((employee, i) => (
               <div key={`${i + 1}`} className="photoContainer">
                 <div className="fileUpload">
                   <MDBFileUpload
@@ -126,6 +144,7 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
                         id="validationCustomUsername"
                         placeholder="Mail"
                         name="mail"
+                        value={employee?.mail ?? ""}
                         onChange={(e) =>
                           handleChange(e.target.value, i, "mail")
                         }
@@ -151,15 +170,22 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
                     </MDBValidationItem>
                   </MDBValidation>
                 </div>
-                {dataEmployee.employees.length > 0 && (
-                  <MDBBtn
-                    className="delete"
-                    type="submit"
-                    onClick={() => handleDelete(i)}
-                  >
-                    x
-                  </MDBBtn>
-                )}
+
+                <MDBBtn
+                  className="delete"
+                  type="submit"
+                  onClick={() => handleDelete(i)}
+                >
+                  {employee?.id ? "modifier" : "créer"}
+                </MDBBtn>
+                <MDBBtn
+                  className="delete"
+                  type="submit"
+                  disabled={!dataEmployee.employees.length}
+                  onClick={() => handleDelete(i, employee.id)}
+                >
+                  supprimer
+                </MDBBtn>
               </div>
             ))}
         </div>

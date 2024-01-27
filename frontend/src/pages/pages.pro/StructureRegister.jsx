@@ -51,13 +51,13 @@ function StructureRegister() {
     <>
       <Navbar />
 
-      <button ref={nextRef} type="button" className="d-none">
-        suivant
-      </button>
-      <button ref={prevRef} type="button" className="d-none">
-        précédent
-      </button>
       <div className="steppers">
+        <button ref={nextRef} type="button" className="d-none">
+          suivant
+        </button>
+        <button ref={prevRef} type="button" className="d-none">
+          précédent
+        </button>
         <div className="half-cover">
           <MDBStepper
             type={stepperType}
