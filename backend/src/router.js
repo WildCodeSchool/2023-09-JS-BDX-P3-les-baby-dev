@@ -81,7 +81,7 @@ router.get("/parent/:id", parentControllers.getParentById);
 router.put(
   "/parents/:id([0-9]+)",
   authMiddleware,
-  userControllers.updateParent
+  parentControllers.updateParent
 );
 
 /* *********** Routes reservation ************** */

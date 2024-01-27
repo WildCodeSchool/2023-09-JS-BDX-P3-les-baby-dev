@@ -67,8 +67,6 @@ const getParentById = (req, res) => {
 module.exports = {
   getListParent,
   getMyParentProfil,
-
   updateParent,
-
   getParentById,
 };
