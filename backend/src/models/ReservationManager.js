@@ -10,16 +10,15 @@ class ReservationManager extends AbstractManager {
   async create(reservation) {
     console.info(reservation);
     const result = await this.database.query(
-      `insert into ${this.table} (structure_id, parent_id, name, dayResa, startHour, finishHour, price, status) values (?,?,?,?,?,?,?,?)`,
+      `insert into ${this.table} (structure_id, parent_id, dayResa, startHour, finishHour, status, message) values (?,?,?,?,?,?,?)`,
       [
         reservation.structure_id,
         reservation.parent_id,
-        reservation.name,
         reservation.dayResa,
         reservation.startHour,
         reservation.finishHour,
-        reservation.price,
         reservation.status,
+        reservation.message,
       ]
     );
 
@@ -27,6 +26,15 @@ class ReservationManager extends AbstractManager {
     // const reservationId = rows.insertId;
 
     return rows;
+  }
+
+  async getOneReservation(parentId) {
+    const [rows] = await this.database.query(
+      "SELECT * FROM reservation where parent_id = ?",
+      [parentId]
+    );
+
+    return rows[0] ?? null;
   }
 }
 

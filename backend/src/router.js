@@ -16,6 +16,7 @@ const { authMiddleware } = require("./middlewares/Security/auth.middleware");
 const structureControllers = require("./controllers/structureControllers");
 const reservationControllers = require("./controllers/reservationControllers");
 const parentControllers = require("./controllers/parentControllers");
+const hoursControllers = require("./controllers/hourControllers");
 // Route to get a list of items
 
 // Route to get a specific item by ID
@@ -75,6 +76,7 @@ router.get(
 );
 router.get("/users/parent", authMiddleware, parentControllers.getListParent);
 router.get("user/parent", authMiddleware, userControllers.getParent);
+router.get("/parent/:id", parentControllers.getParentById);
 
 router.put(
   "/parents/:id([0-9]+)",
@@ -86,6 +88,11 @@ router.put(
 
 router.get("/reservations", reservationControllers.getReservation);
 router.post("/reservation", reservationControllers.addReservation);
+router.get("/reservation/:id", reservationControllers.getReservationById);
+
+/* *********** Routes Hour ************** */
+
+router.get("/hours", hoursControllers.getHours);
 
 router.delete(
   "/employees/:id([0-9]+)",
