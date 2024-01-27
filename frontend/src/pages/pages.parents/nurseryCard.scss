@@ -69,11 +69,22 @@
         }
       }
     }
-    .disponibility_nursery {
+    .days-container {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
       .days-availability {
-        width: 100px;
+        width: calc(33.33% - 10px);
+        margin: 5px;
         border: none;
-        border-radius: 1px;
+        border-radius: 5px;
+        color: white;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
 
@@ -166,14 +177,6 @@
           padding: 0 15px;
           font-size: 0.8em;
         }
-
-        .disponibility_nursery {
-          .days-availability {
-            width: 100px;
-            border: none;
-            border-radius: 1px;
-          }
-        }
       }
       .horaires_nursery {
         width: 80%;
@@ -192,11 +195,22 @@
           }
         }
       }
+
       .disponibility_nursery {
-        .days-availability {
-          width: 200px;
-          border: none;
-          border-radius: 1px;
+        .days-container {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+
+          .days-availability {
+            width: calc(33.33% - 10px);
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            text-align: center;
+          }
         }
       }
       .button_reservation {
