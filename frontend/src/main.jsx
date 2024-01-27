@@ -38,6 +38,8 @@ import currentNurseryLoader from "./loaders/current-nursery.loader";
 import currentOneParentLoader from "./loaders/current-parentById.loader";
 import reservationLoader from "./loaders/current-reservation.loader";
 import hoursLoader from "./loaders/current-hours.loader";
+import currentStructureProfil from "./loaders/current-structure-profil.loader";
+import currentStructureHours from "./loaders/current-structure-hours.loader";
 
 const apiService = new ApiService();
 
@@ -216,17 +218,10 @@ const router = createBrowserRouter([
       },
       {
         path: "/structure",
-        loader: async () => {
-          try {
-            const data = await apiService.get(
-              `${import.meta.env.VITE_BACKEND_URL}/api/users/structure`
-            );
-            return { preloadUserStructure: data ?? null };
-          } catch (error) {
-            console.error(error.message);
-            return null;
-          }
-        },
+        loader: async () => ({
+          ...(await currentStructureProfil(apiService)),
+          ...(await currentStructureHours(apiService)),
+        }),
         element: (
           <StructureContextProvider>
             <StructureRegister />

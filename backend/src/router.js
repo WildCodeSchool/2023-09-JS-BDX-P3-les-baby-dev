@@ -93,6 +93,7 @@ router.get("/reservation/:id", reservationControllers.getReservationById);
 /* *********** Routes Hour ************** */
 
 router.get("/hours", hoursControllers.getHours);
+router.get("/myhours", authMiddleware, structureControllers.getMyHours);
 
 router.delete(
   "/employees/:id([0-9]+)",

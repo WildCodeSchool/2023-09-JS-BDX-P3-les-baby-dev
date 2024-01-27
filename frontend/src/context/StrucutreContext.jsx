@@ -33,6 +33,7 @@ function StructureContextProvider({ children }) {
     saturday: false,
     openHour: "08:00",
     closeHour: "17:00",
+    ...loaderData?.preloadUserStructureHours?.data,
   });
   const [dataEmployee, setDataEmployee] = useState({});
 

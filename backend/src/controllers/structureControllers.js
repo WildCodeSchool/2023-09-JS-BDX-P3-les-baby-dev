@@ -167,6 +167,16 @@ const deleteEmployee = async (req, res) => {
   return res.sendStatus(204);
 };
 
+const getMyHours = async (req, res) => {
+  try {
+    const structureId = await models.structure.getUsersStructure(req.user.id);
+    return res.send(await models.hours.getStructureHours(structureId.id));
+  } catch (error) {
+    console.error(error);
+    return res.sendStatus(500);
+  }
+};
+
 module.exports = {
   updateStructure,
   // updateUpload,
@@ -178,4 +188,5 @@ module.exports = {
   updateEmployee,
   getStructuresEmployees,
   deleteEmployee,
+  getMyHours,
 };
