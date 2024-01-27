@@ -64,7 +64,7 @@ export default function App() {
       <MDBTable align="middle">
         <MDBTableHead>
           <tr className="titreInfos">
-            <th scope="col">Name</th>
+            <th scope="col">Parent/Enfant</th>
             <th scope="col">Jour de réservation</th>
             <th scope="col">Heure d'arrivée</th>
             <th scope="col">Heure de sortie</th>

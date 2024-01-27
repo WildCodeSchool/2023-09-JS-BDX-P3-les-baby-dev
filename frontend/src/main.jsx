@@ -37,6 +37,7 @@ import structuresLoader from "./loaders/structues.loader";
 import currentNurseryLoader from "./loaders/current-nursery.loader";
 import currentOneParentLoader from "./loaders/current-parentById.loader";
 import reservationLoader from "./loaders/current-reservation.loader";
+import hoursLoader from "./loaders/current-hours.loader";
 
 const apiService = new ApiService();
 
@@ -62,6 +63,7 @@ const router = createBrowserRouter([
             loader: async () => ({
               ...(await currentParentProfilLoader(apiService)),
               ...(await structuresLoader(apiService)),
+              ...(await hoursLoader(apiService)),
             }),
             element: (
               <ParentContextProvider>
@@ -84,6 +86,7 @@ const router = createBrowserRouter([
             loader: async ({ params }) => ({
               ...(await currentParentProfilLoader(apiService)),
               ...(await currentNurseryLoader(apiService, params.id)),
+              ...(await hoursLoader(apiService)),
             }),
             element: (
               <ParentContextProvider>

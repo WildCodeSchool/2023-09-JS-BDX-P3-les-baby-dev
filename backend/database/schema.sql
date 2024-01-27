@@ -105,6 +105,20 @@ CREATE TABLE IF NOT EXISTS hours (
 ALTER TABLE hours
 ADD CONSTRAINT `fk_structure_id` FOREIGN KEY (structure_id) REFERENCES structure (id);
 
+insert into
+    hours (
+        structure_id, monday, tuesday, wednesday, thursday, friday, saturday, openHour, closeHour
+    )
+values (
+        1, 0, 0, 1, 0, 0, 1, '10:00:00', '17:00:00'
+    ), 
+    (
+       2, 0, 0, 0, 0, 0, 1, '10:00:00', '17:00:00'
+    ),
+    (
+        3, 1, 0, 1, 0, 0, 0, '10:00:00', '17:00:00'
+    );
+
 DROP TABLE if EXISTS employee;
 
 CREATE TABLE IF NOT EXISTS employee (

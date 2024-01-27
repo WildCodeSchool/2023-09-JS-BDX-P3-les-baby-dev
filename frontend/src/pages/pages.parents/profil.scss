@@ -2,15 +2,15 @@
   background-color: #f7f6fe;
   width: 100%;
   margin: 0 auto;
-  height: 100vh;
+  height: 100%;
   padding-top: 20px;
 
   .header_profil {
-    background: linear-gradient(to bottom right, #7847ff, #e37acc);
+    background: linear-gradient(to bottom right, #684eb2, #90417f);
     height: 100px;
     display: flex;
     box-shadow: 3px 3px 3px rgb(187, 187, 187);
-    margin-top: 30px;
+    margin-top: 5px;
 
     .picture_creche {
       width: 70px;
@@ -77,14 +77,15 @@
 
 @media (min-width: 768px) {
   .profil_container {
-    background-color: white;
+    background-color: #f7f6fe;
     .cadre {
-      width: 50%;
+      width: 40%;
       margin: 0 auto;
-      background-color: #f7f6fe;
+
+      background-color: white;
     }
     .nav_container {
-      width: 50%;
+      width: 40%;
       margin: 0 auto;
     }
   }
