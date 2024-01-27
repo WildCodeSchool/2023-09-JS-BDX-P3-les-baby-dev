@@ -27,16 +27,16 @@ CREATE TABLE IF NOT EXISTS structure (
 
 insert into
     structure (
-        user_id, name, tel, adress, zip, city
+        user_id, name, tel, adress, zip, city, structureDesc
     )
 values (
-        1, 'créche Adam', '0678252910', '17 rue gambetta', '33130', 'bèglesZoo'
+        1, 'Adam Party', '0678252910', '17 rue gambetta', '33130', 'bèglesZoo', 'La crèche « Adam Party» n’est pas qu’un lieu de garde c’est surtout un lieu d’échange et d’accueil  des enfants et des familles dans une confiance réciproque où le respect, l’autonomie et la sécurité sont des références privilégiées dans notre projet.'
     ),
     (
-        2, 'Créche Mat', '0678252910', '17 rue ailleurs', '33130', 'Bordeaux'
+        2, 'Chauchau Family', '0678252910', '17 rue ailleurs', '33130', 'Bordeaux', 'La crèche « Chauchau Family» n’est pas qu’un lieu de garde c’est surtout un lieu d’échange et d’accueil  des enfants et des familles dans une confiance réciproque où le respect, l’autonomie et la sécurité sont des références privilégiées dans notre projet.'
     ),
     (
-        3, 'Créche Victor', '0678252910', '17 rue ailleurs', '33130', 'Bordeaux'
+        3, 'Victor and Co', '0678252910', '17 rue ailleurs', '33130', 'Bordeaux', 'La crèche « Victor and Co» n’est pas qu’un lieu de garde c’est surtout un lieu d’échange et d’accueil  des enfants et des familles dans une confiance réciproque où le respect, l’autonomie et la sécurité sont des références privilégiées dans notre projet.'
     );
 
 DROP TABLE if EXISTS parent;
@@ -110,13 +110,13 @@ insert into
         structure_id, monday, tuesday, wednesday, thursday, friday, saturday, openHour, closeHour
     )
 values (
-        1, 0, 0, 1, 0, 0, 1, '10:00:00', '17:00:00'
+        1, 0, 0, 1, 0, 0, 1, '08:00:00', '17:00:00'
     ), 
     (
-       2, 0, 0, 0, 0, 0, 1, '10:00:00', '17:00:00'
+       2, 0, 0, 0, 0, 0, 1, '07:00:00', '16:00:00'
     ),
     (
-        3, 1, 0, 1, 0, 0, 0, '10:00:00', '17:00:00'
+        3, 1, 0, 1, 0, 0, 0, '10:00:00', '19:00:00'
     );
 
 DROP TABLE if EXISTS employee;
