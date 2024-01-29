@@ -95,7 +95,11 @@ router.put(
 
 router.get("/reservations", reservationControllers.getReservation);
 router.post("/reservation", reservationControllers.addReservation);
-router.get("/reservation/:id", reservationControllers.getReservationById);
+router.get(
+  "/reservations/:id",
+  authMiddleware,
+  reservationControllers.getReservationsByStructure
+);
 
 /* *********** Routes Hour ************** */
 

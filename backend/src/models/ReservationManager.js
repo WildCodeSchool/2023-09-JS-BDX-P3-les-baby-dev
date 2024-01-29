@@ -28,13 +28,13 @@ class ReservationManager extends AbstractManager {
     return rows;
   }
 
-  async getOneReservation(parentId) {
+  async findByStructure(structureId) {
     const [rows] = await this.database.query(
-      "SELECT * FROM reservation where parent_id = ?",
-      [parentId]
+      "SELECT * FROM reservation WHERE structure_id = ?",
+      [structureId]
     );
 
-    return rows[0] ?? null;
+    return rows;
   }
 }
 
