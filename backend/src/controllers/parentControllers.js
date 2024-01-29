@@ -64,9 +64,24 @@ const getParentById = (req, res) => {
     });
 };
 
+const addChildren = async (req, res) => {
+  // console.log("bodyyyyy :", req.body);
+  try {
+    const parentId = parseInt(req.params.id, 10);
+    const childId = await models.parent.createChild(req.body, parentId);
+    res.status(201).send({ msg: "Bien enregistré" });
+    return childId;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: error.message });
+  }
+  return null;
+};
+
 module.exports = {
   getListParent,
   getMyParentProfil,
   updateParent,
   getParentById,
+  addChildren,
 };

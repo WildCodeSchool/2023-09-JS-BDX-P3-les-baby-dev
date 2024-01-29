@@ -176,6 +176,7 @@ const router = createBrowserRouter([
               },
               {
                 path: "/profil/inscription/children",
+                loader: async () => currentParentProfilLoader(apiService),
                 element: (
                   <ParentContextProvider>
                     <IncriptionChildren />

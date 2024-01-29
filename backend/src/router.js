@@ -90,6 +90,11 @@ router.put(
   authMiddleware,
   parentControllers.updateParent
 );
+router.post(
+  "/parents/children/:id([0-9]+)",
+  authMiddleware,
+  parentControllers.addChildren
+);
 
 /* *********** Routes reservation ************** */
 
