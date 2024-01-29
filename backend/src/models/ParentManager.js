@@ -15,6 +15,43 @@ class MyParentProfilManager extends AbstractManager {
 
     return rows[0] ?? null;
   }
+
+  async createChild(child, parentId) {
+    try {
+      const {
+        childFName,
+        childName,
+        birthday,
+        isWalking,
+        childDoctor,
+        allergies,
+      } = child;
+
+      const [result] = await this.database.query(
+        `INSERT INTO child (parent_id, childFName,
+        childName,
+        birthday,
+        isWalking,
+        childDoctor,
+        allergies) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        [
+          parentId,
+          childFName,
+          childName,
+          birthday,
+          isWalking,
+          childDoctor,
+          allergies,
+        ]
+      );
+      const { insertId } = result;
+      // console.log("insert : ", insertId);
+      return insertId;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
 }
 
 module.exports = MyParentProfilManager;

@@ -129,7 +129,7 @@ function InscriptionParent() {
                 invalid
               >
                 <MDBBtn
-                  type="submit"
+                  type="button"
                   onClick={() => {
                     handleSubmit();
                     navigate("/profil/inscription/children");
