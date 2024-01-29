@@ -69,7 +69,6 @@ const updateHours = async (req, res) => {
 };
 
 const updateEmployee = async (req, res) => {
-  // console.log("req.body: ", req.body);
   try {
     await Promise.all(
       req.body.employees.map((employeeData) => {
@@ -128,11 +127,13 @@ const getStructure = async (_, res) => {
 
 const getStructureById = (req, res) => {
   const id = parseInt(req.params.id, 10);
+
   models.structure
-    .find(id)
-    .then(([users]) => {
-      if (users[0] != null) {
-        res.json(users[0]);
+    .getStructure(id)
+    .then((users) => {
+      // console.log("user :", users);
+      if (users != null) {
+        res.json(users);
       } else {
         res.sendStatus(404);
       }

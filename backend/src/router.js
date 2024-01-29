@@ -17,6 +17,7 @@ const structureControllers = require("./controllers/structureControllers");
 const reservationControllers = require("./controllers/reservationControllers");
 const parentControllers = require("./controllers/parentControllers");
 const hoursControllers = require("./controllers/hourControllers");
+const employeeControllers = require("./controllers/employeeControllers");
 // Route to get a list of items
 
 // Route to get a specific item by ID
@@ -59,6 +60,12 @@ router.put(
 router.put(
   "/structure/:id([0-9]+)/adaptation/employees",
   structureControllers.updateEmployee
+);
+
+router.post(
+  "/structure/employees/:id([0-9]+)",
+  authMiddleware,
+  employeeControllers.addEmployee
 );
 
 router.get(

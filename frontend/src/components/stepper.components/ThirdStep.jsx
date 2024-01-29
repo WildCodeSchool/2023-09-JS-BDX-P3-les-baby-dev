@@ -9,12 +9,11 @@ import {
   MDBValidationItem,
 } from "mdb-react-ui-kit";
 import { useStructure } from "../../context/StrucutreContext";
-// import React, { useState } from "react";
 import "./thirdStep.scss";
 
 function ThirdStep({ nextQuestion, prevQuestion }) {
   const [loading, setLoading] = useState(false);
-  const { handleSubmitEmployee } = useStructure();
+  const { handleSubmitEmployee, handleSubmitNewEmployee } = useStructure();
   const {
     dataEmployee,
     setDataEmployee,
@@ -41,7 +40,6 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
   const validateThirdStep = () => {
     setLoading(true);
     setTimeout(() => {
-      handleSubmitEmployee();
       nextQuestion();
       setLoading(false);
     }, 1000);
@@ -78,19 +76,6 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
   return (
     <div className="fifty">
       <div className="step3">
-        <div className="next-prev">
-          <MDBBtn type="button" onClick={validateThirdStep}>
-            {loading ? "" : "suivant"}
-            {loading && (
-              <MDBSpinner role="status" size="sm">
-                <span className="visually-hidden">loading...</span>
-              </MDBSpinner>
-            )}
-          </MDBBtn>
-          <MDBBtn type="button" onClick={prevQuestion}>
-            précédent
-          </MDBBtn>
-        </div>
         <div className="employees">
           {dataEmployee?.employees &&
             dataEmployee?.employees.map((employee, i) => (
@@ -102,14 +87,11 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
                   />
                 </div>
                 <div className="thirdInputContainer">
-                  <MDBValidation className="row g-3">
-                    <MDBValidationItem
-                      className="col-md-4"
-                      feedback="Veuillez entrer un prénom valide"
-                      invalid
-                    >
+                  <MDBValidation className="row g-1" isValidated>
+                    <MDBValidationItem className="col-md-4" feedback="">
                       <MDBInput
                         name="fName"
+                        value={employee?.fName ?? ""}
                         onChange={(e) =>
                           handleChange(e.target.value, i, "fName")
                         }
@@ -118,13 +100,10 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
                         label="Prénom"
                       />
                     </MDBValidationItem>
-                    <MDBValidationItem
-                      className="col-md-4"
-                      feedback="Veuillez entrer un nom valide"
-                      invalid
-                    >
+                    <MDBValidationItem className="col-md-4" feedback="">
                       <MDBInput
                         name="name"
+                        value={employee?.name ?? ""}
                         onChange={(e) =>
                           handleChange(e.target.value, i, "name")
                         }
@@ -133,11 +112,7 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
                         label="Nom"
                       />
                     </MDBValidationItem>
-                    <MDBValidationItem
-                      feedback="Veuillez entrer un email valide"
-                      invalid
-                      className="col-md-4"
-                    >
+                    <MDBValidationItem feedback="" className="col-md-4">
                       <MDBInput
                         type="email"
                         className="form-control"
@@ -153,31 +128,39 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
                         label="Mail"
                       />
                     </MDBValidationItem>
-                    <MDBValidationItem
-                      className="col-md-6"
-                      feedback="Veuillez entrer une fonction valide"
-                      invalid
-                    >
+                    <MDBValidationItem className="col-md-6" feedback="">
                       <MDBInput
                         name="function"
+                        value={employee?.fonction ?? ""}
                         onChange={(e) =>
                           handleChange(e.target.value, i, "fonction")
                         }
                         id="validationCustom05"
                         required
-                        label="fonction"
+                        label="Fonction"
                       />
                     </MDBValidationItem>
                   </MDBValidation>
                 </div>
 
-                <MDBBtn
-                  className="delete"
-                  type="submit"
-                  onClick={() => handleDelete(i)}
-                >
-                  {employee?.id ? "modifier" : "créer"}
-                </MDBBtn>
+                {employee?.id ? (
+                  <MDBBtn
+                    className="delete"
+                    type="submit"
+                    onClick={handleSubmitEmployee}
+                  >
+                    modifier
+                  </MDBBtn>
+                ) : (
+                  <MDBBtn
+                    className="delete"
+                    type="submit"
+                    onClick={handleSubmitNewEmployee}
+                  >
+                    créer{" "}
+                  </MDBBtn>
+                )}
+
                 <MDBBtn
                   className="delete"
                   type="submit"
@@ -193,6 +176,19 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
           <div className="add-employee">
             <MDBBtn type="submit" onClick={HandleAdd}>
               ajouter un employé
+            </MDBBtn>
+          </div>
+          <div className="next-prev">
+            <MDBBtn type="button" onClick={validateThirdStep}>
+              {loading ? "" : "suivant"}
+              {loading && (
+                <MDBSpinner role="status" size="sm">
+                  <span className="visually-hidden">loading...</span>
+                </MDBSpinner>
+              )}
+            </MDBBtn>
+            <MDBBtn type="button" onClick={prevQuestion}>
+              précédent
             </MDBBtn>
           </div>
         </div>

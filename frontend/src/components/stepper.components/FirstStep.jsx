@@ -29,9 +29,6 @@ function FirstStep({ nextQuestion }) {
       isAddressValid &&
       isZipValid &&
       isCityValid;
-    // if (!isValid) {
-    //   return isValidated
-    // }
 
     if (isValid) {
       setLoading(true);
@@ -50,23 +47,9 @@ function FirstStep({ nextQuestion }) {
   return (
     <div className="fifty">
       <div className="step1">
-        <div className="next-prev">
-          <MDBBtn type="button" onClick={validateFirstStep}>
-            {loading ? "" : "suivant"}
-            {loading && (
-              <MDBSpinner size="sm" role="status">
-                <span className="visually-hidden">loading...</span>
-              </MDBSpinner>
-            )}
-          </MDBBtn>
-        </div>
         <h4>Complétez et vérifiez vos informations</h4>
-        <MDBValidation className="row g-3" isValidated>
-          <MDBValidationItem
-            className="col-md-4"
-            feedback="Veuillez entrer un nom valide"
-            invalid
-          >
+        <MDBValidation className="row g-3 mb-3" isValidated>
+          <MDBValidationItem className="col-md-4" feedback="">
             <MDBInput
               value={data?.name ?? ""}
               name="name"
@@ -77,11 +60,7 @@ function FirstStep({ nextQuestion }) {
               label="Nom de l'établissement"
             />
           </MDBValidationItem>
-          <MDBValidationItem
-            className="col-md-4"
-            feedback="Veuillez entrer un numéro valide"
-            invalid
-          >
+          <MDBValidationItem className="col-md-4" feedback="">
             <MDBInput
               label="Numéro"
               id="typePhone"
@@ -93,10 +72,7 @@ function FirstStep({ nextQuestion }) {
               required
             />
           </MDBValidationItem>
-          <MDBValidationItem
-            className="col-md-4"
-            feedback="Veuillez entrer adresse valide"
-          >
+          <MDBValidationItem className="col-md-4" feedback="">
             <MDBInput
               label="N° et nom de rue"
               id="validationCustomUsername"
@@ -108,11 +84,7 @@ function FirstStep({ nextQuestion }) {
               required
             />
           </MDBValidationItem>
-          <MDBValidationItem
-            className="col-md-3"
-            feedback="Veuillez entrer un code postale"
-            invalid
-          >
+          <MDBValidationItem className="col-md-3" feedback="">
             <MDBInput
               value={data?.zip ?? ""}
               name="zip"
@@ -123,11 +95,7 @@ function FirstStep({ nextQuestion }) {
               label="Code postal"
             />
           </MDBValidationItem>
-          <MDBValidationItem
-            className="col-md-4"
-            feedback="Veuillez entrer une ville"
-            invalid
-          >
+          <MDBValidationItem className="col-md-4" feedback="">
             <MDBInput
               value={data?.city ?? ""}
               name="city"
@@ -138,6 +106,16 @@ function FirstStep({ nextQuestion }) {
             />
           </MDBValidationItem>
         </MDBValidation>
+        <div className="next-prev">
+          <MDBBtn type="button" onClick={validateFirstStep}>
+            {loading ? "" : "suivant"}
+            {loading && (
+              <MDBSpinner size="sm" role="status">
+                <span className="visually-hidden">loading...</span>
+              </MDBSpinner>
+            )}
+          </MDBBtn>
+        </div>
       </div>
       <div className="greyBg">
         <div className="infoRegisterCard">
