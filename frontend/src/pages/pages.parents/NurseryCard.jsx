@@ -152,7 +152,7 @@ function NurseryCard() {
             <div className="experience_nursery">
               <h5>Expériences</h5>
               <ul>
-                <li>Formation premiers secours</li>
+                {creche?.psci ? <li>Formation premiers secours</li> : ""}
                 <li>Formation Nesting</li>
                 <li>Pedagogie Montessori</li>
               </ul>
