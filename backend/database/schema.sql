@@ -129,19 +129,19 @@ CREATE TABLE IF NOT EXISTS employee (
 DROP TABLE if EXISTS child;
 
 CREATE TABLE IF NOT EXISTS child (
-    id int primary key auto_increment not null, parent_id INT NOT NULL, firstname VARCHAR(255) NOT NULL, lastname VARCHAR(255) NULL, birthday VARCHAR(255) NOT NULL, is_walking BOOLEAN DEFAULT 0, allergies BOOLEAN DEFAULT 0, medecine_traitant_name VARCHAR(255) NOT NULL, FOREIGN KEY (parent_id) REFERENCES parent (id)
+    id int primary key auto_increment not null, parent_id INT NOT NULL, childFName VARCHAR(255) NOT NULL, childName VARCHAR(255) NULL, birthday VARCHAR(255) NOT NULL, isWalking BOOLEAN DEFAULT 0, childDoctor VARCHAR(255) NOT NULL, allergies BOOLEAN DEFAULT 0, FOREIGN KEY (parent_id) REFERENCES parent (id)
 );
 
 insert into
     child (
-        parent_id, firstname, lastname, birthday, is_walking, allergies, medecine_traitant_name
+        parent_id, childFName, childName, birthday, isWalking, childDoctor, allergies
     )
 values (
-        1, 'daamn', 'neo', '12/09/2019', 0, 0, 'Dr Brigand'
+        1, 'daamn', 'neo', '12/09/2019', 0, 'Dr Brigand', 0
     ), 
     (
-        2, 'vic', 'neo', '12/09/2019', 0, 0, 'Dr Brigand'
+        2, 'vic', 'neo', '12/09/2019', 0, 'Dr Brigand', 0
     ),
     (
-        3, 'mat', 'neo', '12/09/2019', 0, 0, 'Dr Brigand'
+        3, 'mat', 'neo', '12/09/2019', 0, 'Dr Brigand', 0
     );

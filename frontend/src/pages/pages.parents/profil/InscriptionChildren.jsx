@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import {
   MDBBtn,
   MDBInput,
@@ -12,23 +11,18 @@ import NavProfil from "../../../components/profile.components/NavProfil";
 import { useParent } from "../../../context/ParentContext";
 
 function IncriptionChildren() {
-  const [dataChildren, setDataChildren] = useState([
-    {
-      childName: "",
-      childFName: "",
-      childDate: "",
-      walkingChild: "",
-      fonction: "",
-    },
-  ]);
-  const { handleClickChild, handleSubmit } = useParent();
-  const navigate = useNavigate();
+  const {
+    // parent,
+    handleClickChild,
+    // handleSubmit,
+    dataChildren,
+    HandleAdd,
+  } = useParent();
+  // console.log("parent", parent);
+  // const navigate = useNavigate();
 
-  const HandleAdd = () => {
-    const newChild = setDataChildren((prevData) => ({
-      ...prevData,
-      children: [...(prevData.children || []), newChild],
-    }));
+  const envoyé = () => {
+    // console.log(dataChildren);
   };
 
   return (
@@ -36,12 +30,11 @@ function IncriptionChildren() {
       <div>
         <HeaderProfile />
         <h1>Dossier Enfant</h1>
-        {dataChildren.map(() => (
-          // child
-          <button type="button" className="button-children">
-            Enfant 1
+        {/* {dataChildren.map((child) => (
+          <button key={child.id} type="button" className="button-children">
+            {child?.name ?? "Enfant 1"}
           </button>
-        ))}
+        ))} */}
         <div className="div-form-parent">
           <MDBValidation className="row g-3">
             <MDBValidationItem
@@ -84,7 +77,7 @@ function IncriptionChildren() {
                 label="Date de naissance"
                 id="validationCustomUsername"
                 type="date"
-                name="childDate"
+                name="birthday"
                 onChange={handleClickChild}
                 value={dataChildren.childDate}
                 pattern="/^\d{2}\/\d{2}\/\d{4}$/"
@@ -94,11 +87,11 @@ function IncriptionChildren() {
             <MDBSwitch
               id="flexSwitchCheckDefault"
               label="Mon enfant marche"
-              name="walkingChild"
+              name="isWalking"
               onChange={() =>
                 handleClickChild({
                   target: {
-                    name: "walkingChild",
+                    name: "isWalking",
                     value: !dataChildren.walkingChild,
                   },
                 })
@@ -126,7 +119,7 @@ function IncriptionChildren() {
             >
               <MDBInput
                 value={dataChildren.childAllergies}
-                name="childAllergies"
+                name="allergies"
                 onChange={handleClickChild}
                 id="validationCustom01"
                 pattern=".{4,}"
@@ -138,17 +131,15 @@ function IncriptionChildren() {
 
           <div>
             <MDBBtn
-              type="submit"
+              type="button"
               className="button-children"
-              onClick={() => {
-                handleSubmit();
-                navigate("/profil/inscription/inscription");
-              }}
+              onClick={envoyé}
+              // navigate("/profil/inscription/inscription");
             >
               Doc
             </MDBBtn>
             <MDBBtn
-              type="submit"
+              type="button"
               className="button-children"
               onClick={HandleAdd}
             >

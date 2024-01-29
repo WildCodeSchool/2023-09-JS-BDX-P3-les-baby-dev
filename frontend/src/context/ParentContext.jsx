@@ -20,6 +20,15 @@ function ParentContextProvider({ children }) {
     ...loaderData?.parentProfil,
   });
 
+  const [dataChildren, setDataChildren] = useState([]);
+
+  const HandleAdd = () => {
+    const newChild = setDataChildren((prevData) => ({
+      ...prevData,
+      children: [...(prevData.children || []), newChild],
+    }));
+  };
+
   const { apiService } = useUser();
 
   const [reservationData, setReservationData] = useState({
@@ -49,13 +58,12 @@ function ParentContextProvider({ children }) {
     });
   };
 
-  // const handleClickChild =
-  // (e) => {
-  //   setDataChildren({
-  //     ...dataChildren,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
+  const handleClickChild = (e) => {
+    setDataChildren({
+      ...dataChildren,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = async () => {
     try {
@@ -64,7 +72,7 @@ function ParentContextProvider({ children }) {
         dataParent ?? {}
       );
 
-      console.info(response.data);
+      console.info("erreur: ", response.data);
     } catch (error) {
       console.error(error);
     }
@@ -75,19 +83,25 @@ function ParentContextProvider({ children }) {
       handleClick,
       dataParent,
       handleSubmit,
-      // handleClickChild,
       reservationData,
       setReservationData,
       updateReservationData,
+      parent,
+      handleClickChild,
+      HandleAdd,
+      dataChildren,
     }),
     [
       handleClick,
       dataParent,
       handleSubmit,
-      // handleClickChild,
       reservationData,
       setReservationData,
       updateReservationData,
+      parent,
+      handleClickChild,
+      HandleAdd,
+      dataChildren,
     ]
   );
 
