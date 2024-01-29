@@ -92,6 +92,21 @@ function StructureContextProvider({ children }) {
     }
   };
 
+  const handleSubmitNewEmployee = async () => {
+    try {
+      const response = await apiService.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/structure/employees/${
+          data?.id
+        }`,
+        dataEmployee ?? {}
+      );
+
+      console.info(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleSubmitSchedules = async () => {
     try {
       const response = await axios.put(
@@ -168,6 +183,7 @@ function StructureContextProvider({ children }) {
       dataImage,
       getStructureEmployees,
       deleteEmployee,
+      handleSubmitNewEmployee,
     }),
     [
       handleSubmit,
@@ -185,6 +201,7 @@ function StructureContextProvider({ children }) {
       dataImage,
       getStructureEmployees,
       deleteEmployee,
+      handleSubmitNewEmployee,
     ]
   );
 

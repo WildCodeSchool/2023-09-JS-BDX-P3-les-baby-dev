@@ -22,6 +22,16 @@ function FourthStep({ nextQuestion, prevQuestion }) {
   return (
     <div className="fifty">
       <div className="step5">
+        <h4>Les petits plus de votre accueil</h4>
+        <p>
+          Il s'agit en général des services que les parents souhaitent retrouver
+          pour l'accueil de leurs enfants, mais vous pourrez en ajouter d'autres
+          auprès la publication.
+        </p>
+        <div className="checkQestion">
+          <ExpCheckbox />
+          <ActivitiesCheckbox />
+        </div>
         <div className="next-prev">
           <MDBBtn type="button" onClick={validateFourthStep}>
             {loading ? "" : "suivant"}
@@ -34,16 +44,6 @@ function FourthStep({ nextQuestion, prevQuestion }) {
           <MDBBtn type="button" onClick={prevQuestion}>
             précédent
           </MDBBtn>
-        </div>
-        <h4>Les petits plus de votre accueil</h4>
-        <p>
-          Il s'agit en général des services que les parents souhaitent retrouver
-          pour l'accueil de leurs enfants, mais vous pourrez en ajouter d'autres
-          auprès la publication.
-        </p>
-        <div className="checkQestion">
-          <ExpCheckbox />
-          <ActivitiesCheckbox />
         </div>
       </div>
       <div className="greyBg">

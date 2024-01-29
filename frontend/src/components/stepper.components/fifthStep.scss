@@ -3,15 +3,30 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+.timepicker-head {
+  background-color: #9c69e2 !important;
+}
+
 .step5 {
+  .was-validated .form-control:valid,
+  .form-control.is-valid {
+    background-image: none !important;
+  }
   .hourContainer {
     display: flex;
     flex-direction: column;
     gap: 30px;
+
     .hour {
       display: flex;
       justify-content: space-around;
       // line-height: 2px;
+
+      .timepicker-toggle-button {
+        --mdb-timepicker-btn-icon-hover-color: #9c69e2;
+        --mdb-timepicker-btn-icon-focus-color: #9c69e2;
+      }
 
       div {
         p {

@@ -68,11 +68,8 @@ class AbstractManager {
         `SELECT id FROM ${this.table} WHERE structure_id = ? AND id = ?`,
         [structureId, employeeId]
       );
-      // console.log("1", existingEmployee);
 
       if (existingEmployee.length > 0) {
-        // console.log(" existe ; ", existingEmployee);
-        // est strictement = ou est existant ?
         let sql = `UPDATE ${this.table} set`;
         const sqlValues = [];
         for (const [key, value] of Object.entries(dataValue)) {
@@ -82,31 +79,13 @@ class AbstractManager {
         }
         sql += " where structure_id = ? and id = ?";
         sqlValues.push(structureId, employeeId);
-        // console.log("sql :", sql);
-        // console.log("sqlValues :", sqlValues);
         return this.database.query(sql, sqlValues);
       }
-      const result = await this.database.query(
-        `INSERT INTO ${this.table} (structure_id, files, name, fName, mail, fonction) VALUES (?,?,?,?,?,?)`,
-        [
-          structureId,
-          dataValue.files,
-          dataValue.name,
-          dataValue.fName,
-          dataValue.mail,
-          dataValue.fonction,
-        ]
-      );
-      const rows = result[0];
-      const newEmployeeId = rows.insertId;
-
-      return {
-        newEmployeeId,
-      };
     } catch (error) {
       console.error(error);
       throw error;
     }
+    return null;
   }
 
   async updateH(id, dataValue) {
