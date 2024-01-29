@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./dashboard.scss";
 import {
   MDBSideNav,
@@ -22,19 +22,35 @@ export default function App() {
   const [colorCollapse1, setColorCollapse1] = useState(true);
   const [colorCollapse2, setColorCollapse2] = useState(false);
   const [filter, setFilter] = useState("Tous");
-  const { logout } = useUser();
+  const { logout, apiService } = useUser();
+  const [myResa, setMyResa] = useState([]);
 
   const navigate = useNavigate();
-  const loaderDataParent = useLoaderData();
+  const loaderData = useLoaderData();
+
   // console.log(loaderDataParent);
 
-  const parent = loaderDataParent?.preloadOneParent;
-  const reservation = loaderDataParent?.reservation;
+  const parent = loaderData?.preloadOneParent;
+  // const reservation = loaderData?.reservation;
+  const structureId = loaderData?.preloadUserStructure.data.id;
 
-  // console.log("les donées des parents ", parent);
-  // console.log("les donées des resa ", reservation);
+  const getMyResa = async (id) => {
+    try {
+      const response = await apiService.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/reservations/${id}`
+      );
+      const myResaData = response.data;
+      return setMyResa(myResaData);
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  };
+  useEffect(() => {
+    getMyResa(structureId);
+  }, []);
 
-  const filteredData = reservation.filter((item) => {
+  const filteredData = myResa.filter((item) => {
     if (filter === "Tous") {
       return true;
     }

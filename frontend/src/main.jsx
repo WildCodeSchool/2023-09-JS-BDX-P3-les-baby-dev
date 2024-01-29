@@ -208,8 +208,13 @@ const router = createBrowserRouter([
         loader: async () => ({
           ...(await currentOneParentLoader(apiService)),
           ...(await reservationLoader(apiService)),
+          ...(await currentStructureProfil(apiService)),
         }),
-        element: <Dashboard />,
+        element: (
+          <StructureContextProvider>
+            <Dashboard />
+          </StructureContextProvider>
+        ),
       },
       {
         path: "/pro",
