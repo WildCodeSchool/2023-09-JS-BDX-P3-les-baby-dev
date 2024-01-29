@@ -41,7 +41,6 @@ function generateAccessToken(data) {
 const postLogin = (req, res) => {
   models.user.login(req.body).then((user) => {
     if (user) {
-      // todo : filtrer les données à envoyer
       const { id, is_admin, email } = user;
       const token = generateAccessToken({ id, is_admin, email });
       res.send({ token });
@@ -75,29 +74,10 @@ const getParent = async (req, res) => {
   }
 };
 
-const updateParent = async (req, res) => {
-  try {
-    await models.parent.updateP(req.params.id, req.body);
-
-    res.status(201).json({
-      success: true,
-      message: "Parent registered successfully",
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-      error: error.message,
-    });
-  }
-};
-
 module.exports = {
   addUser,
   getUsers,
   postLogin,
   getProfile,
-  updateParent,
   getParent,
 };

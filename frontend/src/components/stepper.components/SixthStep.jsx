@@ -29,22 +29,22 @@ function SixthStep({ nextQuestion, prevQuestion }) {
 
     // Vérifiez si le champ maxHandicap est désactivé et ajustez la valeur en conséquence
     const actualMaxHandicapValue = !data.isHandicapEnabled
-      ? ""
+      ? 0
       : updatedMaxHandicap;
 
     // Vérifiez si le champ maxUnder18Months est désactivé et ajustez la valeur en conséquence
     const actualMaxUnder18MonthsValue = !data.isUnder18MonthsEnabled
-      ? ""
+      ? 0
       : updatedMaxUnder18Months;
 
     // Vérifiez si le champ maxAtypicalHours est désactivé et ajustez la valeur en conséquence
     const actualMaxAtypicalHoursValue = !data.isAtypicalHoursEnabled
-      ? ""
+      ? 0
       : updatedMaxAtypicalHours;
 
     // Vérifiez si le champ maxNightCare est désactivé et ajustez la valeur en conséquence
     const actualMaxNightCareValue = !data.isNightCareEnabled
-      ? ""
+      ? 0
       : updatedMaxNightCare;
 
     updateAmenities("maxHandicap", actualMaxHandicapValue);
@@ -54,44 +54,19 @@ function SixthStep({ nextQuestion, prevQuestion }) {
   };
 
   const handleMaxChildInputChange = (fieldName, value) => {
-    const updatedValue = value === "" ? "" : Math.min(value, data.maxPlaces);
+    let updatedValue = value === "" ? "" : Math.min(value, data.maxPlaces);
+    const switchFieldName = `${fieldName.replace("max", "is")}Enabled`;
 
-    const actualValue =
-      fieldName === "maxHandicap" && !data.isHandicapEnabled
-        ? ""
-        : updatedValue;
-    const updatedValueAfterDisabledCheck =
-      fieldName === "maxUnder18Months" && !data.isUnder18MonthsEnabled
-        ? ""
-        : actualValue;
-    const updatedValueAfterDisabledCheck2 =
-      fieldName === "maxAtypicalHours" && !data.isAtypicalHoursEnabled
-        ? ""
-        : updatedValueAfterDisabledCheck;
-    const updatedValueAfterDisabledCheck3 =
-      fieldName === "maxNightCare" && !data.isNightCareEnabled
-        ? ""
-        : updatedValueAfterDisabledCheck2;
+    if (data[switchFieldName] === false) {
+      updatedValue = 0;
+    }
 
-    updateAmenities(fieldName, updatedValueAfterDisabledCheck3);
+    updateAmenities(fieldName, updatedValue);
   };
 
   return (
     <div className="fifty">
       <div className="step6">
-        <div className="next-prev">
-          <MDBBtn type="button" onClick={validateSixthStep}>
-            {loading ? "" : "suivant"}
-            {loading && (
-              <MDBSpinner role="status" size="sm">
-                <span className="visually-hidden">loading...</span>
-              </MDBSpinner>
-            )}
-          </MDBBtn>
-          <MDBBtn type="button" onClick={prevQuestion}>
-            précédent
-          </MDBBtn>
-        </div>
         <div className="finputContainer">
           <h4>Nombre de places ou agrements</h4>
           <p>A total, de combien de place disposez vous ?</p>
@@ -118,13 +93,14 @@ function SixthStep({ nextQuestion, prevQuestion }) {
               onChange={() =>
                 updateAmenities("isHandicapEnabled", !data.isHandicapEnabled)
               }
+              checked={data?.isHandicapEnabled ?? false}
             />
             <input
               type="number"
               min="0"
               max={data.maxPlaces}
               name="maxHandicap"
-              value={data?.maxHandicap ?? ""}
+              value={!data.isHandicapEnabled ? 0 : data?.maxHandicap}
               onChange={(e) =>
                 handleMaxChildInputChange("maxHandicap", e.target.value)
               }
@@ -141,13 +117,14 @@ function SixthStep({ nextQuestion, prevQuestion }) {
                   !data.isUnder18MonthsEnabled
                 )
               }
+              checked={data?.isUnder18MonthsEnabled ?? false}
             />
             <input
               type="number"
               min="0"
               max={data.maxPlaces}
               name="maxUnder18Month"
-              value={data?.maxUnder18Months ?? ""}
+              value={!data.isUnder18MonthsEnabled ? 0 : data?.maxUnder18Months}
               onChange={(e) =>
                 handleMaxChildInputChange("maxUnder18Months", e.target.value)
               }
@@ -164,13 +141,14 @@ function SixthStep({ nextQuestion, prevQuestion }) {
                   !data.isAtypicalHoursEnabled
                 )
               }
+              checked={data?.isAtypicalHoursEnabled ?? false}
             />
             <input
               type="number"
               min="0"
               max={data.maxPlaces}
               name="maxAtypicalHours"
-              value={data?.maxAtypicalHours ?? ""}
+              value={!data.isAtypicalHoursEnabled ? 0 : data?.maxAtypicalHours}
               onChange={(e) =>
                 handleMaxChildInputChange("maxAtypicalHours", e.target.value)
               }
@@ -184,19 +162,34 @@ function SixthStep({ nextQuestion, prevQuestion }) {
               onChange={() =>
                 updateAmenities("isNightCareEnabled", !data.isNightCareEnabled)
               }
+              checked={data?.isNightCareEnabled ?? false}
             />
             <input
+              defaultValue="0"
               type="number"
               min="0"
               max={data.maxPlaces}
               name="maxNightCare"
-              value={data?.maxNightCare ?? ""}
+              value={!data.isNightCareEnabled ? 0 : data?.maxNightCare}
               onChange={(e) =>
                 handleMaxChildInputChange("maxNightCare", e.target.value)
               }
               disabled={!data.isNightCareEnabled}
             />
           </div>
+        </div>
+        <div className="next-prev">
+          <MDBBtn type="button" onClick={validateSixthStep}>
+            {loading ? "" : "suivant"}
+            {loading && (
+              <MDBSpinner role="status" size="sm">
+                <span className="visually-hidden">loading...</span>
+              </MDBSpinner>
+            )}
+          </MDBBtn>
+          <MDBBtn type="button" onClick={prevQuestion}>
+            précédent
+          </MDBBtn>
         </div>
       </div>
       <div className="greyBg">

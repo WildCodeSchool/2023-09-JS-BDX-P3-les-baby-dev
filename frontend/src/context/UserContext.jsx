@@ -17,7 +17,7 @@ function UserContextProvider({ children, apiService }) {
   const [user, setUser] = useState(givenData?.preloadUser?.data);
   const navigate = useNavigate();
 
-  const login = async (credentials) => {
+  const login = async (credentials, redirect = true, showAlert = true) => {
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/login`,
@@ -31,12 +31,14 @@ function UserContextProvider({ children, apiService }) {
       );
 
       // eslint-disable-next-line no-alert
-      alert(`Content de vous revoir ${result.data.email}`);
-      setUser(result.data);
-      if (result.data.is_admin === 1) {
-        return navigate("/dashboard");
+      if (showAlert) {
+        alert(`Content de vous revoir ${result.data.email}`);
       }
-      return navigate("/searchlist");
+      setUser(result.data);
+      if (!redirect) {
+        return null;
+      }
+      return navigate(result.data.is_admin ? "/dashboard" : "/searchlist");
     } catch (err) {
       console.error(err);
       // eslint-disable-next-line no-alert
@@ -48,18 +50,15 @@ function UserContextProvider({ children, apiService }) {
 
   const register = async (newUser) => {
     try {
-      setUser(
-        await axios.post(
-          `${import.meta.env.VITE_BACKEND_URL}/api/users`,
-          newUser
-        )
+      await apiService.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users`,
+        newUser
       );
+      await login(newUser, false, false);
+
       // eslint-disable-next-line no-alert
-      alert(`Bienvenue ${newUser.email}`);
-      if (newUser.is_admin) {
-        return navigate("/structure");
-      }
-      return navigate("/searchlist");
+      alert(`Bienvenue ${user.email}`);
+      return navigate(user.is_admin ? "/structure" : "/login");
     } catch (err) {
       console.error(err);
       // eslint-disable-next-line no-alert

@@ -17,6 +17,7 @@ const structureControllers = require("./controllers/structureControllers");
 const reservationControllers = require("./controllers/reservationControllers");
 const parentControllers = require("./controllers/parentControllers");
 const hoursControllers = require("./controllers/hourControllers");
+const employeeControllers = require("./controllers/employeeControllers");
 // Route to get a list of items
 
 // Route to get a specific item by ID
@@ -33,7 +34,12 @@ router.post("/login", userControllers.postLogin);
 /* *********** Route Structure ************** */
 
 router.get("/structure", structureControllers.getStructure);
-router.get("/structure/:id", structureControllers.getStructureById);
+router.get("/structure/:id([0-9]+)", structureControllers.getStructureById);
+router.get(
+  "/structures/:id([0-9]+)/employees",
+  authMiddleware,
+  structureControllers.getStructuresEmployees
+);
 
 router.put(
   "/structures/:id([0-9]+)/avatar",
@@ -56,6 +62,12 @@ router.put(
   structureControllers.updateEmployee
 );
 
+router.post(
+  "/structure/employees/:id([0-9]+)",
+  authMiddleware,
+  employeeControllers.addEmployee
+);
+
 router.get(
   "/users/structure",
   authMiddleware,
@@ -73,7 +85,11 @@ router.get("/users/parent", authMiddleware, parentControllers.getListParent);
 router.get("user/parent", authMiddleware, userControllers.getParent);
 router.get("/parent/:id", parentControllers.getParentById);
 
-router.put("/parents/:id", authMiddleware, userControllers.updateParent);
+router.put(
+  "/parents/:id([0-9]+)",
+  authMiddleware,
+  parentControllers.updateParent
+);
 
 /* *********** Routes reservation ************** */
 
@@ -84,6 +100,13 @@ router.get("/reservation/:id", reservationControllers.getReservationById);
 /* *********** Routes Hour ************** */
 
 router.get("/hours", hoursControllers.getHours);
+router.get("/myhours", authMiddleware, structureControllers.getMyHours);
+
+router.delete(
+  "/employees/:id([0-9]+)",
+  authMiddleware,
+  structureControllers.deleteEmployee
+);
 
 /* ************************************************************************* */
 

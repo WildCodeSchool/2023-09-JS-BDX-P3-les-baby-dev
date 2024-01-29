@@ -69,7 +69,6 @@ const updateHours = async (req, res) => {
 };
 
 const updateEmployee = async (req, res) => {
-  // console.log("req.body: ", req.body);
   try {
     await Promise.all(
       req.body.employees.map((employeeData) => {
@@ -128,11 +127,13 @@ const getStructure = async (_, res) => {
 
 const getStructureById = (req, res) => {
   const id = parseInt(req.params.id, 10);
+
   models.structure
-    .find(id)
-    .then(([users]) => {
-      if (users[0] != null) {
-        res.json(users[0]);
+    .getStructure(id)
+    .then((users) => {
+      // console.log("user :", users);
+      if (users != null) {
+        res.json(users);
       } else {
         res.sendStatus(404);
       }
@@ -141,6 +142,40 @@ const getStructureById = (req, res) => {
       console.error(err);
       res.sendStatus(500);
     });
+};
+
+const getStructuresEmployees = async (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  return res.send(await models.employee.getByStructure(id));
+};
+
+const deleteEmployee = async (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  const structureId = await models.employee.getStructureId(id);
+  const [employee] = await models.employee.getByStructure(
+    structureId.structure_id
+  );
+
+  if (
+    id === employee.id &&
+    employee.structure_id !== structureId.structure_id
+  ) {
+    return res.sendStatus(401);
+  }
+
+  // const structureOwner = await models.employee.getOwerId();
+  await models.employee.deleteEmployeeById(id);
+  return res.sendStatus(204);
+};
+
+const getMyHours = async (req, res) => {
+  try {
+    const structureId = await models.structure.getUsersStructure(req.user.id);
+    return res.send(await models.hours.getStructureHours(structureId.id));
+  } catch (error) {
+    console.error(error);
+    return res.sendStatus(500);
+  }
 };
 
 module.exports = {
@@ -152,4 +187,7 @@ module.exports = {
   getStructureById,
   updateHours,
   updateEmployee,
+  getStructuresEmployees,
+  deleteEmployee,
+  getMyHours,
 };

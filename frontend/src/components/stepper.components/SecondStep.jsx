@@ -66,19 +66,6 @@ function SecondStep({ nextQuestion, prevQuestion }) {
   return (
     <div className="fifty">
       <div className="step2">
-        <div className="next-prev">
-          <MDBBtn type="button" onClick={validateSecondStep}>
-            {loading ? "" : "suivant"}
-            {loading && (
-              <MDBSpinner role="status" size="sm">
-                <span className="visually-hidden">loading...</span>
-              </MDBSpinner>
-            )}
-          </MDBBtn>
-          <MDBBtn type="button" onClick={prevQuestion}>
-            précédent
-          </MDBBtn>
-        </div>
         <div>
           <h4>Égayez votre annonce avec des photos</h4>
           <div className="pageContent">
@@ -99,12 +86,8 @@ function SecondStep({ nextQuestion, prevQuestion }) {
         </div>
         <div className="structure4">
           <div className="pageContent">
-            <MDBValidation className="row g-3 second-validation">
-              <MDBValidationItem
-                className="col-md-4 text-area"
-                feedback="Veuillez entrer un nom valide"
-                invalid
-              >
+            <MDBValidation className="row g-3 second-validation" isValidated>
+              <MDBValidationItem className="col-md-4 text-area" feedback="">
                 <MDBTextArea
                   label="Message"
                   id="textAreaExample"
@@ -121,6 +104,19 @@ function SecondStep({ nextQuestion, prevQuestion }) {
               Maximum {`${maxLength - descriptionLength}`} caractères.
             </legend>
           </div>
+        </div>
+        <div className="next-prev">
+          <MDBBtn type="button" onClick={validateSecondStep}>
+            {loading ? "" : "suivant"}
+            {loading && (
+              <MDBSpinner role="status" size="sm">
+                <span className="visually-hidden">loading...</span>
+              </MDBSpinner>
+            )}
+          </MDBBtn>
+          <MDBBtn type="button" onClick={prevQuestion}>
+            précédent
+          </MDBBtn>
         </div>
       </div>
       <div className="greyBg">

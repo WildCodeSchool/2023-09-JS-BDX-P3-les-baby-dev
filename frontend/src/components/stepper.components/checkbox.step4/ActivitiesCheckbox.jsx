@@ -14,6 +14,7 @@ function ActivitiesCheckbox() {
           checked={data?.jardin ?? false}
           onChange={onChange}
         />
+        <span className="check"> </span>
         <label htmlFor="jardin">Espace extérieur / jardin</label>
       </div>
       <div className="checkboxContainer">
@@ -24,6 +25,7 @@ function ActivitiesCheckbox() {
           checked={data?.sorties ?? false}
           onChange={onChange}
         />
+        <span className="check"> </span>
         <label htmlFor="sorties">Sorties extérieures</label>
       </div>
       <div className="checkboxContainer">
@@ -34,6 +36,7 @@ function ActivitiesCheckbox() {
           checked={data?.promenades ?? false}
           onChange={onChange}
         />
+        <span className="check"> </span>
         <label htmlFor="promenades">Promenades</label>
       </div>
       <div className="checkboxContainer">
@@ -44,6 +47,7 @@ function ActivitiesCheckbox() {
           checked={data?.eveil ?? false}
           onChange={onChange}
         />
+        <span className="check"> </span>
         <label htmlFor="eveil">Activités d'éveil</label>
       </div>
       <div className="checkboxContainer">
@@ -54,6 +58,7 @@ function ActivitiesCheckbox() {
           checked={data?.musique ?? false}
           onChange={onChange}
         />
+        <span className="check"> </span>
         <label htmlFor="musique">Atelier musique</label>
       </div>
       <div className="checkboxContainer">
@@ -64,8 +69,10 @@ function ActivitiesCheckbox() {
           checked={data?.art ?? false}
           onChange={onChange}
         />
+        <span className="check"> </span>
         <label htmlFor="art">Activité artistique</label>
       </div>
+      <span className="check"> </span>
       <div className="checkboxContainer">
         <input
           type="checkbox"
@@ -74,6 +81,7 @@ function ActivitiesCheckbox() {
           checked={data?.bilingue ?? false}
           onChange={onChange}
         />
+        <span className="check"> </span>
         <label htmlFor="bilingue">Bilingue/internationale</label>
       </div>
       <div className="checkboxContainer">
@@ -84,6 +92,7 @@ function ActivitiesCheckbox() {
           checked={data?.bibli ?? false}
           onChange={onChange}
         />
+        <span className="check"> </span>
         <label htmlFor="bibli">Bibliothèque / Ludothèque / RAM</label>
       </div>
       <div className="checkboxContainer">
@@ -94,6 +103,7 @@ function ActivitiesCheckbox() {
           checked={data?.transport ?? false}
           onChange={onChange}
         />
+        <span className="check"> </span>
         <label htmlFor="transport">Transport d'enfant</label>
       </div>
     </div>

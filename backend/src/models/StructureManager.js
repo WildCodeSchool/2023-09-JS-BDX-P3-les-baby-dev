@@ -15,6 +15,15 @@ class StuctureManager extends AbstractManager {
 
     return rows[0] ?? null;
   }
+
+  async getStructure(id) {
+    const [rows] = await this.database.query(
+      "SELECT * FROM structure where id = ?",
+      [id]
+    );
+
+    return rows[0] ?? null;
+  }
 }
 
 module.exports = StuctureManager;

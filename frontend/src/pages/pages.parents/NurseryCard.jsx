@@ -152,25 +152,34 @@ function NurseryCard() {
             <div className="experience_nursery">
               <h5>Expériences</h5>
               <ul>
-                {creche?.psci ? <li>Formation premiers secours</li> : ""}
-                <li>Formation Nesting</li>
-                <li>Pedagogie Montessori</li>
+                {creche?.psci ? <li>Formation premiers secours (PSCI)</li> : ""}
+                {creche?.nesting ? <li>Formation Nesting</li> : ""}
+                {creche?.montessori ? <li>Pedagogie Montessori</li> : ""}
+                {creche?.handicap ? (
+                  <li>Formation accueil d'enfant handicapés</li>
+                ) : (
+                  ""
+                )}
               </ul>
             </div>
             <div className="accueil_nursery">
               <h5>Accueil</h5>
               <ul>
-                <li>Sorties Extérieur</li>
-                <li>Repas Maison</li>
+                {creche?.jardin ? <li>Espaces extérieur / jardin</li> : ""}
+                {creche?.sorties ? <li>Sorties extérieur</li> : ""}
                 <li>Foyer non-fumeur</li>
               </ul>
             </div>
             <div className="activity_nursery">
               <h5>Activités</h5>
               <ul>
-                <li>Promenade</li>
-                <li>Activité d'éveil</li>
-                <li>Atelier musique</li>
+                {creche?.promenades ? <li>Promenade</li> : ""}
+                {creche?.eveil ? <li>Activité d'éveil</li> : ""}
+                {creche?.musique ? <li>Atelier musique</li> : ""}
+                {creche?.art ? <li>Activité artistique</li> : ""}
+                {creche?.bilingue ? <li>Bilingue / International</li> : ""}
+                {creche?.bibli ? <li>Bibliothéque / Ludothéque</li> : ""}
+                {creche?.transport ? <li>Transport d'enfant</li> : ""}
               </ul>
             </div>
           </div>
@@ -193,39 +202,100 @@ function NurseryCard() {
                   <MDBModalBody>
                     <h4>Aggréments</h4>
                     <ol>
-                      <li>Enfants handicapés</li>
-                      <li>Enfants de moins de 18 mois</li>
-                      <li>Horaire atypique</li>
-                      <li>Accueil de nuit</li>
+                      {creche?.maxPlaces ? (
+                        <li>Nous avous {creche.maxPlaces} places</li>
+                      ) : (
+                        ""
+                      )}
+
+                      {creche?.isHandicapEnabled ? (
+                        <li>
+                          Enfant handicapé : {creche.maxHandicap} place(s)
+                        </li>
+                      ) : (
+                        ""
+                      )}
+                      {creche?.isUnder18MonthsEnabled ? (
+                        <li>
+                          Enfant de moins de 18 mois : {creche.maxUnder18Months}{" "}
+                          place(s)
+                        </li>
+                      ) : (
+                        ""
+                      )}
+                      {creche?.isAtypicalHoursEnabled ? (
+                        <li>
+                          Horaire atypique {creche.maxAtypicalHours} place(s)
+                        </li>
+                      ) : (
+                        ""
+                      )}
+                      {creche?.isNightCareEnabled ? (
+                        <li>Accueil de nuit {creche.maxNightCare} place(s)</li>
+                      ) : (
+                        ""
+                      )}
                     </ol>
                     <h4>Réglement intérieur</h4>
-                    <p>La période d’adaptation est obligatoire</p>
-                    <p>
-                      Les parents sont priés de respecter l’environnement, le
-                      voisinage, la vie privée et la famille de l’assistante
-                      maternelle
-                    </p>
-                    <p>
-                      Taper ou sonner à la porte, ne pas rentrer sans y être
-                      invité et attendre qu’on vienne vous ouvrir.
-                    </p>
-                    <p>
-                      Les parents doivent me transmettent toutes les
-                      informations nécessaires, ainsi que les incidents
-                      éventuels survenus au domicile
-                    </p>
-                    <p>
-                      L’enfant arrivera en état de propreté, habillé et ayant
-                      pris son premier repas
-                    </p>
-                    <p>
-                      Les bijoux seront enlevés et rendus aux parents pour des
-                      raisons de sécurité (étouffement, ingestion…).
-                    </p>
-                    <p>
-                      L’assistante maternelle est habilitée à administrer les
-                      médicaments uniquement sur ordonnance ou protocole.
-                    </p>
+                    {creche?.isAdaptationRequired ? (
+                      <p>La période d'adaptation est obligatoire</p>
+                    ) : (
+                      ""
+                    )}
+
+                    {creche?.isRespectRequired ? (
+                      <p>
+                        Les parents sont priés de respecter l'environnement, le
+                        voisinage, la vie privée et la famille de l'assistante
+                        maternelle
+                      </p>
+                    ) : (
+                      ""
+                    )}
+
+                    {creche?.isDoorRespectRequired ? (
+                      <p>
+                        Taper ou sonner à la porte, ne pas rentrer sans y être
+                        invité et attendre qu'on vienne vous ouvrir.
+                      </p>
+                    ) : (
+                      ""
+                    )}
+
+                    {creche?.isInfoTransmissionRequired ? (
+                      <p>
+                        Les parents doivent me transmettent toutes les
+                        informations nécessaires, ainsi que les incidents
+                        éventuels survenus au domicile
+                      </p>
+                    ) : (
+                      ""
+                    )}
+
+                    {creche?.isCleanArrivalRequired ? (
+                      <p>
+                        L'enfant arrivera en état de propreté, habillé et ayant
+                        pris son premier repas
+                      </p>
+                    ) : (
+                      ""
+                    )}
+                    {creche?.isJewelryRemovalRequired ? (
+                      <p>
+                        Les bijoux seront enlevés et rendus aux parents pour des
+                        raisons de sécurité (étouffement, ingestion…).
+                      </p>
+                    ) : (
+                      ""
+                    )}
+                    {creche?.isMedicationAdminRequired ? (
+                      <p>
+                        La structure est habilitée à administrer les médicaments
+                        uniquement sur ordonnance ou protocole.
+                      </p>
+                    ) : (
+                      ""
+                    )}
                   </MDBModalBody>
                   <MDBModalFooter>
                     <MDBBtn

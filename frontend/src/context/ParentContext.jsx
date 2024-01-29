@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import { createContext, useContext, useMemo, useState } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
+import { useUser } from "./UserContext";
 
 const ParentContext = createContext();
 
@@ -11,16 +11,16 @@ function ParentContextProvider({ children }) {
   const parent = loaderData?.parentProfil;
 
   const [dataParent, setDataParent] = useState({
-    address: "12 fdf",
-    parentFName: "dsfdf",
-    parentName: "sfdfsdf",
-    profession: "sdfsdf",
-    telephone: "1234678910",
-    ville: "fdfdf",
+    address: "",
+    parentFName: "",
+    parentName: "",
+    profession: "",
+    telephone: "",
+    ville: "",
     ...loaderData?.parentProfil,
   });
 
-  const [dataChildren, setDataChildren] = useState({});
+  const { apiService } = useUser();
 
   const [reservationData, setReservationData] = useState({
     dayResa: "",
@@ -49,17 +49,17 @@ function ParentContextProvider({ children }) {
     });
   };
 
-  const handleClickChild = (e) => {
-    setDataChildren({
-      ...dataChildren,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // const handleClickChild =
+  // (e) => {
+  //   setDataChildren({
+  //     ...dataChildren,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
   const handleSubmit = async () => {
-    // console.log(dataParent);
     try {
-      const response = await axios.put(
+      const response = await apiService.put(
         `http://localhost:3310/api/parents/${dataParent.id}`,
         dataParent ?? {}
       );
@@ -75,7 +75,7 @@ function ParentContextProvider({ children }) {
       handleClick,
       dataParent,
       handleSubmit,
-      handleClickChild,
+      // handleClickChild,
       reservationData,
       setReservationData,
       updateReservationData,
@@ -84,7 +84,7 @@ function ParentContextProvider({ children }) {
       handleClick,
       dataParent,
       handleSubmit,
-      handleClickChild,
+      // handleClickChild,
       reservationData,
       setReservationData,
       updateReservationData,

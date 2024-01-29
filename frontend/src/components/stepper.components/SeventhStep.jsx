@@ -24,19 +24,6 @@ function SeventhStep({ nextQuestion, prevQuestion }) {
   return (
     <div className="fifty">
       <div className="step7">
-        <div className="next-prev">
-          <MDBBtn type="button" onClick={validateSeventhStep}>
-            {loading ? "" : "suivant"}
-            {loading && (
-              <MDBSpinner role="status" size="sm">
-                <span className="visually-hidden">loading...</span>
-              </MDBSpinner>
-            )}
-          </MDBBtn>
-          <MDBBtn type="button" onClick={prevQuestion}>
-            précédent
-          </MDBBtn>
-        </div>
         <h1>Fixez un règlement intérieur</h1>
         <p>
           Les parents doivent accepter votre règlement intérieur avant de
@@ -99,6 +86,19 @@ function SeventhStep({ nextQuestion, prevQuestion }) {
             }
             checked={data?.isMedicationAdminRequired ?? false}
           />
+        </div>
+        <div className="next-prev">
+          <MDBBtn type="button" onClick={validateSeventhStep}>
+            {loading ? "" : "suivant"}
+            {loading && (
+              <MDBSpinner role="status" size="sm">
+                <span className="visually-hidden">loading...</span>
+              </MDBSpinner>
+            )}
+          </MDBBtn>
+          <MDBBtn type="button" onClick={prevQuestion}>
+            précédent
+          </MDBBtn>
         </div>
       </div>
       <div className="greyBg">
