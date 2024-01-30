@@ -1,12 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./profilResa.scss";
 import { Link, useLoaderData } from "react-router-dom";
 import NavProfil from "../../../components/profile.components/NavProfil";
+import { useUser } from "../../../context/UserContext";
 
 function ProfilResa() {
   const loaderDataParent = useLoaderData();
+  const { apiService } = useUser();
+  const myProfil = loaderDataParent?.parentProfil;
+  const [myResa, setMyResa] = useState([]);
 
-  const reservation = loaderDataParent?.reservation;
+  const getMyResaByParentId = async () => {
+    try {
+      const response = await apiService.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/reservations/parent/${
+          myProfil.id
+        }`
+      );
+      const myResaByParent = response.data;
+      return setMyResa(myResaByParent);
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  };
+  useEffect(() => {
+    getMyResaByParentId();
+  }, []);
 
   return (
     <div className="profilResa_container">
@@ -28,7 +48,7 @@ function ProfilResa() {
       </div>
       <div className="myResa_container">
         <h1>Mes réservations</h1>
-        {reservation.map((item) => (
+        {myResa.map((item) => (
           <div key={item.id} className="card_myresa">
             <div className="img_structure">
               <img src="../src/assets/creche3.jpeg" alt="" />
@@ -47,5 +67,4 @@ function ProfilResa() {
     </div>
   );
 }
-
 export default ProfilResa;
