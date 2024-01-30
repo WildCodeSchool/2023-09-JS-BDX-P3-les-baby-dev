@@ -27,6 +27,16 @@ function ParentContextProvider({ children }) {
     });
   };
 
+  // const getMyChildren = async () => {
+  //   try {
+  //     const response = await apiService.get(
+  //       `${import.meta.env.VITE_BACKEND_URL}/api/parent/children/${parent.id}`
+  //     );
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
   const [dataChildren, setDataChildren] = useState([
     {
       lastname: "",

@@ -93,6 +93,19 @@ const remove = async (req, res) => {
   }
 };
 
+const getChildrenById = async (req, res) => {
+  try {
+    const id = +req.params.id;
+    const result = await models.child.getChildren(id);
+    res.json(result);
+    return result;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: error.message });
+    return null;
+  }
+};
+
 module.exports = {
   getListParent,
   getMyParentProfil,
@@ -100,4 +113,5 @@ module.exports = {
   getParentById,
   addChild,
   remove,
+  getChildrenById,
 };
