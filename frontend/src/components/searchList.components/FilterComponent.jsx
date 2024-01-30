@@ -8,7 +8,7 @@ function FilterComponent() {
       <div className="btn_filter">
         <Link to="/searchlist/filter">
           <img src="../src/assets/Filter.svg" alt="" />
-          <h2>Filter</h2>
+          <h2>Filtrer ma recherche</h2>
         </Link>
       </div>
     </div>
