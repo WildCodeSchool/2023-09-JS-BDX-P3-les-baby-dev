@@ -20,15 +20,26 @@ function ParentContextProvider({ children }) {
     ...loaderData?.parentProfil,
   });
 
-  const [dataChildren, setDataChildren] = useState([]);
-
-  const HandleAdd = () => {
-    const newChild = setDataChildren((prevData) => ({
-      ...prevData,
-      children: [...(prevData.children || []), newChild],
-    }));
+  const handleClick = (e) => {
+    setDataParent({
+      ...dataParent,
+      [e.target.name]: e.target.value,
+    });
   };
 
+  const [dataChildren, setDataChildren] = useState([
+    {
+      id: 1,
+      lastname: "",
+      firstname: "",
+      birthday: "",
+      isWalking: false,
+      childDoctor: "",
+      allergies: "",
+    },
+  ]);
+
+  // --------------------- Reservation --------------------------
   const { apiService } = useUser();
 
   const [reservationData, setReservationData] = useState({
@@ -51,21 +62,7 @@ function ParentContextProvider({ children }) {
     }));
   };
 
-  const handleClick = (e) => {
-    setDataParent({
-      ...dataParent,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleClickChild = (e) => {
-    setDataChildren({
-      ...dataChildren,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async () => {
+  const handleSubmitParent = async () => {
     try {
       const response = await apiService.put(
         `http://localhost:3310/api/parents/${dataParent.id}`,
@@ -80,28 +77,26 @@ function ParentContextProvider({ children }) {
 
   const contextParentValue = useMemo(
     () => ({
-      handleClick,
       dataParent,
-      handleSubmit,
+      handleSubmitParent,
       reservationData,
       setReservationData,
       updateReservationData,
       parent,
-      handleClickChild,
-      HandleAdd,
       dataChildren,
+      setDataChildren,
+      handleClick,
     }),
     [
-      handleClick,
       dataParent,
-      handleSubmit,
+      handleSubmitParent,
       reservationData,
       setReservationData,
       updateReservationData,
       parent,
-      handleClickChild,
-      HandleAdd,
       dataChildren,
+      setDataParent,
+      handleClick,
     ]
   );
 
