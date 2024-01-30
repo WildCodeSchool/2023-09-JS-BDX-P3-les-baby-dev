@@ -11,7 +11,7 @@ import NavProfil from "../../../components/profile.components/NavProfil";
 import { useParent } from "../../../context/ParentContext";
 
 function InscriptionParent() {
-  const { dataParent, handleClick, handleSubmit } = useParent();
+  const { dataParent, handleClick, handleSubmitParent } = useParent();
   const navigate = useNavigate();
   return (
     <div className="flex-inscription">
@@ -131,7 +131,7 @@ function InscriptionParent() {
                 <MDBBtn
                   type="button"
                   onClick={() => {
-                    handleSubmit();
+                    handleSubmitParent();
                     navigate("/profil/inscription/children");
                   }}
                 >
