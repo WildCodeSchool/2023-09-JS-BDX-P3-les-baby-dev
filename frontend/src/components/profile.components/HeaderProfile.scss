@@ -1,5 +1,4 @@
 .background-header-profile {
-  background-image: url("../src/assets/background-profil.svg");
   background-repeat: no-repeat;
   background-size: cover;
   height: auto;
@@ -36,16 +35,6 @@
   justify-content: center;
   color: white;
   font-weight: bold;
-
-  &.blue-button {
-    background-image: url("../src/assets/blue-button.svg");
-  }
-  &.green-button {
-    background-image: url("../src/assets/green-button.svg");
-  }
-  &.orange-button {
-    background-image: url("../src/assets/orange-button.svg");
-  }
 }
 
 @media screen and (min-width: 750px) {

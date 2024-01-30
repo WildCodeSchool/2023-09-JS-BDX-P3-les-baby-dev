@@ -9,6 +9,7 @@ import {
 import HeaderProfile from "../../../components/profile.components/HeaderProfile";
 import NavProfil from "../../../components/profile.components/NavProfil";
 import { useParent } from "../../../context/ParentContext";
+// import greenButton from "./src/assets/green-button.svg";
 
 function IncriptionChildren() {
   const {
