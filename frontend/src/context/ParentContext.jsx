@@ -29,7 +29,6 @@ function ParentContextProvider({ children }) {
 
   const [dataChildren, setDataChildren] = useState([
     {
-      id: 1,
       lastname: "",
       firstname: "",
       birthday: "",
@@ -47,7 +46,7 @@ function ParentContextProvider({ children }) {
     startHour: "",
     finishHour: "",
     structure_id: "",
-    parent_id: parent.id,
+    parent_id: parent?.id ?? "",
     status: true,
     message: "",
   });

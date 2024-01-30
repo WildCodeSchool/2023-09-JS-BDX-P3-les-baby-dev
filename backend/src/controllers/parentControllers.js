@@ -64,7 +64,7 @@ const getParentById = (req, res) => {
     });
 };
 
-const addChildren = async (req, res) => {
+const addChild = async (req, res) => {
   // console.log("bodyyyyy :", req.body);
   try {
     const parentId = parseInt(req.params.id, 10);
@@ -78,10 +78,26 @@ const addChildren = async (req, res) => {
   return null;
 };
 
+const remove = async (req, res) => {
+  try {
+    const id = +req.params.id;
+
+    // TODO: creer child manager + select * where id = id + verif parent_id = req.user.id
+    // TODO: !IMPORTANT: securiser la route => admin et parent de lenfant
+
+    const result = await models.parent.removeChild(id);
+
+    return res.sendStatus(!result.affectedRows ? 404 : 204);
+  } catch (err) {
+    return res.status(422).send({ message: err.message });
+  }
+};
+
 module.exports = {
   getListParent,
   getMyParentProfil,
   updateParent,
   getParentById,
-  addChildren,
+  addChild,
+  remove,
 };
