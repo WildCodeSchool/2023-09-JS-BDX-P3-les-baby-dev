@@ -6,7 +6,7 @@
   padding-top: 20px;
 
   .choisen_profil {
-    background-color: white;
+    background: linear-gradient(to bottom right, #7847ff, #e37acc);
     height: 100px;
     display: flex;
     box-shadow: 3px 3px 3px rgb(187, 187, 187);
@@ -34,7 +34,7 @@
 
     .title_Myresa {
       h1 {
-        color: #1d0042;
+        color: white;
         font-size: 1.4em;
         margin-left: 20px;
         padding-top: 15px;
@@ -42,7 +42,7 @@
       }
 
       h2 {
-        color: #7e72f2;
+        color: #cccbd2;
         margin-left: 20px;
         font-size: 1.1em;
         font-weight: bold;
@@ -56,10 +56,11 @@
     h1 {
       margin-left: 60px;
       margin-top: 30px;
+      font-size: 2em;
     }
 
     .card_myresa {
-      background-color: white;
+      background: linear-gradient(to bottom right, #7847ff, #e37acc);
       height: 100px;
       width: 90%;
       margin: 30px auto;
@@ -70,13 +71,13 @@
       justify-content: space-between;
       text-align: center;
       padding: 5px;
+      color: white;
 
       &:hover {
-        background-color: #f0f3fd;
+        background: #e37acc;
       }
 
       .img_structure {
-        width: 120px;
         height: 90%;
         margin: 5px;
 
@@ -107,6 +108,33 @@
           font-weight: bold;
           font-size: 1em;
         }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .profilResa_container {
+    .myResa_container {
+      height: 830px;
+
+      h1 {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 2em;
+      }
+      .card_myresa {
+        height: 130px;
+        width: 90%;
+        margin: 30px auto;
+        border-radius: 5px;
+        box-shadow: 2px 3px 2px grey;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: center;
+        padding: 5px;
+        color: white;
       }
     }
   }

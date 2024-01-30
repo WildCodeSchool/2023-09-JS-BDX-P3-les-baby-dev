@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./dashboard.scss";
 import {
   MDBSideNav,
@@ -13,136 +13,78 @@ import {
   MDBTableHead,
   MDBTableBody,
 } from "mdb-react-ui-kit";
-import { useNavigate } from "react-router-dom";
-import Babyplace from "../../assets/Babyplace.svg";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import Babyplace from "../../assets/BabyplacePro-blanc.svg";
+import { useUser } from "../../context/UserContext";
 
 export default function App() {
   const [colorOpen, setColorOpen] = useState(true);
   const [colorCollapse1, setColorCollapse1] = useState(true);
   const [colorCollapse2, setColorCollapse2] = useState(false);
-  // const [color, setColor] = useState("primary");
   const [filter, setFilter] = useState("Tous");
-  const [resaData, setResaData] = useState([]);
+  const { logout, apiService } = useUser();
+  const [myResa, setMyResa] = useState([]);
 
   const navigate = useNavigate();
+  const loaderData = useLoaderData();
 
-  /* const data = [
-    {
-      id: 1,
-      name: "Mat Doe",
-      dayResa: "Lundi 17 mars",
-      startHour: "9h",
-      finishHour: "17h",
-      price: "15euros",
-      status: "Accepté",
-      position: "Senior",
-      img: "https://mdbootstrap.com/img/new/avatars/8.jpg",
-    },
-    {
-      id: 2,
-      name: "Alex Ray",
-      dayResa: "Mardi 18 mars",
-      startHour: "9h",
-      finishHour: "17h",
-      price: "15euros",
-      status: "Refusé",
-      position: "Junior",
-      img: "https://mdbootstrap.com/img/new/avatars/6.jpg",
-    },
-    {
-      id: 3,
-      name: "Kate Hunington",
-      dayResa: "Mercredi 19 mars",
-      startHour: "9h",
-      finishHour: "17h",
-      price: "15euros",
-      status: "En attente",
-      position: "Senior",
-      img: "https://mdbootstrap.com/img/new/avatars/4.jpg",
-    },
-    {
-      id: 4,
-      name: "John Doe",
-      dayResa: "Vendredi 19 mars",
-      startHour: "9h",
-      finishHour: "17h",
-      price: "15euros",
-      status: "Accepté",
-      position: "Senior",
-      img: "https://mdbootstrap.com/img/new/avatars/5.jpg",
-    },
-    {
-      id: 5,
-      name: "Alex Ray",
-      dayResa: "Mardi 03 avril",
-      startHour: "9h",
-      finishHour: "17h",
-      price: "15euros",
-      status: "Accepté",
-      position: "Junior",
-      img: "https://mdbootstrap.com/img/new/avatars/6.jpg",
-    },
-    {
-      id: 6,
-      name: "Kate Hunington",
-      dayResa: "Mercredi 04 avril",
-      startHour: "9h",
-      finishHour: "17h",
-      price: "15euros",
-      status: "En attente",
-      position: "Senior",
-      img: "https://mdbootstrap.com/img/new/avatars/7.jpg",
-    },
-    // ... autres données
-  ]; */
+  // console.log(loaderDataParent);
 
+  const parent = loaderData?.preloadOneParent;
+  // const reservation = loaderData?.reservation;
+  const structureId = loaderData?.preloadUserStructure.data.id;
+
+  const getMyResa = async (id) => {
+    try {
+      const response = await apiService.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/reservations/${id}`
+      );
+      const myResaData = response.data;
+      return setMyResa(myResaData);
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  };
   useEffect(() => {
-    const fetchResaData = async () => {
-      try {
-        const response = await fetch("http://localhost:3310/api/reservations");
-        if (!response.ok) {
-          throw new Error("Erreur lors de la récupération des données");
-        }
-        const data = await response.json();
-        setResaData(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchResaData();
+    getMyResa(structureId);
   }, []);
 
-  const filteredData = resaData.filter((item) => {
+  const filteredData = myResa.filter((item) => {
     if (filter === "Tous") {
       return true;
     }
-    return item.status === filter;
+    if (filter === "Accepté") {
+      return item.status;
+    }
+    return !item.status;
   });
 
   return (
     <>
       <div className="filters">
-        <MDBBtn onClick={() => setFilter("Tous")}>Tous</MDBBtn>
-        <MDBBtn onClick={() => setFilter("En attente")} color="warning">
+        <MDBBtn onClick={() => setFilter("Tous")} className="btn-tous">
+          Tous
+        </MDBBtn>
+        <MDBBtn onClick={() => setFilter("En attente")} className="btn-attente">
           En attente
         </MDBBtn>
-        <MDBBtn onClick={() => setFilter("Accepté")} color="success">
+        <MDBBtn onClick={() => setFilter("Accepté")} className="btn-accepte">
           Accepté
         </MDBBtn>
-        <MDBBtn onClick={() => setFilter("Refusé")} color="danger">
+        <MDBBtn onClick={() => setFilter("Refusé")} className="btn-refuse">
           Refusé
         </MDBBtn>
       </div>
 
       <MDBTable align="middle">
         <MDBTableHead>
-          <tr>
-            <th scope="col">Name</th>
+          <tr className="titreInfos">
+            <th scope="col">Parent/Enfant</th>
             <th scope="col">Jour de réservation</th>
             <th scope="col">Heure d'arrivée</th>
             <th scope="col">Heure de sortie</th>
-            <th scope="col">Tarifs</th>
+            <th scope="col">Message</th>
             <th scope="col">Status</th>
             <th scope="col">Actions</th>
           </tr>
@@ -152,16 +94,20 @@ export default function App() {
             <tr key={item.id}>
               <td>
                 <div className="d-flex align-items-center">
-                  <img
-                    src={item.picture}
-                    alt=""
-                    style={{ width: "45px", height: "45px" }}
-                    className="rounded-circle"
-                  />
-                  <div className="ms-3">
-                    <p className="fw-bold mb-1">{item.name}</p>
-                    <p className="text-muted mb-0">{item.email}</p>
-                  </div>
+                  {parent.map((p) => (
+                    <div key={parent.id} className="ms-0">
+                      {item.parent_id === p.id && (
+                        <>
+                          <p className="fw-bold mb-0">
+                            Parent: {p.parentName} {p.parentFName}
+                          </p>
+                          <p className="text-muted mb-0">
+                            Enfant: {p?.parentName ?? "Juju"}
+                          </p>
+                        </>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </td>
               <td>
@@ -175,23 +121,18 @@ export default function App() {
                 <p className="fw-normal mb-1">{item.finishHour}</p>
               </td>
               <td>
-                <h2 className="fw-normal mb-1">{item.price}€/heure</h2>
+                <p className="fw-normal mb-1">{item.message}</p>
               </td>
-              {item.status === "Accepté" && (
+              {item.status ? (
                 <MDBBadge className="badge" color="success" pill>
-                  {item.status}
+                  Accepté
                 </MDBBadge>
-              )}
-              {item.status === "Refusé" && (
+              ) : (
                 <MDBBadge color="danger" pill>
-                  {item.status}
+                  Refusé
                 </MDBBadge>
               )}
-              {item.status === "En attente" && (
-                <MDBBadge color="warning" pill>
-                  {item.status}
-                </MDBBadge>
-              )}
+
               <td>
                 <MDBBtn color="link" rounded size="sm">
                   Edit
@@ -240,6 +181,7 @@ export default function App() {
                     Modifier ma structure
                   </MDBSideNavLink>
                   <MDBSideNavLink>Paramètre</MDBSideNavLink>
+                  <MDBSideNavLink onClick={logout}>Déconnextion</MDBSideNavLink>
                 </MDBSideNavCollapse>
               </MDBSideNavItem>
             </MDBSideNavMenu>

@@ -22,11 +22,6 @@ function Footer() {
         <div className="footerBtm">
           <div className="info">
             <div>
-              {/* <button type="button" className="imgButton">
-                <img src="./src/assets/logoPasPro.svg" alt="Babyplace" />
-              </button> */}
-            </div>
-            <div>
               <p className="adress">
                 Warehouse Society, 234 Bahagia Ave Street PRBW 29281
               </p>

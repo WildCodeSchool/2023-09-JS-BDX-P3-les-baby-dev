@@ -16,6 +16,8 @@ const { authMiddleware } = require("./middlewares/Security/auth.middleware");
 const structureControllers = require("./controllers/structureControllers");
 const reservationControllers = require("./controllers/reservationControllers");
 const parentControllers = require("./controllers/parentControllers");
+const hoursControllers = require("./controllers/hourControllers");
+const employeeControllers = require("./controllers/employeeControllers");
 // Route to get a list of items
 
 // Route to get a specific item by ID
@@ -23,20 +25,26 @@ const parentControllers = require("./controllers/parentControllers");
 /* *********** Route User ************** */
 
 // Route to add a new user/stucture/parent/enfants
-router.get("/users", userControllers.getUser);
+router.get("/users", userControllers.getUsers);
 router.get("/users/myprofil", authMiddleware, userControllers.getProfile);
+
 router.post("/users", userControllers.addUser);
 router.post("/login", userControllers.postLogin);
 
 /* *********** Route Structure ************** */
 
 router.get("/structure", structureControllers.getStructure);
-router.get("/structure/:id", structureControllers.getStructureById);
+router.get("/structure/:id([0-9]+)", structureControllers.getStructureById);
+router.get(
+  "/structures/:id([0-9]+)/employees",
+  authMiddleware,
+  structureControllers.getStructuresEmployees
+);
 
 router.put(
   "/structures/:id([0-9]+)/avatar",
   upload.single("avatar"),
-  structureControllers.updateUpload
+  structureControllers.upload
 );
 
 router.put(
@@ -54,6 +62,12 @@ router.put(
   structureControllers.updateEmployee
 );
 
+router.post(
+  "/structure/employees/:id([0-9]+)",
+  authMiddleware,
+  employeeControllers.addEmployee
+);
+
 router.get(
   "/users/structure",
   authMiddleware,
@@ -68,10 +82,52 @@ router.get(
   parentControllers.getMyParentProfil
 );
 router.get("/users/parent", authMiddleware, parentControllers.getListParent);
+router.get("user/parent", authMiddleware, userControllers.getParent);
+router.get("/parent/:id", parentControllers.getParentById);
+
+router.put(
+  "/parents/:id([0-9]+)",
+  authMiddleware,
+  parentControllers.updateParent
+);
+
+router.post(
+  "/parents/children/:id([0-9]+)",
+  authMiddleware,
+  parentControllers.addChild
+);
+
+// router.put(
+//   "/children/:id([0-9]+)",
+//   authMiddleware,
+//   parentControllers.updateChild
+// );
+router.delete(
+  "/children/:id([0-9]+)",
+  authMiddleware,
+  parentControllers.remove
+);
 
 /* *********** Routes reservation ************** */
 
 router.get("/reservations", reservationControllers.getReservation);
+router.post("/reservation", reservationControllers.addReservation);
+router.get(
+  "/reservations/:id",
+  authMiddleware,
+  reservationControllers.getReservationsByStructure
+);
+
+/* *********** Routes Hour ************** */
+
+router.get("/hours", hoursControllers.getHours);
+router.get("/myhours", authMiddleware, structureControllers.getMyHours);
+
+router.delete(
+  "/employees/:id([0-9]+)",
+  authMiddleware,
+  structureControllers.deleteEmployee
+);
 
 /* ************************************************************************* */
 

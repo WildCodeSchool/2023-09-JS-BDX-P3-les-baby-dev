@@ -2,144 +2,132 @@ import "./SearchList.scss";
 import {
   MDBCard,
   MDBCardBody,
-  MDBCardTitle,
-  // MDBCardText,
   MDBListGroup,
   MDBListGroupItem,
 } from "mdb-react-ui-kit";
-import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import NavProfil from "../../components/profile.components/NavProfil";
 import FilterComponent from "../../components/searchList.components/FilterComponent";
 import HeaderNav from "../../components/profile.components/HeaderNav";
-// import { useStructure } from "../../context/StrucutreContext";
-// import ApiService from "../../services/api.service";
+import imageDefault from "../../assets/defaultImage.png";
 
 function SearchList() {
   const navigate = useNavigate();
-  const [crechesData, setCrechesData] = useState([]);
-
-  // const { fetchDataCreche } = useStructure();
+  const loaderData = useLoaderData();
+  // console.log("dans searchlist:", loaderData);
 
   const handleNavigate = (crecheId) => {
     navigate(`/searchlist/nursery/${crecheId}`);
   };
 
-  useEffect(() => {
-    const fetchDataCreche = async () => {
-      try {
-        const response = await fetch("http://localhost:3310/api/structure");
-        if (!response.ok) {
-          throw new Error("Erreur lors de la récupération des données");
-        }
-        const data = await response.json();
-        setCrechesData(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchDataCreche();
-  }, []);
-
   return (
-    /* <div>
-      <FilterComponent />
-      <div className="card-container container">
-        {crechesData.map((creche) => (
-          <div key={creche.id}>
-            <MDBCard>
-              <MDBCardImage
-                position="top"
-                alt={creche.name}
-                src={creche.avatarPath}
-              />
-              <MDBCardBody>
-                <MDBCardTitle>{creche.name}</MDBCardTitle>
-                <MDBCardText>{creche.stuctureDesc}</MDBCardText>
-              </MDBCardBody>
-              <MDBListGroup flush>
-                <MDBListGroupItem>{creche.openingHours}</MDBListGroupItem>
-                <MDBListGroupItem>{creche.tel}</MDBListGroupItem>
-                <MDBListGroupItem>{creche.adress}</MDBListGroupItem>
-                <div className="days-container">
-                  {Object.entries(creche.availability).map(
-                    ([day, isAvailable], index) => (
-                      <div
-                        className="days-availability"
-                        key={`index-${index + 1}`}
-                        style={{
-                          backgroundColor: isAvailable
-                            ? "green"
-                            : "rgb(105, 105, 105)",
-                        }}
-                      >
-                        {day}: {isAvailable ? "Disponible" : "Complet"}
-                      </div>
-                    )
-                  )}
-                </div>
-              </MDBListGroup>
-              <MDBCardBody>
-                <MDBCardLink onClick={handleNavigate}>Nursery</MDBCardLink>
-                <MDBCardLink>
-                  <Link to="/searchlist/nursery">Réserver</Link>
-                </MDBCardLink>
-              </MDBCardBody>
-            </MDBCard>
-          </div>
-        ))}
-      </div>
-      <NavProfil />
-    </div> */
     <div className="searchlist_container">
       <HeaderNav />
       <FilterComponent />
       <div className="card-container">
-        {crechesData.map((creche) => (
-          <div key={creche.id}>
-            <div className="oneCard">
+        {loaderData.structures.map((creche) => {
+          // Filtrer les heures pour la crèche actuelle
+          const crecheHours = loaderData.hours.find(
+            (hour) => hour.structure_id === creche.id
+          );
+          return (
+            <div className="oneCard" key={creche.id}>
               <MDBCard>
                 <div className="img_creche">
                   <img
                     alt={creche.name}
-                    src={creche.avatarPath || "./src/assets/defaultImage.png"}
+                    src={creche.avatarPath || imageDefault}
                   />
                   <h3>{creche.name}</h3>
                 </div>
-
-                <MDBCardBody>
-                  <MDBCardTitle>{creche.name}</MDBCardTitle>
-                </MDBCardBody>
+                <div className="adress_nursery">
+                  <ul>
+                    <li>{creche.adress}</li>
+                    <li>
+                      {creche.zip} {creche.city}
+                    </li>
+                  </ul>
+                </div>
                 <MDBListGroup flush>
-                  <MDBListGroupItem>{creche.tel}</MDBListGroupItem>
-                  <MDBListGroupItem>{creche.city}</MDBListGroupItem>
+                  {crecheHours && (
+                    <div className="horaires_nursery">
+                      <ul>
+                        <li>Ouvert du</li>
+                        <li>lundi au samedi</li>
+                        <li>Téléphone: {creche.tel}</li>
+                      </ul>
+                    </div>
+                  )}
                   <MDBListGroupItem>
                     <h4>3€/heure</h4>
                   </MDBListGroupItem>
                 </MDBListGroup>
                 <MDBCardBody>
                   <div className="days-container">
-                    <div className="days-availability">
-                      <p>Lundi: Disponible</p>
-                    </div>
-                    <div className="days-availability">
-                      <p>Mardi: Disponible</p>
-                    </div>
-                    <div className="days-availability">
-                      <p>Mercredi: Disponible</p>
-                    </div>
-                    <div className="days-availability">
-                      <p>Jeudi: Disponible</p>
-                    </div>
-                    <div className="days-availability">
-                      <p>Vendredi: Disponible</p>
-                    </div>
-                    <div className="days-availability">
-                      <p>Samedi: Disponible</p>
-                    </div>
+                    <p
+                      className="days-availability"
+                      style={{
+                        backgroundColor: crecheHours?.monday
+                          ? "#32c766"
+                          : "gray",
+                      }}
+                    >
+                      Lundi: {crecheHours?.monday ? "Disponible" : "Complet"}
+                    </p>
+                    <p
+                      className="days-availability"
+                      style={{
+                        backgroundColor: crecheHours?.tuesday
+                          ? "#32c766"
+                          : "gray",
+                      }}
+                    >
+                      Mardi: {crecheHours?.tuesday ? "Disponible" : "Complet"}
+                    </p>
+                    <p
+                      className="days-availability"
+                      style={{
+                        backgroundColor: crecheHours?.wednesday
+                          ? "#32c766"
+                          : "gray",
+                      }}
+                    >
+                      Mercredi:{" "}
+                      {crecheHours?.wednesday ? "Disponible" : "Complet"}
+                    </p>
+                    <p
+                      className="days-availability"
+                      style={{
+                        backgroundColor: crecheHours?.thursday
+                          ? "#32c766"
+                          : "gray",
+                      }}
+                    >
+                      Jeudi: {crecheHours?.thursday ? "Disponible" : "Complet"}
+                    </p>
+                    <p
+                      className="days-availability"
+                      style={{
+                        backgroundColor: crecheHours?.friday
+                          ? "#32c766"
+                          : "gray",
+                      }}
+                    >
+                      Vendredi: {crecheHours?.friday ? "Disponible" : "Complet"}
+                    </p>
+                    <p
+                      className="days-availability"
+                      style={{
+                        backgroundColor: crecheHours?.saturday
+                          ? "#32c766"
+                          : "gray",
+                      }}
+                    >
+                      Samedi: {crecheHours?.saturday ? "Disponible" : "Complet"}
+                    </p>
                   </div>
                 </MDBCardBody>
+
                 <MDBCardBody>
                   <Link to={`/searchlist/nursery/${creche.id}`}>
                     <button
@@ -153,8 +141,8 @@ function SearchList() {
                 </MDBCardBody>
               </MDBCard>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
       <NavProfil />
     </div>

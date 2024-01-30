@@ -2,7 +2,7 @@
 const jwt = require("jsonwebtoken");
 const models = require("../models");
 
-const getUser = (_, res) => {
+const getUsers = (_, res) => {
   models.user
     .findAll()
     .then(([rows]) => {
@@ -23,15 +23,15 @@ const addUser = (req, res) => {
         email: req.body.email,
         isAdmin: req.body.isAdmin,
         structureId: rows.structureId,
+        parentId: rows.parentId,
         hoursId: rows.hoursId,
-        emplyeeId: rows.emplyeeId,
+        employeeId: rows.employeeId,
       });
     })
     .catch((err) => {
       console.error(err);
       res.status(400).send({ message: err.message });
     });
-  // res.status(418).send(req.body)
 };
 
 function generateAccessToken(data) {
@@ -41,7 +41,6 @@ function generateAccessToken(data) {
 const postLogin = (req, res) => {
   models.user.login(req.body).then((user) => {
     if (user) {
-      // todo : filtrer les données à envoyer
       const { id, is_admin, email } = user;
       const token = generateAccessToken({ id, is_admin, email });
       res.send({ token });
@@ -51,13 +50,34 @@ const postLogin = (req, res) => {
   });
 };
 
-const getProfile = (req, res) => {
-  res.send(req.user);
+const getProfile = async (req, res) => {
+  try {
+    const user = await models.user.getUsers(req.user.id);
+
+    if (user) {
+      delete user.password;
+    }
+
+    return user ? res.send(user) : res.sendStatus(404);
+  } catch (error) {
+    return res.status(500).send({ msg: error.message });
+  }
+};
+
+const getParent = async (req, res) => {
+  try {
+    const user = await models.user.getParent(req.user.id);
+
+    return user ? res.send(user) : res.sendStatus(404);
+  } catch (error) {
+    return res.status(500).send({ msg: error.message });
+  }
 };
 
 module.exports = {
   addUser,
-  getUser,
+  getUsers,
   postLogin,
   getProfile,
+  getParent,
 };

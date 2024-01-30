@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-// import { MDBFileUpload } from "mdb-react-file-upload";
 import HeaderProfile from "../../../components/profile.components/HeaderProfile";
 import NavProfil from "../../../components/profile.components/NavProfil";
 

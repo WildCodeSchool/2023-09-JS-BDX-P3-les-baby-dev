@@ -1,4 +1,4 @@
-import FooterMdb from "../../components/home.components/FooterMdb";
+import Footer from "../../components/home.components/Footer";
 import Header from "../../components/home.components/Header";
 import Navbar from "../../components/home.components/Navbar";
 
@@ -39,7 +39,7 @@ function Home() {
           className="zeroPapier"
         />
       </div>
-      <FooterMdb />
+      <Footer />
     </div>
   );
 }

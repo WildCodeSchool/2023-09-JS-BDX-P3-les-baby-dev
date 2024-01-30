@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useMemo } from "react";
 import PropTypes from "prop-types";
 
 const ProContext = createContext();
@@ -6,7 +6,11 @@ const ProContext = createContext();
 function ProContextProvider({ children }) {
   // const [proType, setProType] = useState(false);
 
-  return <ProContext.Provider>{children}</ProContext.Provider>;
+  const contextValue = useMemo(() => ({}), []);
+
+  return (
+    <ProContext.Provider value={contextValue}>{children}</ProContext.Provider>
+  );
 }
 
 ProContextProvider.propTypes = {

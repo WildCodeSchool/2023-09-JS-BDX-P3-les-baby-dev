@@ -8,34 +8,40 @@ const UserContext = createContext();
 
 function UserContextProvider({ children, apiService }) {
   const givenData = useLoaderData();
+  // console.log("user", givenData);
+
   const [isProfessional, setIsProfessional] = useState(
     givenData?.preloadUser?.data?.isAdmin
   );
-  // eslint-disable-next-line no-unused-vars
+
   const [user, setUser] = useState(givenData?.preloadUser?.data);
   const navigate = useNavigate();
 
-  const login = async (credentials) => {
+  const login = async (credentials, redirect = true, showAlert = true) => {
     try {
       const { data } = await axios.post(
-        `http://localhost:3310/api/login`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/login`,
         credentials
       );
       localStorage.setItem("token", data.token);
       apiService.setToken(data.token);
 
       const result = await apiService.get(
-        "http://localhost:3310/api/users/myprofil"
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/myprofil`
       );
 
-      alert(`Content de vous revoir ${result.data.email}`);
-      setUser(result.data);
-      if (result.data.isAdmin === 1) {
-        return navigate("/dashboard");
+      // eslint-disable-next-line no-alert
+      if (showAlert) {
+        alert(`Content de vous revoir ${result.data.email}`);
       }
-      return navigate("/searchlist");
+      setUser(result.data);
+      if (!redirect) {
+        return null;
+      }
+      return navigate(result.data.is_admin ? "/dashboard" : "/searchlist");
     } catch (err) {
       console.error(err);
+      // eslint-disable-next-line no-alert
       alert(err.message);
     }
 
@@ -44,14 +50,18 @@ function UserContextProvider({ children, apiService }) {
 
   const register = async (newUser) => {
     try {
-      setUser(await axios.post("http://localhost:3310/api/users", newUser));
-      alert(`Bienvenue ${newUser.email}`);
-      if (newUser.is_admin) {
-        return navigate("/structure");
-      }
-      return navigate("/searchlist");
+      await apiService.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users`,
+        newUser
+      );
+      await login(newUser, false, false);
+
+      // eslint-disable-next-line no-alert
+      alert(`Bienvenue ${user.email}`);
+      return navigate(user.is_admin ? "/structure" : "/searchlist");
     } catch (err) {
       console.error(err);
+      // eslint-disable-next-line no-alert
       alert(err.response.data.message);
     }
 
@@ -66,6 +76,7 @@ function UserContextProvider({ children, apiService }) {
 
   const contextValue = useMemo(
     () => ({
+      apiService,
       login,
       register,
       setIsProfessional,
@@ -73,7 +84,15 @@ function UserContextProvider({ children, apiService }) {
       user,
       logout,
     }),
-    [login, register, setIsProfessional, isProfessional, user, logout]
+    [
+      apiService,
+      login,
+      register,
+      setIsProfessional,
+      isProfessional,
+      user,
+      logout,
+    ]
   );
 
   return (
