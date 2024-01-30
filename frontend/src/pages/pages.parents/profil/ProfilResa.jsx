@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./profilResa.scss";
+import { MDBBadge } from "mdb-react-ui-kit";
 import { Link, useLoaderData } from "react-router-dom";
 import NavProfil from "../../../components/profile.components/NavProfil";
 import { useUser } from "../../../context/UserContext";
@@ -55,9 +56,18 @@ function ProfilResa() {
             </div>
             <div className="title_resa">
               <h2>Bibiche Structure</h2>
-              <p>Réservation confirmé</p>
+              {item.status ? (
+                <MDBBadge className="badge" color="success" pill>
+                  Accepté
+                </MDBBadge>
+              ) : (
+                <MDBBadge color="danger" pill>
+                  Refusé
+                </MDBBadge>
+              )}
             </div>
             <div className="date_resa">
+              <h3>Date de réservation:</h3>
               <h3>{item.dayResa}</h3>
             </div>
           </div>
