@@ -52,6 +52,15 @@ class MyParentProfilManager extends AbstractManager {
       return null;
     }
   }
+
+  async removeChild(id) {
+    const [result] = await this.database.query(
+      `DELETE FROM child WHERE id = ?`,
+      [id]
+    );
+
+    return result;
+  }
 }
 
 module.exports = MyParentProfilManager;
