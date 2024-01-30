@@ -69,13 +69,11 @@ const addChild = async (req, res) => {
   try {
     const parentId = parseInt(req.params.id, 10);
     const childId = await models.parent.createChild(req.body, parentId);
-    res.status(201).send({ msg: "Bien enregistré" });
-    return childId;
+    return res.status(201).send({ ...req.body, id: childId });
   } catch (error) {
     console.error(error);
-    res.status(500).send({ error: error.message });
+    return res.status(500).send({ error: error.message });
   }
-  return null;
 };
 
 const remove = async (req, res) => {
@@ -106,6 +104,26 @@ const getChildrenById = async (req, res) => {
   }
 };
 
+const updateChild = async (req, res) => {
+  try {
+    const id = +req.params.id;
+
+    await models.child.update(id, req.body);
+
+    res.status(201).json({
+      success: true,
+      message: "Enfant registered successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   getListParent,
   getMyParentProfil,
@@ -114,4 +132,5 @@ module.exports = {
   addChild,
   remove,
   getChildrenById,
+  updateChild,
 };

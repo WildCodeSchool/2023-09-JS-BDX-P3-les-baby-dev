@@ -28,7 +28,8 @@ class MyParentProfilManager extends AbstractManager {
       } = child;
 
       const [result] = await this.database.query(
-        `INSERT INTO child (parent_id, childFName,
+        `INSERT INTO child (parent_id, 
+        childFName,
         childName,
         birthday,
         isWalking,
@@ -45,7 +46,6 @@ class MyParentProfilManager extends AbstractManager {
         ]
       );
       const { insertId } = result;
-      // console.log("insert : ", insertId);
       return insertId;
     } catch (error) {
       console.error(error);

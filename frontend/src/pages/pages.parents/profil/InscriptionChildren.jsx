@@ -9,21 +9,27 @@ import { useUser } from "../../../context/UserContext";
 
 function IncriptionChildren() {
   const { apiService } = useUser();
-  const { dataChildren, setDataChildren } = useParent();
+  const { dataChildren, setDataChildren, parent } = useParent();
   const [currentChildIndex, setCurrentChildIndex] = useState(0);
 
-  const handleAddChild = () => {
-    setDataChildren([
-      ...dataChildren,
-      {
-        lastname: "",
-        firstname: "",
-        birthday: "",
-        isWalking: false,
-        childDoctor: "",
-        allergies: "",
-      },
-    ]);
+  const handleAddChild = async () => {
+    try {
+      const resp = await apiService.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/parents/${parent.id}/children`,
+        {
+          childName: "",
+          childFName: "",
+          birthday: "",
+          isWalking: false,
+          childDoctor: "",
+          allergies: false,
+        }
+      );
+
+      setDataChildren([...dataChildren, resp]);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleChangeChild = (index, child) => {
@@ -53,6 +59,18 @@ function IncriptionChildren() {
     }
   };
 
+  const handlePutChild = async () => {
+    try {
+      const child = dataChildren[currentChildIndex];
+      await apiService.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/children/${child.id}`,
+        child
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="flex-inscription">
       <div>
@@ -67,7 +85,7 @@ function IncriptionChildren() {
               setCurrentChildIndex(index);
             }}
           >
-            {child.firstname ? child.firstname : `Enfant ${index + 1}`}
+            {child.childFName ? child.childFName : `Enfant ${index + 1}`}
           </button>
         ))}
         {dataChildren && dataChildren.length > 0 && (
@@ -77,7 +95,11 @@ function IncriptionChildren() {
           />
         )}
         <div>
-          <MDBBtn type="button" className="button-children">
+          <MDBBtn
+            type="button"
+            className="button-children"
+            onClick={handlePutChild}
+          >
             Doc
           </MDBBtn>
           <MDBBtn
