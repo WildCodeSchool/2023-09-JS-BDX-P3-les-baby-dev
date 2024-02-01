@@ -30,8 +30,8 @@ function UserContextProvider({ children, apiService }) {
         `${import.meta.env.VITE_BACKEND_URL}/api/users/myprofil`
       );
 
-      // eslint-disable-next-line no-alert
       if (showAlert) {
+        // eslint-disable-next-line no-alert
         alert(`Content de vous revoir ${result.data.email}`);
       }
       setUser(result.data);
@@ -57,8 +57,8 @@ function UserContextProvider({ children, apiService }) {
       await login(newUser, false, false);
 
       // eslint-disable-next-line no-alert
-      alert(`Bienvenue ${user.email}`);
-      return navigate(user.is_admin ? "/structure" : "/searchlist");
+      alert(`Bienvenue ${newUser.email}`);
+      return navigate(newUser.is_admin ? "/structure" : "/searchlist");
     } catch (err) {
       console.error(err);
       // eslint-disable-next-line no-alert

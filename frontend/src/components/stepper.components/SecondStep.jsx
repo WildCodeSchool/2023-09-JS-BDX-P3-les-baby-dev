@@ -25,9 +25,9 @@ function SecondStep({ nextQuestion, prevQuestion }) {
   const handleSubmitFiles = () => {
     // console.log("dataimage ", dataImage);
     const formData = new FormData();
-    formData.append("avatarPath", dataImage);
-    // console.log(dataImage);
-    // console.log("formdata ", formData);
+    formData.append("avatarPath", dataImage.avatar);
+    // console.log("formData", formData);
+    // console.log("dataImage", dataImage.avatar);
 
     axios
       .put(
@@ -73,7 +73,7 @@ function SecondStep({ nextQuestion, prevQuestion }) {
               <form encType="multipart/form-data">
                 <MDBFileUpload
                   defaultFile="../src/assets/profil-picture.svg"
-                  name="avatar"
+                  name="avatarPath"
                   getInputFiles={onChangeFiles}
                 />
               </form>

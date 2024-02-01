@@ -3,34 +3,34 @@
 const models = require("../models");
 
 // const updateUpload = async (req, res) => {
-//   console.log(req.file);
-// const { filename, originalname } = req.file;
+//   console.log("req.file", req.file);
+//   const { name, originalname } = req.file;
 
-// const avatarPath = `./public/uploads/${uuidv4()}-${originalname}`;
-// fs.rename(`./public/uploads/${filename}`, avatarPath, async (err) => {
-//   if (err) throw err;
-//   console.log("c la merde", avatarPath);
+//   const avatarPath = `./public/uploads/${uuidv4()}-${originalname}`;
+//   fs.rename(`./public/uploads/${name}`, avatarPath, async (err) => {
+//     if (err) throw err;
+//     console.log("c la merde", avatarPath);
 
-//   try {
-//     await models.structure.updateU(req.params.id, {
-//       req.file,
-//     });
-//     return res.status(201).send({ id: req.params.id, req.file });
-//   } catch (error) {
-//     return res.status(422).send({ message: error.message });
-//   }
+//     try {
+//       await models.structure.update(req.params.id, {
+//         avatarPath,
+//       });
+//       return res.status(201).send({ id: req.params.id, avatarPath });
+//     } catch (error) {
+//       return res.status(422).send({ message: error.message });
+//     }
+//   });
 // };
 
-const upload = async (req, res) => {
-  // console.log("req.body:", req.body);
-  try {
-    const [result] = await models.structure.update(req.strucutre.id, req.file);
-    // await models.user.addAvatar(req.user.id, result.id);
-    return res.status(201).send({ ...req.user, avatar: result });
-  } catch (err) {
-    return res.status(400).send({ message: err.message });
-  }
-};
+// const upload = async (req, res) => {
+//   console.log("req.body:", req.body);
+//   try {
+//     const result = await models.structure.update(req.params.id, req.file);
+//     // await models.user.addAvatar(req.user.id, result.id);
+//     return res.status(201).send({ ...req.user, avatar: result });
+//   } catch (err) {
+//     return res.status(400).send({ message: err.message });
+//   }
 
 const updateStructure = async (req, res) => {
   try {
@@ -181,7 +181,7 @@ const getMyHours = async (req, res) => {
 module.exports = {
   updateStructure,
   // updateUpload,
-  upload,
+  // upload,
   getUserStructure,
   getStructure,
   getStructureById,

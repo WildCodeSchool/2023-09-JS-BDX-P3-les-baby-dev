@@ -1,9 +1,9 @@
 const express = require("express");
-const multer = require("multer");
+// const multer = require("multer");
 
 const router = express.Router();
 
-const upload = multer({ dest: "./public/uploads/" });
+// const upload = multer({ dest: "./public/uploads/" });
 
 /* ************************************************************************* */
 // Define Your API Routes Here
@@ -41,11 +41,11 @@ router.get(
   structureControllers.getStructuresEmployees
 );
 
-router.put(
-  "/structures/:id([0-9]+)/avatar",
-  upload.single("avatar"),
-  structureControllers.upload
-);
+// router.put(
+//   "/structures/:id([0-9]+)/avatar",
+//   upload.single("avatarPath"),
+//   structureControllers.updateUpload
+// );
 
 router.put(
   "/structure/:id([0-9]+)/adaptation",

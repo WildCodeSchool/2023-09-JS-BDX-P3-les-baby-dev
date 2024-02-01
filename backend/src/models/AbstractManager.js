@@ -41,7 +41,6 @@ class AbstractManager {
     let filename = data.destination.replace("public/", "");
     filename += `${data.filename}.`;
     filename += data.originalname.split(".").slice(-1);
-    // console.log("filename", filename);
 
     return new Promise((resolve, reject) => {
       fs.rename(`${data.path}`, `public/${filename}`, async (err) => {
@@ -53,10 +52,10 @@ class AbstractManager {
           [filename, id]
         );
 
-        // console.log("result : ", result);
+        // return result;
         resolve({
-          id: result.insertId,
           url: filename,
+          result,
         });
       });
     });

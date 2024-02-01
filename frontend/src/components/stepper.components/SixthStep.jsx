@@ -29,22 +29,22 @@ function SixthStep({ nextQuestion, prevQuestion }) {
 
     // Vérifiez si le champ maxHandicap est désactivé et ajustez la valeur en conséquence
     const actualMaxHandicapValue = !data.isHandicapEnabled
-      ? 0
+      ? "0"
       : updatedMaxHandicap;
 
     // Vérifiez si le champ maxUnder18Months est désactivé et ajustez la valeur en conséquence
     const actualMaxUnder18MonthsValue = !data.isUnder18MonthsEnabled
-      ? 0
+      ? "0"
       : updatedMaxUnder18Months;
 
     // Vérifiez si le champ maxAtypicalHours est désactivé et ajustez la valeur en conséquence
     const actualMaxAtypicalHoursValue = !data.isAtypicalHoursEnabled
-      ? 0
+      ? "0"
       : updatedMaxAtypicalHours;
 
     // Vérifiez si le champ maxNightCare est désactivé et ajustez la valeur en conséquence
     const actualMaxNightCareValue = !data.isNightCareEnabled
-      ? 0
+      ? "0"
       : updatedMaxNightCare;
 
     updateAmenities("maxHandicap", actualMaxHandicapValue);
