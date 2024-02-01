@@ -90,10 +90,22 @@ router.put(
   authMiddleware,
   parentControllers.updateParent
 );
+
 router.post(
   "/parents/children/:id([0-9]+)",
   authMiddleware,
-  parentControllers.addChildren
+  parentControllers.addChild
+);
+
+// router.put(
+//   "/children/:id([0-9]+)",
+//   authMiddleware,
+//   parentControllers.updateChild
+// );
+router.delete(
+  "/children/:id([0-9]+)",
+  authMiddleware,
+  parentControllers.remove
 );
 
 /* *********** Routes reservation ************** */
@@ -104,6 +116,11 @@ router.get(
   "/reservations/:id",
   authMiddleware,
   reservationControllers.getReservationsByStructure
+);
+router.get(
+  "/reservations/parent/:id",
+  authMiddleware,
+  reservationControllers.getReservationsByParent
 );
 
 /* *********** Routes Hour ************** */

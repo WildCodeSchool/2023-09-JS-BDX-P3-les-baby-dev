@@ -6,16 +6,17 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 5px;
-  color: white;
+  color: #9254f2;
   box-shadow: 2px 2px 2px 2px rgb(0, 0, 0, 0.6);
   border: none;
+  background: linear-gradient(to bottom right, #e0e3ff, #f3e4ff);
 
   a {
     text-decoration: none;
     display: flex;
     align-items: center;
     color: inherit;
-    margin-left: 40px;
+    margin-left: 30px;
 
     h2 {
       margin: 0;
@@ -36,6 +37,14 @@
         border: none;
         border-radius: 5px;
       }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .filterComponent_container {
+    a {
+      margin-left: 70px;
     }
   }
 }

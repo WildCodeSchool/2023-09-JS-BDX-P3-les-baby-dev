@@ -5,18 +5,17 @@ import HeaderProfile from "../../../components/profile.components/HeaderProfile"
 import NavProfil from "../../../components/profile.components/NavProfil";
 import { useParent } from "../../../context/ParentContext";
 import ChildForm from "./ChildForm";
+import { useUser } from "../../../context/UserContext";
 
 function IncriptionChildren() {
+  const { apiService } = useUser();
   const { dataChildren, setDataChildren } = useParent();
   const [currentChildIndex, setCurrentChildIndex] = useState(0);
-  const [selectedChildIndex, setSelectedChildIndex] = useState(null);
 
   const handleAddChild = () => {
-    const newChildId = dataChildren.length + 1;
     setDataChildren([
       ...dataChildren,
       {
-        id: newChildId,
         lastname: "",
         firstname: "",
         birthday: "",
@@ -33,17 +32,25 @@ function IncriptionChildren() {
     setDataChildren(updatedChildren);
   };
 
-  const handleRemoveChild = () => {
-    if (selectedChildIndex) {
-      const newChildList = [...dataChildren];
-      newChildList.splice(selectedChildIndex, 1);
-      setDataChildren(newChildList);
-      setSelectedChildIndex(null);
-    }
-  };
+  const handleRemoveChild = async () => {
+    try {
+      if (dataChildren[currentChildIndex]?.id) {
+        await apiService.delete(
+          `${import.meta.env.VITE_BACKEND_URL}/api/children/${
+            dataChildren[currentChildIndex]?.id
+          }`
+        );
+      }
 
-  const envoyé = () => {
-    // console.log(dataChildren);
+      const newChildList = [...dataChildren];
+      newChildList.splice(currentChildIndex, 1);
+      setDataChildren(newChildList);
+      setCurrentChildIndex(0);
+      // TODO: display success message
+    } catch (err) {
+      console.error(err);
+      // TODO: display error
+    }
   };
 
   return (
@@ -53,23 +60,24 @@ function IncriptionChildren() {
         <h1>Dossier Enfant</h1>
         {dataChildren.map((child, index) => (
           <button
-            key={child.id}
+            key={`${index + 1}`}
             type="button"
             className="button-children"
             onClick={() => {
               setCurrentChildIndex(index);
-              setSelectedChildIndex(index);
             }}
           >
             {child.firstname ? child.firstname : `Enfant ${index + 1}`}
           </button>
         ))}
-        <ChildForm
-          child={dataChildren[currentChildIndex]}
-          onChange={(child) => handleChangeChild(currentChildIndex, child)}
-        />
+        {dataChildren && dataChildren.length > 0 && (
+          <ChildForm
+            child={dataChildren[currentChildIndex]}
+            onChange={(child) => handleChangeChild(currentChildIndex, child)}
+          />
+        )}
         <div>
-          <MDBBtn type="button" className="button-children" onClick={envoyé}>
+          <MDBBtn type="button" className="button-children">
             Doc
           </MDBBtn>
           <MDBBtn

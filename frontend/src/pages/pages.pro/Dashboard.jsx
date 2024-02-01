@@ -14,7 +14,7 @@ import {
   MDBTableBody,
 } from "mdb-react-ui-kit";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import Babyplace from "../../assets/BabyplacePro-blanc.svg";
+import Babyplace from "../../assets/Babyplace.svg";
 import { useUser } from "../../context/UserContext";
 
 export default function App() {
@@ -27,12 +27,10 @@ export default function App() {
 
   const navigate = useNavigate();
   const loaderData = useLoaderData();
-
-  // console.log(loaderDataParent);
-
   const parent = loaderData?.preloadOneParent;
   // const reservation = loaderData?.reservation;
   const structureId = loaderData?.preloadUserStructure.data.id;
+  const structure = loaderData?.preloadUserStructure.data;
 
   const getMyResa = async (id) => {
     try {
@@ -62,19 +60,25 @@ export default function App() {
 
   return (
     <>
-      <div className="filters">
-        <MDBBtn onClick={() => setFilter("Tous")} className="btn-tous">
-          Tous
-        </MDBBtn>
-        <MDBBtn onClick={() => setFilter("En attente")} className="btn-attente">
-          En attente
-        </MDBBtn>
-        <MDBBtn onClick={() => setFilter("Accepté")} className="btn-accepte">
-          Accepté
-        </MDBBtn>
-        <MDBBtn onClick={() => setFilter("Refusé")} className="btn-refuse">
-          Refusé
-        </MDBBtn>
+      <div className="header-dash">
+        <h3>Bienvenue {structure.name}</h3>
+        <div className="filters">
+          <MDBBtn onClick={() => setFilter("Tous")} className="btn-tous">
+            Tous
+          </MDBBtn>
+          <MDBBtn
+            onClick={() => setFilter("En attente")}
+            className="btn-attente"
+          >
+            En attente
+          </MDBBtn>
+          <MDBBtn onClick={() => setFilter("Accepté")} className="btn-accepte">
+            Accepté
+          </MDBBtn>
+          <MDBBtn onClick={() => setFilter("Refusé")} className="btn-refuse">
+            Refusé
+          </MDBBtn>
+        </div>
       </div>
 
       <MDBTable align="middle">
@@ -153,6 +157,7 @@ export default function App() {
               <MDBSideNavItem>
                 <div className="logo">
                   <img src={Babyplace} alt="" />
+                  <h4>PRO</h4>
                 </div>
                 <MDBSideNavLink
                   icon="angle-down"

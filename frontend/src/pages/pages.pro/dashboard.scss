@@ -1,14 +1,25 @@
 /* * body {
   background: linear-gradient(to bottom right, #e0e3ff, #f3e4ff);
 } */
-
-* .filters {
-  margin-top: 20px;
-  margin-left: 400px;
-  margin-right: 200px;
-  margin-bottom: 40px;
+.header-dash {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+
+  h3 {
+    color: #7847ff;
+    display: flex;
+    align-self: center;
+    margin-top: 20px;
+    font-weight: bolder;
+  }
+  .filters {
+    margin-top: 20px;
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-around;
+  }
 
   .btn-tous {
     background-color: rgb(150, 150, 201);
@@ -42,6 +53,14 @@
         width: 500px;
         margin: 10px;
         padding-right: 300px;
+      }
+
+      h4 {
+        color: white;
+        text-align: center;
+        border: 1px solid white;
+        border-radius: 20px;
+        margin: 0 30px;
       }
     }
   }
