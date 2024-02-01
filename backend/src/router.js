@@ -117,6 +117,11 @@ router.get(
   authMiddleware,
   reservationControllers.getReservationsByStructure
 );
+router.get(
+  "/reservations/parent/:id",
+  authMiddleware,
+  reservationControllers.getReservationsByParent
+);
 
 /* *********** Routes Hour ************** */
 

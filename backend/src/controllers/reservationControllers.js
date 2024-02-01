@@ -36,9 +36,21 @@ const getReservationsByStructure = async (req, res) => {
     res.sendStatus(500);
   }
 };
+const getReservationsByParent = async (req, res) => {
+  const parentId = parseInt(req.params.id, 10);
+
+  try {
+    const reservations = await models.reservation.findByParent(parentId);
+    res.json(reservations);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+};
 
 module.exports = {
   getReservation,
   addReservation,
   getReservationsByStructure,
+  getReservationsByParent,
 };

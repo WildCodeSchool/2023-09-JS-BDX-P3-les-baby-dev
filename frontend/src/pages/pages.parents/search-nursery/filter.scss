@@ -6,7 +6,7 @@
   padding-top: 20px;
 
   .returnBar {
-    background-color: white;
+    background: linear-gradient(to bottom right, #7847ff, #e37acc);
     height: 100px;
     display: flex;
     box-shadow: 3px 3px 3px rgb(187, 187, 187);
@@ -22,6 +22,7 @@
     align-self: center;
     font-weight: bold;
     margin-left: 30px;
+    color: rgb(255, 255, 255);
   }
   .lines_filter {
     margin-top: 100px;

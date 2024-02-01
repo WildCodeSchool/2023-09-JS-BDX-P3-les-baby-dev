@@ -1,10 +1,5 @@
 import "./SearchList.scss";
-import {
-  MDBCard,
-  MDBCardBody,
-  MDBListGroup,
-  MDBListGroupItem,
-} from "mdb-react-ui-kit";
+import { MDBCard, MDBCardBody, MDBListGroup } from "mdb-react-ui-kit";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import NavProfil from "../../components/profile.components/NavProfil";
 import FilterComponent from "../../components/searchList.components/FilterComponent";
@@ -38,10 +33,11 @@ function SearchList() {
                     alt={creche.name}
                     src={creche.avatarPath || imageDefault}
                   />
-                  <h3>{creche.name}</h3>
+                  <h3>{creche.name || "Nom inconnue"}</h3>
                 </div>
                 <div className="adress_nursery">
                   <ul>
+                    <li>Adresse:</li>
                     <li>{creche.adress}</li>
                     <li>
                       {creche.zip} {creche.city}
@@ -58,9 +54,6 @@ function SearchList() {
                       </ul>
                     </div>
                   )}
-                  <MDBListGroupItem>
-                    <h4>3€/heure</h4>
-                  </MDBListGroupItem>
                 </MDBListGroup>
                 <MDBCardBody>
                   <div className="days-container">

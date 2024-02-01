@@ -34,28 +34,6 @@ function NurseryCard() {
   };
 
   return (
-    /* 
-            <div className="critere_nursery">
-              <div className="disponibility_nursery">
-                <h5>Disponibilités</h5>
-                <div className="days-container">
-                  {Object.entries(creche.availability).map(
-                    ([day, isAvailable], index) => (
-                      <div
-                        className="days-availability"
-                        key={`index-${index + 1}`}
-                        style={{
-                          backgroundColor: isAvailable ? "green" : "silver",
-                        }}
-                      >
-                        {day}
-                      </div>
-                    )
-                  )}
-                </div>
-              </div>
-              */
-
     <div className="card_container">
       <div key={creche.id}>
         <h1>Créche {creche.name}</h1>
