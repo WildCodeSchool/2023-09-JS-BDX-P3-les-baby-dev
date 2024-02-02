@@ -5,7 +5,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
+  min-height: 100vh;
+  padding-bottom: 100px;
 }
 .div-form-parent {
   display: flex;
@@ -16,7 +17,7 @@
   margin: 5vw 2vw;
 }
 .button-children {
-  background-image: url("../src/assets/background-profil.svg");
+  background: linear-gradient(to bottom right, #7847ff, #e37acc);
   background-size: cover;
   border: none;
   border-radius: 15px;

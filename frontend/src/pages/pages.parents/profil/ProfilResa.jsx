@@ -5,6 +5,7 @@ import { Link, useLoaderData } from "react-router-dom";
 import NavProfil from "../../../components/profile.components/NavProfil";
 import imageDefault from "../../../assets/creche2.jpeg";
 import { useUser } from "../../../context/UserContext";
+import HeaderNav from "../../../components/profile.components/HeaderNav";
 
 function ProfilResa() {
   const loaderDataParent = useLoaderData();
@@ -33,6 +34,7 @@ function ProfilResa() {
 
   return (
     <div className="profilResa_container">
+      <HeaderNav />
       <div className="choisen_profil">
         <Link to="/profil">
           <img
@@ -44,9 +46,9 @@ function ProfilResa() {
         <div className="picture_profil">
           <img src="../src/assets/Victor.jpeg" alt="" />
         </div>
-        <div key={myProfil.id} className="title_Myresa">
-          <h1>{myProfil.parentName}</h1>
-          <h2>{myProfil.parentFName}</h2>
+        <div className="title_Myresa">
+          <h1>{myProfil?.parentName ?? ""}</h1>
+          <h2>{myProfil?.parentFName ?? ""}</h2>
         </div>
       </div>
       <div className="myResa_container">

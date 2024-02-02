@@ -1,11 +1,11 @@
 // import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { MDBBtn } from "mdb-react-ui-kit";
 import HeaderProfile from "../../../components/profile.components/HeaderProfile";
 import NavProfil from "../../../components/profile.components/NavProfil";
 import { useParent } from "../../../context/ParentContext";
 import ChildForm from "./ChildForm";
 import { useUser } from "../../../context/UserContext";
+import HeaderNav from "../../../components/profile.components/HeaderNav";
 
 function IncriptionChildren() {
   const { apiService } = useUser();
@@ -56,6 +56,7 @@ function IncriptionChildren() {
   return (
     <div className="flex-inscription">
       <div>
+        <HeaderNav />
         <HeaderProfile />
         <h1>Dossier Enfant</h1>
         {dataChildren.map((child, index) => (
@@ -77,23 +78,23 @@ function IncriptionChildren() {
           />
         )}
         <div>
-          <MDBBtn type="button" className="button-children">
-            Doc
-          </MDBBtn>
-          <MDBBtn
+          <button type="button" className="button-children">
+            Enregistrer
+          </button>
+          <button
             onClick={handleAddChild}
             type="button"
             className="button-children"
           >
-            ajouter un enfant
-          </MDBBtn>
-          <MDBBtn
+            Ajouter un enfant
+          </button>
+          <button
             onClick={handleRemoveChild}
             type="button"
             className="button-children"
           >
-            supprimer
-          </MDBBtn>
+            Supprimer
+          </button>
         </div>
       </div>
       <NavProfil />
