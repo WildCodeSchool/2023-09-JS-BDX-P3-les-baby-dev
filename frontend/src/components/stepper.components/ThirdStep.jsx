@@ -11,6 +11,7 @@ import {
 } from "mdb-react-ui-kit";
 import { useStructure } from "../../context/StrucutreContext";
 import "./thirdStep.scss";
+import profilePic from "../../assets/profil-picture.svg";
 
 function ThirdStep({ nextQuestion, prevQuestion }) {
   const [loading, setLoading] = useState(false);
@@ -104,7 +105,7 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
               <div key={`${i + 1}`} className="photoContainer">
                 <div className="fileUpload">
                   <MDBFileUpload
-                    defaultFile="../src/assets/profil-picture.svg"
+                    defaultFile={profilePic}
                     onChange={(e) => handleChange(e[0], i, "files")}
                   />
                 </div>

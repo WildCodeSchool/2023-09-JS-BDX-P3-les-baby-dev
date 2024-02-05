@@ -1,12 +1,13 @@
 import React from "react";
 import "./confirmationResa.scss";
 import { Link } from "react-router-dom";
+import rondVert from "../../../assets/logoRondVert.svg";
 
 function ConfirmationResa() {
   return (
     <div className="confirmation_container">
       <div className="picturelogo">
-        <img src="../src/assets/logoRondVert.svg" alt="" />
+        <img src={rondVert} alt="" />
       </div>
       <h1>Fantastique!</h1>
       <p>

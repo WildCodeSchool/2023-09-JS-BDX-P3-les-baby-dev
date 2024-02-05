@@ -20,9 +20,9 @@ function ChildForm({ child, onChange }) {
           invalid
         >
           <MDBInput
-            value={child?.lastname ?? ""}
+            value={child?.childName ?? ""}
             name="childName"
-            onChange={(e) => handleChange("lastname", e.target.value)}
+            onChange={(e) => handleChange("childName", e.target.value)}
             id="validationCustom01"
             pattern=".{4,}"
             required
@@ -35,9 +35,9 @@ function ChildForm({ child, onChange }) {
           invalid
         >
           <MDBInput
-            value={child?.firstname ?? ""}
+            value={child?.childFName ?? ""}
             name="childFName"
-            onChange={(e) => handleChange("firstname", e.target.value)}
+            onChange={(e) => handleChange("childFName", e.target.value)}
             id="validationCustom01"
             pattern=".{4,}"
             required
@@ -104,8 +104,8 @@ function ChildForm({ child, onChange }) {
 
 ChildForm.propTypes = {
   child: PropTypes.shape({
-    lastname: PropTypes.string.isRequired,
-    firstname: PropTypes.string.isRequired,
+    childName: PropTypes.string.isRequired,
+    childFName: PropTypes.string.isRequired,
     birthday: PropTypes.string.isRequired,
     isWalking: PropTypes.bool.isRequired,
     childDoctor: PropTypes.string.isRequired,

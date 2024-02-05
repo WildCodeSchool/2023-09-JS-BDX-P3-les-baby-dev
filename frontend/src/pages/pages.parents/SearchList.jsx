@@ -36,7 +36,7 @@ function SearchList() {
                         ? `${import.meta.env.VITE_BACKEND_URL}/${
                             creche.avatarPath
                           }`
-                        : imageDefault
+                        : { imageDefault }
                     }
                   />
                   <h3>{creche?.name ?? "Nom inconnue"}</h3>

@@ -96,6 +96,11 @@ router.get(
 router.get("/users/parent", authMiddleware, parentControllers.getListParent);
 router.get("user/parent", authMiddleware, userControllers.getParent);
 router.get("/parent/:id", parentControllers.getParentById);
+router.get(
+  "/parent/children/:id",
+  authMiddleware,
+  parentControllers.getChildrenById
+);
 
 router.put(
   "/parents/:id([0-9]+)",
@@ -104,16 +109,17 @@ router.put(
 );
 
 router.post(
-  "/parents/children/:id([0-9]+)",
+  "/parents/:id([0-9]+)/children",
   authMiddleware,
   parentControllers.addChild
 );
 
-// router.put(
-//   "/children/:id([0-9]+)",
-//   authMiddleware,
-//   parentControllers.updateChild
-// );
+router.put(
+  "/children/:id([0-9]+)",
+  authMiddleware,
+  parentControllers.updateChild
+);
+
 router.delete(
   "/children/:id([0-9]+)",
   authMiddleware,
