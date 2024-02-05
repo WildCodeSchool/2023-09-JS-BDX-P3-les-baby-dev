@@ -25,16 +25,17 @@ function StructureContextProvider({ children }) {
   });
 
   const [dataSchedules, setdataSchedules] = useState({
-    monday: false,
-    tuesday: false,
-    wednesday: false,
-    thursday: false,
-    friday: false,
+    monday: true,
+    tuesday: true,
+    wednesday: true,
+    thursday: true,
+    friday: true,
     saturday: false,
     openHour: "08:00",
     closeHour: "17:00",
     ...loaderData?.preloadUserStructureHours?.data,
   });
+
   const [dataEmployee, setDataEmployee] = useState({});
 
   const navigate = useNavigate();
@@ -93,11 +94,12 @@ function StructureContextProvider({ children }) {
   };
 
   const handleSubmitNewEmployee = async () => {
+    // console.log(dataEmployee[i]);
     try {
       const response = await apiService.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/structure/employees/${
+        `${import.meta.env.VITE_BACKEND_URL}/api/structure/${
           data?.id
-        }`,
+        }/employees`,
         dataEmployee ?? {}
       );
 

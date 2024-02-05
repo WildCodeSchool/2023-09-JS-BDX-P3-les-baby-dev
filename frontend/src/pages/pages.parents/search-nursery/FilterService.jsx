@@ -1,9 +1,10 @@
-import React /* { useState } */ from "react";
+import React, { useState /* { useState } */ } from "react";
 import { Link } from "react-router-dom";
 import "./filterService.scss";
+import axios from "axios";
 
 function FilterService() {
-  /* const [checkboxState, setCheckboxState] = useState({
+  const [checkboxState, setCheckboxState] = useState({
     psci: false,
     nesting: false,
     montessori: false,
@@ -18,15 +19,24 @@ function FilterService() {
     bibli: false,
   });
 
-  /* const handleCheckboxChange = (checkboxName) => {
-    setCheckboxState((prevCheckboxState) => ({
-      ...prevCheckboxState,
-      [checkboxName]: !prevCheckboxState[checkboxName],
-    }));
-  }; */
+  const onChange = (e) => {
+    setCheckboxState({
+      ...checkboxState,
+      [e.target.name]: e.target.checked,
+    });
+  };
 
-  const handleAppliquerClick = () => {
-    // console.log("Filtres à appliquer :", checkboxState);
+  const handleAppliquerClick = async () => {
+    // console.log(checkboxState);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/structures/filter`,
+        { params: checkboxState } ?? {}
+      );
+      console.info(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -47,24 +57,46 @@ function FilterService() {
           type="checkbox"
           id="psci"
           name="psci"
-          //        checked={value}
-          //      onChange={() => handleCheckboxChange(key)}
+          onChange={onChange}
+          checked={checkboxState.psci}
         />
+        <span className="check"> </span>
         <label htmlFor="psci">Formation premiers secours (PSCI)</label>
       </div>
       <div className="checkboxContainer">
-        <input type="checkbox" id="nesting" name="nesting" />
+        <input
+          type="checkbox"
+          id="nesting"
+          name="nesting"
+          onChange={onChange}
+          checked={checkboxState.nesting}
+        />
+        <span className="check"> </span>
         <label htmlFor="nesting">
           Formation Nesting (pollution intérieure)
         </label>
       </div>
       <div className="checkboxContainer">
-        <input type="checkbox" id="montessori" name="montessori" />
+        <input
+          type="checkbox"
+          id="montessori"
+          name="montessori"
+          onChange={onChange}
+          checked={checkboxState.montessori}
+        />
+        <span className="check"> </span>
         <label htmlFor="montessori">Pedagogie Montessori / Pikler Loczy</label>
       </div>
       <div className="checkboxContainer">
-        <input type="checkbox" id="handicap" name="handicap" />
-        <label htmlFor="handi">Formation accueil d'enfant handicapés</label>
+        <input
+          type="checkbox"
+          id="handicap"
+          name="handicap"
+          onChange={onChange}
+          checked={checkboxState.handicap}
+        />
+        <span className="check"> </span>
+        <label htmlFor="handicap">Formation accueil d'enfant handicapés</label>
       </div>
       <h2>Sorties</h2>
       <div className="checkboxContainer">
@@ -72,38 +104,88 @@ function FilterService() {
           type="checkbox"
           id="jardin"
           name="jardin"
-          //          checked={checkboxState.jardin || false}
-          //         onChange={setCheckboxState}
+          onChange={onChange}
+          checked={checkboxState.jardin}
         />
+        <span className="check"> </span>
         <label htmlFor="jardin">Espace extérieur / jardin</label>
       </div>
       <div className="checkboxContainer">
-        <input type="checkbox" id="sorties" name="sorties" />
+        <input
+          type="checkbox"
+          id="sorties"
+          name="sorties"
+          onChange={onChange}
+          checked={checkboxState.sorties}
+        />
+        <span className="check"> </span>
         <label htmlFor="sorties">Sorties extérieures</label>
       </div>
       <div className="checkboxContainer">
-        <input type="checkbox" id="promenades" name="promenades" />
+        <input
+          type="checkbox"
+          id="promenades"
+          name="promenades"
+          onChange={onChange}
+          checked={checkboxState.promenades}
+        />
+        <span className="check"> </span>
         <label htmlFor="promenades">Promenades</label>
       </div>
       <h2>Activités</h2>
       <div className="checkboxContainer">
-        <input type="checkbox" id="eveil" name="eveil" />
+        <input
+          type="checkbox"
+          id="eveil"
+          name="eveil"
+          onChange={onChange}
+          checked={checkboxState.eveil}
+        />
+        <span className="check"> </span>
         <label htmlFor="eveil">Activités d'éveil</label>
       </div>
       <div className="checkboxContainer">
-        <input type="checkbox" id="musique" name="musique" />
+        <input
+          type="checkbox"
+          id="musique"
+          name="musique"
+          onChange={onChange}
+          checked={checkboxState.musique}
+        />
+        <span className="check"> </span>
         <label htmlFor="musique">Atelier musique</label>
       </div>
       <div className="checkboxContainer">
-        <input type="checkbox" id="art" name="art" />
+        <input
+          type="checkbox"
+          id="art"
+          name="art"
+          onChange={onChange}
+          checked={checkboxState.art}
+        />
+        <span className="check"> </span>
         <label htmlFor="art">Activité artistique</label>
       </div>
       <div className="checkboxContainer">
-        <input type="checkbox" id="bilingue" name="bilingue" />
+        <input
+          type="checkbox"
+          id="bilingue"
+          name="bilingue"
+          onChange={onChange}
+          checked={checkboxState.bilingue}
+        />
+        <span className="check"> </span>
         <label htmlFor="bilingue">Bilingue/internationale</label>
       </div>
       <div className="checkboxContainer">
-        <input type="checkbox" id="bibli" name="bibli" />
+        <input
+          type="checkbox"
+          id="bibli"
+          name="bibli"
+          onChange={onChange}
+          checked={checkboxState.bibli}
+        />
+        <span className="check"> </span>
         <label htmlFor="bibli">Bibliothèque / Ludothèque / RAM</label>
       </div>
       <div className="btn_appliquer">

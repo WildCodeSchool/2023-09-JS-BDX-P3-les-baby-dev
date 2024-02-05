@@ -15,12 +15,12 @@ function HeaderNav() {
         <ul>
           <li>
             <Link to="/searchlist">
-              <h2>Rechercher une créche</h2>
+              <h2>Home</h2>
             </Link>
           </li>
           <li>
             <Link to="/profil">
-              <h2>Mon profil</h2>
+              <h2>Profil</h2>
             </Link>
           </li>
           <li>
