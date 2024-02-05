@@ -1,20 +1,19 @@
 const AbstractManager = require("./AbstractManager");
 
-class MyChildProfilManager extends AbstractManager {
+class ChildManager extends AbstractManager {
   constructor() {
     // Call the constructor of the parent class (AbstractManager)
     // and pass the table name "item" as configuration
     super({ table: "child" });
   }
 
-  async getOneChild(id) {
+  async getChildren(id) {
     const [rows] = await this.database.query(
-      "SELECT * FROM child where parent_id = ?",
+      `select * from ${this.table} where parent_id = ?`,
       [id]
     );
-
     return rows;
   }
 }
 
-module.exports = MyChildProfilManager;
+module.exports = ChildManager;

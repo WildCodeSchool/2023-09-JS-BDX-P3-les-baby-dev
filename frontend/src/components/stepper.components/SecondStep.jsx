@@ -11,6 +11,7 @@ import {
 } from "mdb-react-ui-kit";
 import { useStructure } from "../../context/StrucutreContext";
 import "./secondStep.scss";
+import profilePic from "../../assets/profil-picture.svg";
 
 function SecondStep({ nextQuestion, prevQuestion }) {
   const [loading, setLoading] = useState(false);
@@ -76,7 +77,7 @@ function SecondStep({ nextQuestion, prevQuestion }) {
                   defaultFile={
                     data?.avatarPath
                       ? `${import.meta.env.VITE_BACKEND_URL}/${data.avatarPath}`
-                      : "../src/assets/profil-picture.svg"
+                      : { profilePic }
                   }
                   name="avatarPath"
                   getInputFiles={onChangeFiles}

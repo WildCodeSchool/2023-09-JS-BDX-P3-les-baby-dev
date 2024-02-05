@@ -50,6 +50,7 @@ models.reservation.setDatabase(pool);
 models.hours.setDatabase(pool);
 models.employee.setDatabase(pool);
 models.parent.setDatabase(pool);
+models.child.setDatabase(pool);
 
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
