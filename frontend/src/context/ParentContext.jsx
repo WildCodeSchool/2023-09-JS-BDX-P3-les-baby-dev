@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { useUser } from "./UserContext";
 
@@ -7,6 +7,7 @@ const ParentContext = createContext();
 
 function ParentContextProvider({ children }) {
   const loaderData = useLoaderData();
+  const { apiService } = useUser();
 
   const parent = loaderData?.parentProfil;
 
@@ -28,19 +29,26 @@ function ParentContextProvider({ children }) {
     });
   };
 
-  const [dataChildren, setDataChildren] = useState([
-    {
-      childName: "",
-      childFName: "",
-      birthday: "",
-      isWalking: false,
-      childDoctor: "",
-      allergies: "",
-    },
-  ]);
+  const [dataChildren, setDataChildren] = useState([]);
+
+  const getMyChildren = async () => {
+    try {
+      const response = await apiService.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/parent/children/${parent.id}`
+        // `${import.meta.env.VITE_BACKEND_URL}/api/parents/${parent.id}/children`
+      );
+
+      setDataChildren(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getMyChildren();
+  }, []);
 
   // --------------------- Reservation --------------------------
-  const { apiService } = useUser();
 
   const [reservationData, setReservationData] = useState({
     dayResa: "",
@@ -86,6 +94,7 @@ function ParentContextProvider({ children }) {
       dataChildren,
       setDataChildren,
       handleClick,
+      getMyChildren,
     }),
     [
       dataParent,
@@ -97,6 +106,7 @@ function ParentContextProvider({ children }) {
       dataChildren,
       setDataParent,
       handleClick,
+      getMyChildren,
     ]
   );
 

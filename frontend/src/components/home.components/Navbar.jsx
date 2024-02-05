@@ -1,12 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
 import "./navbar.scss";
+import logoPasPro from "../../assets/logoPasPro.svg";
 
 function Navbar() {
   const location = useLocation();
   return (
     <nav className="homeNav">
       <div>
-        <img src="./src/assets/logoPasPro.svg" alt="Babyplace" />
+        <img src={logoPasPro} alt="Babyplace" />
       </div>
       {location.pathname === "/" ? (
         <Link to="/pro">

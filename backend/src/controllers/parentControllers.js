@@ -88,26 +88,24 @@ const addChild = async (req, res) => {
   try {
     const parentId = parseInt(req.params.id, 10);
     const childId = await models.parent.createChild(req.body, parentId);
-    res.status(201).send({ msg: "Bien enregistré" });
-    return childId;
-  } catch (error) {
-    console.error(error);
-    res.status(500).send({ error: error.message });
-  }
-  return null;
-};
-
-const updateChild = async (req, res) => {
-  try {
-    // const childId = parseInt(req.params.id, 10);
-    const result = await models.child.update(req.body);
-    res.status(200).send({ msg: "Bien enregistré" });
-    return result;
+    return res.status(201).send({ ...req.body, id: childId });
   } catch (error) {
     console.error(error);
     return res.status(500).send({ error: error.message });
   }
 };
+
+// const updateChild = async (req, res) => {
+//   try {
+//     // const childId = parseInt(req.params.id, 10);
+//     const result = await models.child.update(req.body);
+//     res.status(200).send({ msg: "Bien enregistré" });
+//     return result;
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).send({ error: error.message });
+//   }
+// };
 
 const remove = async (req, res) => {
   try {
@@ -124,6 +122,39 @@ const remove = async (req, res) => {
   }
 };
 
+const getChildrenById = async (req, res) => {
+  try {
+    const id = +req.params.id;
+    const result = await models.child.getChildren(id);
+    res.json(result);
+    return result;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: error.message });
+    return null;
+  }
+};
+
+const updateChild = async (req, res) => {
+  try {
+    const id = +req.params.id;
+
+    await models.child.update(id, req.body);
+
+    res.status(201).json({
+      success: true,
+      message: "Enfant registered successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   getListParent,
   getMyParentProfil,
@@ -133,4 +164,5 @@ module.exports = {
   updateChild,
   remove,
   updateUpload,
+  getChildrenById,
 };

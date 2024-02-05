@@ -9,21 +9,27 @@ import HeaderNav from "../../../components/profile.components/HeaderNav";
 
 function IncriptionChildren() {
   const { apiService } = useUser();
-  const { dataParent, dataChildren, setDataChildren } = useParent();
+  const { dataChildren, setDataChildren, parent } = useParent();
   const [currentChildIndex, setCurrentChildIndex] = useState(0);
 
-  const handleAddChild = () => {
-    setDataChildren([
-      ...dataChildren,
-      {
-        childFName: "",
-        childName: "",
-        birthday: "",
-        isWalking: false,
-        childDoctor: "",
-        allergies: "",
-      },
-    ]);
+  const handleAddChild = async () => {
+    try {
+      const resp = await apiService.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/parents/${parent.id}/children`,
+        {
+          childName: "",
+          childFName: "",
+          birthday: "",
+          isWalking: false,
+          childDoctor: "",
+          allergies: false,
+        }
+      );
+
+      setDataChildren([...dataChildren, resp]);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleChangeChild = (index, child) => {
@@ -45,20 +51,20 @@ function IncriptionChildren() {
     }
   };
 
-  const handleSubmitChild = async () => {
-    try {
-      const response = await apiService.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/parents/children/${
-          dataParent?.id
-        }`,
-        dataChildren ?? {}
-      );
+  // const handleSubmitChild = async () => {
+  //   try {
+  //     const response = await apiService.post(
+  //       `${import.meta.env.VITE_BACKEND_URL}/api/parents/children/${
+  //         dataParent?.id
+  //       }`,
+  //       dataChildren ?? {}
+  //     );
 
-      console.info(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  //     console.info(response.data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const handleRemoveChild = async () => {
     try {
@@ -80,6 +86,18 @@ function IncriptionChildren() {
       // TODO: display error
     }
   };
+
+  // const handlePutChild = async () => {
+  //   try {
+  //     const child = dataChildren[currentChildIndex];
+  //     await apiService.put(
+  //       `${import.meta.env.VITE_BACKEND_URL}/api/children/${child.id}`,
+  //       child
+  //     );
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   return (
     <div className="flex-inscription">
@@ -113,13 +131,13 @@ function IncriptionChildren() {
           >
             Modifier
           </button>
-          <button
+          {/* <button
             type="button"
             className="button-children"
             onClick={handleSubmitChild}
           >
             Enregistrer
-          </button>
+          </button> */}
           <button
             onClick={handleAddChild}
             type="button"

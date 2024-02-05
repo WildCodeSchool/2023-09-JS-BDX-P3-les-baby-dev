@@ -44,7 +44,7 @@ function NurseryCard() {
               src={
                 creche.avatarPath !== null
                   ? `${import.meta.env.VITE_BACKEND_URL}/${creche.avatarPath}`
-                  : imageDefault
+                  : { imageDefault }
               }
             />
           </div>
