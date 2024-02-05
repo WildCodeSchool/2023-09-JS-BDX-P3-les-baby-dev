@@ -51,145 +51,147 @@ function InscriptionParent() {
     <div className="flex-inscription">
       <div>
         <HeaderProfile />
-        <h1>Dossier Parent</h1>
-        <button type="button" className="button-children">
-          Parent 1
-        </button>
-        <div className="fileUpload">
-          <form encType="multipart/form-data">
-            <MDBFileUpload
-              defaultFile={
-                dataParent?.avatarPath
-                  ? `${import.meta.env.VITE_BACKEND_URL}/${
-                      dataParent?.avatarPath
-                    }`
-                  : "../src/assets/profil-picture.svg"
-              }
-              name="avatarPath"
-              getInputFiles={onChangeFiles}
-            />
-          </form>
-        </div>
-        <div className="div-form-parent">
-          <MDBValidation className="row g-3">
-            <MDBValidationItem
-              className="col-md-4"
-              feedback="Veuillez entrer un nom valide"
-              invalid
-            >
-              <MDBInput
-                value={dataParent?.parentName ?? ""}
-                name="parentName"
-                onChange={handleClick}
-                id="validationCustom01"
-                pattern=".{4,}"
-                required
-                label="Nom"
-                className="input-parent"
+        <div className="input-parent">
+          <h1>Dossier Parent</h1>
+          <button type="button" className="button-children">
+            Parent 1
+          </button>
+          <div className="fileUpload">
+            <form encType="multipart/form-data">
+              <MDBFileUpload
+                defaultFile={
+                  dataParent?.avatarPath
+                    ? `${import.meta.env.VITE_BACKEND_URL}/${
+                        dataParent?.avatarPath
+                      }`
+                    : "../src/assets/profil-picture.svg"
+                }
+                name="avatarPath"
+                getInputFiles={onChangeFiles}
               />
-            </MDBValidationItem>
-            <MDBValidationItem
-              className="col-md-4"
-              feedback="Veuillez entrer un prénom valide"
-              invalid
-            >
-              <MDBInput
-                value={dataParent?.parentFName ?? ""}
-                name="parentFName"
-                onChange={handleClick}
-                id="validationCustom01"
-                pattern=".{4,}"
-                required
-                label="Prénom"
-                className="input-parent"
-              />
-            </MDBValidationItem>
+            </form>
+          </div>
+          <div className="div-form-parent">
+            <MDBValidation className="row g-3">
+              <MDBValidationItem
+                className="col-md-4"
+                feedback="Veuillez entrer un nom valide"
+                invalid
+              >
+                <MDBInput
+                  value={dataParent?.parentName ?? ""}
+                  name="parentName"
+                  onChange={handleClick}
+                  id="validationCustom01"
+                  pattern=".{4,}"
+                  required
+                  label="Nom"
+                  className="input-parent"
+                />
+              </MDBValidationItem>
+              <MDBValidationItem
+                className="col-md-4"
+                feedback="Veuillez entrer un prénom valide"
+                invalid
+              >
+                <MDBInput
+                  value={dataParent?.parentFName ?? ""}
+                  name="parentFName"
+                  onChange={handleClick}
+                  id="validationCustom01"
+                  pattern=".{4,}"
+                  required
+                  label="Prénom"
+                  className="input-parent"
+                />
+              </MDBValidationItem>
 
-            <MDBValidationItem
-              className="col-md-4"
-              feedback="Veuillez entrer une profession valide"
-              invalid
-            >
-              <MDBInput
-                label="Profession"
-                id="validationCustomUsername"
-                type="text"
-                name="profession"
-                onChange={handleClick}
-                value={dataParent?.profession ?? ""}
-                required
-                className="input-parent"
-              />
-            </MDBValidationItem>
-            <MDBValidationItem
-              className="col-md-4"
-              feedback="Veuillez entrer une adresse valide"
-              invalid
-            >
-              <MDBInput
-                label="N° et nom de rue"
-                id="validationCustomUsername"
-                type="text"
-                name="address"
-                pattern="^\d+\s[\w\s]+$"
-                onChange={handleClick}
-                value={dataParent?.address ?? ""}
-                required
-                className="input-parent"
-              />
-            </MDBValidationItem>
-            <MDBValidationItem
-              className="col-md-4"
-              feedback="Veuillez entrer une ville"
-              invalid
-            >
-              <MDBInput
-                value={dataParent?.ville ?? ""}
-                name="ville"
-                onChange={handleClick}
-                id="validationCustom03"
-                required
-                label="Ville"
-                pattern="[A-Za-z-]+"
-                className="input-parent"
-              />
-            </MDBValidationItem>
-            <MDBValidationItem
-              className="col-md-4"
-              feedback="Veuillez entrer un numéro valide"
-              invalid
-            >
-              <MDBInput
-                label="Téléphone portable"
-                id="typePhone"
-                type="tel"
-                name="telephone"
-                pattern="\d{10}"
-                onChange={handleClick}
-                value={dataParent?.telephone ?? ""}
-                required
-                className="input-parent"
-              />
-            </MDBValidationItem>
-            <div>
+              <MDBValidationItem
+                className="col-md-4"
+                feedback="Veuillez entrer une profession valide"
+                invalid
+              >
+                <MDBInput
+                  label="Profession"
+                  id="validationCustomUsername"
+                  type="text"
+                  name="profession"
+                  onChange={handleClick}
+                  value={dataParent?.profession ?? ""}
+                  required
+                  className="input-parent"
+                />
+              </MDBValidationItem>
+              <MDBValidationItem
+                className="col-md-4"
+                feedback="Veuillez entrer une adresse valide"
+                invalid
+              >
+                <MDBInput
+                  label="N° et nom de rue"
+                  id="validationCustomUsername"
+                  type="text"
+                  name="address"
+                  pattern="^\d+\s[\w\s]+$"
+                  onChange={handleClick}
+                  value={dataParent?.address ?? ""}
+                  required
+                  className="input-parent"
+                />
+              </MDBValidationItem>
+              <MDBValidationItem
+                className="col-md-4"
+                feedback="Veuillez entrer une ville"
+                invalid
+              >
+                <MDBInput
+                  value={dataParent?.ville ?? ""}
+                  name="ville"
+                  onChange={handleClick}
+                  id="validationCustom03"
+                  required
+                  label="Ville"
+                  pattern="[A-Za-z-]+"
+                  className="input-parent"
+                />
+              </MDBValidationItem>
               <MDBValidationItem
                 className="col-md-4"
                 feedback="Veuillez entrer un numéro valide"
                 invalid
               >
-                <MDBBtn
-                  type="button"
-                  onClick={() => {
-                    handleSubmitFiles();
-                    handleSubmitParent();
-                    navigate("/profil/inscription/children");
-                  }}
-                >
-                  Enfant →
-                </MDBBtn>
+                <MDBInput
+                  label="Téléphone portable"
+                  id="typePhone"
+                  type="tel"
+                  name="telephone"
+                  pattern="\d{10}"
+                  onChange={handleClick}
+                  value={dataParent?.telephone ?? ""}
+                  required
+                  className="input-parent"
+                />
               </MDBValidationItem>
-            </div>
-          </MDBValidation>
+              <div>
+                <MDBValidationItem
+                  className="col-md-4"
+                  feedback="Veuillez entrer un numéro valide"
+                  invalid
+                >
+                  <MDBBtn
+                    type="button"
+                    onClick={() => {
+                      handleSubmitFiles();
+                      handleSubmitParent();
+                      navigate("/profil/inscription/children");
+                    }}
+                  >
+                    Enfant →
+                  </MDBBtn>
+                </MDBValidationItem>
+              </div>
+            </MDBValidation>
+          </div>
         </div>
       </div>
       <NavProfil />
