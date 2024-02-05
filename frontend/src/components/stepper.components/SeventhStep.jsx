@@ -88,6 +88,9 @@ function SeventhStep({ nextQuestion, prevQuestion }) {
           />
         </div>
         <div className="next-prev">
+          <MDBBtn type="button" onClick={prevQuestion}>
+            précédent
+          </MDBBtn>
           <MDBBtn type="button" onClick={validateSeventhStep}>
             {loading ? "" : "suivant"}
             {loading && (
@@ -95,9 +98,6 @@ function SeventhStep({ nextQuestion, prevQuestion }) {
                 <span className="visually-hidden">loading...</span>
               </MDBSpinner>
             )}
-          </MDBBtn>
-          <MDBBtn type="button" onClick={prevQuestion}>
-            précédent
           </MDBBtn>
         </div>
       </div>

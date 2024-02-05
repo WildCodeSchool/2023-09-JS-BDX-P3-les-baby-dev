@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 import { MDBFileUpload } from "mdb-react-file-upload";
 import {
   MDBBtn,
@@ -10,6 +11,7 @@ import {
 } from "mdb-react-ui-kit";
 import { useStructure } from "../../context/StrucutreContext";
 import "./thirdStep.scss";
+import profilePic from "../../assets/profil-picture.svg";
 
 function ThirdStep({ nextQuestion, prevQuestion }) {
   const [loading, setLoading] = useState(false);
@@ -37,9 +39,30 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
     }));
   };
 
+  const handleSubmitFiles = () => {
+    const formData = new FormData();
+    formData.append("avatarPath", dataEmployee.files);
+    if (dataEmployee.files) {
+      axios
+        .put(
+          `${import.meta.env.VITE_BACKEND_URL}/api/structure/${
+            dataEmployee.id
+          }/employees`,
+          formData ?? {}
+        )
+        .then((response) => {
+          console.info(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  };
+
   const validateThirdStep = () => {
     setLoading(true);
     setTimeout(() => {
+      handleSubmitFiles();
       nextQuestion();
       setLoading(false);
     }, 1000);
@@ -82,7 +105,7 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
               <div key={`${i + 1}`} className="photoContainer">
                 <div className="fileUpload">
                   <MDBFileUpload
-                    defaultFile="../src/assets/profil-picture.svg"
+                    defaultFile={profilePic}
                     onChange={(e) => handleChange(e[0], i, "files")}
                   />
                 </div>
@@ -123,7 +146,6 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
                         onChange={(e) =>
                           handleChange(e.target.value, i, "mail")
                         }
-                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\.[a-zA-Z]+"
                         required
                         label="Mail"
                       />
@@ -179,6 +201,9 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
             </MDBBtn>
           </div>
           <div className="next-prev">
+            <MDBBtn type="button" onClick={prevQuestion}>
+              précédent
+            </MDBBtn>
             <MDBBtn type="button" onClick={validateThirdStep}>
               {loading ? "" : "suivant"}
               {loading && (
@@ -186,9 +211,6 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
                   <span className="visually-hidden">loading...</span>
                 </MDBSpinner>
               )}
-            </MDBBtn>
-            <MDBBtn type="button" onClick={prevQuestion}>
-              précédent
             </MDBBtn>
           </div>
         </div>

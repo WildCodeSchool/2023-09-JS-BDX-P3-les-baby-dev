@@ -42,30 +42,16 @@ values (
 
 DROP TABLE if EXISTS parent;
 
-CREATE TABLE
-    IF NOT EXISTS parent (
-        id int primary key auto_increment not null,
-        user_id INT NOT NULL,
-        parentName VARCHAR(255),
-        parentFName VARCHAR(255),
-        profession VARCHAR(255),
-        address VARCHAR(255),
-        ville VARCHAR(255),
-        telephone VARCHAR(10)
-    );
+CREATE TABLE IF NOT EXISTS parent (
+    id int primary key auto_increment not null, user_id INT NOT NULL, avatarPath VARCHAR(255), parentName VARCHAR(255), parentFName VARCHAR(255), profession VARCHAR(255), address VARCHAR(255), ville VARCHAR(255), telephone VARCHAR(10)
+);
 
 ALTER TABLE parent
-ADD CONSTRAINT `fk_user_id` FOREIGN KEY (user_id) REFERENCES user(id);
+ADD CONSTRAINT `fk_user_id` FOREIGN KEY (user_id) REFERENCES user (id);
 
 insert into
     parent (
-        user_id,
-        parentName,
-        parentFName,
-        profession,
-        address,
-        ville,
-        telephone
+        user_id, parentName, parentFName, profession, address, ville, telephone
     )
 values (
         1, 'Mumu', 'didi', 'ambulanciere', '17 rue gambetta', '33130', '070707070'
@@ -73,7 +59,7 @@ values (
     (
         3, 'Mateo', 'delavega', 'Pompier', '17 rue gambetta', '33130', '080808080'
     ),
-        (
+    (
         3, 'rikit', 'aoaoab', 'Policier', '17 rue gambetta', '33130', '080808080'
     );
 
@@ -112,9 +98,9 @@ insert into
     )
 values (
         1, 0, 0, 1, 0, 0, 1, '08:00:00', '17:00:00'
-    ), 
+    ),
     (
-       2, 0, 0, 0, 0, 0, 1, '07:00:00', '16:00:00'
+        2, 0, 0, 0, 0, 0, 1, '07:00:00', '16:00:00'
     ),
     (
         3, 1, 0, 1, 0, 0, 0, '10:00:00', '19:00:00'
@@ -138,7 +124,7 @@ insert into
     )
 values (
         1, 'daamn', 'neo', '12/09/2019', 0, 'Dr Brigand', 0
-    ), 
+    ),
     (
         2, 'vic', 'neo', '12/09/2019', 0, 'Dr Brigand', 0
     ),

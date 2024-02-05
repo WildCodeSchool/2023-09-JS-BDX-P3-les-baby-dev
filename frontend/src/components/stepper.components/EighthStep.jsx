@@ -56,11 +56,11 @@ function EighthStep({ prevQuestion }) {
           </p>
         </div>
         <div className="next-prev">
-          <MDBBtn type="submit" onClick={toggleOpen}>
-            terminé
-          </MDBBtn>
           <MDBBtn type="button" onClick={prevQuestion}>
             précédent
+          </MDBBtn>
+          <MDBBtn type="submit" onClick={toggleOpen}>
+            terminé
           </MDBBtn>
         </div>
       </div>

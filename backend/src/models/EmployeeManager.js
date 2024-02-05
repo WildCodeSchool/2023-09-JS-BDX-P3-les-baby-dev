@@ -7,13 +7,13 @@ class EmployeeManager extends AbstractManager {
 
   async create(structureId, employee) {
     try {
-      const { fName, files, fonction, mail, name } = employee;
+      const { fName, fonction, mail, name } = employee;
 
       // console.log("employee !:", employee);
 
       const [result] = await this.database.query(
-        `INSERT INTO ${this.table} (structure_id, files, name, fName, mail, fonction) VALUES (?, ?, ?, ?, ?, ?)`,
-        [structureId, files, name, fName, mail, fonction]
+        `INSERT INTO ${this.table} (structure_id, name, fName, mail, fonction) VALUES (?, ?, ?, ?, ?)`,
+        [structureId, name, fName, mail, fonction]
       );
       // console.log("result :", result);
 

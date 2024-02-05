@@ -29,22 +29,22 @@ function SixthStep({ nextQuestion, prevQuestion }) {
 
     // Vérifiez si le champ maxHandicap est désactivé et ajustez la valeur en conséquence
     const actualMaxHandicapValue = !data.isHandicapEnabled
-      ? 0
+      ? "0"
       : updatedMaxHandicap;
 
     // Vérifiez si le champ maxUnder18Months est désactivé et ajustez la valeur en conséquence
     const actualMaxUnder18MonthsValue = !data.isUnder18MonthsEnabled
-      ? 0
+      ? "0"
       : updatedMaxUnder18Months;
 
     // Vérifiez si le champ maxAtypicalHours est désactivé et ajustez la valeur en conséquence
     const actualMaxAtypicalHoursValue = !data.isAtypicalHoursEnabled
-      ? 0
+      ? "0"
       : updatedMaxAtypicalHours;
 
     // Vérifiez si le champ maxNightCare est désactivé et ajustez la valeur en conséquence
     const actualMaxNightCareValue = !data.isNightCareEnabled
-      ? 0
+      ? "0"
       : updatedMaxNightCare;
 
     updateAmenities("maxHandicap", actualMaxHandicapValue);
@@ -165,7 +165,6 @@ function SixthStep({ nextQuestion, prevQuestion }) {
               checked={data?.isNightCareEnabled ?? false}
             />
             <input
-              defaultValue="0"
               type="number"
               min="0"
               max={data.maxPlaces}
@@ -179,6 +178,9 @@ function SixthStep({ nextQuestion, prevQuestion }) {
           </div>
         </div>
         <div className="next-prev">
+          <MDBBtn type="button" onClick={prevQuestion}>
+            précédent
+          </MDBBtn>
           <MDBBtn type="button" onClick={validateSixthStep}>
             {loading ? "" : "suivant"}
             {loading && (
@@ -186,9 +188,6 @@ function SixthStep({ nextQuestion, prevQuestion }) {
                 <span className="visually-hidden">loading...</span>
               </MDBSpinner>
             )}
-          </MDBBtn>
-          <MDBBtn type="button" onClick={prevQuestion}>
-            précédent
           </MDBBtn>
         </div>
       </div>

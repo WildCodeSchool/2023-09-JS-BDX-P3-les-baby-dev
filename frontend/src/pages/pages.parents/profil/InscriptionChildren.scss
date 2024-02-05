@@ -5,17 +5,32 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
+  min-height: 100vh;
+
+  .child-container {
+    .input-child {
+      padding: 20px;
+      .button-children {
+        margin: 10px;
+      }
+      .btn-child {
+        margin-top: 10px;
+      }
+    }
+  }
 }
+
 .div-form-parent {
   display: flex;
   flex-direction: column;
 }
+
 .form-parent {
   margin: 5vw 2vw;
 }
+
 .button-children {
-  background-image: url("./src/assets/background-profil.svg");
+  background: linear-gradient(to bottom right, #7847ff, #e37acc);
   background-size: cover;
   border: none;
   border-radius: 15px;
@@ -23,6 +38,7 @@
   padding: 1vw 2vw;
   margin-left: 1vw;
 }
+
 .link-children {
   color: white;
 }

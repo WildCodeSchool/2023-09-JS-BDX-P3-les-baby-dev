@@ -33,6 +33,9 @@ function FourthStep({ nextQuestion, prevQuestion }) {
           <ActivitiesCheckbox />
         </div>
         <div className="next-prev">
+          <MDBBtn type="button" onClick={prevQuestion}>
+            précédent
+          </MDBBtn>
           <MDBBtn type="button" onClick={validateFourthStep}>
             {loading ? "" : "suivant"}
             {loading && (
@@ -40,9 +43,6 @@ function FourthStep({ nextQuestion, prevQuestion }) {
                 <span className="visually-hidden">loading...</span>
               </MDBSpinner>
             )}
-          </MDBBtn>
-          <MDBBtn type="button" onClick={prevQuestion}>
-            précédent
           </MDBBtn>
         </div>
       </div>
