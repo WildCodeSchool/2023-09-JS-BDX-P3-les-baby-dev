@@ -9,7 +9,7 @@ class StuctureManager extends AbstractManager {
 
   async getUsersStructure(id) {
     const [rows] = await this.database.query(
-      "SELECT * FROM structure where user_id = ?",
+      `SELECT * FROM ${this.table} where user_id = ?`,
       [id]
     );
 
@@ -18,11 +18,30 @@ class StuctureManager extends AbstractManager {
 
   async getStructure(id) {
     const [rows] = await this.database.query(
-      "SELECT * FROM structure where id = ?",
+      `SELECT * FROM ${this.table} where id = ?`,
       [id]
     );
 
     return rows[0] ?? null;
+  }
+
+  async filtredStructure(filters) {
+    let sql = `SELECT * FROM ${this.table} WHERE`;
+    const sqlValues = [];
+
+    let conditions = "";
+
+    for (const [key, value] of Object.entries(filters)) {
+      if (value === "true") {
+        conditions += `${conditions ? " AND" : ""} ${key} = ?`;
+        sqlValues.push(value === "true");
+      }
+    }
+
+    sql += conditions;
+
+    const [rows] = await this.database.query(sql, sqlValues);
+    return rows;
   }
 }
 

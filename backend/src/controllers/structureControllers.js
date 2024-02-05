@@ -1,36 +1,34 @@
-// const fs = require("fs");
-// const { v4: uuidv4 } = require("uuid");
+const fs = require("fs");
+const { v4: uuidv4 } = require("uuid");
 const models = require("../models");
 
-// const updateUpload = async (req, res) => {
-//   console.log(req.file);
-// const { filename, originalname } = req.file;
+const updateUpload = async (req, res) => {
+  const { originalname } = req.file;
 
-// const avatarPath = `./public/uploads/${uuidv4()}-${originalname}`;
-// fs.rename(`./public/uploads/${filename}`, avatarPath, async (err) => {
-//   if (err) throw err;
-//   console.log("c la merde", avatarPath);
+  const avatarPath = `uploads/${uuidv4()}-${originalname}`;
+  fs.rename(req.file.path, `public/${avatarPath}`, async (err) => {
+    if (err) throw err;
 
+    try {
+      await models.structure.update(req.params.id, {
+        avatarPath,
+      });
+      return res.status(201).send({ id: req.params.id, avatarPath });
+    } catch (error) {
+      return res.status(422).send({ message: error.message });
+    }
+  });
+};
+
+// const upload = async (req, res) => {
+//   console.log("req.body:", req.body);
 //   try {
-//     await models.structure.updateU(req.params.id, {
-//       req.file,
-//     });
-//     return res.status(201).send({ id: req.params.id, req.file });
-//   } catch (error) {
-//     return res.status(422).send({ message: error.message });
+//     const result = await models.structure.update(req.params.id, req.file);
+//     return res.status(201).send({ ...req.user, avatar: result });
+//   } catch (err) {
+//     return res.status(400).send({ message: err.message });
 //   }
 // };
-
-const upload = async (req, res) => {
-  // console.log("req.body:", req.body);
-  try {
-    const [result] = await models.structure.update(req.strucutre.id, req.file);
-    // await models.user.addAvatar(req.user.id, result.id);
-    return res.status(201).send({ ...req.user, avatar: result });
-  } catch (err) {
-    return res.status(400).send({ message: err.message });
-  }
-};
 
 const updateStructure = async (req, res) => {
   try {
@@ -72,10 +70,9 @@ const updateEmployee = async (req, res) => {
   try {
     await Promise.all(
       req.body.employees.map((employeeData) => {
-        const { id, files, name, fName, mail, fonction } = employeeData;
+        const { id, name, fName, mail, fonction } = employeeData;
 
         return models.employee.updateE(+req.params.id, id, {
-          files,
           fName,
           name,
           mail,
@@ -178,10 +175,20 @@ const getMyHours = async (req, res) => {
   }
 };
 
+const getFiltredStructure = async (req, res) => {
+  try {
+    const response = await models.structure.filtredStructure(req.query);
+    return res.send(response);
+  } catch (error) {
+    console.error(error);
+    return res.sendStatus(500);
+  }
+};
+
 module.exports = {
   updateStructure,
-  // updateUpload,
-  upload,
+  updateUpload,
+  // upload,
   getUserStructure,
   getStructure,
   getStructureById,
@@ -190,4 +197,5 @@ module.exports = {
   getStructuresEmployees,
   deleteEmployee,
   getMyHours,
+  getFiltredStructure,
 };

@@ -16,20 +16,20 @@ function FirstStep({ nextQuestion }) {
 
   const { handleSubmit } = useStructure();
 
+  const isStructureNameValid = data.name;
+  const isTelValid = /^\d{10}$/.test(data.tel);
+  const isAddressValid = /^\d+\s[\w\s]+$/.test(data.adress);
+  const isZipValid = data.zip;
+  const isCityValid = data.city;
+
+  const isValid =
+    isStructureNameValid &&
+    isTelValid &&
+    isAddressValid &&
+    isZipValid &&
+    isCityValid;
+
   const validateFirstStep = () => {
-    const isStructureNameValid = data.name;
-    const isTelValid = /^\d{10}$/.test(data.tel);
-    const isAddressValid = /^\d+\s[\w\s]+$/.test(data.adress);
-    const isZipValid = data.zip;
-    const isCityValid = data.city;
-
-    const isValid =
-      isStructureNameValid &&
-      isTelValid &&
-      isAddressValid &&
-      isZipValid &&
-      isCityValid;
-
     if (isValid) {
       setLoading(true);
       setTimeout(() => {
@@ -103,19 +103,20 @@ function FirstStep({ nextQuestion }) {
               id="validationCustom03"
               required
               label="Ville"
+              validation="Please provide your email"
             />
           </MDBValidationItem>
+          <div className="next-prev">
+            <MDBBtn type="button" onClick={validateFirstStep}>
+              {loading ? "" : "suivant"}
+              {loading && (
+                <MDBSpinner size="sm" role="status">
+                  <span className="visually-hidden">loading...</span>
+                </MDBSpinner>
+              )}
+            </MDBBtn>
+          </div>
         </MDBValidation>
-        <div className="next-prev">
-          <MDBBtn type="button" onClick={validateFirstStep}>
-            {loading ? "" : "suivant"}
-            {loading && (
-              <MDBSpinner size="sm" role="status">
-                <span className="visually-hidden">loading...</span>
-              </MDBSpinner>
-            )}
-          </MDBBtn>
-        </div>
       </div>
       <div className="greyBg">
         <div className="infoRegisterCard">

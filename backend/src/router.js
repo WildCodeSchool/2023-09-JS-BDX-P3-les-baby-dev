@@ -33,6 +33,12 @@ router.post("/login", userControllers.postLogin);
 
 /* *********** Route Structure ************** */
 
+router.get(
+  "/users/structure",
+  authMiddleware,
+  structureControllers.getUserStructure
+);
+router.get("/structures/filter", structureControllers.getFiltredStructure);
 router.get("/structure", structureControllers.getStructure);
 router.get("/structure/:id([0-9]+)", structureControllers.getStructureById);
 router.get(
@@ -43,8 +49,8 @@ router.get(
 
 router.put(
   "/structures/:id([0-9]+)/avatar",
-  upload.single("avatar"),
-  structureControllers.upload
+  upload.single("avatarPath"),
+  structureControllers.updateUpload
 );
 
 router.put(
@@ -63,15 +69,21 @@ router.put(
 );
 
 router.post(
-  "/structure/employees/:id([0-9]+)",
+  "/structure/:id([0-9]+)/employees",
   authMiddleware,
   employeeControllers.addEmployee
 );
 
-router.get(
-  "/users/structure",
+router.put(
+  "/employees/:id([0-9]+)/avatar",
+  upload.single("avatarPath"),
+  employeeControllers.updateUploadEmployee
+);
+
+router.delete(
+  "/employees/:id([0-9]+)",
   authMiddleware,
-  structureControllers.getUserStructure
+  structureControllers.deleteEmployee
 );
 
 /* *********** Routes Parent ************** */
@@ -127,12 +139,6 @@ router.get(
 
 router.get("/hours", hoursControllers.getHours);
 router.get("/myhours", authMiddleware, structureControllers.getMyHours);
-
-router.delete(
-  "/employees/:id([0-9]+)",
-  authMiddleware,
-  structureControllers.deleteEmployee
-);
 
 /* ************************************************************************* */
 

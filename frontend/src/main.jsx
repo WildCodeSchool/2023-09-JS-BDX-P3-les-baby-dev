@@ -224,6 +224,7 @@ const router = createBrowserRouter([
           ...(await currentOneParentLoader(apiService)),
           ...(await reservationLoader(apiService)),
           ...(await currentStructureProfil(apiService)),
+          ...(await currentStructureHours(apiService)),
         }),
         element: (
           <StructureContextProvider>
