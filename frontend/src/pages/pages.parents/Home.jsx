@@ -1,6 +1,7 @@
 import Footer from "../../components/home.components/Footer";
 import Header from "../../components/home.components/Header";
 import Navbar from "../../components/home.components/Navbar";
+import zeroPapier from "../../assets/zeroPapier.svg";
 
 import "./Home.scss";
 
@@ -33,11 +34,7 @@ function Home() {
             enfance
           </span>
         </div>
-        <img
-          src="./src/assets/zeroPapier.svg"
-          alt="Zero papier App"
-          className="zeroPapier"
-        />
+        <img src={zeroPapier} alt="Zero papier App" className="zeroPapier" />
       </div>
       <Footer />
     </div>

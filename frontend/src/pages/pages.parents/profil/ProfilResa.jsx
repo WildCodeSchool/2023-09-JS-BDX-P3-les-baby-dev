@@ -6,6 +6,7 @@ import NavProfil from "../../../components/profile.components/NavProfil";
 import imageDefault from "../../../assets/creche2.jpeg";
 import { useUser } from "../../../context/UserContext";
 import HeaderNav from "../../../components/profile.components/HeaderNav";
+import arrowBack from "../../../assets/arrow_back.svg";
 
 function ProfilResa() {
   const loaderDataParent = useLoaderData();
@@ -37,11 +38,7 @@ function ProfilResa() {
       <HeaderNav />
       <div className="choisen_profil">
         <Link to="/profil">
-          <img
-            className="arrowBack"
-            src="../src/assets/arrow_back.svg"
-            alt=""
-          />
+          <img className="arrowBack" src={arrowBack} alt="" />
         </Link>
         <div className="picture_profil">
           <img src="../src/assets/Victor.jpeg" alt="" />
@@ -60,7 +57,7 @@ function ProfilResa() {
           return (
             <div key={item.id} className="card_myresa">
               <div className="img_structure">
-                <img src={creche.avatarPath || imageDefault} alt="" />
+                <img src={creche?.avatarPath ?? imageDefault} alt="" />
               </div>
               <div className="title_resa">
                 <div key={creche.id}>
