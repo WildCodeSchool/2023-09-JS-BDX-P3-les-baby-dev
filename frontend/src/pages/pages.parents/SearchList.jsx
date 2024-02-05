@@ -39,7 +39,7 @@ function SearchList() {
                         : imageDefault
                     }
                   />
-                  <h3>{creche.name || "Nom inconnue"}</h3>
+                  <h3>{creche?.name ?? "Nom inconnue"}</h3>
                 </div>
                 <div className="adress_nursery">
                   <ul>

@@ -12,7 +12,7 @@ const currentParentProfilLoader = async (apiService) => {
 
     return loaderData;
   } catch (error) {
-    return loaderData;
+    return null;
   }
 };
 
