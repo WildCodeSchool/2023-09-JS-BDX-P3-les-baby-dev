@@ -23,27 +23,27 @@ function SecondStep({ nextQuestion, prevQuestion }) {
   const { handleSubmit } = useStructure();
 
   const handleSubmitFiles = () => {
-    // console.log("dataimage ", dataImage);
     const formData = new FormData();
     formData.append("avatarPath", dataImage.avatar);
-    // console.log("formData", formData);
-    // console.log("dataImage", dataImage.avatar);
-
-    axios
-      .put(
-        `${import.meta.env.VITE_BACKEND_URL}/api/structures/${data?.id}/avatar`,
-        formData ?? {}
-      )
-      .then((response) => {
-        console.info(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    if (dataImage.avatar) {
+      axios
+        .put(
+          `${import.meta.env.VITE_BACKEND_URL}/api/structures/${
+            data?.id
+          }/avatar`,
+          formData ?? {}
+        )
+        .then((response) => {
+          console.info(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
 
   const validateSecondStep = () => {
-    // const isFileValid = inputRef.current.files.length > 0;
+    // const isFileValid = data.avatarPath;
     const isDescValid = data.structureDesc;
 
     const isValid = isDescValid;
@@ -54,7 +54,6 @@ function SecondStep({ nextQuestion, prevQuestion }) {
         handleSubmit();
         nextQuestion();
         handleSubmitFiles();
-
         setLoading(false);
       }, 1000);
     } else {
@@ -62,6 +61,8 @@ function SecondStep({ nextQuestion, prevQuestion }) {
       alert("Les champs ne sont pas valides");
     }
   };
+
+  const removeChar = data.avatarPath.substring(1);
 
   return (
     <div className="fifty">
@@ -71,11 +72,23 @@ function SecondStep({ nextQuestion, prevQuestion }) {
           <div className="pageContent">
             <div className="fileUpload">
               <form encType="multipart/form-data">
+                {/* {data?.avatarPath !== null ? ( */}
                 <MDBFileUpload
-                  defaultFile="../src/assets/profil-picture.svg"
+                  defaultFile={
+                    data.avatarPath
+                      ? `${import.meta.env.VITE_BACKEND_URL}/${removeChar}`
+                      : "../src/assets/profil-picture.svg"
+                  }
                   name="avatarPath"
                   getInputFiles={onChangeFiles}
                 />
+                {/* // ) : ( */}
+                {/* //   <MDBFileUpload */}
+                {/* //     defaultFile="../src/assets/profil-picture.svg"
+                //     name="avatarPath"
+                //     getInputFiles={onChangeFiles}
+                //   />
+                // )} */}
               </form>
             </div>
 
@@ -87,7 +100,7 @@ function SecondStep({ nextQuestion, prevQuestion }) {
         <div className="structure4">
           <div className="pageContent">
             <MDBValidation className="row g-3 second-validation" isValidated>
-              <MDBValidationItem className="col-md-4 text-area" feedback="">
+              <MDBValidationItem className="col-md-4 text-area" feedback="yooo">
                 <MDBTextArea
                   label="Message"
                   id="textAreaExample"
@@ -99,24 +112,24 @@ function SecondStep({ nextQuestion, prevQuestion }) {
                   required
                 />
               </MDBValidationItem>
+              <div className="next-prev">
+                <MDBBtn type="button" onClick={prevQuestion}>
+                  précédent
+                </MDBBtn>
+                <MDBBtn type="button" onClick={validateSecondStep}>
+                  {loading ? "" : "suivant"}
+                  {loading && (
+                    <MDBSpinner role="status" size="sm">
+                      <span className="visually-hidden">loading...</span>
+                    </MDBSpinner>
+                  )}
+                </MDBBtn>
+              </div>
             </MDBValidation>
             <legend>
               Maximum {`${maxLength - descriptionLength}`} caractères.
             </legend>
           </div>
-        </div>
-        <div className="next-prev">
-          <MDBBtn type="button" onClick={validateSecondStep}>
-            {loading ? "" : "suivant"}
-            {loading && (
-              <MDBSpinner role="status" size="sm">
-                <span className="visually-hidden">loading...</span>
-              </MDBSpinner>
-            )}
-          </MDBBtn>
-          <MDBBtn type="button" onClick={prevQuestion}>
-            précédent
-          </MDBBtn>
         </div>
       </div>
       <div className="greyBg">

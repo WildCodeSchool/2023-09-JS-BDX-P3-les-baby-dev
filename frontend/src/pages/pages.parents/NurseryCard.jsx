@@ -37,10 +37,16 @@ function NurseryCard() {
     <div className="card_container">
       <div key={creche.id}>
         <h1>Créche {creche.name}</h1>
-        <h2>{creche.name}</h2>
         <div className="infos_card">
           <div className="picture_card">
-            <img alt={creche.name} src={creche.avatarPath || imageDefault} />
+            <img
+              alt={creche.name}
+              src={
+                creche.avatarPath !== null
+                  ? `${import.meta.env.VITE_BACKEND_URL}/${creche.avatarPath}`
+                  : imageDefault
+              }
+            />
           </div>
           <div className="description_card">
             <h3>3/5</h3>

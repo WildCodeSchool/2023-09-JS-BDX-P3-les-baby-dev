@@ -52,7 +52,6 @@ class AbstractManager {
           [filename, id]
         );
 
-        // return result;
         resolve({
           url: filename,
           result,

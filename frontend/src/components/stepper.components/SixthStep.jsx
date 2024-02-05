@@ -165,7 +165,6 @@ function SixthStep({ nextQuestion, prevQuestion }) {
               checked={data?.isNightCareEnabled ?? false}
             />
             <input
-              defaultValue="0"
               type="number"
               min="0"
               max={data.maxPlaces}
@@ -179,6 +178,9 @@ function SixthStep({ nextQuestion, prevQuestion }) {
           </div>
         </div>
         <div className="next-prev">
+          <MDBBtn type="button" onClick={prevQuestion}>
+            précédent
+          </MDBBtn>
           <MDBBtn type="button" onClick={validateSixthStep}>
             {loading ? "" : "suivant"}
             {loading && (
@@ -186,9 +188,6 @@ function SixthStep({ nextQuestion, prevQuestion }) {
                 <span className="visually-hidden">loading...</span>
               </MDBSpinner>
             )}
-          </MDBBtn>
-          <MDBBtn type="button" onClick={prevQuestion}>
-            précédent
           </MDBBtn>
         </div>
       </div>

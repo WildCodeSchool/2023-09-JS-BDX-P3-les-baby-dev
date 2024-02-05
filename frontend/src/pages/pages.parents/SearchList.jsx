@@ -31,7 +31,13 @@ function SearchList() {
                 <div className="img_creche">
                   <img
                     alt={creche.name}
-                    src={creche.avatarPath || imageDefault}
+                    src={
+                      creche.avatarPath !== null
+                        ? `${import.meta.env.VITE_BACKEND_URL}/${
+                            creche.avatarPath
+                          }`
+                        : imageDefault
+                    }
                   />
                   <h3>{creche.name || "Nom inconnue"}</h3>
                 </div>

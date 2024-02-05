@@ -18,12 +18,19 @@ function FifthStep({ nextQuestion, prevQuestion }) {
     useStructure();
 
   const validateFifthStep = () => {
-    setLoading(true);
-    setTimeout(() => {
-      handleSubmitSchedules();
-      nextQuestion();
-      setLoading(false);
-    }, 1000);
+    const isHoursValid = dataSchedules.openHour && dataSchedules.closeHour;
+
+    if (isHoursValid) {
+      setLoading(true);
+      setTimeout(() => {
+        handleSubmitSchedules();
+        nextQuestion();
+        setLoading(false);
+      }, 1000);
+    } else {
+      // eslint-disable-next-line no-alert
+      alert("Les champs ne sont pas valides");
+    }
   };
 
   const handleSwitch = (key) => {
@@ -101,21 +108,20 @@ function FifthStep({ nextQuestion, prevQuestion }) {
                 />
               </div>
             </MDBValidationItem>
+            <div className="next-prev">
+              <MDBBtn type="button" onClick={prevQuestion}>
+                précédent
+              </MDBBtn>
+              <MDBBtn type="button" onClick={validateFifthStep}>
+                {loading ? "" : "suivant"}
+                {loading && (
+                  <MDBSpinner role="status" size="sm">
+                    <span className="visually-hidden">loading...</span>
+                  </MDBSpinner>
+                )}
+              </MDBBtn>
+            </div>
           </MDBValidation>
-
-          <div className="next-prev">
-            <MDBBtn type="button" onClick={validateFifthStep}>
-              {loading ? "" : "suivant"}
-              {loading && (
-                <MDBSpinner role="status" size="sm">
-                  <span className="visually-hidden">loading...</span>
-                </MDBSpinner>
-              )}
-            </MDBBtn>
-            <MDBBtn type="button" onClick={prevQuestion}>
-              précédent
-            </MDBBtn>
-          </div>
         </div>
       </div>
       <div className="greyBg">
