@@ -1,3 +1,5 @@
+const fs = require("fs");
+const { v4: uuidv4 } = require("uuid");
 const models = require("../models");
 
 const getListParent = async (_, res) => {
@@ -47,6 +49,24 @@ const updateParent = async (req, res) => {
   }
 };
 
+const updateUpload = async (req, res) => {
+  const { originalname } = req.file;
+
+  const avatarPath = `uploads/${uuidv4()}-${originalname}`;
+  fs.rename(req.file.path, `public/${avatarPath}`, async (err) => {
+    if (err) throw err;
+
+    try {
+      await models.parent.update(req.params.id, {
+        avatarPath,
+      });
+      return res.status(201).send({ id: req.params.id, avatarPath });
+    } catch (error) {
+      return res.status(422).send({ message: error.message });
+    }
+  });
+};
+
 const getParentById = (req, res) => {
   const id = parseInt(req.params.id, 10);
   models.parent
@@ -65,7 +85,6 @@ const getParentById = (req, res) => {
 };
 
 const addChild = async (req, res) => {
-  // console.log("bodyyyyy :", req.body);
   try {
     const parentId = parseInt(req.params.id, 10);
     const childId = await models.parent.createChild(req.body, parentId);
@@ -76,6 +95,18 @@ const addChild = async (req, res) => {
     res.status(500).send({ error: error.message });
   }
   return null;
+};
+
+const updateChild = async (req, res) => {
+  try {
+    // const childId = parseInt(req.params.id, 10);
+    const result = await models.child.update(req.body);
+    res.status(200).send({ msg: "Bien enregistré" });
+    return result;
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({ error: error.message });
+  }
 };
 
 const remove = async (req, res) => {
@@ -99,5 +130,7 @@ module.exports = {
   updateParent,
   getParentById,
   addChild,
+  updateChild,
   remove,
+  updateUpload,
 };

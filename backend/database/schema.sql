@@ -43,7 +43,7 @@ values (
 DROP TABLE if EXISTS parent;
 
 CREATE TABLE IF NOT EXISTS parent (
-    id int primary key auto_increment not null, user_id INT NOT NULL, parentName VARCHAR(255), parentFName VARCHAR(255), profession VARCHAR(255), address VARCHAR(255), ville VARCHAR(255), telephone VARCHAR(10)
+    id int primary key auto_increment not null, user_id INT NOT NULL, avatarPath VARCHAR(255), parentName VARCHAR(255), parentFName VARCHAR(255), profession VARCHAR(255), address VARCHAR(255), ville VARCHAR(255), telephone VARCHAR(10)
 );
 
 ALTER TABLE parent

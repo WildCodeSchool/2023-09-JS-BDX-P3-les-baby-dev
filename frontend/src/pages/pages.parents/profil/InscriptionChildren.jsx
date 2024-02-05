@@ -9,15 +9,15 @@ import HeaderNav from "../../../components/profile.components/HeaderNav";
 
 function IncriptionChildren() {
   const { apiService } = useUser();
-  const { dataChildren, setDataChildren } = useParent();
+  const { dataParent, dataChildren, setDataChildren } = useParent();
   const [currentChildIndex, setCurrentChildIndex] = useState(0);
 
   const handleAddChild = () => {
     setDataChildren([
       ...dataChildren,
       {
-        lastname: "",
-        firstname: "",
+        childFName: "",
+        childName: "",
         birthday: "",
         isWalking: false,
         childDoctor: "",
@@ -30,6 +30,34 @@ function IncriptionChildren() {
     const updatedChildren = [...dataChildren];
     updatedChildren[index] = child;
     setDataChildren(updatedChildren);
+  };
+
+  const handleUpdateChild = async () => {
+    try {
+      const response = await apiService.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/children`,
+        dataChildren[currentChildIndex]?.id ?? {}
+      );
+
+      console.info(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleSubmitChild = async () => {
+    try {
+      const response = await apiService.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/parents/children/${
+          dataParent?.id
+        }`,
+        dataChildren ?? {}
+      );
+
+      console.info(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleRemoveChild = async () => {
@@ -68,7 +96,7 @@ function IncriptionChildren() {
               setCurrentChildIndex(index);
             }}
           >
-            {child.firstname ? child.firstname : `Enfant ${index + 1}`}
+            {child.childFName ? child.childFName : `Enfant ${index + 1}`}
           </button>
         ))}
         {dataChildren && dataChildren.length > 0 && (
@@ -78,7 +106,18 @@ function IncriptionChildren() {
           />
         )}
         <div>
-          <button type="button" className="button-children">
+          <button
+            type="button"
+            className="button-children"
+            onClick={handleUpdateChild}
+          >
+            Modifier
+          </button>
+          <button
+            type="button"
+            className="button-children"
+            onClick={handleSubmitChild}
+          >
             Enregistrer
           </button>
           <button

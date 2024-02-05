@@ -61,7 +61,7 @@ export default function App() {
   return (
     <>
       <div className="header-dash">
-        <h3>Bienvenue {structure.name}</h3>
+        <h3>Bienvenue {structure?.name ?? ""}</h3>
         <div className="filters">
           <MDBBtn onClick={() => setFilter("Tous")} className="btn-tous">
             Tous

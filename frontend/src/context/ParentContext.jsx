@@ -11,6 +11,7 @@ function ParentContextProvider({ children }) {
   const parent = loaderData?.parentProfil;
 
   const [dataParent, setDataParent] = useState({
+    avatarPath: "",
     address: "",
     parentFName: "",
     parentName: "",
@@ -29,8 +30,8 @@ function ParentContextProvider({ children }) {
 
   const [dataChildren, setDataChildren] = useState([
     {
-      lastname: "",
-      firstname: "",
+      childName: "",
+      childFName: "",
       birthday: "",
       isWalking: false,
       childDoctor: "",
@@ -64,11 +65,11 @@ function ParentContextProvider({ children }) {
   const handleSubmitParent = async () => {
     try {
       const response = await apiService.put(
-        `http://localhost:3310/api/parents/${dataParent.id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/parents/${dataParent.id}`,
         dataParent ?? {}
       );
 
-      console.info("erreur: ", response.data);
+      console.info(response.data);
     } catch (error) {
       console.error(error);
     }
