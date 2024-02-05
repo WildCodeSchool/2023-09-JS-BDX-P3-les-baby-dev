@@ -30,8 +30,8 @@ function SearchList() {
               <MDBCard>
                 <div className="img_creche">
                   <img
-                    alt={creche.name}
-                    src={creche.avatarPath || imageDefault}
+                    alt={creche?.name ?? ""}
+                    src={creche?.avatarPath ?? imageDefault}
                   />
                   <h3>{creche.name || "Nom inconnue"}</h3>
                 </div>

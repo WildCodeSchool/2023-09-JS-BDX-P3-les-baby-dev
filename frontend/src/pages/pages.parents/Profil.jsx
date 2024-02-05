@@ -8,7 +8,7 @@ import HeaderNav from "../../components/profile.components/HeaderNav";
 function Profil() {
   const { logout } = useUser();
   const loaderDataParent = useLoaderData();
-  const myProfil = loaderDataParent?.parentProfil;
+  const myProfil = loaderDataParent?.parentProfil ?? "";
 
   return (
     <div className="profil_container">
@@ -19,8 +19,8 @@ function Profil() {
             <img src="../src/assets/Victor.jpeg" alt="" />
           </div>
           <div className="title_profil">
-            <h1>{myProfil.parentName}</h1>
-            <h2>{myProfil.parentFName}</h2>
+            <h1>{myProfil?.parentName ?? ""}</h1>
+            <h2>{myProfil?.parentFName ?? ""}</h2>
           </div>
         </div>
         <div className="list_options">
