@@ -5,8 +5,8 @@ const models = require("../models");
 const updateUpload = async (req, res) => {
   const { originalname } = req.file;
 
-  const avatarPath = `./public/uploads/${uuidv4()}-${originalname}`;
-  fs.rename(req.file.path, avatarPath, async (err) => {
+  const avatarPath = `uploads/${uuidv4()}-${originalname}`;
+  fs.rename(req.file.path, `public/${avatarPath}`, async (err) => {
     if (err) throw err;
 
     try {

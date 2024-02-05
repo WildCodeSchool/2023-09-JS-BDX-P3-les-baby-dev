@@ -113,7 +113,7 @@ app.use("/api", router);
 const reactBuildPath = path.join(__dirname, "/../../frontend/dist");
 
 // Serve react resources
-app.use(express.static(path.join(__dirname, "/../../backend")));
+app.use(express.static(path.join(__dirname, "/../../backend/public")));
 
 app.use(express.static(reactBuildPath));
 

@@ -62,7 +62,7 @@ function SecondStep({ nextQuestion, prevQuestion }) {
     }
   };
 
-  const removeChar = data.avatarPath.substring(1);
+  // const removeChar = data?.avatarPath?.substring(1);
 
   return (
     <div className="fifty">
@@ -72,23 +72,15 @@ function SecondStep({ nextQuestion, prevQuestion }) {
           <div className="pageContent">
             <div className="fileUpload">
               <form encType="multipart/form-data">
-                {/* {data?.avatarPath !== null ? ( */}
                 <MDBFileUpload
                   defaultFile={
-                    data.avatarPath
-                      ? `${import.meta.env.VITE_BACKEND_URL}/${removeChar}`
+                    data?.avatarPath
+                      ? `${import.meta.env.VITE_BACKEND_URL}/${data.avatarPath}`
                       : "../src/assets/profil-picture.svg"
                   }
                   name="avatarPath"
                   getInputFiles={onChangeFiles}
                 />
-                {/* // ) : ( */}
-                {/* //   <MDBFileUpload */}
-                {/* //     defaultFile="../src/assets/profil-picture.svg"
-                //     name="avatarPath"
-                //     getInputFiles={onChangeFiles}
-                //   />
-                // )} */}
               </form>
             </div>
 
