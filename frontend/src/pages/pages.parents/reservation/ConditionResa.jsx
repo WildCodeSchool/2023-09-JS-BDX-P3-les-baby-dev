@@ -1,17 +1,14 @@
 import React from "react";
 import "./conditionResa.scss";
 import { Link } from "react-router-dom";
+import Return from "../../../assets/arrow_back_black.svg";
 
 function ConditonResa() {
   return (
     <div className="conditions_container">
       <div className="choisen_creche">
         <Link to="/searchlist/reservation">
-          <img
-            className="arrowBack"
-            src="../src/assets/arrow_back.svg"
-            alt=""
-          />
+          <img className="arrowBack" src={Return} alt="" />
         </Link>
         <div className="picture_creche">
           <img src="../src/assets/creche2.jpeg" alt="" />

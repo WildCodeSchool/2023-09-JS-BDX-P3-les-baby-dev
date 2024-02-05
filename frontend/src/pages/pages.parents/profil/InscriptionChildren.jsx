@@ -5,7 +5,6 @@ import NavProfil from "../../../components/profile.components/NavProfil";
 import { useParent } from "../../../context/ParentContext";
 import ChildForm from "./ChildForm";
 import { useUser } from "../../../context/UserContext";
-import HeaderNav from "../../../components/profile.components/HeaderNav";
 
 function IncriptionChildren() {
   const { apiService } = useUser();
@@ -56,7 +55,6 @@ function IncriptionChildren() {
   return (
     <div className="flex-inscription">
       <div>
-        <HeaderNav />
         <HeaderProfile />
         <h1>Dossier Enfant</h1>
         {dataChildren.map((child, index) => (

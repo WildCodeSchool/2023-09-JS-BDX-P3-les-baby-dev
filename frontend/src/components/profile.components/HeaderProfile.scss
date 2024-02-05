@@ -8,15 +8,27 @@
   align-items: center;
   padding-bottom: 20px;
 }
-.inscription-titre {
-  color: white;
-  font-weight: bold;
-  font-size: 3vh;
-}
-.inscription-sous-titre {
-  color: white;
-  font-weight: bold;
-  font-size: 2vh;
+
+.header-profil {
+  display: flex;
+  flex-direction: row;
+
+  img {
+    padding-top: 60%;
+  }
+
+  .name-inscription {
+    .inscription-titre {
+      color: white;
+      font-weight: bold;
+      font-size: 3vh;
+    }
+    .inscription-sous-titre {
+      color: white;
+      font-weight: bold;
+      font-size: 2vh;
+    }
+  }
 }
 .bouton-div {
   display: flex;

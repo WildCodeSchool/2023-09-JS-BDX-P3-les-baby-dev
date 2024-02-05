@@ -4,11 +4,21 @@
   margin: 0 auto;
   height: 105vh;
 
-  h1 {
-    color: white;
+  .header-nursery {
+    display: flex;
     padding-top: 30px;
-    padding-left: 40px;
-    font-weight: bold;
+
+    a {
+      display: flex;
+      align-items: center;
+      padding-left: 15px;
+    }
+
+    h1 {
+      color: white;
+      padding-left: 40px;
+      font-weight: bold;
+    }
   }
 
   .card_reservation {

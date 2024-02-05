@@ -40,7 +40,7 @@ function ReservationFinal() {
         <Link to="/searchlist/conditions">
           <img
             className="arrowBack"
-            src="../src/assets/arrow_back.svg"
+            src="../src/assets/arrow_back_black.svg"
             alt=""
           />
         </Link>

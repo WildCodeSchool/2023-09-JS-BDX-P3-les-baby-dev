@@ -31,7 +31,6 @@ function Profil() {
             <Link to="/profil/myresa">
               <li>Mes réservations</li>
             </Link>
-            <li>Mes favoris</li>
             <button type="button" onClick={logout}>
               Déconnexion
             </button>
