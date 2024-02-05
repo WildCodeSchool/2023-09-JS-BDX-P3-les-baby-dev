@@ -11,6 +11,7 @@ function ChildForm({ child, onChange }) {
   const handleChange = (field, value) => {
     onChange({ ...child, [field]: value });
   };
+
   return (
     <div className="div-form-parent">
       <MDBValidation className="row g-3">

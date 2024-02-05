@@ -1,11 +1,13 @@
 // import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { MDBBtn } from "mdb-react-ui-kit";
 import HeaderProfile from "../../../components/profile.components/HeaderProfile";
 import NavProfil from "../../../components/profile.components/NavProfil";
 import { useParent } from "../../../context/ParentContext";
 import ChildForm from "./ChildForm";
 import { useUser } from "../../../context/UserContext";
 import HeaderNav from "../../../components/profile.components/HeaderNav";
+import "./InscriptionChildren.scss";
 
 function IncriptionChildren() {
   const { apiService } = useUser();
@@ -32,10 +34,16 @@ function IncriptionChildren() {
     }
   };
 
-  const handleChangeChild = (index, child) => {
-    const updatedChildren = [...dataChildren];
-    updatedChildren[index] = child;
-    setDataChildren(updatedChildren);
+  const handlePutChild = async () => {
+    try {
+      const child = dataChildren[currentChildIndex];
+      await apiService.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/children/${child.id}`,
+        child
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleRemoveChild = async () => {
@@ -59,60 +67,60 @@ function IncriptionChildren() {
     }
   };
 
-  // const handlePutChild = async () => {
-  //   try {
-  //     const child = dataChildren[currentChildIndex];
-  //     await apiService.put(
-  //       `${import.meta.env.VITE_BACKEND_URL}/api/children/${child.id}`,
-  //       child
-  //     );
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  const handleChangeChild = (index, child) => {
+    const updatedChildren = [...dataChildren];
+    updatedChildren[index] = child;
+    setDataChildren(updatedChildren);
+  };
 
   return (
     <div className="flex-inscription">
-      <div>
+      <div className="child-container">
         <HeaderNav />
         <HeaderProfile />
-        <h1>Dossier Enfant</h1>
-        {dataChildren.map((child, index) => (
-          <button
-            key={`${index + 1}`}
-            type="button"
-            className="button-children"
-            onClick={() => {
-              setCurrentChildIndex(index);
-            }}
-          >
-            {child.childFName ? child.childFName : `Enfant ${index + 1}`}
-          </button>
-        ))}
-        {dataChildren && dataChildren.length > 0 && (
-          <ChildForm
-            child={dataChildren[currentChildIndex]}
-            onChange={(child) => handleChangeChild(currentChildIndex, child)}
-          />
-        )}
-        <div>
-          <button type="button" className="button-children">
-            Enregistrer
-          </button>
-          <button
-            onClick={handleAddChild}
-            type="button"
-            className="button-children"
-          >
-            Ajouter un enfant
-          </button>
-          <button
-            onClick={handleRemoveChild}
-            type="button"
-            className="button-children"
-          >
-            Supprimer
-          </button>
+        <div className="input-child">
+          <h1>Dossier Enfant</h1>
+          {dataChildren.map((child, index) => (
+            <button
+              key={`${index + 1}`}
+              type="button"
+              className="button-children"
+              onClick={() => {
+                setCurrentChildIndex(index);
+              }}
+            >
+              {child.childFName ? child.childFName : `Enfant ${index + 1}`}
+            </button>
+          ))}
+          {dataChildren && dataChildren.length > 0 && (
+            <ChildForm
+              child={dataChildren[currentChildIndex]}
+              onChange={(child) => handleChangeChild(currentChildIndex, child)}
+            />
+          )}
+          <div className="d-flex btn-child">
+            <MDBBtn
+              type="button"
+              className="button-children"
+              onClick={handlePutChild}
+            >
+              Enregistrer
+            </MDBBtn>
+            <MDBBtn
+              onClick={handleAddChild}
+              type="button"
+              className="button-children"
+            >
+              Ajouter un enfant
+            </MDBBtn>
+            <MDBBtn
+              onClick={handleRemoveChild}
+              type="button"
+              className="button-children"
+            >
+              Supprimer
+            </MDBBtn>
+          </div>
         </div>
       </div>
       <NavProfil />
