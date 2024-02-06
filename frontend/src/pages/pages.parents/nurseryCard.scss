@@ -142,12 +142,17 @@
 
 @media (min-width: 768px) {
   .card_container {
-    h1 {
-      color: white;
+    .header-nursery {
+      display: flex;
+      justify-content: center;
       padding-top: 30px;
-      text-align: center;
-      font-weight: bold;
-      font-size: 2.6em;
+
+      h1 {
+        color: white;
+        text-align: center;
+        font-weight: bold;
+        font-size: 2.6em;
+      }
     }
 
     h2 {

@@ -47,7 +47,7 @@ function ReservationFinal() {
         </div>
         <div className="title_creche">
           <h1>Terminer ma réservation</h1>
-          <h2>Créche "NAME_CRECHE"</h2>
+          <h2>Enfants à garder</h2>
         </div>
       </div>
       <div className="infos_container">
@@ -56,10 +56,6 @@ function ReservationFinal() {
           <MDBSwitch
             id="flexSwitchCheckDefault"
             label="Adam le bébé (18 mois)"
-          />
-          <MDBSwitch
-            id="flexSwitchCheckDefault"
-            label="Victor le bébé (21 mois)"
           />
         </div>
         <div className="textArea">

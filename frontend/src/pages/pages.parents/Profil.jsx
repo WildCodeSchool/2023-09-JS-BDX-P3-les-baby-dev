@@ -13,29 +13,20 @@ function Profil() {
   return (
     <div className="profil_container">
       <HeaderNav />
-      <div className="cadre">
-        <div className="header_profil">
-          <div className="picture_creche">
-            <img src="../src/assets/Victor.jpeg" alt="" />
-          </div>
-          <div className="title_profil">
-            <h1>{myProfil?.parentName ?? ""}</h1>
-            <h2>{myProfil?.parentFName ?? ""}</h2>
-          </div>
-        </div>
-        <div className="list_options">
-          <ul>
-            <Link to="/profil/inscription">
-              <li>Dossier d'inscription</li>
-            </Link>
-            <Link to="/profil/myresa">
-              <li>Mes réservations</li>
-            </Link>
-            <button type="button" onClick={logout}>
-              Déconnexion
-            </button>
-          </ul>
-        </div>
+      <h1>{myProfil?.parentName ?? ""}</h1>
+      <h2>{myProfil?.parentFName ?? ""}</h2>
+      <div className="list_options">
+        <ul>
+          <Link to="/profil/inscription">
+            <li>Dossier d'inscription</li>
+          </Link>
+          <Link to="/profil/myresa">
+            <li>Mes réservations</li>
+          </Link>
+          <button type="button" onClick={logout}>
+            Déconnexion
+          </button>
+        </ul>
       </div>
       <NavProfil />
     </div>

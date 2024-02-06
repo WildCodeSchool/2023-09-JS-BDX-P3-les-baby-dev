@@ -17,7 +17,7 @@ function ConditonResa() {
         </div>
         <div className="title_creche">
           <h1>Demander une place</h1>
-          <h2>Créche "NAME_CRECHE"</h2>
+          <h2>Conditions</h2>
         </div>
       </div>
       <h3>Conditions de réservation</h3>
