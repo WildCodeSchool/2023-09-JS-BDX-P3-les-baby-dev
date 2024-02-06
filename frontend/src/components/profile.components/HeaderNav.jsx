@@ -6,11 +6,14 @@ import { useUser } from "../../context/UserContext";
 
 function HeaderNav() {
   const { logout } = useUser();
+
   return (
     <div className="headerNav_container">
-      <div className="logo">
-        <img src={Babyplace} alt="" />
-      </div>
+      <Link to="/searchlist">
+        <div className="logo">
+          <img className="img-logo" src={Babyplace} alt="" />
+        </div>
+      </Link>
       <div className="sections_nav">
         <ul>
           <li>

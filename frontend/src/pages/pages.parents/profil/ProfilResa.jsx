@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./profilResa.scss";
 import { MDBBadge } from "mdb-react-ui-kit";
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import NavProfil from "../../../components/profile.components/NavProfil";
 import imageDefault from "../../../assets/creche2.jpeg";
 import { useUser } from "../../../context/UserContext";
 import HeaderNav from "../../../components/profile.components/HeaderNav";
-import arrowBack from "../../../assets/arrow_back.svg";
 
 function ProfilResa() {
   const loaderDataParent = useLoaderData();
@@ -36,18 +35,6 @@ function ProfilResa() {
   return (
     <div className="profilResa_container">
       <HeaderNav />
-      <div className="choisen_profil">
-        <Link to="/profil">
-          <img className="arrowBack" src={arrowBack} alt="" />
-        </Link>
-        <div className="picture_profil">
-          <img src="../src/assets/Victor.jpeg" alt="" />
-        </div>
-        <div className="title_Myresa">
-          <h1>{myProfil?.parentName ?? ""}</h1>
-          <h2>{myProfil?.parentFName ?? ""}</h2>
-        </div>
-      </div>
       <div className="myResa_container">
         <h1>Mes réservations</h1>
         {myResa.map((item) => {

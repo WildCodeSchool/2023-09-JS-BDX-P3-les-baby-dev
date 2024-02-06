@@ -18,6 +18,7 @@ const reservationControllers = require("./controllers/reservationControllers");
 const parentControllers = require("./controllers/parentControllers");
 const hoursControllers = require("./controllers/hourControllers");
 const employeeControllers = require("./controllers/employeeControllers");
+const childControllers = require("./controllers/childControllers");
 // Route to get a list of items
 
 // Route to get a specific item by ID
@@ -131,6 +132,8 @@ router.delete(
   authMiddleware,
   parentControllers.remove
 );
+
+router.get("/child/:id", childControllers.getChildById);
 
 /* *********** Routes reservation ************** */
 

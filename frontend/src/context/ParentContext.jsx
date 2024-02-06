@@ -10,6 +10,7 @@ function ParentContextProvider({ children }) {
   const { apiService } = useUser();
 
   const parent = loaderData?.parentProfil;
+  const child = loaderData?.childProfil;
 
   const [dataParent, setDataParent] = useState({
     avatarPath: "",
@@ -91,6 +92,7 @@ function ParentContextProvider({ children }) {
       setReservationData,
       updateReservationData,
       parent,
+      child,
       dataChildren,
       setDataChildren,
       handleClick,
@@ -103,6 +105,7 @@ function ParentContextProvider({ children }) {
       setReservationData,
       updateReservationData,
       parent,
+      child,
       dataChildren,
       setDataParent,
       handleClick,

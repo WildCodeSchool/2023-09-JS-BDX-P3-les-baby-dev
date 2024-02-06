@@ -106,7 +106,7 @@ export default function App() {
                             Parent: {p.parentName} {p.parentFName}
                           </p>
                           <p className="text-muted mb-0">
-                            Enfant: {p?.parentName ?? "Juju"}
+                            Enfant: {item?.childFName} {item?.childName}
                           </p>
                         </>
                       )}
