@@ -44,12 +44,24 @@ function ProfilResa() {
           return (
             <div key={item.id} className="card_myresa">
               <div className="img_structure">
-                <img src={creche?.avatarPath ?? imageDefault} alt="" />
+                <img
+                  src={
+                    creche.avatarPath !== null
+                      ? `${import.meta.env.VITE_BACKEND_URL}/${
+                          creche.avatarPath
+                        }`
+                      : { imageDefault }
+                  }
+                  alt=""
+                />
               </div>
               <div className="title_resa">
                 <div key={creche.id}>
-                  <h2>Créche:</h2>
                   <h2>{creche.name}</h2>
+                </div>
+                <div className="date_resa">
+                  <h3>Date de réservation:</h3>
+                  <h3>{item.dayResa}</h3>
                 </div>
                 {item.status ? (
                   <MDBBadge className="badge" color="success" pill>
@@ -60,10 +72,6 @@ function ProfilResa() {
                     Refusé
                   </MDBBadge>
                 )}
-              </div>
-              <div className="date_resa">
-                <h3>Date de réservation:</h3>
-                <h3>{item.dayResa}</h3>
               </div>
             </div>
           );

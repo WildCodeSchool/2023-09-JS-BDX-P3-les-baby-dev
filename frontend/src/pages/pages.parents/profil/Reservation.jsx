@@ -19,11 +19,6 @@ function Reservation() {
   const [endTime, setEndTime] = useState(null);
   const navigate = useNavigate();
 
-  /* console.log(selectedDate);
-  console.log(startTime);
-  console.log(endTime);
-  console.log(reservationData); */
-
   const creche = loaderData?.preloadNursery;
 
   const nextStep = async () => {
@@ -42,7 +37,14 @@ function Reservation() {
         </div>
         <div className="card_reservation">
           <div className="picture_card">
-            <img src={creche.avatarPath || imageDefault} alt={creche.name} />
+            <img
+              src={
+                creche.avatarPath !== null
+                  ? `${import.meta.env.VITE_BACKEND_URL}/${creche.avatarPath}`
+                  : { imageDefault }
+              }
+              alt={creche.name}
+            />
           </div>
           <h2>Demande de réservation</h2>
           <h3>Créche {creche.name}</h3>

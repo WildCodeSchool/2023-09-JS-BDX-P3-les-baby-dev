@@ -13,8 +13,12 @@ function Profil() {
   return (
     <div className="profil_container">
       <HeaderNav />
-      <h1>{myProfil?.parentName ?? ""}</h1>
-      <h2>{myProfil?.parentFName ?? ""}</h2>
+      <div className="name-profil">
+        <h2>Bienvenue dans votre espace personnel</h2>
+        <h1>
+          {myProfil?.parentFName ?? ""} {myProfil?.parentName ?? ""}
+        </h1>
+      </div>
       <div className="list_options">
         <ul>
           <Link to="/profil/inscription">
