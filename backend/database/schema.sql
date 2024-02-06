@@ -66,21 +66,21 @@ values (
 DROP TABLE if EXISTS reservation;
 
 CREATE TABLE IF NOT EXISTS reservation (
-    id int primary key auto_increment not null, structure_id INT NOT NULL, parent_id INT NOT NULL, child_id INT NOT NULL, dayResa VARCHAR(10) NOT NULL, startHour TIME NOT NULL, finishHour TIME NOT NULL, status BOOLEAN DEFAULT 0, message VARCHAR(300) NULL, FOREIGN KEY (structure_id) REFERENCES structure (id), FOREIGN KEY (parent_id) REFERENCES parent (id)
+    id int primary key auto_increment not null, structure_id INT NOT NULL, parent_id INT NOT NULL, child_id INT NOT NULL, childName VARCHAR(255) NOT NULL, childFName VARCHAR(255) NOT NULL, dayResa VARCHAR(10) NOT NULL, startHour TIME NOT NULL, finishHour TIME NOT NULL, status BOOLEAN DEFAULT 0, message VARCHAR(300) NULL, FOREIGN KEY (structure_id) REFERENCES structure (id), FOREIGN KEY (parent_id) REFERENCES parent (id)
 );
 
 insert into
     reservation (
-        structure_id, parent_id, child_id, dayResa, startHour, finishHour, status, message
+        structure_id, parent_id, child_id, childName, childFName, dayResa, startHour, finishHour, status, message
     )
 values (
-        1, 1, 1, 'lundi', '09:00:00', '17:00:00', 0, 'Hello je suis nouveau'
+        1, 1, 1,'Theo', 'Julio', 'lundi', '09:00:00', '17:00:00', 0, 'Hello je suis nouveau'
     ),
     (
-        2, 2, 2, 'mercredi', '10:00:00', '19:00:00', 0, 'pas moi'
+        2, 2, 2,'Theo', 'Julio', 'mercredi', '10:00:00', '19:00:00', 0, 'pas moi'
     ),
     (
-        3, 3, 3, 'jeudi', '07:00:00', '16:00:00', 0, 'top'
+        3, 3, 3,'Theo', 'Julio', 'jeudi', '07:00:00', '16:00:00', 0, 'top'
     );
 
 DROP TABLE if EXISTS hours;
