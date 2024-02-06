@@ -1,3 +1,4 @@
+import barSearch from "../../assets/BarSearch.svg";
 import "./header.scss";
 
 function Header() {
@@ -7,11 +8,8 @@ function Header() {
         Réservez une place auprès de professionnels de la petite enfance
         gratuitement en quelques clics
       </h1>
-      <div>
-        <button type="button">
-          {" "}
-          Rechercher <span>➜</span>
-        </button>
+      <div className="search-bar">
+        <img src={barSearch} alt="" />
       </div>
     </header>
   );

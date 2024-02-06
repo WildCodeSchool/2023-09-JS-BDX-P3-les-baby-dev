@@ -182,7 +182,7 @@ export default function App() {
                   Administration
                 </MDBSideNavLink>
                 <MDBSideNavCollapse open={colorCollapse2}>
-                  <MDBSideNavLink onClick={() => navigate("/structure")}>
+                  <MDBSideNavLink onClick={() => navigate("/structure/step/1")}>
                     Modifier ma structure
                   </MDBSideNavLink>
                   <MDBSideNavLink>Paramètre</MDBSideNavLink>

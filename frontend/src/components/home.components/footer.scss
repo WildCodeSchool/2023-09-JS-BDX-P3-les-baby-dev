@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Adamina&display=swap");
 
 .line {
-  border-bottom: 1px solid #9805c5c7;
+  border-bottom: 1px solid lightgrey;
   margin: 30px 10px;
+  width: 100%;
 }
 
 .footerTitle {
@@ -32,6 +33,7 @@
     }
 
     .arrowBtn {
+      padding-bottom: 5px;
       span {
         transition: 0.3s ease-in-out;
         display: inline-block;
