@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import "mdb-react-ui-kit/dist/css/mdb.min.css";
+import "mdb-react-file-upload/dist/css/file-upload.min.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import HomePro from "./pages/pages.pro/HomePro";
 import SearchList from "./pages/pages.parents/SearchList";
-import "./assets/scss/mdb.pro.scss";
 import Home from "./pages/pages.parents/Home";
 import UserContextProvider from "./context/UserContext";
 import ProContextProvider from "./context/ProContext";
@@ -241,7 +241,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/structure",
+        path: "/structure/step/:step",
         loader: async () => ({
           ...(await currentStructureProfil(apiService)),
           ...(await currentStructureHours(apiService)),

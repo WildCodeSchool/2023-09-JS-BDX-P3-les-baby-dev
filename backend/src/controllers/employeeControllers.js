@@ -23,21 +23,12 @@ const updateUploadEmployee = async (req, res) => {
 const addEmployee = async (req, res) => {
   try {
     const structureId = parseInt(req.params.id, 10);
-    await Promise.all(
-      req.body.employees.map((employeeData) => {
-        const { name, fName, mail, fonction } = employeeData;
-        return models.employee.create(structureId, {
-          fName,
-          name,
-          mail,
-          fonction,
-        });
-      })
+    const employeeId = await models.employee.create(structureId, req.body);
+    const [newData] = await models.employee.database.query(
+      `select * from ${models.employee.table} where id = ?`,
+      [employeeId]
     );
-    res.status(201).json({
-      success: true,
-      message: "Employee registered successfully",
-    });
+    res.status(201).json(newData[0]);
   } catch (error) {
     console.error(error);
 

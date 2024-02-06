@@ -9,7 +9,7 @@ const StructureContext = createContext();
 function StructureContextProvider({ children }) {
   const { user, apiService } = useUser();
   const loaderData = useLoaderData();
-  const [dataImage, setDataImage] = useState({});
+  const [dataImage, setDataImage] = useState(undefined);
   const [data, setData] = useState({
     jardin: false,
     maxPlaces: 1,
@@ -56,11 +56,8 @@ function StructureContextProvider({ children }) {
   };
 
   const onChangeFiles = (value) => {
-    if (value[0] !== dataImage.avatar) {
-      setDataImage((prevDataImage) => ({
-        ...prevDataImage,
-        avatar: value[0],
-      }));
+    if (value?.length) {
+      setDataImage(value[0]);
     }
   };
 
@@ -78,32 +75,32 @@ function StructureContextProvider({ children }) {
     }));
   };
 
-  const handleSubmitEmployee = async () => {
-    try {
-      const response = await axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}/api/structure/${
-          data?.id
-        }/adaptation/employees`,
-        dataEmployee ?? {}
-      );
-
-      console.info(response.data);
-    } catch (error) {
-      console.error(error);
-    }
+  const handleSubmitNewEmployee = async (index) => {
+    // console.log(dataEmployee[i]);
+    const response = await apiService.post(
+      `${import.meta.env.VITE_BACKEND_URL}/api/structure/${data?.id}/employees`,
+      dataEmployee.employees[index]
+    );
+    return response;
   };
 
-  const handleSubmitNewEmployee = async () => {
-    // console.log(dataEmployee[i]);
+  const handleSubmitEmployee = async (index) => {
     try {
-      const response = await apiService.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/structure/${
-          data?.id
-        }/employees`,
-        dataEmployee ?? {}
-      );
+      const employe = { ...dataEmployee.employees[index] };
 
-      console.info(response.data);
+      if (employe.id) {
+        delete employe.id;
+        dataEmployee.employees[index] = await apiService.put(
+          `${import.meta.env.VITE_BACKEND_URL}/api/structure/${
+            dataEmployee.employees[index]?.id
+          }/adaptation/employees`,
+          employe
+        );
+      } else {
+        dataEmployee.employees[index] = await handleSubmitNewEmployee(index);
+      }
+
+      setDataEmployee({ ...dataEmployee });
     } catch (error) {
       console.error(error);
     }
@@ -185,7 +182,6 @@ function StructureContextProvider({ children }) {
       dataImage,
       getStructureEmployees,
       deleteEmployee,
-      handleSubmitNewEmployee,
     }),
     [
       handleSubmit,
@@ -203,7 +199,6 @@ function StructureContextProvider({ children }) {
       dataImage,
       getStructureEmployees,
       deleteEmployee,
-      handleSubmitNewEmployee,
     ]
   );
 

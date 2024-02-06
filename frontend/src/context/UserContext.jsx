@@ -58,7 +58,7 @@ function UserContextProvider({ children, apiService }) {
 
       // eslint-disable-next-line no-alert
       alert(`Bienvenue ${newUser.email}`);
-      return navigate(newUser.is_admin ? "/structure" : "/searchlist");
+      return navigate(newUser.is_admin ? "/structure/step/1" : "/searchlist");
     } catch (err) {
       console.error(err);
       // eslint-disable-next-line no-alert

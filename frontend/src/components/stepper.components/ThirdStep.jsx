@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
 import { MDBFileUpload } from "mdb-react-file-upload";
 import {
   MDBBtn,
@@ -15,7 +14,7 @@ import profilePic from "../../assets/profil-picture.svg";
 
 function ThirdStep({ nextQuestion, prevQuestion }) {
   const [loading, setLoading] = useState(false);
-  const { handleSubmitEmployee, handleSubmitNewEmployee } = useStructure();
+  const { handleSubmitEmployee } = useStructure();
   const {
     dataEmployee,
     setDataEmployee,
@@ -39,30 +38,9 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
     }));
   };
 
-  const handleSubmitFiles = () => {
-    const formData = new FormData();
-    formData.append("avatarPath", dataEmployee.files);
-    if (dataEmployee.files) {
-      axios
-        .put(
-          `${import.meta.env.VITE_BACKEND_URL}/api/structure/${
-            dataEmployee.id
-          }/employees`,
-          formData ?? {}
-        )
-        .then((response) => {
-          console.info(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  };
-
   const validateThirdStep = () => {
     setLoading(true);
     setTimeout(() => {
-      handleSubmitFiles();
       nextQuestion();
       setLoading(false);
     }, 1000);
@@ -106,7 +84,7 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
                 <div className="fileUpload">
                   <MDBFileUpload
                     defaultFile={profilePic}
-                    onChange={(e) => handleChange(e[0], i, "files")}
+                    onChange={(e) => handleChange(e.files[0], i, "files")}
                   />
                 </div>
                 <div className="thirdInputContainer">
@@ -165,23 +143,13 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
                   </MDBValidation>
                 </div>
 
-                {employee?.id ? (
-                  <MDBBtn
-                    className="delete"
-                    type="submit"
-                    onClick={handleSubmitEmployee}
-                  >
-                    modifier
-                  </MDBBtn>
-                ) : (
-                  <MDBBtn
-                    className="delete"
-                    type="submit"
-                    onClick={handleSubmitNewEmployee}
-                  >
-                    créer{" "}
-                  </MDBBtn>
-                )}
+                <MDBBtn
+                  className="delete"
+                  type="submit"
+                  onClick={() => handleSubmitEmployee(i)}
+                >
+                  {employee.id ? "modifier" : "créer"}
+                </MDBBtn>
 
                 <MDBBtn
                   className="delete"
