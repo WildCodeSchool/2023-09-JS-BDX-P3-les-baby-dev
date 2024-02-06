@@ -2,6 +2,9 @@ import Footer from "../../components/home.components/Footer";
 import Header from "../../components/home.components/Header";
 import Navbar from "../../components/home.components/Navbar";
 import zeroPapier from "../../assets/zeroPapier.svg";
+import homeVisuelOne from "../../assets/homeVisuel1.svg";
+import homeVisuelTwo from "../../assets/homeVisuel2.svg";
+import homeVisuelThree from "../../assets/homeVisuel3.svg";
 
 import "./Home.scss";
 
@@ -16,9 +19,9 @@ function Home() {
           reservation en ligne
         </h1>
         <div className="home-visuel">
-          <img src="./src/assets/homeVisuel1.svg" alt="visuel1" />
-          <img src="./src/assets/homeVisuel2.svg" alt="visuel2" />
-          <img src="./src/assets/homeVisuel3.svg" alt="visuel3" />
+          <img src={homeVisuelOne} alt="visuel1" />
+          <img src={homeVisuelTwo} alt="visuel2" />
+          <img src={homeVisuelThree} alt="visuel3" />
         </div>
         <div className="home-visuel text text-visuel">
           <span>
