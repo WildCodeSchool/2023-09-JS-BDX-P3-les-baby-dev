@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { MDBFileUpload } from "mdb-react-file-upload";
 import {
   MDBBtn,
   MDBInput,
@@ -10,17 +9,16 @@ import {
 } from "mdb-react-ui-kit";
 import { useStructure } from "../../context/StrucutreContext";
 import "./thirdStep.scss";
-import profilePic from "../../assets/profil-picture.svg";
 
 function ThirdStep({ nextQuestion, prevQuestion }) {
   const [loading, setLoading] = useState(false);
-  const { handleSubmitEmployee } = useStructure();
   const {
     dataEmployee,
     setDataEmployee,
     getStructureEmployees,
     data,
     deleteEmployee,
+    handleSubmitEmployee,
   } = useStructure();
 
   const HandleAdd = () => {
@@ -81,12 +79,12 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
           {dataEmployee?.employees &&
             dataEmployee?.employees.map((employee, i) => (
               <div key={`${i + 1}`} className="photoContainer">
-                <div className="fileUpload">
+                {/* <div className="fileUpload">
                   <MDBFileUpload
                     defaultFile={profilePic}
-                    onChange={(e) => handleChange(e.files[0], i, "files")}
+                    onChange={(e) => handleChange(e[0], i, "files")}
                   />
-                </div>
+                </div> */}
                 <div className="thirdInputContainer">
                   <MDBValidation className="row g-1" isValidated>
                     <MDBValidationItem className="col-md-4" feedback="">

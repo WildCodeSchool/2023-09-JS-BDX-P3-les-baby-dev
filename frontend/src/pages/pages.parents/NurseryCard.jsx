@@ -13,8 +13,10 @@ import imageDefault from "../../assets/defaultImage.png";
 import { useParent } from "../../context/ParentContext";
 
 function NurseryCard() {
+  const navigate = useNavigate();
   const [scrollableModal, setScrollableModal] = useState(false);
   const loaderData = useLoaderData();
+  const parent = loaderData.parentProfil;
   const { setReservationData, reservationData } = useParent();
 
   const creche = loaderData?.preloadNursery;
@@ -22,15 +24,24 @@ function NurseryCard() {
     (hour) => hour.structure_id === creche.id
   );
 
-  const navigate = useNavigate();
-
   const handleNavigate = () => {
-    // console.log("creche.id:", creche.id);
-    navigate(`/searchlist/nursery/${creche.id}/reservation`);
-    setReservationData({
-      ...reservationData,
-      structure_id: creche.id,
-    });
+    if (
+      parent.address === null ||
+      parent.avatarPath === null ||
+      parent.parentFName === null ||
+      parent.parentName === null ||
+      parent.profession === null ||
+      parent.telephone === null ||
+      parent.ville === null
+    ) {
+      navigate("/profil/inscription");
+    } else {
+      navigate(`/searchlist/nursery/${creche.id}/reservation`);
+      setReservationData({
+        ...reservationData,
+        structure_id: creche.id,
+      });
+    }
   };
 
   return (
@@ -56,7 +67,11 @@ function NurseryCard() {
           {crecheHours && (
             <div className="horaires_nursery">
               <ul>
-                <li>Du lundi au samedi</li>
+                <li>
+                  Ouvert le : {crecheHours.monday} - {crecheHours.tuesday} -{" "}
+                  {crecheHours.wednesday} - {crecheHours.thursday} -
+                  {crecheHours.friday} - {crecheHours.saturday}
+                </li>
                 <li>de {crecheHours.openHour} heure</li>
                 <li>à {crecheHours.closeHour} heure</li>
               </ul>

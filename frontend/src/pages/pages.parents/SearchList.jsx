@@ -9,7 +9,6 @@ import imageDefault from "../../assets/defaultImage.png";
 function SearchList() {
   const navigate = useNavigate();
   const loaderData = useLoaderData();
-  // console.log("dans searchlist:", loaderData);
 
   const handleNavigate = (crecheId) => {
     navigate(`/searchlist/nursery/${crecheId}`);
@@ -54,8 +53,14 @@ function SearchList() {
                   {crecheHours && (
                     <div className="horaires_nursery">
                       <ul>
-                        <li>Ouvert du</li>
-                        <li>lundi au samedi</li>
+                        <li>
+                          Ouvert le : {crecheHours.monday ? "lundi - " : ""}
+                          {crecheHours.tuesday ? "mardi - " : ""}
+                          {crecheHours.wednesday ? "mercredi - " : ""}
+                          {crecheHours.thursday ? "jeudi - " : ""}
+                          {crecheHours.friday ? "vendredi - " : ""}
+                          {crecheHours.saturday ? "samedi" : ""}
+                        </li>
                         <li>Téléphone: {creche.tel}</li>
                       </ul>
                     </div>

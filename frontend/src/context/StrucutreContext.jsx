@@ -75,6 +75,19 @@ function StructureContextProvider({ children }) {
     }));
   };
 
+  // const handleSubmitPicEmployee = async (index) => {
+  //   const employeePics = dataEmployee.employees[index].files;
+  //   const formData = new FormData();
+  //   formData.append("avatarPath", employeePics);
+  //   const response = await axios.put(
+  //     `${import.meta.env.VITE_BACKEND_URL}/api//employees/${
+  //       dataEmployee.employees[index]?.id
+  //     }/avatar`,
+  //     formData
+  //   );
+  //   return response;
+  // };
+
   const handleSubmitNewEmployee = async (index) => {
     // console.log(dataEmployee[i]);
     const response = await apiService.post(
