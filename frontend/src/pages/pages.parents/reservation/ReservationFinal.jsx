@@ -4,12 +4,13 @@ import "./reservationFinal.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { MDBSwitch } from "mdb-react-ui-kit";
 import { useParent } from "../../../context/ParentContext";
-import arrowBack from "../../../assets/arrow_back.svg";
+import arrowBack from "../../../assets/arrow_back_black.svg";
 import secondCreche from "../../../assets/creche2.jpeg";
 
 function ReservationFinal() {
   const { reservationData, updateReservationData } = useParent();
   const [parentMessage, setParentMessage] = useState("");
+  const [switchValue, setSwitchValue] = useState(false);
   const navigate = useNavigate();
 
   const handleConfirmationClick = async () => {
@@ -19,21 +20,30 @@ function ReservationFinal() {
       reservationData.finishHour,
       parentMessage
     );
-    // console.log(reservationData);
 
     navigate("/searchlist/confirmation");
+
     try {
+      const dataToUpdate = {
+        ...reservationData,
+        message: parentMessage,
+      };
+      if (!switchValue) {
+        dataToUpdate.childName = reservationData.childName;
+      }
       const response = await Axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/reservation`,
-        {
-          ...reservationData,
-          message: parentMessage,
-        }
+        dataToUpdate
       );
       console.info(response.data);
     } catch (error) {
       console.error("Erreur lors de l'envoi de la réservation :", error);
     }
+  };
+
+  const handleSwitchChange = () => {
+    // Mettre à jour la valeur du switch
+    setSwitchValue(!switchValue);
   };
 
   return (
@@ -47,7 +57,7 @@ function ReservationFinal() {
         </div>
         <div className="title_creche">
           <h1>Terminer ma réservation</h1>
-          <h2>Créche "NAME_CRECHE"</h2>
+          <h2>Enfants à garder</h2>
         </div>
       </div>
       <div className="infos_container">
@@ -55,11 +65,9 @@ function ReservationFinal() {
         <div className="switch">
           <MDBSwitch
             id="flexSwitchCheckDefault"
-            label="Adam le bébé (18 mois)"
-          />
-          <MDBSwitch
-            id="flexSwitchCheckDefault"
-            label="Victor le bébé (21 mois)"
+            label={`${reservationData.childFName} ${reservationData.childName}`}
+            onChange={handleSwitchChange}
+            checked={switchValue}
           />
         </div>
         <div className="textArea">

@@ -8,9 +8,10 @@ import {
   MDBModalBody,
   MDBModalFooter,
 } from "mdb-react-ui-kit";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import imageDefault from "../../assets/defaultImage.png";
 import { useParent } from "../../context/ParentContext";
+import Return from "../../assets/arrow_back.svg";
 
 function NurseryCard() {
   const navigate = useNavigate();
@@ -47,7 +48,12 @@ function NurseryCard() {
   return (
     <div className="card_container">
       <div key={creche.id}>
-        <h1>Créche {creche.name}</h1>
+        <div className="header-nursery">
+          <Link to="/searchlist">
+            <img className="arrowBack" src={Return} alt="" />
+          </Link>
+          <h1>Créche {creche.name}</h1>
+        </div>
         <div className="infos_card">
           <div className="picture_card">
             <img

@@ -133,18 +133,19 @@
   --mdb-btn-box-shadow-state: 0 6px 7px -3px rgba(94, 36, 115, 0.3),
     0 4px 18px 0 rgba(68, 22, 86, 0.2);
 }
-
-.btn {
-  background: #9c69e2;
-  box-shadow: none;
-  min-width: 120px;
-  min-height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:hover {
+.next-prev {
+  .btn {
     background: #9c69e2;
+    box-shadow: none;
+    min-width: 120px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: #9c69e2;
+    }
   }
 }
 
