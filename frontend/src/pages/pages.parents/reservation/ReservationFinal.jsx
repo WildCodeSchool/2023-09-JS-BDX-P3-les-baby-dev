@@ -20,8 +20,6 @@ function ReservationFinal() {
       parentMessage
     );
 
-    navigate("/searchlist/confirmation");
-
     try {
       const dataToUpdate = {
         ...reservationData,
@@ -35,8 +33,11 @@ function ReservationFinal() {
         dataToUpdate
       );
       console.info(response.data);
+
+      navigate("/searchlist/confirmation");
     } catch (error) {
       console.error("Erreur lors de l'envoi de la réservation :", error);
+      navigate("/searchlist/refus");
     }
   };
 
