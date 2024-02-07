@@ -72,21 +72,19 @@ const router = createBrowserRouter([
               </ParentContextProvider>
             ),
           },
+
           {
-            children: [
-              {
-                path: "/searchlist/filter/services",
-                loader: async () => ({
-                  ...(await currentParentProfilLoader(apiService)),
-                }),
-                element: (
-                  <ParentContextProvider>
-                    <FilterService />
-                  </ParentContextProvider>
-                ),
-              },
-            ],
+            path: "/searchlist/filter/services",
+            loader: async () => ({
+              ...(await currentParentProfilLoader(apiService)),
+            }),
+            element: (
+              <ParentContextProvider>
+                <FilterService />
+              </ParentContextProvider>
+            ),
           },
+
           {
             path: "/searchlist/nursery/:id",
             loader: async ({ params }) => ({
