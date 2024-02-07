@@ -13,7 +13,7 @@ import { useParent } from "../../../context/ParentContext";
 
 function Reservation() {
   const loaderData = useLoaderData();
-  const { /* reservationData */ updateReservationData } = useParent();
+  const { updateReservationData } = useParent();
   const [selectedDate, setSelectedDate] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
@@ -57,7 +57,6 @@ function Reservation() {
                     className="col-md-4"
                     feedback="Veuillez entrer une date"
                     invalid
-                    isValidated
                   >
                     <MDBDatepicker
                       inline

@@ -43,6 +43,16 @@
 
       .text-area {
         width: 500px !important;
+
+        .legend {
+          font-size: 15px;
+          text-align: end;
+
+          span {
+            color: #9c69e2;
+            font-weight: 800;
+          }
+        }
       }
     }
   }

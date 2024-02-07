@@ -48,7 +48,7 @@ function FirstStep({ nextQuestion }) {
     <div className="fifty">
       <div className="step1">
         <h4>Complétez et vérifiez vos informations</h4>
-        <MDBValidation className="row g-3 mb-3" isValidated>
+        <MDBValidation className="row g-3 mb-3 mt-3" isValidated>
           <MDBValidationItem className="col-md-4" feedback="">
             <MDBInput
               value={data?.name ?? ""}
