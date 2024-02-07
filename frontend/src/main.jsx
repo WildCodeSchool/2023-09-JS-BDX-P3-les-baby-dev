@@ -38,6 +38,7 @@ import reservationLoader from "./loaders/current-reservation.loader";
 import hoursLoader from "./loaders/current-hours.loader";
 import currentStructureProfil from "./loaders/current-structure-profil.loader";
 import currentStructureHours from "./loaders/current-structure-hours.loader";
+import RefusResa from "./pages/pages.parents/reservation/RefusResa";
 
 const apiService = new ApiService();
 
@@ -145,6 +146,18 @@ const router = createBrowserRouter([
             element: (
               <ParentContextProvider>
                 <ConfirmationResa />
+              </ParentContextProvider>
+            ),
+          },
+          {
+            path: "/searchlist/refus",
+            loader: async ({ params }) => ({
+              ...(await currentParentProfilLoader(apiService)),
+              ...(await currentNurseryLoader(apiService, params.id)),
+            }),
+            element: (
+              <ParentContextProvider>
+                <RefusResa />
               </ParentContextProvider>
             ),
           },

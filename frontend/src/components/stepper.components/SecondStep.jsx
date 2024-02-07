@@ -19,7 +19,7 @@ function SecondStep({ nextQuestion, prevQuestion }) {
   const { onChange, onChangeFiles, data, dataImage, setData } = useStructure();
 
   const maxLength = 500;
-  const descriptionLength = data.structureDesc.length;
+  const descriptionLength = data?.structureDesc ? data.structureDesc.length : 0;
   const remainingCharacters = maxLength - descriptionLength;
 
   const { handleSubmit } = useStructure();
