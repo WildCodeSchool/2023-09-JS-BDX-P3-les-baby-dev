@@ -10,6 +10,7 @@
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 10px;
+  box-shadow: #9d69e2 0px -1px 9px 0px;
 
   img {
     width: 80px;
@@ -22,7 +23,6 @@
 
   .homeTxtBtn {
     background-color: transparent;
-    text-decoration: underline;
     transition: 0.3s ease-in-out;
     font-weight: 550;
     font-size: 11px;
@@ -74,6 +74,17 @@
   }
 }
 
+@media screen and (min-width: 330px) {
+  .homeNav .homeTxtBtn {
+    font-size: 9px;
+  }
+  .homeNav .connectBtn {
+    width: 84px;
+    height: 20px;
+    line-height: 10px;
+  }
+}
+
 @media screen and (min-width: 750px) {
   .homeNav {
     width: 100%;
@@ -94,6 +105,7 @@
       margin: 0;
       padding: 0;
       font-size: 12px;
+      line-height: 20px;
 
       div {
         font-size: 18px;
