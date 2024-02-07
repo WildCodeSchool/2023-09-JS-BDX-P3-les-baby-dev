@@ -72,12 +72,7 @@ function NurseryCard() {
           {crecheHours && (
             <div className="horaires_nursery">
               <ul>
-                <li>
-                  Ouvert le : {crecheHours.monday} - {crecheHours.tuesday} -{" "}
-                  {crecheHours.wednesday} - {crecheHours.thursday} -
-                  {crecheHours.friday} - {crecheHours.saturday}
-                </li>
-                <li>de {crecheHours.openHour} heure</li>
+                <li> Ouvert de : {crecheHours.openHour} heure</li>
                 <li>à {crecheHours.closeHour} heure</li>
               </ul>
             </div>

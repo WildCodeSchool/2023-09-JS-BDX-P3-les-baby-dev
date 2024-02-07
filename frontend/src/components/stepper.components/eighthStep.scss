@@ -1,7 +1,13 @@
-.btn {
-  background: #9c69e2;
+.step8 {
+  .pageContainer {
+    width: 70%;
+    padding: 10px;
+    .btn {
+      background: #9c69e2;
 
-  &:focus {
-    box-shadow: none !important;
+      &:focus {
+        box-shadow: none !important;
+      }
+    }
   }
 }

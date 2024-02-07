@@ -37,7 +37,7 @@ function ParentContextProvider({ children }) {
   const getMyChildren = async () => {
     try {
       const response = await apiService.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/parent/children/${parent?.id}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/parent/children/${parent.id}`
         // `${import.meta.env.VITE_BACKEND_URL}/api/parents/${parent.id}/children`
       );
 

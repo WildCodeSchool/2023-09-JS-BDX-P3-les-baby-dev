@@ -52,17 +52,17 @@ function SearchList() {
                         </li>
                       </ul>
                     </div>
-                    <MDBListGroup flush>
+                    <MDBListGroup flush="true">
                       {crecheHours && (
                         <div className="horaires_nursery">
                           <ul>
-                            <li>
-                              Ouvert le : {crecheHours.monday ? "lundi - " : ""}
-                              {crecheHours.tuesday ? "mardi - " : ""}
-                              {crecheHours.wednesday ? "mercredi - " : ""}
-                              {crecheHours.thursday ? "jeudi - " : ""}
-                              {crecheHours.friday ? "vendredi - " : ""}
-                              {crecheHours.saturday ? "samedi" : ""}
+                            <li className="days">
+                              Ouvert le : {crecheHours.monday ? "lundi" : ""}
+                              {crecheHours.tuesday ? ` - mardi` : ""}
+                              {crecheHours.wednesday ? ` - mercredi` : ""}
+                              {crecheHours.thursday ? ` - jeudi` : ""}
+                              {crecheHours.friday ? ` - vendredi` : ""}
+                              {crecheHours.saturday ? ` - samedi` : ""}
                             </li>
                             <li>Téléphone: {creche.tel}</li>
                           </ul>
@@ -185,7 +185,7 @@ function SearchList() {
                         </li>
                       </ul>
                     </div>
-                    <MDBListGroup flush>
+                    <MDBListGroup flush="true">
                       {crecheHours && (
                         <div className="horaires_nursery">
                           <ul>

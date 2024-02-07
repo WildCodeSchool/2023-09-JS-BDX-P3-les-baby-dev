@@ -99,7 +99,7 @@ export default function App() {
               <td>
                 <div className="d-flex align-items-center">
                   {parent.map((p) => (
-                    <div key={parent.id} className="ms-0">
+                    <div key={p.id} className="ms-0">
                       {item.parent_id === p.id && (
                         <>
                           <p className="fw-bold mb-0">

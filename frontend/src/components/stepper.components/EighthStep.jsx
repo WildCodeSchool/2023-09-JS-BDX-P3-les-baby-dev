@@ -12,11 +12,14 @@ import {
   MDBModalTitle,
 } from "mdb-react-ui-kit";
 import "./eighthStep.scss";
+import { useStructure } from "../../context/StrucutreContext";
+import eighthStepTitle from "../../assets/eigthstep_title.svg";
+import eightstepDesc from "../../assets/eightstep_desc.svg";
 
 function EighthStep({ prevQuestion }) {
   const [centredModal, setCentredModal] = useState(false);
   const navigate = useNavigate();
-
+  const { data } = useStructure();
   const toggleOpen = () => setCentredModal(!centredModal);
 
   return (
@@ -25,16 +28,18 @@ function EighthStep({ prevQuestion }) {
         <h4>
           Sur la base de vos paramètres, voici à quoi vous pouvez vous attendre
         </h4>
+        <img src={eighthStepTitle} alt="" />
         <div>
           <h5>
             Vous êtes disponible à partir du 24 août pour accueillir jusqu'à{" "}
-            <strong>4 enfants</strong> simultanément.{" "}
+            <strong>{data.maxPlaces}</strong> simultanément.{" "}
           </h5>
           <p>
             La famille Martin trouve votre annonce sur Babyplace, et vous trouve
             parfait.e pour accueillir leur bout de chou.
           </p>
         </div>
+        <img src={eightstepDesc} alt="" />
         <div>
           <h5>La famille effectue une demande de réservation</h5>
           <p>
@@ -46,6 +51,7 @@ function EighthStep({ prevQuestion }) {
             intérieur....)
           </p>
         </div>
+        <img src={eightstepDesc} alt="" />
         <div>
           <h5>Accueillez la petite Lou en toute serenité </h5>
           <p>

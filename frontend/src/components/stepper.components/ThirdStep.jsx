@@ -140,23 +140,24 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
                     </MDBValidationItem>
                   </MDBValidation>
                 </div>
+                <div className="modify-employee">
+                  <MDBBtn
+                    className="delete"
+                    type="submit"
+                    onClick={() => handleSubmitEmployee(i)}
+                  >
+                    {employee.id ? "modifier" : "créer"}
+                  </MDBBtn>
 
-                <MDBBtn
-                  className="delete"
-                  type="submit"
-                  onClick={() => handleSubmitEmployee(i)}
-                >
-                  {employee.id ? "modifier" : "créer"}
-                </MDBBtn>
-
-                <MDBBtn
-                  className="delete"
-                  type="submit"
-                  disabled={!dataEmployee.employees.length}
-                  onClick={() => handleDelete(i, employee.id)}
-                >
-                  supprimer
-                </MDBBtn>
+                  <MDBBtn
+                    className="delete"
+                    type="submit"
+                    disabled={!dataEmployee.employees.length}
+                    onClick={() => handleDelete(i, employee.id)}
+                  >
+                    supprimer
+                  </MDBBtn>
+                </div>
               </div>
             ))}
         </div>

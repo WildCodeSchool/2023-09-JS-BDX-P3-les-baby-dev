@@ -10,6 +10,12 @@
     flex-wrap: wrap;
     gap: 30px;
     justify-content: center;
+
+    .modify-employee {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
   }
 
   .needs-validation {
@@ -38,7 +44,7 @@
   }
 
   .delete {
-    margin: 10px auto;
+    margin: 0px auto;
     background: #9c69e2;
 
     &:hover {
