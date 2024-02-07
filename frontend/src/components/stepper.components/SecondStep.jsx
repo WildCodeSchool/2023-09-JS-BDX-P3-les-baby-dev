@@ -19,7 +19,8 @@ function SecondStep({ nextQuestion, prevQuestion }) {
   const { onChange, onChangeFiles, data, dataImage, setData } = useStructure();
 
   const maxLength = 500;
-  const descriptionLength = data.description ? data.description.length : 0;
+  const descriptionLength = data.structureDesc.length;
+  const remainingCharacters = maxLength - descriptionLength;
 
   const { handleSubmit } = useStructure();
 
@@ -94,7 +95,7 @@ function SecondStep({ nextQuestion, prevQuestion }) {
         <div className="structure4">
           <div className="pageContent">
             <MDBValidation className="row g-3 second-validation" isValidated>
-              <MDBValidationItem className="col-md-4 text-area" feedback="yooo">
+              <MDBValidationItem className="col-md-4 text-area" feedback="">
                 <MDBTextArea
                   label="Message"
                   id="textAreaExample"
@@ -105,24 +106,24 @@ function SecondStep({ nextQuestion, prevQuestion }) {
                   name="structureDesc"
                   required
                 />
+                <legend className="legend">
+                  Maximum <span>{remainingCharacters}</span> caractères.
+                </legend>
               </MDBValidationItem>
-              <div className="next-prev">
-                <MDBBtn type="button" onClick={prevQuestion}>
-                  précédent
-                </MDBBtn>
-                <MDBBtn type="button" onClick={validateSecondStep}>
-                  {loading ? "" : "suivant"}
-                  {loading && (
-                    <MDBSpinner role="status" size="sm">
-                      <span className="visually-hidden">loading...</span>
-                    </MDBSpinner>
-                  )}
-                </MDBBtn>
-              </div>
             </MDBValidation>
-            <legend>
-              Maximum {`${maxLength - descriptionLength}`} caractères.
-            </legend>
+          </div>
+          <div className="next-prev">
+            <MDBBtn type="button" onClick={prevQuestion}>
+              précédent
+            </MDBBtn>
+            <MDBBtn type="button" onClick={validateSecondStep}>
+              {loading ? "" : "suivant"}
+              {loading && (
+                <MDBSpinner role="status" size="sm">
+                  <span className="visually-hidden">loading...</span>
+                </MDBSpinner>
+              )}
+            </MDBBtn>
           </div>
         </div>
       </div>

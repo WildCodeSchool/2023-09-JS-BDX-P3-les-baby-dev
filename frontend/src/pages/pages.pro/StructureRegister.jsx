@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MDBStepper, MDBStepperStep } from "mdb-react-ui-kit";
 import "./structureRegister.scss";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import FirstStep from "../../components/stepper.components/FirstStep";
 import SecondStep from "../../components/stepper.components/SecondStep";
 import ThirdStep from "../../components/stepper.components/ThirdStep";
@@ -12,6 +12,7 @@ import EighthStep from "../../components/stepper.components/EighthStep";
 import SeventhStep from "../../components/stepper.components/SeventhStep";
 import "mdb-react-file-upload/dist/scss/file-upload.scss";
 import Navbar from "../../components/stepper.components/Navbar";
+import Return from "../../assets/arrow_back.svg";
 
 function StructureRegister() {
   const { step } = useParams();
@@ -61,6 +62,10 @@ function StructureRegister() {
           précédent
         </button>
         <div className="half-cover">
+          <Link to="/dashboard">
+            <img className="arrowBack" src={Return} alt="" />
+          </Link>
+
           <MDBStepper
             defaultStep={+step}
             type={stepperType}
