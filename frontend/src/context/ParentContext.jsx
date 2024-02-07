@@ -1,4 +1,5 @@
 import { useLoaderData } from "react-router-dom";
+import axios from "axios";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { useUser } from "./UserContext";
@@ -6,6 +7,7 @@ import { useUser } from "./UserContext";
 const ParentContext = createContext();
 
 function ParentContextProvider({ children }) {
+  const [filterSearch, setFilterSearch] = useState([]);
   const loaderData = useLoaderData();
   const { apiService } = useUser();
 
@@ -35,7 +37,7 @@ function ParentContextProvider({ children }) {
   const getMyChildren = async () => {
     try {
       const response = await apiService.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/parent/children/${parent.id}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/parent/children/${parent?.id}`
         // `${import.meta.env.VITE_BACKEND_URL}/api/parents/${parent.id}/children`
       );
 
@@ -84,6 +86,42 @@ function ParentContextProvider({ children }) {
     }
   };
 
+  // ------------------- filter --------------------
+
+  const [checkboxState, setCheckboxState] = useState({
+    psci: false,
+    nesting: false,
+    montessori: false,
+    handicap: false,
+    jardin: false,
+    sorties: false,
+    promenades: false,
+    eveil: false,
+    musique: false,
+    art: false,
+    bilingue: false,
+    bibli: false,
+  });
+
+  const onChange = (e) => {
+    setCheckboxState({
+      ...checkboxState,
+      [e.target.name]: e.target.checked,
+    });
+  };
+
+  const handleAppliquerClick = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/structures/filter`,
+        { params: checkboxState }
+      );
+      setFilterSearch([...response.data]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const contextParentValue = useMemo(
     () => ({
       dataParent,
@@ -97,6 +135,11 @@ function ParentContextProvider({ children }) {
       setDataChildren,
       handleClick,
       getMyChildren,
+      filterSearch,
+      setFilterSearch,
+      handleAppliquerClick,
+      onChange,
+      checkboxState,
     }),
     [
       dataParent,
@@ -110,6 +153,11 @@ function ParentContextProvider({ children }) {
       setDataParent,
       handleClick,
       getMyChildren,
+      filterSearch,
+      setFilterSearch,
+      handleAppliquerClick,
+      onChange,
+      checkboxState,
     ]
   );
 
