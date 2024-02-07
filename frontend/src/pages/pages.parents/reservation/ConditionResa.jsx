@@ -1,8 +1,7 @@
 import React from "react";
 import "./conditionResa.scss";
 import { Link } from "react-router-dom";
-import arrowBack from "../../../assets/arrow_back_black.svg";
-import crecheSecond from "../../../assets/creche2.jpeg";
+import arrowBack from "../../../assets/arrow_back.svg";
 import check from "../../../assets/check.svg";
 import { useParent } from "../../../context/ParentContext";
 import { useUser } from "../../../context/UserContext";
@@ -35,12 +34,12 @@ function ConditonResa() {
   return (
     <div className="conditions_container">
       <div className="choisen_creche">
-        <Link to="/searchlist/reservation">
+        <Link to="/searchlist">
           <img className="arrowBack" src={arrowBack} alt="" />
         </Link>
-        <div className="picture_creche">
+        {/* <div className="picture_creche">
           <img src={crecheSecond} alt="" />
-        </div>
+        </div> */}
         <div className="title_creche">
           <h1>Demander une place</h1>
           <h2>Conditions</h2>

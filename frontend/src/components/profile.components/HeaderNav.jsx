@@ -1,5 +1,11 @@
 import React from "react";
 import "./headerNav.scss";
+import {
+  MDBDropdown,
+  MDBDropdownMenu,
+  MDBDropdownToggle,
+  MDBDropdownItem,
+} from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
 import Babyplace from "../../assets/Babyplace.svg";
 import { useUser } from "../../context/UserContext";
@@ -18,23 +24,24 @@ function HeaderNav() {
         <ul>
           <li>
             <Link to="/searchlist">
-              <h2>Home</h2>
+              <h2>HOME</h2>
             </Link>
           </li>
           <li>
-            <Link to="/profil">
-              <h2>Profil</h2>
-            </Link>
-          </li>
-          <li>
-            <Link to="/profil/myresa">
-              <h2>Mes réservations</h2>
-            </Link>
-          </li>
-          <li>
-            <button type="button" onClick={logout}>
-              Deconnexion
-            </button>
+            <MDBDropdown>
+              <MDBDropdownToggle>Profil</MDBDropdownToggle>
+              <MDBDropdownMenu>
+                <MDBDropdownItem link childTag="button">
+                  <Link to="/profil/inscription">INSCRIPTION</Link>
+                </MDBDropdownItem>
+                <MDBDropdownItem link childTag="button">
+                  <Link to="/profil/myresa">MES RESERVATIONS</Link>
+                </MDBDropdownItem>
+                <MDBDropdownItem link childTag="button" onClick={logout}>
+                  DECONNEXION
+                </MDBDropdownItem>
+              </MDBDropdownMenu>
+            </MDBDropdown>
           </li>
         </ul>
       </div>

@@ -55,7 +55,6 @@ function NurseryCard() {
             />
           </div>
           <div className="description_card">
-            <h3>3/5</h3>
             <h4>Description</h4>
             <p>{creche.structureDesc}</p>
           </div>

@@ -103,10 +103,10 @@ export default function App() {
                       {item.parent_id === p.id && (
                         <>
                           <p className="fw-bold mb-0">
-                            Parent: {p.parentName} {p.parentFName}
+                            Parent: {p.parentFName} {p.parentName}
                           </p>
                           <p className="text-muted mb-0">
-                            Enfant: {item?.childFName} {item?.childName}
+                            Enfant: {item?.childFName}
                           </p>
                         </>
                       )}

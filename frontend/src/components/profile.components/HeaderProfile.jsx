@@ -19,29 +19,34 @@ function HeaderProfile() {
           <img className="arrowBack" src={Return} alt="" />
         </Link>
         <div className="name-inscription">
-          <h1 className="inscription-titre">Jean-Philippe</h1>
-          <h2 className="inscription-sous-titre">Papa du petit Antoine</h2>
+          <h1 className="inscription-titre">Mon inscription</h1>
         </div>
       </div>
       <div className="bouton-div">
-        <div
-          className="color-button blue-button"
-          style={{ backgroundImage: `url(${blueButtonImage})` }}
-        >
-          Parents
-        </div>
-        <div
-          className="color-button green-button"
-          style={{ backgroundImage: `url(${greenButtonImage})` }}
-        >
-          Enfants
-        </div>
-        <div
-          className="color-button orange-button"
-          style={{ backgroundImage: `url(${orangeButtonImage})` }}
-        >
-          Documents
-        </div>
+        <Link to="/profil/inscription">
+          <div
+            className="color-button blue-button"
+            style={{ backgroundImage: `url(${blueButtonImage})` }}
+          >
+            Parents
+          </div>
+        </Link>
+        <Link to="/profil/inscription/children">
+          <div
+            className="color-button green-button"
+            style={{ backgroundImage: `url(${greenButtonImage})` }}
+          >
+            Enfants
+          </div>
+        </Link>
+        <Link to="/profil/inscription/inscription">
+          <div
+            className="color-button orange-button"
+            style={{ backgroundImage: `url(${orangeButtonImage})` }}
+          >
+            Documents
+          </div>
+        </Link>
       </div>
     </div>
   );

@@ -10,10 +10,7 @@ function ConfirmationResa() {
         <img src={rondVert} alt="" />
       </div>
       <h1>Fantastique!</h1>
-      <p>
-        La crèche Picoti Picota cofirme accueillir votre enfant le Lundi 14
-        septembre de 9h à 17h
-      </p>
+      <p>Votre réservation à bien été pris en compte !</p>
       <h2>Statut de votre réservation:</h2>
       <h3>Confirmé</h3>
       <Link to="/searchlist">
