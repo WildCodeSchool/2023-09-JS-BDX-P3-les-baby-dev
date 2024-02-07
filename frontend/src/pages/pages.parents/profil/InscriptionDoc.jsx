@@ -1,79 +1,24 @@
-import { Link } from "react-router-dom";
 import HeaderProfile from "../../../components/profile.components/HeaderProfile";
 import NavProfil from "../../../components/profile.components/NavProfil";
-import HeaderNav from "../../../components/profile.components/HeaderNav";
+import "./InscriptionDoc.scss";
 
 function DocInscription() {
   return (
-    <div className="flex-inscription">
-      <div>
-        <HeaderNav />
-        <HeaderProfile />
+    <div className="flex-doc">
+      <HeaderProfile />
+      <div className="div-form-parent">
         <h1>Dossier Inscription</h1>
-        <div className="div-form-parent">
-          <label htmlFor="photo1">
-            Justificatif de revenu (moins de 3 mois)
-          </label>
-          <input
-            type="file"
-            id="photo1"
-            name="file"
-            accept="image/png, image/jpg, image/jpeg"
-            className="form-control"
-          />
-          <label htmlFor="photo1">Déclaration de revenu (année en cours)</label>
-          <input
-            type="file"
-            id="photo1"
-            name="file"
-            accept="image/png, image/jpg, image/jpeg"
-            className="form-control"
-          />
-          <label htmlFor="photo1">Justificatif de domicile</label>
-          <input
-            type="file"
-            id="photo1"
-            name="file"
-            accept="image/png, image/jpg, image/jpeg"
-            className="form-control"
-          />
-          <label htmlFor="photo1">
-            Justificatif de situation professionnelles
-          </label>
-          <input
-            type="file"
-            id="photo1"
-            name="file"
-            accept="image/png, image/jpg, image/jpeg"
-            className="form-control"
-          />
-          <label htmlFor="photo1">RIB</label>
-          <input
-            type="file"
-            id="photo1"
-            name="file"
-            accept="image/png, image/jpg, image/jpeg"
-            className="form-control"
-          />
-          <input
-            className="form-parent form-control"
-            required
-            type="text"
-            name="nomParent"
-            placeholder="Numéro allocataire CAF"
-          />
-          <input
-            className="form-parent form-control"
-            required
-            type="text"
-            name="nomParent"
-            placeholder="Numéro de sécurité sociale"
-          />
-        </div>
-        <Link to="/profil" type="button" className="button-children">
-          {" "}
-          Valider mon dossier{" "}
-        </Link>
+        <h2>
+          Lors de votre première venue dans notre crèche, merci de bien vouloir
+          nous apporter les documents suivants:
+        </h2>
+        <ul>
+          <li>Justificatif de revenu (moins de 3 mois)</li>
+          <li>Déclaration de revenu (année en cours)</li>
+          <li>Justificatif de domicile</li>
+          <li>Justificatif de situation professionnelles</li>
+          <li>RIB</li>
+        </ul>
       </div>
       <NavProfil />
     </div>

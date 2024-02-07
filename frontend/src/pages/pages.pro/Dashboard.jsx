@@ -20,7 +20,6 @@ import { useUser } from "../../context/UserContext";
 export default function App() {
   const [colorOpen, setColorOpen] = useState(true);
   const [colorCollapse1, setColorCollapse1] = useState(true);
-  const [colorCollapse2, setColorCollapse2] = useState(false);
   const [filter, setFilter] = useState("Tous");
   const { logout, apiService } = useUser();
   const [myResa, setMyResa] = useState([]);
@@ -99,15 +98,15 @@ export default function App() {
               <td>
                 <div className="d-flex align-items-center">
                   {parent.map((p) => (
-                    <div key={parent.id} className="ms-0">
+                    <div key={p.id} className="ms-0">
                       {item.parent_id === p.id && (
                         <>
-                          <p className="fw-bold mb-0">
-                            Parent: {p.parentName} {p.parentFName}
-                          </p>
-                          <p className="text-muted mb-0">
-                            Enfant: {p?.parentName ?? "Juju"}
-                          </p>
+                          <div className="fw-bold mb-0">
+                            Parent: {p.parentFName} {p.parentName}
+                          </div>
+                          <div className="text-muted mb-0">
+                            Enfant: {item?.childFName}
+                          </div>
                         </>
                       )}
                     </div>
@@ -169,23 +168,9 @@ export default function App() {
                 </MDBSideNavLink>
                 <MDBSideNavCollapse open={colorCollapse1}>
                   <MDBSideNavLink>Liste des réservations</MDBSideNavLink>
-                  <MDBSideNavLink>Ajouter une place</MDBSideNavLink>
-                </MDBSideNavCollapse>
-              </MDBSideNavItem>
-              <MDBSideNavItem>
-                <MDBSideNavLink
-                  icon="angle-down"
-                  shouldBeExpanded={colorCollapse2}
-                  onClick={() => setColorCollapse2(!colorCollapse2)}
-                >
-                  <MDBIcon fas icon="grin" className="fa-fw me-3" />
-                  Administration
-                </MDBSideNavLink>
-                <MDBSideNavCollapse open={colorCollapse2}>
-                  <MDBSideNavLink onClick={() => navigate("/structure")}>
+                  <MDBSideNavLink onClick={() => navigate("/structure/step/1")}>
                     Modifier ma structure
                   </MDBSideNavLink>
-                  <MDBSideNavLink>Paramètre</MDBSideNavLink>
                   <MDBSideNavLink onClick={logout}>Déconnextion</MDBSideNavLink>
                 </MDBSideNavCollapse>
               </MDBSideNavItem>

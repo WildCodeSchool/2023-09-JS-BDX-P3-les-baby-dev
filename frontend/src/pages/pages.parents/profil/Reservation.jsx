@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import {
   MDBTimepicker,
   MDBDatepicker,
@@ -7,22 +6,18 @@ import {
   MDBValidationItem,
 } from "mdb-react-ui-kit";
 import "./reservation.scss";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import Return from "../../../assets/arrow_back.svg";
 import imageDefault from "../../../assets/defaultImage.png";
 import { useParent } from "../../../context/ParentContext";
 
 function Reservation() {
   const loaderData = useLoaderData();
-  const { /* reservationData */ updateReservationData } = useParent();
+  const { updateReservationData } = useParent();
   const [selectedDate, setSelectedDate] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const navigate = useNavigate();
-
-  /* console.log(selectedDate);
-  console.log(startTime);
-  console.log(endTime);
-  console.log(reservationData); */
 
   const creche = loaderData?.preloadNursery;
 
@@ -34,10 +29,22 @@ function Reservation() {
   return (
     <div className="reservation_container">
       <div key={creche.id}>
-        <h1>Créche {creche.name}</h1>
+        <div className="header-nursery">
+          <Link to="/searchlist">
+            <img className="arrowBack" src={Return} alt="" />
+          </Link>
+          <h1>Créche {creche.name}</h1>
+        </div>
         <div className="card_reservation">
           <div className="picture_card">
-            <img src={creche.avatarPath || imageDefault} alt={creche.name} />
+            <img
+              src={
+                creche.avatarPath !== null
+                  ? `${import.meta.env.VITE_BACKEND_URL}/${creche.avatarPath}`
+                  : { imageDefault }
+              }
+              alt={creche.name}
+            />
           </div>
           <h2>Demande de réservation</h2>
           <h3>Créche {creche.name}</h3>
@@ -50,7 +57,6 @@ function Reservation() {
                     className="col-md-4"
                     feedback="Veuillez entrer une date"
                     invalid
-                    isValidated
                   >
                     <MDBDatepicker
                       inline

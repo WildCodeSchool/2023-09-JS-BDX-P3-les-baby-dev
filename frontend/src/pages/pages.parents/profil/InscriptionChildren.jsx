@@ -6,7 +6,6 @@ import NavProfil from "../../../components/profile.components/NavProfil";
 import { useParent } from "../../../context/ParentContext";
 import ChildForm from "./ChildForm";
 import { useUser } from "../../../context/UserContext";
-import HeaderNav from "../../../components/profile.components/HeaderNav";
 import "./InscriptionChildren.scss";
 
 function IncriptionChildren() {
@@ -76,7 +75,6 @@ function IncriptionChildren() {
   return (
     <div className="flex-inscription">
       <div className="child-container">
-        <HeaderNav />
         <HeaderProfile />
         <div className="input-child">
           <h1>Dossier Enfant</h1>

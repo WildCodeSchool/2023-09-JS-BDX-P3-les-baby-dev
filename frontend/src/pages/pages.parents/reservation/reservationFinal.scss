@@ -2,11 +2,11 @@
   background-color: #f7f6fe;
   width: 100%;
   margin: 0 auto;
-  height: 100vh;
+  min-height: 100vh;
   padding-top: 20px;
 
   .choisen_creche {
-    background-color: white;
+    background: linear-gradient(to bottom right, #7847ff, #e37acc);
     height: 100px;
     display: flex;
     box-shadow: 3px 3px 3px rgb(187, 187, 187);
@@ -32,15 +32,17 @@
       }
     }
     .title_creche {
+      display: flex;
+      flex-direction: column;
+      align-self: center;
       h1 {
-        color: blueviolet;
+        color: white;
         font-size: 1em;
         margin-left: 20px;
-        padding-top: 15px;
       }
 
       h2 {
-        color: black;
+        color: white;
         margin-left: 20px;
         font-size: 1.1em;
         font-weight: bold;
@@ -59,7 +61,7 @@
       color: white;
       margin-top: 50px;
       text-align: center;
-      font-size: 1.8em;
+      font-size: 1.6em;
       padding-top: 30px;
     }
 
@@ -72,12 +74,12 @@
 
     .textArea {
       display: flex;
-      justify-content: center;
       flex-direction: column;
 
       h4 {
         color: white;
         margin-left: 40px;
+        font-size: 1.2em;
       }
 
       textarea {
@@ -87,7 +89,7 @@
         border: 1px solid #ccc;
         box-shadow: 1px 1px 1px #999;
         height: 100px;
-        margin: 0 auto;
+        margin-left: 40px;
       }
     }
   }
@@ -117,6 +119,31 @@
       font-weight: bold;
       font-size: 1.2em;
       text-align: center;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .finalResa_container {
+    .acceptation {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      padding-left: 100px;
+    }
+    .btn_confirmation {
+      padding-bottom: 50px;
+      button {
+        width: 250px;
+        height: 60px;
+        border: none;
+        background-color: #6200ee;
+        color: white;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 1em;
+        text-align: center;
+      }
     }
   }
 }

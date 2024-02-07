@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
-import { MDBFileUpload } from "mdb-react-file-upload";
 import {
   MDBBtn,
   MDBInput,
@@ -11,17 +9,16 @@ import {
 } from "mdb-react-ui-kit";
 import { useStructure } from "../../context/StrucutreContext";
 import "./thirdStep.scss";
-import profilePic from "../../assets/profil-picture.svg";
 
 function ThirdStep({ nextQuestion, prevQuestion }) {
   const [loading, setLoading] = useState(false);
-  const { handleSubmitEmployee, handleSubmitNewEmployee } = useStructure();
   const {
     dataEmployee,
     setDataEmployee,
     getStructureEmployees,
     data,
     deleteEmployee,
+    handleSubmitEmployee,
   } = useStructure();
 
   const HandleAdd = () => {
@@ -39,30 +36,9 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
     }));
   };
 
-  const handleSubmitFiles = () => {
-    const formData = new FormData();
-    formData.append("avatarPath", dataEmployee.files);
-    if (dataEmployee.files) {
-      axios
-        .put(
-          `${import.meta.env.VITE_BACKEND_URL}/api/structure/${
-            dataEmployee.id
-          }/employees`,
-          formData ?? {}
-        )
-        .then((response) => {
-          console.info(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  };
-
   const validateThirdStep = () => {
     setLoading(true);
     setTimeout(() => {
-      handleSubmitFiles();
       nextQuestion();
       setLoading(false);
     }, 1000);
@@ -103,12 +79,12 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
           {dataEmployee?.employees &&
             dataEmployee?.employees.map((employee, i) => (
               <div key={`${i + 1}`} className="photoContainer">
-                <div className="fileUpload">
+                {/* <div className="fileUpload">
                   <MDBFileUpload
                     defaultFile={profilePic}
                     onChange={(e) => handleChange(e[0], i, "files")}
                   />
-                </div>
+                </div> */}
                 <div className="thirdInputContainer">
                   <MDBValidation className="row g-1" isValidated>
                     <MDBValidationItem className="col-md-4" feedback="">
@@ -164,33 +140,24 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
                     </MDBValidationItem>
                   </MDBValidation>
                 </div>
-
-                {employee?.id ? (
+                <div className="modify-employee">
                   <MDBBtn
                     className="delete"
                     type="submit"
-                    onClick={handleSubmitEmployee}
+                    onClick={() => handleSubmitEmployee(i)}
                   >
-                    modifier
+                    {employee.id ? "modifier" : "créer"}
                   </MDBBtn>
-                ) : (
+
                   <MDBBtn
                     className="delete"
                     type="submit"
-                    onClick={handleSubmitNewEmployee}
+                    disabled={!dataEmployee.employees.length}
+                    onClick={() => handleDelete(i, employee.id)}
                   >
-                    créer{" "}
+                    supprimer
                   </MDBBtn>
-                )}
-
-                <MDBBtn
-                  className="delete"
-                  type="submit"
-                  disabled={!dataEmployee.employees.length}
-                  onClick={() => handleDelete(i, employee.id)}
-                >
-                  supprimer
-                </MDBBtn>
+                </div>
               </div>
             ))}
         </div>
