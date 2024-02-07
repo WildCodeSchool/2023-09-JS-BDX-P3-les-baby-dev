@@ -6,10 +6,10 @@ function Header() {
     <header className="header">
       <h1>
         Réservez une place auprès de professionnels de la petite enfance
-        gratuitement en quelques clics
+        gratuitement, en quelques clics
       </h1>
       <div className="search-bar">
-        <img src={barSearch} alt="" />
+        <img src={barSearch} alt="SearchBar" />
       </div>
     </header>
   );
