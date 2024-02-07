@@ -4,7 +4,26 @@
   margin: 0 auto;
   min-height: 100vh;
 
-  .header_profil {
+  .name-profil {
+    margin-top: 60px;
+    h2 {
+      text-align: center;
+      font-size: 1.2em;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.4em;
+      width: 80%;
+      margin: 30px auto;
+      border-radius: 30px;
+      padding: 5px 20px;
+      color: white;
+      background: linear-gradient(to bottom right, #5364fc, #9c2cf8);
+    }
+  }
+
+  /* .header_profil {
     background: linear-gradient(to bottom right, #684eb2, #90417f);
     height: 100px;
     display: flex;
@@ -27,6 +46,8 @@
     }
 
     .title_profil {
+      display: flex;
+      justify-content: center;
       h1 {
         color: white;
         font-size: 1.4em;
@@ -42,11 +63,9 @@
         font-weight: bold;
       }
     }
-  }
+  } */
 }
 .list_options {
-  height: 70vh;
-
   ul {
     list-style: none;
     text-align: start;

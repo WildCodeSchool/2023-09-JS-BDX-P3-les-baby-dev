@@ -9,14 +9,14 @@ function FilterService() {
   return (
     <div className="filterService_container">
       <div className="returnBar">
-        <Link to="/searchlist/filter">
+        <Link to="/searchlist">
           <img
             className="arrowBack"
             src="../../src/assets/arrow_back.svg"
             alt=""
           />
         </Link>
-        <h1>Service</h1>
+        <h1>Filtrer les services</h1>
       </div>
       <h2>Expériences et Formations</h2>
       <div className="checkboxContainer">

@@ -4,8 +4,7 @@ import "./reservationFinal.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { MDBSwitch } from "mdb-react-ui-kit";
 import { useParent } from "../../../context/ParentContext";
-import arrowBack from "../../../assets/arrow_back_black.svg";
-import secondCreche from "../../../assets/creche2.jpeg";
+import arrowBack from "../../../assets/arrow_back.svg";
 
 function ReservationFinal() {
   const { reservationData, updateReservationData } = useParent();
@@ -52,16 +51,16 @@ function ReservationFinal() {
         <Link to="/searchlist/conditions">
           <img className="arrowBack" src={arrowBack} alt="" />
         </Link>
-        <div className="picture_creche">
+        {/* <div className="picture_creche">
           <img src={secondCreche} alt="" />
-        </div>
+        </div> */}
         <div className="title_creche">
           <h1>Terminer ma réservation</h1>
-          <h2>Enfants à garder</h2>
+          <h2>Enfant(s) à garder</h2>
         </div>
       </div>
       <div className="infos_container">
-        <h3>Enfants à garder</h3>
+        <h3>Enfant(s) à garder</h3>
         <div className="switch">
           <MDBSwitch
             id="flexSwitchCheckDefault"
