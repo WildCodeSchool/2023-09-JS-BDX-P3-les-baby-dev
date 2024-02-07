@@ -1,30 +1,38 @@
 * {
   font-family: "nunito", sans-serif;
 }
-.flex-inscription {
+.flex-doc {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 100vh;
-  padding-bottom: 100px;
-}
-.div-form-parent {
-  display: flex;
-  flex-direction: column;
-  margin: 20px;
-}
-.form-parent {
-  margin: 5vw 2vw;
-}
-.button-children {
-  background: linear-gradient(to bottom right, #7847ff, #e37acc);
-  background-size: cover;
-  border: none;
-  border-radius: 15px;
-  color: white;
-  padding: 1vw 2vw;
-  margin-left: 1vw;
-}
 
-@media (min-width: 768px) {
+  padding-bottom: 100px;
+
+  .div-form-parent {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+
+    h1 {
+      text-align: center;
+      color: blueviolet;
+      margin: 20px auto;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 1.1em;
+      margin: 2px 20px;
+      margin-bottom: 40px;
+      font-weight: lighter;
+    }
+
+    ul {
+      margin: 5px 30px;
+
+      li {
+        margin: 15px 0;
+      }
+    }
+  }
 }

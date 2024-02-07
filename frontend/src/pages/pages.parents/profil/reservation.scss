@@ -2,7 +2,7 @@
   background: linear-gradient(to bottom right, #7847ff, #e37acc);
   width: 100%;
   margin: 0 auto;
-  height: 105vh;
+  min-height: 100vh;
 
   .header-nursery {
     display: flex;
@@ -25,7 +25,7 @@
     margin: 20px auto;
     background-color: white;
     width: 95%;
-    height: 85vh;
+    min-height: 90vh;
     border-radius: 3px;
 
     .picture_card {
