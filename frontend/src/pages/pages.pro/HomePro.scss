@@ -40,29 +40,31 @@
 }
 
 .visuel-simple {
-  width: 60%;
+  width: 80%;
   margin: 3vh;
 }
-.visuel {
-  width: 30%;
-  position: relative;
-}
-.text-overlay {
+
+.div-overlay {
   position: absolute;
-  top: 23px;
-  left: 0;
-  margin-left: 47%;
-  width: 32%;
-  height: 100%;
   display: flex;
   align-items: center;
+  flex-direction: column;
+  text-align: center;
+  max-width: 40vw;
+  top: 5vh;
+  right: 14vw;
+}
+.text-overlay {
+  align-items: center;
   justify-content: center;
-  font-family: "Adamina", serif;
-  font-size: 1vw;
+  font-size: 6px;
+}
+h4.text-overlay {
+  font-weight: 600;
 }
 .titre-overlay {
   top: -5vw;
-  font-size: 2vw;
+  font-size: 11px;
 }
 .text-svg {
   position: absolute;
@@ -137,15 +139,45 @@
 }
 
 .overlay {
-  padding: 20px 60px 0 180px;
-  width: 38vw;
-  font-size: 10px;
+  padding: 0 65px 0 157px;
+  width: 90%;
+  font-size: 6px;
   h3 {
-    font-size: 20px;
+    font-size: 12px;
+  }
+  p {
+    font-size: 7px;
   }
 }
 
-@media (max-width: 768px) {
+.image {
+  height: 23vh;
+  margin-top: 15px;
+}
+
+@media (min-width: 376px) {
+  .overlay {
+    padding: 0 42px 0 167px;
+  }
+  .div-overlay {
+    max-width: 44vw;
+    top: 5vh;
+    right: 11vw;
+  }
+  p.text-overlay {
+    font-size: 8px;
+  }
+  .overlay h3 {
+    font-size: 19px;
+  }
+  .overlay p {
+    font-size: 10px;
+  }
+  h3.titre-overlay {
+    font-size: 11px;
+  }
+}
+@media (max-width: 1023px) {
   .div-visuel p {
     margin-top: 0px;
   }
@@ -153,86 +185,53 @@
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, 1fr);
   }
-  .overlay {
-    padding: 0 120px 0 205px;
-    width: 100%;
-    font-size: 6px;
-    h3 {
-      font-size: 13px;
-    }
-  }
-  .image-one {
-    height: 15vh;
-  }
-  .image-two {
-    height: 15vh;
-  }
-  .image-three {
-    height: 15vh;
-  }
-  .image-four {
-    height: 15vh;
-  }
 }
 
-// @media screen and (min-width: 750px) {
-//   .text-overlay {
-//     top: 40px;
-//   }
-//   .titre-overlay {
-//     top: -7vw;
-//     font-size: 2vw;
-//   }
-//   .one {
-//     left: 15%;
-//     top: 7%;
-//   }
-//   .two {
-//     left: 43%;
-//     top: 8%;
-//   }
-//   .three {
-//     left: 15%;
-//     top: 21%;
-//   }
-//   .four {
-//     left: 44%;
-//     top: 21%;
-//   }
-// }
-// @media screen and (min-width: 1000px) {
-//   .one {
-//     left: 15%;
-//     top: 57%;
-//   }
-//   .two {
-//     left: 45%;
-//     top: 58%;
-//   }
-//   .three {
-//     left: 15%;
-//     top: 90%;
-//   }
-//   .four {
-//     left: 44%;
-//     top: 91%;
-//   }
-// }
-// @media screen and (min-width: 1200px) {
-//   .one {
-//     left: 16%;
-//     top: 46%;
-//   }
-//   .two {
-//     left: 42%;
-//     top: 46%;
-//   }
-//   .three {
-//     left: 15%;
-//     top: 73%;
-//   }
-//   .four {
-//     left: 42%;
-//     top: 73vh;
-//   }
-// }
+@media (min-width: 760px) {
+  h4.text-overlay {
+    font-size: 20px;
+  }
+  p.text-overlay {
+    font-size: 15px;
+  }
+  .overlay p {
+    font-size: 14px;
+    padding: 0 148px 0 152px;
+  }
+}
+@media (min-width: 1023px) {
+  .div-overlay {
+    max-width: 44vw;
+    top: 14vh;
+    right: 12vw;
+  }
+  h4.text-overlay {
+    font-size: 24px;
+  }
+  p.text-overlay {
+    font-size: 19px;
+  }
+  .overlay p {
+    font-size: 14px;
+    padding: 0 0 0 0;
+  }
+  .image {
+    height: 300px;
+    margin-top: 15px;
+  }
+  .overlay {
+    padding: 0 15px 0 199px;
+  }
+  .homeNav .homeTxtBtn {
+    font-size: 20px;
+  }
+}
+@media (min-width: 1200px) {
+  .div-overlay {
+    max-width: 40vw;
+    right: 10vw;
+  }
+  .overlay {
+    padding: 0 75px 0 254px;
+  }
+}

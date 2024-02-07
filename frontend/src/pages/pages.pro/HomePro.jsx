@@ -12,27 +12,26 @@ function HomePro() {
           src="./src/assets/proSimple.svg"
           alt="Visuel Simple"
         />
-        <h4 className="text-overlay titre-overlay">
-          Simplifiez vous la vie en choisissant un systeme de reservation
-          moderne et efficace
-        </h4>
-        <p className="text-overlay">
-          Gerez vos reservations directement depuis votre agenda que vous pouvez
-          consulter sur votre telephone, ordinateur ou tablette Soyez prevenu en
-          temps reel des annulations vous permettant ainsi de remplacer les
-          places vacantes. Remplacez facilement les absences grace aux “waiting
-          list” des parents.
-        </p>
+        <div className="div-overlay">
+          <h4 className="text-overlay titre-overlay">
+            Simplifiez vous la vie en choisissant un systeme de reservation
+            moderne et efficace
+          </h4>
+          <p className="text-overlay">
+            Gerez vos reservations directement depuis votre agenda que vous
+            pouvez consulter sur votre telephone, ordinateur ou tablette Soyez
+            prevenu en temps reel des annulations vous permettant ainsi de
+            remplacer les places vacantes. Remplacez facilement les absences
+            grace aux “waiting list” des parents.
+          </p>
+        </div>
       </div>
       <h1 className="text">
         Equipez vous du logiciel de gestion de place d'accueil de jeunes enfants
         le plus complet
       </h1>
-      <h4 className="info-text">
-        Cliquez sur l'une de nos solutions pour en savoir plus
-      </h4>
       <div className="grid-container">
-        <div className="grid-item image-one">
+        <div className="grid-item image-one image">
           <div className="overlay">
             <h3>Agenda en ligne</h3>
             <p>
@@ -42,7 +41,7 @@ function HomePro() {
             </p>
           </div>
         </div>
-        <div className="grid-item image-two">
+        <div className="grid-item image-two image">
           <div className="overlay">
             <h3>Soyez alerté</h3>
             <p>
@@ -51,7 +50,7 @@ function HomePro() {
             </p>
           </div>
         </div>
-        <div className="grid-item image-three">
+        <div className="grid-item image-three image">
           <div className="overlay">
             <h3>Marketing de votre activité</h3>
             <p>
@@ -60,7 +59,7 @@ function HomePro() {
             </p>
           </div>
         </div>
-        <div className="grid-item image-four">
+        <div className="grid-item image-four image">
           <div className="overlay">
             <h3>Communiquez avec les parents</h3>
             <p>

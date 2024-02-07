@@ -36,7 +36,7 @@ function Footer() {
             <h5>Réseaux sociaux</h5>
             <div className="listAbout">
               <ul>
-                <li>Notre équipe</li>
+                {/* <li>Notre équipe</li> */}
                 <li>Mention Légales</li>
               </ul>
             </div>
