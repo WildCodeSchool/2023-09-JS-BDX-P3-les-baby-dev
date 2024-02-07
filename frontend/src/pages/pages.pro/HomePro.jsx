@@ -1,6 +1,10 @@
 import Footer from "../../components/home.components/Footer";
 import Navbar from "../../components/home.components/Navbar";
 import "./HomePro.scss";
+import imageOne from "../../assets/Agenda.svg";
+import imageTwo from "../../assets/proAlerte.svg";
+import imageThree from "../../assets/proMarketing.svg";
+import imageFour from "../../assets/proCom.svg";
 
 function HomePro() {
   return (
@@ -31,7 +35,10 @@ function HomePro() {
         le plus complet
       </h1>
       <div className="grid-container">
-        <div className="grid-item image-one image">
+        <div
+          className="grid-item image-one image"
+          style={{ backgroundImage: `url(${imageOne})` }}
+        >
           <div className="overlay">
             <h3>Agenda en ligne</h3>
             <p>
@@ -41,7 +48,10 @@ function HomePro() {
             </p>
           </div>
         </div>
-        <div className="grid-item image-two image">
+        <div
+          className="grid-item image-two image"
+          style={{ backgroundImage: `url(${imageTwo})` }}
+        >
           <div className="overlay">
             <h3>Soyez alerté</h3>
             <p>
@@ -50,7 +60,10 @@ function HomePro() {
             </p>
           </div>
         </div>
-        <div className="grid-item image-three image">
+        <div
+          className="grid-item image-three image"
+          style={{ backgroundImage: `url(${imageThree})` }}
+        >
           <div className="overlay">
             <h3>Marketing de votre activité</h3>
             <p>
@@ -59,7 +72,10 @@ function HomePro() {
             </p>
           </div>
         </div>
-        <div className="grid-item image-four image">
+        <div
+          className="grid-item image-four image"
+          style={{ backgroundImage: `url(${imageFour})` }}
+        >
           <div className="overlay">
             <h3>Communiquez avec les parents</h3>
             <p>
