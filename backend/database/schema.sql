@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS parent (
 );
 
 CREATE TABLE IF NOT EXISTS hours (
-    id int primary key auto_increment not null, structure_id INT NOT NULL, monday BOOLEAN DEFAULT 0, tuesday BOOLEAN DEFAULT 0, wednesday BOOLEAN DEFAULT 0, thursday BOOLEAN DEFAULT 0, friday BOOLEAN DEFAULT 0, saturday BOOLEAN DEFAULT 0, openHour TIME, closeHour TIME, FOREIGN KEY (structure_id) REFERENCES structure (id)
+    id int primary key auto_increment not null, structure_id INT NOT NULL, monday BOOLEAN DEFAULT 1, tuesday BOOLEAN DEFAULT 1, wednesday BOOLEAN DEFAULT 1, thursday BOOLEAN DEFAULT 1, friday BOOLEAN DEFAULT 1, saturday BOOLEAN DEFAULT 0, openHour TIME, closeHour TIME, FOREIGN KEY (structure_id) REFERENCES structure (id)
 );
 
 CREATE TABLE IF NOT EXISTS employee (

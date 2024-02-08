@@ -8,6 +8,7 @@ import {
 } from "mdb-react-ui-kit";
 import axios from "axios";
 import { MDBFileUpload } from "mdb-react-file-upload";
+import profilePic from "../../../assets/profil-picture.svg";
 import HeaderProfile from "../../../components/profile.components/HeaderProfile";
 import "./InscriptionParent.scss";
 import NavProfil from "../../../components/profile.components/NavProfil";
@@ -64,7 +65,7 @@ function InscriptionParent() {
                     ? `${import.meta.env.VITE_BACKEND_URL}/${
                         dataParent?.avatarPath
                       }`
-                    : "../src/assets/profil-picture.svg"
+                    : profilePic
                 }
                 name="avatarPath"
                 getInputFiles={onChangeFiles}
