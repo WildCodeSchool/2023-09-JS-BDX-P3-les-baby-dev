@@ -9,7 +9,7 @@ import {
 
 function ChildForm({ child, onChange }) {
   const handleChange = (field, value) => {
-    onChange({ ...child, [field]: value });
+    onChange({ ...child, [field]: field === "isWalking" ? !!value : value });
   };
 
   return (
@@ -67,6 +67,7 @@ function ChildForm({ child, onChange }) {
           label="Mon enfant marche"
           name="isWalking"
           onChange={() => handleChange("isWalking", !child.isWalking)}
+          checked={!!(child?.isWalking ?? false)}
         />
         <MDBValidationItem
           className="col-md-4"
@@ -84,20 +85,13 @@ function ChildForm({ child, onChange }) {
           />
         </MDBValidationItem>
 
-        <MDBValidationItem
-          className="col-md-4"
-          feedback="Veuillez entrer les allergies"
-        >
-          <MDBInput
-            value={child?.allergies ?? ""}
-            name="allergies"
-            onChange={(e) => handleChange("allergies", e.target.value)}
-            id="validationCustom01"
-            pattern=".{4,}"
-            required
-            label="Allergies"
-          />
-        </MDBValidationItem>
+        <MDBSwitch
+          id="flexSwitchCheckDefault"
+          label="Allergies"
+          name="allergies"
+          onChange={() => handleChange("allergies", !child.allergies)}
+          checked={child?.allergies ?? false}
+        />
       </MDBValidation>
     </div>
   );
@@ -110,7 +104,7 @@ ChildForm.propTypes = {
     birthday: PropTypes.string.isRequired,
     isWalking: PropTypes.bool.isRequired,
     childDoctor: PropTypes.string.isRequired,
-    allergies: PropTypes.string.isRequired,
+    allergies: PropTypes.bool.isRequired,
   }).isRequired,
   onChange: PropTypes.func.isRequired,
 };
