@@ -214,6 +214,8 @@ const router = createBrowserRouter([
               },
               {
                 path: "/profil/inscription/inscription",
+                loader: async () => currentParentProfilLoader(apiService),
+
                 element: (
                   <ParentContextProvider>
                     <DocInscription />
