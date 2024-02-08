@@ -6,8 +6,8 @@ import "./register.scss";
 
 function Register() {
   const [formValue, setFormValue] = useState({
-    email: "mathieulebg@gmail.com",
-    password: "1234",
+    email: "",
+    password: "",
     is_admin: false,
   });
 
