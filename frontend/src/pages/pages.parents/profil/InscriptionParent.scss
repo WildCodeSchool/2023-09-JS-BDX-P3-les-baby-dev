@@ -30,4 +30,17 @@
 
 .input-parent {
   margin: 10px;
+
+  .fileUpload {
+    text-align: center;
+    margin: 0 auto;
+
+    form {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
+@media (min-width: 768px) {
 }

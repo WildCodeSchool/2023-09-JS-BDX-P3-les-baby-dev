@@ -18,6 +18,7 @@ const reservationControllers = require("./controllers/reservationControllers");
 const parentControllers = require("./controllers/parentControllers");
 const hoursControllers = require("./controllers/hourControllers");
 const employeeControllers = require("./controllers/employeeControllers");
+const childControllers = require("./controllers/childControllers");
 // Route to get a list of items
 
 // Route to get a specific item by ID
@@ -38,9 +39,9 @@ router.get(
   authMiddleware,
   structureControllers.getUserStructure
 );
-router.get("/structures/filter", structureControllers.getFiltredStructure);
 router.get("/structure", structureControllers.getStructure);
 router.get("/structure/:id([0-9]+)", structureControllers.getStructureById);
+router.get("/structures/filter", structureControllers.getFiltredStructure);
 router.get(
   "/structures/:id([0-9]+)/employees",
   authMiddleware,
@@ -96,6 +97,11 @@ router.get(
 router.get("/users/parent", authMiddleware, parentControllers.getListParent);
 router.get("user/parent", authMiddleware, userControllers.getParent);
 router.get("/parent/:id", parentControllers.getParentById);
+router.get(
+  "/parent/children/:id",
+  authMiddleware,
+  parentControllers.getChildrenById
+);
 
 router.put(
   "/parents/:id([0-9]+)",
@@ -103,22 +109,31 @@ router.put(
   parentControllers.updateParent
 );
 
+router.put(
+  "/parents/:id([0-9]+)/avatar",
+  upload.single("avatarPath"),
+  parentControllers.updateUpload
+);
+
 router.post(
-  "/parents/children/:id([0-9]+)",
+  "/parents/:id([0-9]+)/children",
   authMiddleware,
   parentControllers.addChild
 );
 
-// router.put(
-//   "/children/:id([0-9]+)",
-//   authMiddleware,
-//   parentControllers.updateChild
-// );
+router.put(
+  "/children/:id([0-9]+)",
+  authMiddleware,
+  parentControllers.updateChild
+);
+
 router.delete(
   "/children/:id([0-9]+)",
   authMiddleware,
   parentControllers.remove
 );
+
+router.get("/child/:id", childControllers.getChildById);
 
 /* *********** Routes reservation ************** */
 

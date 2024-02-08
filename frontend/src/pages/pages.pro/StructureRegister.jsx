@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MDBStepper, MDBStepperStep } from "mdb-react-ui-kit";
 import "./structureRegister.scss";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import FirstStep from "../../components/stepper.components/FirstStep";
 import SecondStep from "../../components/stepper.components/SecondStep";
 import ThirdStep from "../../components/stepper.components/ThirdStep";
@@ -11,26 +12,28 @@ import EighthStep from "../../components/stepper.components/EighthStep";
 import SeventhStep from "../../components/stepper.components/SeventhStep";
 import "mdb-react-file-upload/dist/scss/file-upload.scss";
 import Navbar from "../../components/stepper.components/Navbar";
+import Return from "../../assets/arrow_back.svg";
 
 function StructureRegister() {
+  const { step } = useParams();
+  const navigate = useNavigate();
   const [stepperType, setStepperType] = useState(
     window.innerWidth > 700 ? "vertical" : "horizontal"
   );
 
   const nextRef = useRef(null);
   const prevRef = useRef(null);
-  const [currentQuestion, setCurrentQuestion] = useState(1);
 
   const nextQuestion = () => {
-    if (currentQuestion < 8) {
-      setCurrentQuestion(currentQuestion + 1);
+    if (+step < 8) {
+      navigate(`/structure/step/${+step + 1}`);
       nextRef.current.click();
     }
   };
 
   const prevQuestion = () => {
-    if (currentQuestion > 1) {
-      setCurrentQuestion(currentQuestion - 1);
+    if (+step > 1) {
+      navigate(`/structure/step/${+step - 1}`);
       prevRef.current.click();
     }
   };
@@ -59,7 +62,12 @@ function StructureRegister() {
           précédent
         </button>
         <div className="half-cover">
+          <Link to="/dashboard">
+            <img className="arrowBack" src={Return} alt="" />
+          </Link>
+
           <MDBStepper
+            defaultStep={+step}
             type={stepperType}
             externalNext={nextRef}
             externalPrev={prevRef}
@@ -93,46 +101,46 @@ function StructureRegister() {
           </MDBStepper>
         </div>
         <div className="other-half">
-          {currentQuestion === 1 && (
+          {+step === 1 && (
             <FirstStep nextRef={nextRef} nextQuestion={nextQuestion} />
           )}
-          {currentQuestion === 2 && (
+          {+step === 2 && (
             <SecondStep
               nextQuestion={nextQuestion}
               prevQuestion={prevQuestion}
             />
           )}
-          {currentQuestion === 3 && (
+          {+step === 3 && (
             <ThirdStep
               nextQuestion={nextQuestion}
               prevQuestion={prevQuestion}
             />
           )}
-          {currentQuestion === 4 && (
+          {+step === 4 && (
             <FourthStep
               nextQuestion={nextQuestion}
               prevQuestion={prevQuestion}
             />
           )}
-          {currentQuestion === 5 && (
+          {+step === 5 && (
             <FifthStep
               nextQuestion={nextQuestion}
               prevQuestion={prevQuestion}
             />
           )}
-          {currentQuestion === 6 && (
+          {+step === 6 && (
             <SixthStep
               nextQuestion={nextQuestion}
               prevQuestion={prevQuestion}
             />
           )}
-          {currentQuestion === 7 && (
+          {+step === 7 && (
             <SeventhStep
               nextQuestion={nextQuestion}
               prevQuestion={prevQuestion}
             />
           )}
-          {currentQuestion === 8 && <EighthStep prevQuestion={prevQuestion} />}
+          {+step === 8 && <EighthStep prevQuestion={prevQuestion} />}
         </div>
       </div>
     </>

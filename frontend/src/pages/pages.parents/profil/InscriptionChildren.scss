@@ -6,15 +6,41 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: 100vh;
-  padding-bottom: 100px;
+
+  .child-container {
+    .input-child {
+      padding: 20px;
+      .button-children {
+        margin: 10px;
+      }
+      .btn-child {
+        display: flex;
+        gap: 10px;
+        margin: 20px auto;
+        width: 350px;
+
+        button {
+          height: 45px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          // color: red;
+        }
+      }
+    }
+  }
 }
+
 .div-form-parent {
   display: flex;
   flex-direction: column;
 }
+
 .form-parent {
   margin: 5vw 2vw;
 }
+
 .button-children {
   background: linear-gradient(to bottom right, #7847ff, #e37acc);
   background-size: cover;
@@ -24,6 +50,7 @@
   padding: 1vw 2vw;
   margin-left: 1vw;
 }
+
 .link-children {
   color: white;
 }

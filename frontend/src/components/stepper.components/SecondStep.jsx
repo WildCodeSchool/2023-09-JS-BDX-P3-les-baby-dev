@@ -11,58 +11,61 @@ import {
 } from "mdb-react-ui-kit";
 import { useStructure } from "../../context/StrucutreContext";
 import "./secondStep.scss";
+import profilePic from "../../assets/profil-picture.svg";
 
 function SecondStep({ nextQuestion, prevQuestion }) {
   const [loading, setLoading] = useState(false);
 
-  const { onChange, onChangeFiles, data, dataImage } = useStructure();
+  const { onChange, onChangeFiles, data, dataImage, setData } = useStructure();
 
   const maxLength = 500;
-  const descriptionLength = data.description ? data.description.length : 0;
+  const descriptionLength = data?.structureDesc ? data.structureDesc.length : 0;
+  const remainingCharacters = maxLength - descriptionLength;
 
   const { handleSubmit } = useStructure();
 
-  const handleSubmitFiles = () => {
+  const handleSubmitFiles = async () => {
     const formData = new FormData();
-    formData.append("avatarPath", dataImage.avatar);
-    if (dataImage.avatar) {
-      axios
-        .put(
+    formData.append("avatarPath", dataImage);
+    if (dataImage) {
+      try {
+        const response = await axios.put(
           `${import.meta.env.VITE_BACKEND_URL}/api/structures/${
             data?.id
           }/avatar`,
-          formData ?? {}
-        )
-        .then((response) => {
-          console.info(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+          formData
+        );
+        setData({ ...data, avatarPath: response.data.avatarPath });
+        console.info(response.data);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
   const validateSecondStep = () => {
     // const isFileValid = data.avatarPath;
     const isDescValid = data.structureDesc;
-
     const isValid = isDescValid;
 
     if (isValid) {
       setLoading(true);
-      setTimeout(() => {
-        handleSubmit();
-        nextQuestion();
-        handleSubmitFiles();
-        setLoading(false);
+      setTimeout(async () => {
+        const workers = [handleSubmit(), handleSubmitFiles()];
+        try {
+          await Promise.all(workers);
+          nextQuestion();
+        } catch (err) {
+          console.error(err);
+        } finally {
+          setLoading(false);
+        }
       }, 1000);
     } else {
       // eslint-disable-next-line no-alert
       alert("Les champs ne sont pas valides");
     }
   };
-
-  // const removeChar = data?.avatarPath?.substring(1);
 
   return (
     <div className="fifty">
@@ -76,7 +79,7 @@ function SecondStep({ nextQuestion, prevQuestion }) {
                   defaultFile={
                     data?.avatarPath
                       ? `${import.meta.env.VITE_BACKEND_URL}/${data.avatarPath}`
-                      : "../src/assets/profil-picture.svg"
+                      : profilePic
                   }
                   name="avatarPath"
                   getInputFiles={onChangeFiles}
@@ -92,7 +95,7 @@ function SecondStep({ nextQuestion, prevQuestion }) {
         <div className="structure4">
           <div className="pageContent">
             <MDBValidation className="row g-3 second-validation" isValidated>
-              <MDBValidationItem className="col-md-4 text-area" feedback="yooo">
+              <MDBValidationItem className="col-md-4 text-area" feedback="">
                 <MDBTextArea
                   label="Message"
                   id="textAreaExample"
@@ -103,24 +106,24 @@ function SecondStep({ nextQuestion, prevQuestion }) {
                   name="structureDesc"
                   required
                 />
+                <legend className="legend">
+                  Maximum <span>{remainingCharacters}</span> caractères.
+                </legend>
               </MDBValidationItem>
-              <div className="next-prev">
-                <MDBBtn type="button" onClick={prevQuestion}>
-                  précédent
-                </MDBBtn>
-                <MDBBtn type="button" onClick={validateSecondStep}>
-                  {loading ? "" : "suivant"}
-                  {loading && (
-                    <MDBSpinner role="status" size="sm">
-                      <span className="visually-hidden">loading...</span>
-                    </MDBSpinner>
-                  )}
-                </MDBBtn>
-              </div>
             </MDBValidation>
-            <legend>
-              Maximum {`${maxLength - descriptionLength}`} caractères.
-            </legend>
+          </div>
+          <div className="next-prev">
+            <MDBBtn type="button" onClick={prevQuestion}>
+              précédent
+            </MDBBtn>
+            <MDBBtn type="button" onClick={validateSecondStep}>
+              {loading ? "" : "suivant"}
+              {loading && (
+                <MDBSpinner role="status" size="sm">
+                  <span className="visually-hidden">loading...</span>
+                </MDBSpinner>
+              )}
+            </MDBBtn>
           </div>
         </div>
       </div>

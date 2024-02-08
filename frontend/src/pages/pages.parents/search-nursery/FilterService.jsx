@@ -1,55 +1,22 @@
-import React, { useState /* { useState } */ } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./filterService.scss";
-import axios from "axios";
+import { useParent } from "../../../context/ParentContext";
 
 function FilterService() {
-  const [checkboxState, setCheckboxState] = useState({
-    psci: false,
-    nesting: false,
-    montessori: false,
-    handicap: false,
-    jardin: false,
-    sorties: false,
-    promenades: false,
-    eveil: false,
-    musique: false,
-    art: false,
-    bilingue: false,
-    bibli: false,
-  });
-
-  const onChange = (e) => {
-    setCheckboxState({
-      ...checkboxState,
-      [e.target.name]: e.target.checked,
-    });
-  };
-
-  const handleAppliquerClick = async () => {
-    // console.log(checkboxState);
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/structures/filter`,
-        { params: checkboxState } ?? {}
-      );
-      console.info(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const navigate = useNavigate();
+  const { onChange, checkboxState, handleAppliquerClick } = useParent();
 
   return (
     <div className="filterService_container">
       <div className="returnBar">
-        <Link to="/searchlist/filter">
+        <Link to="/searchlist">
           <img
             className="arrowBack"
             src="../../src/assets/arrow_back.svg"
             alt=""
           />
         </Link>
-        <h1>Service</h1>
+        <h1>Filtrer les services</h1>
       </div>
       <h2>Expériences et Formations</h2>
       <div className="checkboxContainer">
@@ -189,7 +156,13 @@ function FilterService() {
         <label htmlFor="bibli">Bibliothèque / Ludothèque / RAM</label>
       </div>
       <div className="btn_appliquer">
-        <button type="button" onClick={handleAppliquerClick}>
+        <button
+          type="button"
+          onClick={() => {
+            handleAppliquerClick();
+            navigate("/searchlist");
+          }}
+        >
           Appliquer
         </button>
       </div>

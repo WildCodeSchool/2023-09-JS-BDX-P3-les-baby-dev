@@ -68,28 +68,16 @@ const updateHours = async (req, res) => {
 
 const updateEmployee = async (req, res) => {
   try {
-    await Promise.all(
-      req.body.employees.map((employeeData) => {
-        const { id, name, fName, mail, fonction } = employeeData;
-
-        return models.employee.updateE(+req.params.id, id, {
-          fName,
-          name,
-          mail,
-          fonction,
-        });
-      })
+    await models.employee.update(+req.params.id, req.body);
+    const [newData] = await models.employee.database.query(
+      `select * from ${models.employee.table} where id = ?`,
+      [+req.params.id]
     );
 
-    res.status(201).json({
-      success: true,
-      message: "Employee registered successfully",
-    });
+    res.json(newData[0]);
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
       error: error.message,
     });
   }
@@ -148,16 +136,11 @@ const getStructuresEmployees = async (req, res) => {
 
 const deleteEmployee = async (req, res) => {
   const id = parseInt(req.params.id, 10);
-  const structureId = await models.employee.getStructureId(id);
-  const [employee] = await models.employee.getByStructure(
-    structureId.structure_id
-  );
+  const employee = await models.employee.getStructureId(id);
+  const structure = await models.structure.getStructure(employee.structure_id);
 
-  if (
-    id === employee.id &&
-    employee.structure_id !== structureId.structure_id
-  ) {
-    return res.sendStatus(401);
+  if (req.user.id !== structure.user_id) {
+    return res.sendStatus(403);
   }
 
   // const structureOwner = await models.employee.getOwerId();

@@ -27,6 +27,8 @@ const migrate = async () => {
       multipleStatements: true, // Allow multiple SQL statements
     });
 
+    // Drop the existing database if it exists
+
     // Create a new database with the specified name
     await database.query(`create database if not exists ${DB_NAME}`);
 

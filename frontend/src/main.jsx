@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import "mdb-react-ui-kit/dist/css/mdb.min.css";
+import "mdb-react-file-upload/dist/css/file-upload.min.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import HomePro from "./pages/pages.pro/HomePro";
 import SearchList from "./pages/pages.parents/SearchList";
-import "./assets/scss/mdb.pro.scss";
 import Home from "./pages/pages.parents/Home";
 import UserContextProvider from "./context/UserContext";
 import ProContextProvider from "./context/ProContext";
@@ -14,8 +14,6 @@ import App from "./App";
 import Login from "./pages/login/register/Login";
 import Dashboard from "./pages/pages.pro/Dashboard";
 import Register from "./pages/login/register/Register";
-import Filter from "./pages/pages.parents/search-nursery/Filter";
-import FilterDate from "./pages/pages.parents/search-nursery/FilterDate";
 import FilterService from "./pages/pages.parents/search-nursery/FilterService";
 import NurseryCard from "./pages/pages.parents/NurseryCard";
 import Reservation from "./pages/pages.parents/profil/Reservation";
@@ -40,13 +38,13 @@ import reservationLoader from "./loaders/current-reservation.loader";
 import hoursLoader from "./loaders/current-hours.loader";
 import currentStructureProfil from "./loaders/current-structure-profil.loader";
 import currentStructureHours from "./loaders/current-structure-hours.loader";
+import RefusResa from "./pages/pages.parents/reservation/RefusResa";
 
 const apiService = new ApiService();
 
 const router = createBrowserRouter([
   {
     path: "/",
-    loader: async () => currentProfilLoader(apiService),
     element: (
       <UserContextProvider apiService={apiService}>
         <App />
@@ -63,6 +61,7 @@ const router = createBrowserRouter([
           {
             path: "/searchlist",
             loader: async () => ({
+              ...(await currentProfilLoader(apiService)),
               ...(await currentParentProfilLoader(apiService)),
               ...(await structuresLoader(apiService)),
               ...(await hoursLoader(apiService)),
@@ -73,16 +72,19 @@ const router = createBrowserRouter([
               </ParentContextProvider>
             ),
           },
+
           {
-            children: [
-              { path: "/searchlist/filter", element: <Filter /> },
-              { path: "/searchlist/filter/dates", element: <FilterDate /> },
-              {
-                path: "/searchlist/filter/services",
-                element: <FilterService />,
-              },
-            ],
+            path: "/searchlist/filter/services",
+            loader: async () => ({
+              ...(await currentParentProfilLoader(apiService)),
+            }),
+            element: (
+              <ParentContextProvider>
+                <FilterService />
+              </ParentContextProvider>
+            ),
           },
+
           {
             path: "/searchlist/nursery/:id",
             loader: async ({ params }) => ({
@@ -145,6 +147,18 @@ const router = createBrowserRouter([
               </ParentContextProvider>
             ),
           },
+          {
+            path: "/searchlist/refus",
+            loader: async ({ params }) => ({
+              ...(await currentParentProfilLoader(apiService)),
+              ...(await currentNurseryLoader(apiService, params.id)),
+            }),
+            element: (
+              <ParentContextProvider>
+                <RefusResa />
+              </ParentContextProvider>
+            ),
+          },
         ],
       },
       {
@@ -200,6 +214,8 @@ const router = createBrowserRouter([
               },
               {
                 path: "/profil/inscription/inscription",
+                loader: async () => currentParentProfilLoader(apiService),
+
                 element: (
                   <ParentContextProvider>
                     <DocInscription />
@@ -221,6 +237,7 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         loader: async () => ({
+          ...(await currentProfilLoader(apiService)),
           ...(await currentOneParentLoader(apiService)),
           ...(await reservationLoader(apiService)),
           ...(await currentStructureProfil(apiService)),
@@ -241,8 +258,9 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/structure",
+        path: "/structure/step/:step",
         loader: async () => ({
+          ...(await currentProfilLoader(apiService)),
           ...(await currentStructureProfil(apiService)),
           ...(await currentStructureHours(apiService)),
         }),

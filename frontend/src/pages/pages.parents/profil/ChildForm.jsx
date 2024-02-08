@@ -9,8 +9,9 @@ import {
 
 function ChildForm({ child, onChange }) {
   const handleChange = (field, value) => {
-    onChange({ ...child, [field]: value });
+    onChange({ ...child, [field]: field === "isWalking" ? !!value : value });
   };
+
   return (
     <div className="div-form-parent">
       <MDBValidation className="row g-3">
@@ -20,9 +21,9 @@ function ChildForm({ child, onChange }) {
           invalid
         >
           <MDBInput
-            value={child?.lastname ?? ""}
+            value={child?.childName ?? ""}
             name="childName"
-            onChange={(e) => handleChange("lastname", e.target.value)}
+            onChange={(e) => handleChange("childName", e.target.value)}
             id="validationCustom01"
             pattern=".{4,}"
             required
@@ -35,9 +36,9 @@ function ChildForm({ child, onChange }) {
           invalid
         >
           <MDBInput
-            value={child?.firstname ?? ""}
+            value={child?.childFName ?? ""}
             name="childFName"
-            onChange={(e) => handleChange("firstname", e.target.value)}
+            onChange={(e) => handleChange("childFName", e.target.value)}
             id="validationCustom01"
             pattern=".{4,}"
             required
@@ -66,6 +67,7 @@ function ChildForm({ child, onChange }) {
           label="Mon enfant marche"
           name="isWalking"
           onChange={() => handleChange("isWalking", !child.isWalking)}
+          checked={!!(child?.isWalking ?? false)}
         />
         <MDBValidationItem
           className="col-md-4"
@@ -83,20 +85,13 @@ function ChildForm({ child, onChange }) {
           />
         </MDBValidationItem>
 
-        <MDBValidationItem
-          className="col-md-4"
-          feedback="Veuillez entrer les allergies"
-        >
-          <MDBInput
-            value={child?.allergies ?? ""}
-            name="allergies"
-            onChange={(e) => handleChange("allergies", e.target.value)}
-            id="validationCustom01"
-            pattern=".{4,}"
-            required
-            label="Allergies"
-          />
-        </MDBValidationItem>
+        <MDBSwitch
+          id="flexSwitchCheckDefault"
+          label="Allergies"
+          name="allergies"
+          onChange={() => handleChange("allergies", !child.allergies)}
+          checked={child?.allergies ?? false}
+        />
       </MDBValidation>
     </div>
   );
@@ -104,12 +99,12 @@ function ChildForm({ child, onChange }) {
 
 ChildForm.propTypes = {
   child: PropTypes.shape({
-    lastname: PropTypes.string.isRequired,
-    firstname: PropTypes.string.isRequired,
+    childName: PropTypes.string.isRequired,
+    childFName: PropTypes.string.isRequired,
     birthday: PropTypes.string.isRequired,
     isWalking: PropTypes.bool.isRequired,
     childDoctor: PropTypes.string.isRequired,
-    allergies: PropTypes.string.isRequired,
+    allergies: PropTypes.bool.isRequired,
   }).isRequired,
   onChange: PropTypes.func.isRequired,
 };

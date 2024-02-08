@@ -3,6 +3,7 @@
   width: 100%;
   margin: 0 auto;
   min-height: 100vh;
+  padding-bottom: 100px;
 
   .choisen_profil {
     background: linear-gradient(to bottom right, #7847ff, #e37acc);
@@ -53,14 +54,14 @@
     height: 630px;
 
     h1 {
-      margin-left: 60px;
       margin-top: 30px;
-      font-size: 2em;
+      font-size: 1.7em;
+      text-align: center;
     }
 
     .card_myresa {
       background: linear-gradient(to bottom right, #e0e3ff, #f3e4ff);
-      height: 100px;
+      height: 150px;
       width: 90%;
       margin: 30px auto;
       border-radius: 5px;
@@ -73,13 +74,20 @@
       color: #7847ff;
 
       &:hover {
-        background: #e37acc;
+        background: linear-gradient(to bottom right, #a6aef7, #d6a5ff);
+
+        .date_resa {
+          color: white;
+          font-weight: bold;
+        }
       }
 
       .img_structure {
-        height: 90%;
+        height: 80%;
         margin: 5px;
         max-width: 180px;
+        display: flex;
+        align-self: center;
 
         img {
           width: 100%;
@@ -90,23 +98,37 @@
 
       .title_resa {
         align-self: center;
-        width: 30%;
-        margin-top: 20px;
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        justify-content: center;
 
         h2 {
           font-weight: bold;
-          font-size: 1em;
+          font-size: 0.9em;
+          color: white;
+          background: linear-gradient(to bottom right, #5364fc, #9c2cf8);
+          width: 80%;
+          margin: 10px auto;
+          border-radius: 30px;
+          padding: 3px 6px;
         }
-      }
 
-      .date_resa {
-        align-self: center;
-        width: 20%;
-        margin-right: 5px;
+        .date_resa {
+          align-self: center;
+          width: 90%;
+          margin-right: 5px;
 
-        h3 {
-          font-weight: bold;
-          font-size: 1em;
+          h3 {
+            font-size: 1em;
+            font-weight: bolder;
+          }
+        }
+
+        .badge {
+          width: 40%;
+          margin: 0 auto;
         }
       }
     }
@@ -124,8 +146,8 @@
         font-size: 2em;
       }
       .card_myresa {
-        height: 130px;
-        width: 90%;
+        height: 160px;
+        width: 85%;
         margin: 30px auto;
         border-radius: 5px;
         box-shadow: 2px 3px 2px grey;
@@ -134,7 +156,10 @@
         justify-content: space-between;
         text-align: center;
         padding: 5px;
-        color: white;
+
+        .img_structure {
+          max-width: 300px;
+        }
       }
     }
   }
