@@ -1,34 +1,16 @@
 -- Active: 1704704362175@@127.0.0.1@3306@DBBabyplace
 
-drop DATABASE DBBabyplace;
-
-create DATABASE if not exists DBBabyplace;
-
-use DBBabyplace;
-
 create table IF NOT EXISTS user (
     id int primary key auto_increment not null, email varchar(255) not null, password varchar(255) not null, is_admin bool, unique (email)
 );
-
-insert into
-    user (email, password, is_admin)
-values ('user@demo.com', '1234', 0),
-    ('admin@demo.com', '1234', 1),
-    ('usero@demo.com', '1234', 0),
-    ('usera@demo.com', '1234', 0),
-    ('adminz@demo.com', '1234', 1),
-    ('useroh@demo.com', '1234', 0);
 
 CREATE TABLE IF NOT EXISTS structure (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, name VARCHAR(255), tel VARCHAR(10), adress VARCHAR(255), zip VARCHAR(6), city VARCHAR(255), avatarPath VARCHAR(255), structureDesc VARCHAR(500), psci INT DEFAULT 0, nesting BOOLEAN DEFAULT 0, montessori BOOLEAN DEFAULT 0, handicap BOOLEAN DEFAULT 0, jardin BOOLEAN DEFAULT 0, sorties BOOLEAN DEFAULT 0, promenades BOOLEAN DEFAULT 0, eveil BOOLEAN DEFAULT 0, musique BOOLEAN DEFAULT 0, art BOOLEAN DEFAULT 0, bilingue BOOLEAN DEFAULT 0, bibli BOOLEAN DEFAULT 0, transport BOOLEAN DEFAULT 0, maxPlaces INT DEFAULT 1, maxHandicap INT DEFAULT 0, maxUnder18Months INT DEFAULT 0, maxAtypicalHours INT DEFAULT 0, maxNightCare INT DEFAULT 0, isAdaptationRequired BOOLEAN DEFAULT 0, isRespectRequired BOOLEAN DEFAULT 0, isDoorRespectRequired BOOLEAN DEFAULT 0, isInfoTransmissionRequired BOOLEAN DEFAULT 0, isCleanArrivalRequired BOOLEAN DEFAULT 0, isJewelryRemovalRequired BOOLEAN DEFAULT 0, isMedicationAdminRequired BOOLEAN DEFAULT 0, isHandicapEnabled BOOLEAN DEFAULT 0, isUnder18MonthsEnabled BOOLEAN DEFAULT 0, isAtypicalHoursEnabled BOOLEAN DEFAULT 0, isNightCareEnabled BOOLEAN DEFAULT 0, FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
 CREATE TABLE IF NOT EXISTS parent (
-    id int primary key auto_increment not null, user_id INT NOT NULL, avatarPath VARCHAR(255), parentName VARCHAR(255), parentFName VARCHAR(255), profession VARCHAR(255), address VARCHAR(255), ville VARCHAR(255), telephone VARCHAR(10)
+    id int primary key auto_increment not null, user_id INT NOT NULL, avatarPath VARCHAR(255), parentName VARCHAR(255), parentFName VARCHAR(255), profession VARCHAR(255), address VARCHAR(255), ville VARCHAR(255), telephone VARCHAR(10), FOREIGN KEY (user_id) REFERENCES user (id)
 );
-
-ALTER TABLE parent
-ADD CONSTRAINT `fk_user_id` FOREIGN KEY (user_id) REFERENCES user (id);
 
 CREATE TABLE IF NOT EXISTS hours (
     id int primary key auto_increment not null, structure_id INT NOT NULL, monday BOOLEAN DEFAULT 0, tuesday BOOLEAN DEFAULT 0, wednesday BOOLEAN DEFAULT 0, thursday BOOLEAN DEFAULT 0, friday BOOLEAN DEFAULT 0, saturday BOOLEAN DEFAULT 0, openHour TIME, closeHour TIME, FOREIGN KEY (structure_id) REFERENCES structure (id)
