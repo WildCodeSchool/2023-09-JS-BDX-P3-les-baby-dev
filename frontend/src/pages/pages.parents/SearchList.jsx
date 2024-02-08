@@ -19,7 +19,7 @@ function SearchList() {
   return (
     <div className="searchlist_container">
       <HeaderNav />
-      <FilterComponent />
+      <FilterComponent filterSearch={filterSearch} />
       <div className="card-container">
         {filterSearch.length === 0
           ? loaderData.structures.map((creche) => {
