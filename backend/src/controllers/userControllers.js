@@ -18,7 +18,7 @@ const addUser = (req, res) => {
   models.user
     .create(req.body)
     .then((rows) => {
-      res.send({
+      res.status(201).send({
         id: rows.insertId,
         email: req.body.email,
         isAdmin: req.body.isAdmin,

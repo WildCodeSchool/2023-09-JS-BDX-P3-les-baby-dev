@@ -42,7 +42,7 @@ function UserContextProvider({ children, apiService }) {
     } catch (err) {
       console.error(err);
       // eslint-disable-next-line no-alert
-      alert(err.message);
+      alert("identifiant ou mot de passe incorrect");
     }
 
     return null;
