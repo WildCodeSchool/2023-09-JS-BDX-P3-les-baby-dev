@@ -137,9 +137,9 @@ export default function App() {
               )}
 
               <td>
-                <MDBBtn color="link" rounded size="sm">
+                <button type="button" className="btn-modif">
                   Annuler la réservation
-                </MDBBtn>
+                </button>
               </td>
             </tr>
           ))}

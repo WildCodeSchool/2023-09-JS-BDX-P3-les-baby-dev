@@ -139,6 +139,7 @@ router.get("/child/:id", childControllers.getChildById);
 
 router.get("/reservations", reservationControllers.getReservation);
 router.post("/reservation", reservationControllers.addReservation);
+router.put("/reservation", reservationControllers.changeReservation);
 router.get(
   "/reservations/:id",
   authMiddleware,

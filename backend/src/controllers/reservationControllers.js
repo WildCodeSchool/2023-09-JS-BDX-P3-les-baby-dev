@@ -48,9 +48,49 @@ const getReservationsByParent = async (req, res) => {
   }
 };
 
+const changeReservation = (req, res) => {
+  console.info(req.body);
+
+  const { reservationId, newFieldValue } = req.body;
+
+  // Assurez-vous d'avoir les détails nécessaires pour la modification
+  if (!reservationId || newFieldValue === undefined) {
+    return res.status(400).send({
+      message: "Paramètres manquants pour la modification de la réservation.",
+    });
+  }
+
+  return models.reservation
+    .findByPk(reservationId)
+    .then((foundReservation) => {
+      if (!foundReservation) {
+        return res.status(404).send({ message: "Réservation non trouvée." });
+      }
+
+      // Créez une variable distincte pour stocker la réservation
+      const reservationToUpdate = foundReservation;
+
+      // Mettez à jour le champ souhaité avec la nouvelle valeur
+      reservationToUpdate.status = 0;
+
+      // Enregistrez les modifications
+      return reservationToUpdate.save();
+    })
+    .then((updatedReservation) => {
+      res.status(200).json(updatedReservation);
+    })
+    .catch((err) => {
+      console.error(err);
+      res
+        .status(500)
+        .send({ message: "Erreur lors de la modification de la réservation." });
+    });
+};
+
 module.exports = {
   getReservation,
   addReservation,
   getReservationsByStructure,
   getReservationsByParent,
+  changeReservation,
 };

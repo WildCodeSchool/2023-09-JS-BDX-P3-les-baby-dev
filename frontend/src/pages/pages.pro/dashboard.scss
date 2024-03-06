@@ -95,6 +95,25 @@ h2 {
   color: white;
 }
 
+.btn-modif {
+  background-color: #7847ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1em;
+  padding: 5px 10px;
+  box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.324);
+
+  &:hover {
+    background-color: #9c69e2;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    padding: 5px 10px;
+  }
+}
+
 .titreInfos {
   color: #9c69e2;
   font-size: 1.2em;
