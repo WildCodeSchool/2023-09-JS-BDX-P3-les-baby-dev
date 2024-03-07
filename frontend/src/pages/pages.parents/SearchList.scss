@@ -134,9 +134,7 @@
       margin: 60px auto;
 
       .oneCard {
-        width: calc(
-          30% - 20px
-        ); /* Ajustez la largeur en fonction de votre conception */
+        width: calc(30% - 20px);
         margin: 10px;
 
         .img_creche {
@@ -163,9 +161,7 @@
       justify-content: center;
 
       .days-availability {
-        width: calc(
-          33.33% - 10px
-        ); /* 33.33% pour trois éléments par ligne, ajustez si nécessaire */
+        width: calc(33.33% - 10px);
         border-radius: 10px;
         margin: 5px;
         text-align: center;
