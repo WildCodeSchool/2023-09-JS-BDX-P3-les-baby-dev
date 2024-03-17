@@ -5,20 +5,18 @@ import { useUser } from "../../../context/UserContext";
 import "./register.scss";
 
 function Register() {
+  const { register } = useUser();
   const [formValue, setFormValue] = useState({
     email: "",
     password: "",
     is_admin: false,
   });
 
-  const { register, setIsProfessional, isProfessional } = useUser();
-
   const onChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
   };
 
   const onSwitchChange = () => {
-    setIsProfessional(!isProfessional);
     setFormValue({ ...formValue, is_admin: !formValue.is_admin });
   };
 

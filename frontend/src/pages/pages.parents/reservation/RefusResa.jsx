@@ -10,7 +10,10 @@ function RefusResa() {
         <img src={rondVert} alt="" />
       </div>
       <h1>Desolé</h1>
-      <p>Votre réservation n'a bien été enregisté</p>
+      <p>
+        Votre réservation n'a bien été enregisté. <br />
+        <br /> Veuillez vous assurer de remplir tous les champs correctement.
+      </p>
       <h2>Statut de votre réservation:</h2>
       <h3 className="refused">Refusé</h3>
       <Link to="/searchlist">

@@ -101,9 +101,7 @@ function StructureRegister() {
           </MDBStepper>
         </div>
         <div className="other-half">
-          {+step === 1 && (
-            <FirstStep nextRef={nextRef} nextQuestion={nextQuestion} />
-          )}
+          {+step === 1 && <FirstStep nextQuestion={nextQuestion} />}
           {+step === 2 && (
             <SecondStep
               nextQuestion={nextQuestion}

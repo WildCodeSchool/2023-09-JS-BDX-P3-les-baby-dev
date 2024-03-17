@@ -48,9 +48,22 @@ const getReservationsByParent = async (req, res) => {
   }
 };
 
+const updateReservation = async (req, res) => {
+  try {
+    await models.reservation.update(req.params.id, req.body);
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      msg: error.message,
+    });
+  }
+};
+
 module.exports = {
   getReservation,
   addReservation,
   getReservationsByStructure,
   getReservationsByParent,
+  updateReservation,
 };

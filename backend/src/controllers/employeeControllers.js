@@ -5,15 +5,15 @@ const models = require("../models");
 const updateUploadEmployee = async (req, res) => {
   const { originalname } = req.file;
 
-  const avatarPath = `./public/uploads/${uuidv4()}-${originalname}`;
-  fs.rename(req.file.path, avatarPath, async (err) => {
+  const files = `uploads/${uuidv4()}-${originalname}`;
+  fs.rename(req.file.path, `public/${files}`, async (err) => {
     if (err) throw err;
 
     try {
       await models.employee.update(req.params.id, {
-        avatarPath,
+        files,
       });
-      return res.status(201).send({ id: req.params.id, avatarPath });
+      return res.status(201).send({ id: req.params.id, files });
     } catch (error) {
       return res.status(422).send({ message: error.message });
     }

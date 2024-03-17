@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./nurseryCard.scss";
 import {
   MDBBtn,
@@ -7,18 +7,30 @@ import {
   MDBModalContent,
   MDBModalBody,
   MDBModalFooter,
+  MDBModalHeader,
+  MDBModalTitle,
 } from "mdb-react-ui-kit";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import imageDefault from "../../assets/defaultImage.png";
 import { useParent } from "../../context/ParentContext";
 import Return from "../../assets/arrow_back.svg";
+import { useUser } from "../../context/UserContext";
+import profilePic from "../../assets/profil-picture.svg";
 
 function NurseryCard() {
+  const { apiService } = useUser();
+  const { setReservationData, reservationData } = useParent();
   const navigate = useNavigate();
+  const [employees, setEmployees] = useState([]);
   const [scrollableModal, setScrollableModal] = useState(false);
+  const [basicModal, setBasicModal] = useState(false);
+  const toggleOpen = () => setBasicModal(!basicModal);
+  const [width, setWidht] = useState(0);
+  const carousel = useRef();
+
   const loaderData = useLoaderData();
   const parent = loaderData.parentProfil;
-  const { setReservationData, reservationData } = useParent();
 
   const creche = loaderData?.preloadNursery;
   const crecheHours = loaderData?.hours.find(
@@ -35,7 +47,8 @@ function NurseryCard() {
       parent.telephone === null ||
       parent.ville === null
     ) {
-      navigate("/profil/inscription");
+      setScrollableModal(!setScrollableModal);
+      toggleOpen();
     } else {
       navigate(`/searchlist/nursery/${creche.id}/reservation`);
       setReservationData({
@@ -44,6 +57,24 @@ function NurseryCard() {
       });
     }
   };
+
+  useEffect(() => {
+    const getEmployee = async () => {
+      try {
+        const response = await apiService.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/structures/${
+            creche.id
+          }/employees`
+        );
+        setEmployees(response.data);
+        setWidht(carousel.current.scrollWidth - carousel.current.offsetWidth);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getEmployee();
+  }, []);
 
   return (
     <div className="card_container">
@@ -181,6 +212,41 @@ function NurseryCard() {
                 {creche?.transport ? <li>Transport d'enfant</li> : ""}
               </ul>
             </div>
+            <div className="employee">
+              <motion.div
+                ref={carousel}
+                className="carousel"
+                whileTap={{ cursor: "grabbing" }}
+              >
+                <motion.div
+                  drag="x"
+                  dragConstraints={{ right: 0, left: -width - 20 }}
+                  className="inner-carousel"
+                >
+                  {employees.map((employe) => (
+                    <motion.div className="item shadow" key={employe.id}>
+                      <img
+                        src={
+                          employe.files
+                            ? `${import.meta.env.VITE_BACKEND_URL}/${
+                                employe.files
+                              }`
+                            : profilePic
+                        }
+                        alt=""
+                      />
+                      <motion.div className="desc">
+                        <p>
+                          {employe.fName} {employe.name}
+                        </p>
+                        <p>{employe.fonction}</p>
+                        <p>{employe.mail}</p>
+                      </motion.div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </motion.div>
+            </div>
           </div>
           <div className="button_reservation">
             <button
@@ -298,10 +364,10 @@ function NurseryCard() {
                   </MDBModalBody>
                   <MDBModalFooter>
                     <MDBBtn
-                      color="secondary"
+                      // color="secondary"
                       onClick={() => setScrollableModal(!setScrollableModal)}
                     >
-                      Close
+                      fermer
                     </MDBBtn>
                     <MDBBtn onClick={() => handleNavigate()}>
                       J'ai compris
@@ -311,6 +377,29 @@ function NurseryCard() {
               </MDBModalDialog>
             </MDBModal>
           </div>
+          {/* <MDBBtn onClick={toggleOpen}>LAUNCH DEMO MODAL</MDBBtn> */}
+          <MDBModal open={basicModal} setOpen={setBasicModal} tabIndex="-1">
+            <MDBModalDialog>
+              <MDBModalContent>
+                <MDBModalHeader>
+                  <MDBModalTitle>
+                    Avant de continuer, veuillez remplir votre dossier
+                    d'inscription
+                  </MDBModalTitle>
+                </MDBModalHeader>
+
+                <MDBModalFooter>
+                  <MDBBtn onClick={toggleOpen}>Fermer</MDBBtn>
+                  <MDBBtn
+                    // color="secondary"
+                    onClick={() => navigate("/profil/inscription")}
+                  >
+                    inscription
+                  </MDBBtn>
+                </MDBModalFooter>
+              </MDBModalContent>
+            </MDBModalDialog>
+          </MDBModal>
         </div>
       </div>
       <div className="tarif_perso">

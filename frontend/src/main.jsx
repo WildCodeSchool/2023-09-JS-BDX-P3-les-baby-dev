@@ -163,7 +163,6 @@ const router = createBrowserRouter([
       },
       {
         path: "/profil",
-        // element: <IncriptionChildren />,
         children: [
           {
             path: "/profil",

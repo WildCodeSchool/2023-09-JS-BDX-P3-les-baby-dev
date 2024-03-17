@@ -34,7 +34,7 @@ const updateStructure = async (req, res) => {
   try {
     await models.structure.update(+req.params.id, req.body);
 
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       message: "Structure registered successfully",
     });
@@ -52,7 +52,7 @@ const updateHours = async (req, res) => {
   try {
     await models.hours.updateH(+req.params.id, req.body);
 
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       message: "Hours registered successfully",
     });

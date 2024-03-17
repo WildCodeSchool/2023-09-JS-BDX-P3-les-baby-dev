@@ -12,6 +12,12 @@ import {
   MDBTable,
   MDBTableHead,
   MDBTableBody,
+  MDBModal,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalFooter,
+  MDBModalHeader,
+  MDBModalTitle,
 } from "mdb-react-ui-kit";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Babyplace from "../../assets/Babyplace.svg";
@@ -23,6 +29,12 @@ export default function App() {
   const [filter, setFilter] = useState("Tous");
   const { logout, apiService } = useUser();
   const [myResa, setMyResa] = useState([]);
+  const [basicModal, setBasicModal] = useState(false);
+  const [selectedResaId, setSelectedResaId] = useState(null);
+  const toggleOpen = (id) => {
+    setSelectedResaId(id);
+    setBasicModal(!basicModal);
+  };
 
   const navigate = useNavigate();
   const loaderData = useLoaderData();
@@ -45,7 +57,19 @@ export default function App() {
   };
   useEffect(() => {
     getMyResa(structureId);
-  }, []);
+  }, [myResa]);
+
+  const putResa = async (id) => {
+    try {
+      await apiService.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/reservation/${id}`,
+        { status: false }
+      );
+      setBasicModal(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const filteredData = myResa.filter((item) => {
     if (filter === "Tous") {
@@ -131,14 +155,14 @@ export default function App() {
                   Accepté
                 </MDBBadge>
               ) : (
-                <MDBBadge color="danger" pill>
+                <MDBBadge className="badge" color="danger" pill>
                   Refusé
                 </MDBBadge>
               )}
 
               <td>
-                <MDBBtn color="link" rounded size="sm">
-                  Edit
+                <MDBBtn rounded size="sm" onClick={() => toggleOpen(item.id)}>
+                  Annuler
                 </MDBBtn>
               </td>
             </tr>
@@ -178,6 +202,27 @@ export default function App() {
           </div>
         </MDBSideNav>
       </div>
+      <MDBModal open={basicModal} setOpen={setBasicModal} tabIndex="-1">
+        <MDBModalDialog>
+          <MDBModalContent>
+            <MDBModalHeader>
+              <MDBModalTitle>
+                Voulez-vous modifier votre reservation ?
+              </MDBModalTitle>
+            </MDBModalHeader>
+
+            <MDBModalFooter>
+              <MDBBtn onClick={toggleOpen}>Fermer</MDBBtn>
+              <MDBBtn
+                // color="secondary"
+                onClick={() => putResa(selectedResaId)}
+              >
+                Annuler
+              </MDBBtn>
+            </MDBModalFooter>
+          </MDBModalContent>
+        </MDBModalDialog>
+      </MDBModal>
 
       <div style={{ padding: "20px" }} className="text-center">
         <MDBBtn onClick={() => setColorOpen(!colorOpen)}>

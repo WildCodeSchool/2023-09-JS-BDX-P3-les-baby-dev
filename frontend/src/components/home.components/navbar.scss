@@ -51,7 +51,7 @@
     background-color: white;
     color: #9805c5c7;
     margin: 0 auto;
-    box-shadow: -3px 3px 3px rgba(75, 93, 104, 0.1);
+    transition: border-radius 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transition: 0.3s ease-in-out;
     line-height: 15px;
 

@@ -4,6 +4,12 @@ import "./firstStep.scss";
 import {
   MDBBtn,
   MDBInput,
+  MDBModal,
+  MDBModalContent,
+  MDBModalDialog,
+  MDBModalFooter,
+  MDBModalHeader,
+  MDBModalTitle,
   MDBSpinner,
   MDBValidation,
   MDBValidationItem,
@@ -13,8 +19,10 @@ import { useStructure } from "../../context/StrucutreContext";
 function FirstStep({ nextQuestion }) {
   const { onChange, data } = useStructure();
   const [loading, setLoading] = useState(false);
-
   const { handleSubmit } = useStructure();
+  const [basicModal, setBasicModal] = useState(false);
+
+  const toggleOpen = () => setBasicModal(!basicModal);
 
   const isStructureNameValid = data.name;
   const isTelValid = /^\d{10}$/.test(data.tel);
@@ -39,8 +47,7 @@ function FirstStep({ nextQuestion }) {
         setLoading(false);
       }, 1000);
     } else {
-      // eslint-disable-next-line no-alert
-      alert("Les champs ne sont pas valides");
+      toggleOpen();
     }
   };
 
@@ -127,6 +134,19 @@ function FirstStep({ nextQuestion }) {
           </p>
         </div>
       </div>
+      <MDBModal open={basicModal} setOpen={setBasicModal} tabIndex="-1">
+        <MDBModalDialog>
+          <MDBModalContent>
+            <MDBModalHeader>
+              <MDBModalTitle>Les champs ne sont pas valides</MDBModalTitle>
+            </MDBModalHeader>
+
+            <MDBModalFooter>
+              <MDBBtn onClick={toggleOpen}>Fermer</MDBBtn>
+            </MDBModalFooter>
+          </MDBModalContent>
+        </MDBModalDialog>
+      </MDBModal>
     </div>
   );
 }

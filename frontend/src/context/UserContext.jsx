@@ -10,10 +10,6 @@ function UserContextProvider({ children, apiService }) {
   const givenData = useLoaderData();
   // console.log("user", givenData);
 
-  const [isProfessional, setIsProfessional] = useState(
-    givenData?.preloadUser?.data?.isAdmin
-  );
-
   const [user, setUser] = useState(givenData?.preloadUser?.data);
   const navigate = useNavigate();
 
@@ -79,20 +75,10 @@ function UserContextProvider({ children, apiService }) {
       apiService,
       login,
       register,
-      setIsProfessional,
-      isProfessional,
       user,
       logout,
     }),
-    [
-      apiService,
-      login,
-      register,
-      setIsProfessional,
-      isProfessional,
-      user,
-      logout,
-    ]
+    [apiService, login, register, user, logout]
   );
 
   return (

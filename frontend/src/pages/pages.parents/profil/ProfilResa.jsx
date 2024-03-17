@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./profilResa.scss";
-import { MDBBadge } from "mdb-react-ui-kit";
+import {
+  MDBBadge,
+  MDBBtn,
+  MDBModal,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalFooter,
+  MDBModalHeader,
+  MDBModalTitle,
+} from "mdb-react-ui-kit";
 import { useLoaderData } from "react-router-dom";
 import NavProfil from "../../../components/profile.components/NavProfil";
 import imageDefault from "../../../assets/creche2.jpeg";
@@ -9,6 +18,12 @@ import HeaderNav from "../../../components/profile.components/HeaderNav";
 
 function ProfilResa() {
   const loaderDataParent = useLoaderData();
+  const [basicModal, setBasicModal] = useState(false);
+  const [selectedResaId, setSelectedResaId] = useState(null);
+  const toggleOpen = (id) => {
+    setSelectedResaId(id);
+    setBasicModal(!basicModal);
+  };
   const { apiService } = useUser();
   const myProfil = loaderDataParent?.parentProfil;
   const structures = loaderDataParent?.structures;
@@ -30,7 +45,19 @@ function ProfilResa() {
   };
   useEffect(() => {
     getMyResaByParentId();
-  }, []);
+  }, [myResa]);
+
+  const putResa = async (id) => {
+    try {
+      await apiService.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/reservation/${id}`,
+        { status: false }
+      );
+      setBasicModal(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="profilResa_container">
@@ -42,7 +69,18 @@ function ProfilResa() {
             (structure) => structure.id === item.structure_id
           );
           return (
-            <div key={item.id} className="card_myresa">
+            <div
+              key={item.id}
+              className="card_myresa"
+              onClick={() => toggleOpen(item.id)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  toggleOpen(item.id);
+                }
+              }}
+              role="button"
+              tabIndex={0}
+            >
               <div className="img_structure">
                 <img
                   src={
@@ -77,6 +115,27 @@ function ProfilResa() {
           );
         })}
       </div>
+      <MDBModal open={basicModal} setOpen={setBasicModal} tabIndex="-1">
+        <MDBModalDialog>
+          <MDBModalContent>
+            <MDBModalHeader>
+              <MDBModalTitle>
+                Voulez-vous modifier votre reservation ?
+              </MDBModalTitle>
+            </MDBModalHeader>
+
+            <MDBModalFooter>
+              <MDBBtn onClick={toggleOpen}>Fermer</MDBBtn>
+              <MDBBtn
+                // color="secondary"
+                onClick={() => putResa(selectedResaId)}
+              >
+                Annuler
+              </MDBBtn>
+            </MDBModalFooter>
+          </MDBModalContent>
+        </MDBModalDialog>
+      </MDBModal>
       <NavProfil />
     </div>
   );

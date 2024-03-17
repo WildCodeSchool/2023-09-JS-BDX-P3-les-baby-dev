@@ -18,7 +18,7 @@ const addUser = (req, res) => {
   models.user
     .create(req.body)
     .then((rows) => {
-      res.send({
+      res.status(201).send({
         id: rows.insertId,
         email: req.body.email,
         isAdmin: req.body.isAdmin,
@@ -58,7 +58,7 @@ const getProfile = async (req, res) => {
       delete user.password;
     }
 
-    return user ? res.send(user) : res.sendStatus(404);
+    return user ? res.send(user) : res.sendStatus(401);
   } catch (error) {
     return res.status(500).send({ msg: error.message });
   }

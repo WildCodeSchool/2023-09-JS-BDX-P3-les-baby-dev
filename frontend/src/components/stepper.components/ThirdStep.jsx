@@ -7,8 +7,11 @@ import {
   MDBValidation,
   MDBValidationItem,
 } from "mdb-react-ui-kit";
+import { MDBFileUpload } from "mdb-react-file-upload";
 import { useStructure } from "../../context/StrucutreContext";
 import "./thirdStep.scss";
+
+import profilePic from "../../assets/profil-picture.svg";
 
 function ThirdStep({ nextQuestion, prevQuestion }) {
   const [loading, setLoading] = useState(false);
@@ -79,12 +82,18 @@ function ThirdStep({ nextQuestion, prevQuestion }) {
           {dataEmployee?.employees &&
             dataEmployee?.employees.map((employee, i) => (
               <div key={`${i + 1}`} className="photoContainer">
-                {/* <div className="fileUpload">
+                <div className="fileUpload">
                   <MDBFileUpload
-                    defaultFile={profilePic}
+                    defaultFile={
+                      employee?.files
+                        ? `${import.meta.env.VITE_BACKEND_URL}/${
+                            employee.files
+                          }`
+                        : profilePic
+                    }
                     onChange={(e) => handleChange(e[0], i, "files")}
                   />
-                </div> */}
+                </div>
                 <div className="thirdInputContainer">
                   <MDBValidation className="row g-1" isValidated>
                     <MDBValidationItem className="col-md-4" feedback="">

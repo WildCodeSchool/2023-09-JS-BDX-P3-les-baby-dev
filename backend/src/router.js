@@ -150,6 +150,12 @@ router.get(
   reservationControllers.getReservationsByParent
 );
 
+router.put(
+  "/reservation/:id([0-9]+)",
+  authMiddleware,
+  reservationControllers.updateReservation
+);
+
 /* *********** Routes Hour ************** */
 
 router.get("/hours", hoursControllers.getHours);

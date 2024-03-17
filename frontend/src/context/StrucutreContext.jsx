@@ -43,7 +43,7 @@ function StructureContextProvider({ children }) {
     if (user?.is_admin === 0) {
       return navigate("/login");
     }
-    console.info(user);
+    // console.info(user);
     return undefined;
   }, [user]);
 
@@ -100,6 +100,9 @@ function StructureContextProvider({ children }) {
   const handleSubmitEmployee = async (index) => {
     try {
       const employe = { ...dataEmployee.employees[index] };
+      const { files, fName, name, fonction, mail } = employe;
+
+      const employeInfo = { fName, fonction, name, mail };
 
       if (employe.id) {
         delete employe.id;
@@ -107,10 +110,26 @@ function StructureContextProvider({ children }) {
           `${import.meta.env.VITE_BACKEND_URL}/api/structure/${
             dataEmployee.employees[index]?.id
           }/adaptation/employees`,
-          employe
+          employeInfo
         );
       } else {
         dataEmployee.employees[index] = await handleSubmitNewEmployee(index);
+      }
+
+      if (files) {
+        const formData = new FormData();
+        formData.append("avatarPath", files);
+        const response = await axios.put(
+          `${import.meta.env.VITE_BACKEND_URL}/api/employees/${
+            dataEmployee.employees[index]?.id
+          }/avatar`,
+          formData
+        );
+
+        dataEmployee.employees[index] = {
+          ...dataEmployee.employees[index],
+          files: response.data.avatarPath,
+        };
       }
 
       setDataEmployee({ ...dataEmployee });
