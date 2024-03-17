@@ -1,5 +1,6 @@
 // import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { MDBBtn } from "mdb-react-ui-kit";
 import HeaderProfile from "../../../components/profile.components/HeaderProfile";
 import NavProfil from "../../../components/profile.components/NavProfil";
@@ -12,6 +13,7 @@ function IncriptionChildren() {
   const { apiService } = useUser();
   const { dataChildren, setDataChildren, parent } = useParent();
   const [currentChildIndex, setCurrentChildIndex] = useState(0);
+  const navigate = useNavigate();
 
   const handleAddChild = async () => {
     try {
@@ -27,7 +29,18 @@ function IncriptionChildren() {
         }
       );
 
-      setDataChildren([...dataChildren, resp]);
+      setDataChildren([
+        ...dataChildren,
+        {
+          id: resp.id,
+          childName: "",
+          childFName: "",
+          birthday: "",
+          isWalking: false,
+          childDoctor: "",
+          allergies: false,
+        },
+      ]);
     } catch (err) {
       console.error(err);
     }
@@ -99,23 +112,17 @@ function IncriptionChildren() {
           <div className="d-flex btn-child">
             <MDBBtn
               type="button"
-              className="button-children"
-              onClick={handlePutChild}
+              onClick={() => {
+                handlePutChild();
+                navigate("/profil/inscription/inscription");
+              }}
             >
               Enregistrer
             </MDBBtn>
-            <MDBBtn
-              onClick={handleAddChild}
-              type="button"
-              className="button-children"
-            >
+            <MDBBtn onClick={handleAddChild} type="button">
               Ajouter un enfant
             </MDBBtn>
-            <MDBBtn
-              onClick={handleRemoveChild}
-              type="button"
-              className="button-children"
-            >
+            <MDBBtn onClick={handleRemoveChild} type="button">
               Supprimer
             </MDBBtn>
           </div>

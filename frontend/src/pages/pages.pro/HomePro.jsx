@@ -5,17 +5,14 @@ import imageOne from "../../assets/Agenda.svg";
 import imageTwo from "../../assets/proAlerte.svg";
 import imageThree from "../../assets/proMarketing.svg";
 import imageFour from "../../assets/proCom.svg";
+import proSimple from "../../assets/proSimple.svg";
 
 function HomePro() {
   return (
     <div className="containerPro">
       <Navbar />
       <div className="div-visuel">
-        <img
-          className="visuel-simple"
-          src="./src/assets/proSimple.svg"
-          alt="Visuel Simple"
-        />
+        <img className="visuel-simple" src={proSimple} alt="Visuel Simple" />
         <div className="div-overlay">
           <h4 className="text-overlay titre-overlay">
             Simplifiez vous la vie en choisissant un systeme de reservation

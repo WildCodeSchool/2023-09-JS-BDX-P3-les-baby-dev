@@ -11,6 +11,7 @@
   flex-wrap: wrap;
   gap: 10px;
   box-shadow: #9d69e2 0px -1px 9px 0px;
+  padding-bottom: 10px;
 
   img {
     width: 80px;
@@ -30,6 +31,13 @@
     min-width: 70px;
     display: inline-block;
     font-family: "Abril Fatface", serif;
+    color: rgb(79, 79, 79);
+    transition: 0.3s ease-in-out;
+    border-bottom: 1px solid transparent;
+
+    &:hover {
+      border-bottom: 1px solid rgb(79, 79, 79);
+    }
   }
 
   .connectBtn {

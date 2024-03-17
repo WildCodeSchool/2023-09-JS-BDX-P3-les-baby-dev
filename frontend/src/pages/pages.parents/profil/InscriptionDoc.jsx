@@ -1,8 +1,12 @@
+import { useNavigate } from "react-router-dom";
+import { MDBBtn } from "mdb-react-ui-kit";
 import HeaderProfile from "../../../components/profile.components/HeaderProfile";
 import NavProfil from "../../../components/profile.components/NavProfil";
 import "./InscriptionDoc.scss";
 
 function DocInscription() {
+  const navigate = useNavigate();
+
   return (
     <div className="flex-doc">
       <HeaderProfile />
@@ -19,6 +23,13 @@ function DocInscription() {
           <li>Justificatif de situation professionnelles</li>
           <li>RIB</li>
         </ul>
+        <MDBBtn
+          type="button"
+          className="button-doc"
+          onClick={() => navigate("/profil")}
+        >
+          Enregistrer
+        </MDBBtn>
       </div>
       <NavProfil />
     </div>

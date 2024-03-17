@@ -113,14 +113,18 @@ app.use("/api", router);
 const reactBuildPath = path.join(__dirname, "/../../frontend/dist");
 
 // Serve react resources
-app.use(express.static(path.join(__dirname, "/../../backend/public")));
 
 app.use(express.static(reactBuildPath));
 
+app.get(
+  "*.*",
+  express.static(path.join(__dirname, "../public"), { maxAge: "1y" })
+);
+
 // Redirect unhandled requests to the react index file
 
-app.get("*", (req, res) => {
-  res.sendFile(`${reactBuildPath}/index.html`);
+app.get("*", (_, res) => {
+  res.sendFile(path.join(reactBuildPath, "/index.html"));
 });
 
 /* ************************************************************************* */

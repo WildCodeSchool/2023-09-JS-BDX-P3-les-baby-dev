@@ -4,6 +4,7 @@
   border: 1px solid #dfdede;
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
   align-items: center;
   margin-bottom: 5px;
   color: #9254f2;
@@ -11,19 +12,40 @@
   border: none;
   background: linear-gradient(to bottom right, #e0e3ff, #f3e4ff);
 
+  .btn_filter {
+    display: flex;
+    gap: 20px;
+
+    button {
+      border: transparent;
+      color: #9254f2;
+      background: linear-gradient(to bottom right, #e0e3ff, #f3e4ff);
+      font-size: 1.1em;
+      font-weight: 600;
+    }
+  }
+
   a {
     text-decoration: none;
     display: flex;
     align-items: center;
     color: inherit;
-    margin-left: 30px;
+    margin-left: 20px;
+
+    .filter-text {
+      display: flex;
+    }
 
     h2 {
       margin: 0;
       font-size: 1.1em;
-      margin-left: 10px;
+      margin-left: 5px;
     }
 
+    .yoo {
+      margin-right: 10px;
+      padding-right: 10px;
+    }
     .btn_filter {
       display: flex;
       flex-direction: row;
