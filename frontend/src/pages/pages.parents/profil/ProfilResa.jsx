@@ -72,7 +72,7 @@ function ProfilResa() {
             <div
               key={item.id}
               className="card_myresa"
-              onClick={() => toggleOpen(item.id)}
+              onClick={item.status ? () => toggleOpen(item.id) : null}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   toggleOpen(item.id);
