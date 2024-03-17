@@ -79,10 +79,9 @@ export default function App() {
   const deleteResa = async (id) => {
     try {
       await apiService.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/api/reservation/${id}`,
-        { status: false }
+        `${import.meta.env.VITE_BACKEND_URL}/api/reservation/${id}`
       );
-      setBasicModal(false);
+      setBasicModalDelete(false);
     } catch (error) {
       console.error(error);
     }
