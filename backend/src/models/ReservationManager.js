@@ -48,6 +48,15 @@ class ReservationManager extends AbstractManager {
 
     return rows;
   }
+
+  async removeReservation(id) {
+    const [result] = await this.database.query(
+      `DELETE FROM reservation WHERE id = ?`,
+      [id]
+    );
+
+    return result;
+  }
 }
 
 module.exports = ReservationManager;

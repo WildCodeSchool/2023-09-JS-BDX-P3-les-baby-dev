@@ -156,6 +156,12 @@ router.put(
   reservationControllers.updateReservation
 );
 
+router.delete(
+  "/reservation/:id([0-9]+)",
+  authMiddleware,
+  reservationControllers.removeResa
+);
+
 /* *********** Routes Hour ************** */
 
 router.get("/hours", hoursControllers.getHours);

@@ -30,10 +30,15 @@ export default function App() {
   const { logout, apiService } = useUser();
   const [myResa, setMyResa] = useState([]);
   const [basicModal, setBasicModal] = useState(false);
+  const [basicModalDelete, setBasicModalDelete] = useState(false);
   const [selectedResaId, setSelectedResaId] = useState(null);
   const toggleOpen = (id) => {
     setSelectedResaId(id);
     setBasicModal(!basicModal);
+  };
+  const toggleOpenDelete = (id) => {
+    setSelectedResaId(id);
+    setBasicModalDelete(!basicModalDelete);
   };
 
   const navigate = useNavigate();
@@ -62,6 +67,18 @@ export default function App() {
   const putResa = async (id) => {
     try {
       await apiService.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/reservation/${id}`,
+        { status: false }
+      );
+      setBasicModal(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteResa = async (id) => {
+    try {
+      await apiService.delete(
         `${import.meta.env.VITE_BACKEND_URL}/api/reservation/${id}`,
         { status: false }
       );
@@ -161,9 +178,18 @@ export default function App() {
               )}
 
               <td>
-                <MDBBtn rounded size="sm" onClick={() => toggleOpen(item.id)}>
-                  Annuler
-                </MDBBtn>
+                <div className="modif-button">
+                  <MDBBtn rounded size="sm" onClick={() => toggleOpen(item.id)}>
+                    Annuler
+                  </MDBBtn>
+                  <MDBBtn
+                    rounded
+                    size="sm"
+                    onClick={() => toggleOpenDelete(item.id)}
+                  >
+                    Supprimer
+                  </MDBBtn>
+                </div>
               </td>
             </tr>
           ))}
@@ -218,6 +244,31 @@ export default function App() {
                 onClick={() => putResa(selectedResaId)}
               >
                 Annuler
+              </MDBBtn>
+            </MDBModalFooter>
+          </MDBModalContent>
+        </MDBModalDialog>
+      </MDBModal>
+      <MDBModal
+        open={basicModalDelete}
+        setOpen={setBasicModalDelete}
+        tabIndex="-1"
+      >
+        <MDBModalDialog>
+          <MDBModalContent>
+            <MDBModalHeader>
+              <MDBModalTitle>
+                Êtes vous sur de vouloir supprimer cette réservation ?
+              </MDBModalTitle>
+            </MDBModalHeader>
+
+            <MDBModalFooter>
+              <MDBBtn onClick={toggleOpenDelete}>Non, fermer</MDBBtn>
+              <MDBBtn
+                // color="secondary"
+                onClick={() => deleteResa(selectedResaId)}
+              >
+                Oui, supprimer
               </MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>

@@ -60,10 +60,22 @@ const updateReservation = async (req, res) => {
   }
 };
 
+const removeResa = async (req, res) => {
+  try {
+    const id = +req.params.id;
+    const result = await models.reservation.removeReservation(id);
+
+    return res.sendStatus(!result.affectedRows ? 404 : 204);
+  } catch (err) {
+    return res.status(422).send({ message: err.message });
+  }
+};
+
 module.exports = {
   getReservation,
   addReservation,
   getReservationsByStructure,
   getReservationsByParent,
   updateReservation,
+  removeResa,
 };
