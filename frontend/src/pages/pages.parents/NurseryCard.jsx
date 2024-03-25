@@ -10,8 +10,8 @@ import {
   MDBModalHeader,
   MDBModalTitle,
 } from "mdb-react-ui-kit";
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import imageDefault from "../../assets/defaultImage.png";
 import { useParent } from "../../context/ParentContext";
 import Return from "../../assets/arrow_back.svg";

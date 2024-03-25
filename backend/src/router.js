@@ -137,8 +137,16 @@ router.get("/child/:id", childControllers.getChildById);
 
 /* *********** Routes reservation ************** */
 
-router.get("/reservations", reservationControllers.getReservation);
-router.post("/reservation", reservationControllers.addReservation);
+router.get(
+  "/reservations",
+  authMiddleware,
+  reservationControllers.getReservation
+);
+router.post(
+  "/reservation",
+  authMiddleware,
+  reservationControllers.addReservation
+);
 router.get(
   "/reservations/:id",
   authMiddleware,

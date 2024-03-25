@@ -36,6 +36,7 @@ const getReservationsByStructure = async (req, res) => {
     res.sendStatus(500);
   }
 };
+
 const getReservationsByParent = async (req, res) => {
   const parentId = parseInt(req.params.id, 10);
 
