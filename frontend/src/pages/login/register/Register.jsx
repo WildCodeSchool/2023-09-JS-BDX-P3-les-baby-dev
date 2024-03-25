@@ -40,6 +40,7 @@ function Register() {
               <input
                 value={formValue.email}
                 name="email"
+                placeholder="email"
                 onChange={onChange}
                 required
                 label="Email"
@@ -55,6 +56,7 @@ function Register() {
                 onChange={onChange}
                 required
                 label="Password"
+                placeholder="password"
                 type="password"
               />
             </li>
