@@ -1,13 +1,34 @@
 import "./SearchList.scss";
-import { MDBCard, MDBCardBody, MDBListGroup } from "mdb-react-ui-kit";
+import {
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBListGroup,
+  MDBModal,
+  MDBModalContent,
+  MDBModalDialog,
+  MDBModalFooter,
+  MDBModalHeader,
+  MDBModalTitle,
+} from "mdb-react-ui-kit";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import NavProfil from "../../components/profile.components/NavProfil";
 import FilterComponent from "../../components/searchList.components/FilterComponent";
 import HeaderNav from "../../components/profile.components/HeaderNav";
 import imageDefault from "../../assets/defaultImage.png";
 import { useParent } from "../../context/ParentContext";
+import { useUser } from "../../context/UserContext";
 
 function SearchList() {
+  const {
+    basicHelloModal,
+    setBasicHelloModal,
+    basicWelcomeModal,
+    setBasicWelcomeModal,
+    toggleHelloOpen,
+    user,
+    toggleWelcomeOpen,
+  } = useUser();
   const { filterSearch } = useParent();
   const navigate = useNavigate();
   const loaderData = useLoaderData();
@@ -289,6 +310,42 @@ function SearchList() {
               );
             })}
       </div>
+      <MDBModal
+        open={basicWelcomeModal}
+        setOpen={setBasicWelcomeModal}
+        tabIndex="-1"
+      >
+        <MDBModalDialog>
+          <MDBModalContent>
+            <MDBModalHeader>
+              <MDBModalTitle>Bienvenue {user?.email}</MDBModalTitle>
+            </MDBModalHeader>
+
+            <MDBModalFooter>
+              <MDBBtn onClick={toggleWelcomeOpen}>Fermer</MDBBtn>
+            </MDBModalFooter>
+          </MDBModalContent>
+        </MDBModalDialog>
+      </MDBModal>
+      <MDBModal
+        open={basicHelloModal}
+        setOpen={setBasicHelloModal}
+        tabIndex="-1"
+      >
+        <MDBModalDialog>
+          <MDBModalContent>
+            <MDBModalHeader>
+              <MDBModalTitle>
+                Content de vous revoir {user?.email}
+              </MDBModalTitle>
+            </MDBModalHeader>
+
+            <MDBModalFooter>
+              <MDBBtn onClick={toggleHelloOpen}>Fermer</MDBBtn>
+            </MDBModalFooter>
+          </MDBModalContent>
+        </MDBModalDialog>
+      </MDBModal>
       <NavProfil />
     </div>
   );

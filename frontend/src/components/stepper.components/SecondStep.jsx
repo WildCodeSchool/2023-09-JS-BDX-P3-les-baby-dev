@@ -4,6 +4,12 @@ import PropTypes from "prop-types";
 import { MDBFileUpload } from "mdb-react-file-upload";
 import {
   MDBBtn,
+  MDBModal,
+  MDBModalContent,
+  MDBModalDialog,
+  MDBModalFooter,
+  MDBModalHeader,
+  MDBModalTitle,
   MDBSpinner,
   MDBTextArea,
   MDBValidation,
@@ -15,6 +21,9 @@ import profilePic from "../../assets/profil-picture.svg";
 
 function SecondStep({ nextQuestion, prevQuestion }) {
   const [loading, setLoading] = useState(false);
+  const [basicModal, setBasicModal] = useState(false);
+
+  const toggleOpen = () => setBasicModal(!basicModal);
 
   const { onChange, onChangeFiles, data, dataImage, setData } = useStructure();
 
@@ -62,8 +71,7 @@ function SecondStep({ nextQuestion, prevQuestion }) {
         }
       }, 1000);
     } else {
-      // eslint-disable-next-line no-alert
-      alert("Les champs ne sont pas valides");
+      toggleOpen();
     }
   };
 
@@ -138,6 +146,19 @@ function SecondStep({ nextQuestion, prevQuestion }) {
           </p>
         </div>
       </div>
+      <MDBModal open={basicModal} setOpen={setBasicModal} tabIndex="-1">
+        <MDBModalDialog>
+          <MDBModalContent>
+            <MDBModalHeader>
+              <MDBModalTitle>Les champs ne sont pas valides</MDBModalTitle>
+            </MDBModalHeader>
+
+            <MDBModalFooter>
+              <MDBBtn onClick={toggleOpen}>Fermer</MDBBtn>
+            </MDBModalFooter>
+          </MDBModalContent>
+        </MDBModalDialog>
+      </MDBModal>
     </div>
   );
 }

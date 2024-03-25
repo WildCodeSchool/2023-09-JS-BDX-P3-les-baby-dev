@@ -1,5 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  MDBBtn,
+  MDBModal,
+  MDBModalContent,
+  MDBModalDialog,
+  MDBModalFooter,
+  MDBModalHeader,
+  MDBModalTitle,
+} from "mdb-react-ui-kit";
 import { useUser } from "../../../context/UserContext";
 import "./login.scss";
 
@@ -9,10 +18,15 @@ function Login() {
     password: "",
   });
 
-  const { login } = useUser();
+  const { login, basicErrorModal, setBasicErrorModal, toggleErrorOpen } =
+    useUser();
 
   const handleChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
+  };
+
+  const handleLogin = async () => {
+    await login(formValue);
   };
 
   return (
@@ -55,11 +69,30 @@ function Login() {
             </li>
           </ul>
           <div className="btnConnect">
-            <button type="button" onClick={() => login(formValue)}>
+            <button type="button" onClick={handleLogin}>
               Connexion
             </button>
           </div>
         </div>
+        <MDBModal
+          open={basicErrorModal}
+          setOpen={setBasicErrorModal}
+          tabIndex="-1"
+        >
+          <MDBModalDialog>
+            <MDBModalContent>
+              <MDBModalHeader>
+                <MDBModalTitle>
+                  Identifiant ou mot de passe incorrect
+                </MDBModalTitle>
+              </MDBModalHeader>
+
+              <MDBModalFooter>
+                <MDBBtn onClick={toggleErrorOpen}>Fermer</MDBBtn>
+              </MDBModalFooter>
+            </MDBModalContent>
+          </MDBModalDialog>
+        </MDBModal>
       </div>
     </div>
   );

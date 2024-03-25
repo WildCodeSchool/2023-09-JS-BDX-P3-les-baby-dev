@@ -19,9 +19,9 @@ const addUser = (req, res) => {
     .create(req.body)
     .then((rows) => {
       res.status(201).send({
-        id: rows.insertId,
+        id: rows.id,
         email: req.body.email,
-        isAdmin: req.body.isAdmin,
+        isAdmin: rows.isAdmin,
         structureId: rows.structureId,
         parentId: rows.parentId,
         hoursId: rows.hoursId,

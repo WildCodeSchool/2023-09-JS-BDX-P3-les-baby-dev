@@ -10,12 +10,10 @@ class UserManager extends AbstractManager {
 
   async create(user) {
     const hash = await UserManager.hashPassword(user.password);
-
     const result = await this.database.query(
       `insert into ${this.table} (email, password, is_admin) values (?,?,?)`,
       [user.email, hash, user.is_admin]
     );
-
     const rows = result[0];
     const userId = rows.insertId;
 
@@ -25,29 +23,24 @@ class UserManager extends AbstractManager {
         [userId]
       );
       const structureId = userStructure.insertId;
-
       const [hoursStructure] = await this.database.query(
         `INSERT INTO hours (structure_id) values (?)`,
         [structureId]
       );
-
       const hoursId = hoursStructure.insertId;
-
       const [employeeStructure] = await this.database.query(
         `INSERT INTO employee (structure_id, mail) values (?, ?)`,
         [structureId, user.email]
       );
-
       const employeeId = employeeStructure.insertId;
-
       return {
         id: userId,
         structureId,
         hoursId,
         employeeId,
+        isAdmin: user.is_admin,
       };
     }
-
     const [userParent] = await this.database.query(
       `INSERT INTO parent (user_id) values (?)`,
       [userId]
@@ -57,6 +50,7 @@ class UserManager extends AbstractManager {
     return {
       id: userId,
       parentId,
+      isAdmin: user.is_admin,
     };
   }
 

@@ -36,6 +36,9 @@ export default function App() {
     setBasicModal(!basicModal);
   };
 
+  const { basicHelloModal, setBasicHelloModal, user, toggleHelloOpen } =
+    useUser();
+
   const navigate = useNavigate();
   const loaderData = useLoaderData();
   const parent = loaderData?.preloadOneParent;
@@ -219,6 +222,25 @@ export default function App() {
               >
                 Annuler
               </MDBBtn>
+            </MDBModalFooter>
+          </MDBModalContent>
+        </MDBModalDialog>
+      </MDBModal>
+      <MDBModal
+        open={basicHelloModal}
+        setOpen={setBasicHelloModal}
+        tabIndex="-1"
+      >
+        <MDBModalDialog>
+          <MDBModalContent>
+            <MDBModalHeader>
+              <MDBModalTitle>
+                Content de vous revoir {user?.email}
+              </MDBModalTitle>
+            </MDBModalHeader>
+
+            <MDBModalFooter>
+              <MDBBtn onClick={toggleHelloOpen}>Fermer</MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>
