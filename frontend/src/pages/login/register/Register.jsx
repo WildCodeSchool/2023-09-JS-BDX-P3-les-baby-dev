@@ -1,11 +1,21 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { MDBSwitch } from "mdb-react-ui-kit";
+import {
+  MDBBtn,
+  MDBModal,
+  MDBModalContent,
+  MDBModalDialog,
+  MDBModalFooter,
+  MDBModalHeader,
+  MDBModalTitle,
+  MDBSwitch,
+} from "mdb-react-ui-kit";
 import { useUser } from "../../../context/UserContext";
 import "./register.scss";
 
 function Register() {
-  const { register } = useUser();
+  const { register, basicErrorRModal, setBasicErrorRModal, toggleErrorROpen } =
+    useUser();
   const [formValue, setFormValue] = useState({
     email: "",
     password: "",
@@ -18,6 +28,10 @@ function Register() {
 
   const onSwitchChange = () => {
     setFormValue({ ...formValue, is_admin: !formValue.is_admin });
+  };
+
+  const handleRegister = async () => {
+    await register(formValue);
   };
 
   return (
@@ -70,11 +84,28 @@ function Register() {
             />
           </div>
           <div className="btnConnect">
-            <button type="button" onClick={() => register(formValue)}>
+            <button type="button" onClick={handleRegister}>
               Inscription
             </button>
           </div>
         </div>
+        <MDBModal
+          open={basicErrorRModal}
+          setOpen={setBasicErrorRModal}
+          tabIndex="-1"
+        >
+          <MDBModalDialog>
+            <MDBModalContent>
+              <MDBModalHeader>
+                <MDBModalTitle>Champs incorrects</MDBModalTitle>
+              </MDBModalHeader>
+
+              <MDBModalFooter>
+                <MDBBtn onClick={toggleErrorROpen}>Fermer</MDBBtn>
+              </MDBModalFooter>
+            </MDBModalContent>
+          </MDBModalDialog>
+        </MDBModal>
       </div>
     </div>
   );

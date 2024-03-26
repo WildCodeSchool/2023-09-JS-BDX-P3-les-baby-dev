@@ -27,13 +27,10 @@ class AbstractManager {
     const sqlValues = [];
     for (const [key, value] of Object.entries(dataValue)) {
       sql += `${sqlValues.length ? "," : ""} ${key} = ?`;
-
       sqlValues.push(value);
     }
     sql += " where id = ?";
     sqlValues.push(id);
-    // console.log("sql :", sql);
-    // console.log("sqlValues :", sqlValues);
     return this.database.query(sql, sqlValues);
   }
 

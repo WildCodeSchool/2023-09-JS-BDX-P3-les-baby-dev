@@ -1,5 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import { MDBStepper, MDBStepperStep } from "mdb-react-ui-kit";
+import {
+  MDBBtn,
+  MDBModal,
+  MDBModalContent,
+  MDBModalDialog,
+  MDBModalFooter,
+  MDBModalHeader,
+  MDBModalTitle,
+  MDBStepper,
+  MDBStepperStep,
+} from "mdb-react-ui-kit";
 import "./structureRegister.scss";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import FirstStep from "../../components/stepper.components/FirstStep";
@@ -13,8 +23,11 @@ import SeventhStep from "../../components/stepper.components/SeventhStep";
 import "mdb-react-file-upload/dist/scss/file-upload.scss";
 import Navbar from "../../components/stepper.components/Navbar";
 import Return from "../../assets/arrow_back.svg";
+import { useUser } from "../../context/UserContext";
 
 function StructureRegister() {
+  const { user, basicWelcomeModal, setBasicWelcomeModal, toggleWelcomeOpen } =
+    useUser();
   const { step } = useParams();
   const navigate = useNavigate();
   const [stepperType, setStepperType] = useState(
@@ -140,6 +153,23 @@ function StructureRegister() {
           )}
           {+step === 8 && <EighthStep prevQuestion={prevQuestion} />}
         </div>
+        <MDBModal
+          open={basicWelcomeModal}
+          setOpen={setBasicWelcomeModal}
+          tabIndex="-1"
+        >
+          <MDBModalDialog>
+            <MDBModalContent>
+              <MDBModalHeader>
+                <MDBModalTitle>Bienvenue {user?.email}</MDBModalTitle>
+              </MDBModalHeader>
+
+              <MDBModalFooter>
+                <MDBBtn onClick={toggleWelcomeOpen}>Fermer</MDBBtn>
+              </MDBModalFooter>
+            </MDBModalContent>
+          </MDBModalDialog>
+        </MDBModal>
       </div>
     </>
   );

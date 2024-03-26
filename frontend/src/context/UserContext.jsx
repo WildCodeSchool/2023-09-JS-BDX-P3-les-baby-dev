@@ -8,7 +8,21 @@ const UserContext = createContext();
 
 function UserContextProvider({ children, apiService }) {
   const givenData = useLoaderData();
-  // console.log("user", givenData);
+  const [basicHelloModal, setBasicHelloModal] = useState(false);
+
+  const toggleHelloOpen = () => setBasicHelloModal(!basicHelloModal);
+
+  const [basicWelcomeModal, setBasicWelcomeModal] = useState(false);
+
+  const toggleWelcomeOpen = () => setBasicWelcomeModal(!basicWelcomeModal);
+
+  const [basicErrorModal, setBasicErrorModal] = useState(false);
+
+  const toggleErrorOpen = () => setBasicErrorModal(!basicErrorModal);
+
+  const [basicErrorRModal, setBasicErrorRModal] = useState(false);
+
+  const toggleErrorROpen = () => setBasicErrorRModal(!basicErrorRModal);
 
   const [user, setUser] = useState(givenData?.preloadUser?.data);
   const navigate = useNavigate();
@@ -27,9 +41,9 @@ function UserContextProvider({ children, apiService }) {
       );
 
       if (showAlert) {
-        // eslint-disable-next-line no-alert
-        alert(`Content de vous revoir ${result.data.email}`);
+        toggleHelloOpen();
       }
+      // toggleWelcomeOpen();
       setUser(result.data);
       if (!redirect) {
         return null;
@@ -37,8 +51,7 @@ function UserContextProvider({ children, apiService }) {
       return navigate(result.data.is_admin ? "/dashboard" : "/searchlist");
     } catch (err) {
       console.error(err);
-      // eslint-disable-next-line no-alert
-      alert(err.message);
+      toggleErrorOpen();
     }
 
     return null;
@@ -46,22 +59,21 @@ function UserContextProvider({ children, apiService }) {
 
   const register = async (newUser) => {
     try {
-      await apiService.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/users`,
-        newUser
-      );
-      await login(newUser, false, false);
+      if (newUser.email && newUser.password) {
+        await apiService.post(
+          `${import.meta.env.VITE_BACKEND_URL}/api/users`,
+          newUser
+        );
+        await login(newUser, false, false);
 
-      // eslint-disable-next-line no-alert
-      alert(`Bienvenue ${newUser.email}`);
-      return navigate(newUser.is_admin ? "/structure/step/1" : "/searchlist");
+        toggleWelcomeOpen();
+        return navigate(newUser.is_admin ? "/structure/step/1" : "/searchlist");
+      }
     } catch (err) {
       console.error(err);
-      // eslint-disable-next-line no-alert
-      alert(err.response.data.message);
     }
 
-    return null;
+    return toggleErrorROpen();
   };
 
   const logout = () => {
@@ -77,8 +89,38 @@ function UserContextProvider({ children, apiService }) {
       register,
       user,
       logout,
+      basicHelloModal,
+      setBasicHelloModal,
+      toggleHelloOpen,
+      toggleWelcomeOpen,
+      setBasicWelcomeModal,
+      basicWelcomeModal,
+      basicErrorModal,
+      setBasicErrorModal,
+      toggleErrorOpen,
+      basicErrorRModal,
+      setBasicErrorRModal,
+      toggleErrorROpen,
     }),
-    [apiService, login, register, user, logout]
+    [
+      apiService,
+      login,
+      register,
+      user,
+      logout,
+      basicHelloModal,
+      setBasicHelloModal,
+      toggleHelloOpen,
+      toggleWelcomeOpen,
+      setBasicWelcomeModal,
+      basicWelcomeModal,
+      basicErrorModal,
+      setBasicErrorModal,
+      toggleErrorOpen,
+      basicErrorRModal,
+      setBasicErrorRModal,
+      toggleErrorROpen,
+    ]
   );
 
   return (

@@ -1,5 +1,11 @@
 import {
   MDBBtn,
+  MDBModal,
+  MDBModalContent,
+  MDBModalDialog,
+  MDBModalFooter,
+  MDBModalHeader,
+  MDBModalTitle,
   MDBSpinner,
   MDBSwitch,
   MDBTimepicker,
@@ -13,6 +19,9 @@ import "./fifthStep.scss";
 
 function FifthStep({ nextQuestion, prevQuestion }) {
   const [loading, setLoading] = useState(false);
+  const [basicModal, setBasicModal] = useState(false);
+
+  const toggleOpen = () => setBasicModal(!basicModal);
 
   const { dataSchedules, updateAllDays, handleSubmitSchedules } =
     useStructure();
@@ -28,8 +37,7 @@ function FifthStep({ nextQuestion, prevQuestion }) {
         setLoading(false);
       }, 1000);
     } else {
-      // eslint-disable-next-line no-alert
-      alert("Les champs ne sont pas valides");
+      toggleOpen();
     }
   };
 
@@ -134,6 +142,19 @@ function FifthStep({ nextQuestion, prevQuestion }) {
           </p>
         </div>
       </div>
+      <MDBModal open={basicModal} setOpen={setBasicModal} tabIndex="-1">
+        <MDBModalDialog>
+          <MDBModalContent>
+            <MDBModalHeader>
+              <MDBModalTitle>Les champs ne sont pas valides</MDBModalTitle>
+            </MDBModalHeader>
+
+            <MDBModalFooter>
+              <MDBBtn onClick={toggleOpen}>Fermer</MDBBtn>
+            </MDBModalFooter>
+          </MDBModalContent>
+        </MDBModalDialog>
+      </MDBModal>
     </div>
   );
 }

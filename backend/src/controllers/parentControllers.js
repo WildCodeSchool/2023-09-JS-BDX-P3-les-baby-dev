@@ -33,7 +33,7 @@ const getMyParentProfil = (req, res) => {
 
 const updateParent = async (req, res) => {
   try {
-    await models.parent.updateP(req.params.id, req.body);
+    await models.parent.update(req.params.id, req.body);
 
     res.status(201).json({
       success: true,

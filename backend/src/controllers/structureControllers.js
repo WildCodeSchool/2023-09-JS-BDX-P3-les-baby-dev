@@ -142,8 +142,6 @@ const deleteEmployee = async (req, res) => {
   if (req.user.id !== structure.user_id) {
     return res.sendStatus(403);
   }
-
-  // const structureOwner = await models.employee.getOwerId();
   await models.employee.deleteEmployeeById(id);
   return res.sendStatus(204);
 };
